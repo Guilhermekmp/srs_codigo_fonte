@@ -22,9 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="463b90e4-c3fa-4f6f-b127-4b869d696b34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changeLog/v00.0001_criacao_de_tabelas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changeLog/v00.0001_criacao_de_tabelas.xml" afterDir="false" />
-    </list>
+    <list default="true" id="463b90e4-c3fa-4f6f-b127-4b869d696b34" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
