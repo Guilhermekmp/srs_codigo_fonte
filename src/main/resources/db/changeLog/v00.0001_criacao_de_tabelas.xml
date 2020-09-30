@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1" author="Guilherme">
+        <createTable tableName="reserva">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="id_reserva"/>
+            </column>
+            <column name="id_cliente" type="INTEGER">
+                <constraints nullable="false" foreignKeyName="id_cliente" references="cliente(id)"/>
+            </column>
+            <column name="id_sala" type="INTEGER">
+                <constraints nullable="false" foreignKeyName="id_sala" references="sala(id)"/>
+            </column>
+            <column name="dtini" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dtfin" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vfin" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
