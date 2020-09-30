@@ -107,5 +107,47 @@
             </column>
         </createTable>
     </changeSet>
+    =====================
+    <changeSet id="3" author="andriws.miranda" remarks="Tabela Equipamento">
+        <createTable  tableName="equipamento">
+            <column  autoIncrement ="true" name="id"  type="NUMBER">
+                <constrainsts> primarykey="true" nullable="false"
+                </constrainsts>
+            </column>
+            <column name="nome" type ="VARCHAR(255)">
+                <constraints>
+                    nullable="false"
+                </constraints>
+            </column>
+            <column name="id_tipo_equipamento" type="NUMBER">
+                <constrainsts>
+                    foreingKeyName = "fk_id_tipo_equipamento"
+                    nullable="false"
+                </constrainsts>
+            </column>
+            <columns name="preco_diario" type="DOUBLE">
+                <constraints>
+                    nullable="false"
+                </constraints>
+            </columns>
+            <column name="obrigatorio" type="NUMBER">
+                <constrainsts>
+                    nullable="false"
+                </constrainsts>
+            </column>
+        </createTable>
+        <createTable tableName="tipo_equipamento" remarks="Tabela Tipo Equipamento">
+            <column autoIncrement="true" name="id" type="NUMBER">
+                <constrainsts>
+                    nullable="false"
+                </constrainsts>
+            </column>
+            <column name="descricao" type="VARCHAR(255)">
+                <constrainsts>
+                    nullable="false"
+                </constrainsts>
+            </column>
+        </createTable>
+    </changeSet>
 >>>>>>> 2d28451cea773cbd197d4977b1dc2fc641350de1
 </databaseChangeLog>
