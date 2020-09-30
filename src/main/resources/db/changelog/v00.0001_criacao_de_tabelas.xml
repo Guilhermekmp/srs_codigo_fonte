@@ -26,8 +26,6 @@
             </column>
         </createTable>
     </changeSet>
-<<<<<<< HEAD
-
     <changeSet id="4" author="lucas.colaco">
         <createTable tableName="cliente">
             <column autoIncrement="true" name="id" type="NUMBER" >
@@ -66,7 +64,6 @@
 
     </changeSet>
 
-=======
     <changeSet id="2" author="antonio">
         <createTable  tableName="sala" remarks="tabela para as salas">
             <column autoIncrement="true" name ="id" type="NUMBER">
@@ -107,9 +104,9 @@
             </column>
         </createTable>
     </changeSet>
-    =====================
-    <changeSet id="3" author="andriws.miranda" remarks="Tabela Equipamento">
-        <createTable  tableName="equipamento">
+
+    <changeSet id="3" author="andriws.miranda">
+        <createTable  tableName="equipamento" remarks="Tabela Equipamento">
             <column  autoIncrement ="true" name="id"  type="NUMBER">
                 <constrainsts> primarykey="true" nullable="false"
                 </constrainsts>
@@ -149,5 +146,5 @@
             </column>
         </createTable>
     </changeSet>
->>>>>>> 2d28451cea773cbd197d4977b1dc2fc641350de1
+
 </databaseChangeLog>
