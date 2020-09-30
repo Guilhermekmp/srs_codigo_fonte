@@ -73,16 +73,16 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="id"/>
             </column>
             <column name="descricao" type="TEXT">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
             <column name="id_tipo_sala" type="NUMBER">
                 <constraints nullable="false" foreignKeyName="fk_tipo_sala" references="tipo_sala(id)"/>
             </column>
             <column name="capacidade" type="NUMBER">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
             <column name="preco_diario" type="DOUBLE">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
             <column name="disponivel" type="NUMBER">
             </column>
@@ -92,7 +92,7 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="id"/>
             </column>
             <column name="descricao" type="TEXT">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
         </createTable>
         <createTable tableName="sala_equipamento" remarks="tabela da relação entre sala e equipamentos">
@@ -103,7 +103,7 @@
                 <constraints nullable="false" foreignKeyName="fk_sala" references="sala(id)"/>
             </column>
             <column name="quantidade" type="NUMBER">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
