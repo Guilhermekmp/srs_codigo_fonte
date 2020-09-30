@@ -84,8 +84,6 @@
             <column name="preco_diario" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
-            <column name="disponivel" type="NUMBER">
-            </column>
         </createTable>
         <createTable tableName="tipo_sala" remarks="tabela para os tipos de sala">
             <column autoIncrement="true" name ="id" type="NUMBER">
