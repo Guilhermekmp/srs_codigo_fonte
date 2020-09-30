@@ -22,7 +22,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="463b90e4-c3fa-4f6f-b127-4b869d696b34" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="463b90e4-c3fa-4f6f-b127-4b869d696b34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changeLog/v00.0001_criacao_de_tabelas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changeLog/v00.0001_criacao_de_tabelas.xml" afterDir="false" />
+    </list>
+>>>>>>> 2d28451cea773cbd197d4977b1dc2fc641350de1
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +37,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/Guilhermekmp/srs_codigo_fonte" />
+      </set>
+    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -88,6 +102,9 @@
       <updated>1601481844209</updated>
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

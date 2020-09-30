@@ -26,6 +26,7 @@
             </column>
         </createTable>
     </changeSet>
+<<<<<<< HEAD
 
     <changeSet id="4" author="lucas.colaco">
         <createTable tableName="cliente">
@@ -65,4 +66,46 @@
 
     </changeSet>
 
+=======
+    <changeSet id="2" author="antonio">
+        <createTable  tableName="sala" remarks="tabela para as salas">
+            <column autoIncrement="true" name ="id" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="id"/>
+            </column>
+            <column name="descricao" type="TEXT">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="id_tipo_sala" type="NUMBER">
+                <constraints nullable="false" foreignKeyName="fk_tipo_sala" references="tipo_sala(id)"/>
+            </column>
+            <column name="capacidade" type="NUMBER">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="preco_diario" type="DOUBLE">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="disponivel" type="NUMBER">
+            </column>
+        </createTable>
+        <createTable tableName="tipo_sala" remarks="tabela para os tipos de sala">
+            <column autoIncrement="true" name ="id" type="NUMBER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="id"/>
+            </column>
+            <column name="descricao" type="TEXT">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+        <createTable tableName="sala_equipamento" remarks="tabela da relação entre sala e equipamentos">
+            <column name="id_equipamento" type="NUMBER">
+                <constraints nullable="false" foreignKeyName="fk_equipamento" references="tipo_sala(id)"/>
+            </column>
+            <column name="id_sala" type="NUMBER">
+                <constraints nullable="false" foreignKeyName="fk_sala" references="sala(id)"/>
+            </column>
+            <column name="quantidade" type="NUMBER">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+>>>>>>> 2d28451cea773cbd197d4977b1dc2fc641350de1
 </databaseChangeLog>
