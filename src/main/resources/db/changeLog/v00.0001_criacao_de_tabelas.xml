@@ -27,4 +27,42 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="4" author="lucas.colaco">
+        <createTable tableName="cliente">
+            <column autoIncrement="true" name="id" type="NUMBER" >
+                <constraints> nullable="false"
+                    primaryKey="true"
+                    primaryKeyName="id"
+                </constraints>
+            </column>
+            <column name="nome" type="VARCHAR(255)">
+                <constraints> nullable="false"
+                </constraints>
+            </column>
+            <column name="cpf" type="VARCHAR(11)">
+                <constraints> nullable="false"
+                </constraints>
+            </column>
+            <column name="data_nasc" type="DATE">
+                <constraints> nullable="false"
+                </constraints>
+            </column>
+            <column name="endereco" type="TEXT">
+                <constraints> nullable="false"
+                </constraints>
+            </column>
+            <column name="telefone" type="VARCHAR(12)">
+                <constraints> nullable="false"
+                </constraints>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints> nullable="false"
+                </constraints>
+            </column>
+
+
+        </createTable>
+
+    </changeSet>
+
 </databaseChangeLog>
