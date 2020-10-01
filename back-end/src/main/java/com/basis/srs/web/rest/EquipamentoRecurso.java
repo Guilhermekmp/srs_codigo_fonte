@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/equipamentos")
+@RequestMapping("/api/equipamentos")
 @RequiredArgsConstructor
 public class EquipamentoRecurso {
 
