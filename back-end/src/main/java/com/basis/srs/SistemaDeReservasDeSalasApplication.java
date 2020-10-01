@@ -10,4 +10,4 @@ public class SistemaDeReservasDeSalasApplication {
 		SpringApplication.run(SistemaDeReservasDeSalasApplication.class, args);
 	}
 
-}
+}	
