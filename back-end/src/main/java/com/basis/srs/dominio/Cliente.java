@@ -12,7 +12,7 @@ import java.util.Date;
 @Table(name = "cliente")
 public class Cliente implements Serializable {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Column(length = 255, name = "nome")
