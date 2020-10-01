@@ -3,7 +3,7 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="2" author="andriws.miranda">
+    <changeSet id="create_table_equipamento" author="andriws.miranda">
         <createTable tableName="tipo_equipamento" remarks="Tabela Tipo Equipamento">
             <column autoIncrement="true" name="id" type="INTEGER">
             </column>
@@ -27,7 +27,7 @@
         <addForeignKeyConstraint baseTableName="equipamento" baseColumnNames="id_tipo_equipamento" constraintName="equipamento_tipo_equipamento" referencedTableName="tipo_equipamento"
                                  referencedColumnNames="id"/>
     </changeSet>
-    <changeSet id="3" author="antonio.terceiro">
+    <changeSet id="create_table_sala" author="antonio.terceiro">
         <createTable tableName="tipo_sala" remarks="tabela para os tipos de sala">
             <column autoIncrement="true" name ="id" type="INTEGER">
             </column>
@@ -64,7 +64,7 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
-    <changeSet id="4" author="guilherme.maciel">
+    <changeSet id="create_table_reserva" author="guilherme.maciel">
         <createTable tableName="reserva" remarks="Tabela reserva" schemaName="public">
             <column autoIncrement="true" name="id" type="INTEGER">
             </column>
