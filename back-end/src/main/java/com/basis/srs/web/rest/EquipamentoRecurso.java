@@ -3,24 +3,18 @@ package com.basis.srs.web.rest;
 import com.basis.srs.dominio.Equipamento;
 import com.basis.srs.servicos.EquipamentoServico;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.xml.ws.Response;
 import java.util.List;
 
-@Resource
+@RestController
 @RequestMapping("/equipamentos")
 @RequiredArgsConstructor
 public class EquipamentoRecurso {
 
-    private final EquipamentoServico servicoUsuario;
-
-    public EquipamentoRecurso(EquipamentoServico servicoUsuario) {
-        this.servicoUsuario = servicoUsuario;
-    }
+    private EquipamentoServico servicoUsuario;
 
     @GetMapping
     public ResponseEntity<List<Equipamento>> obter(){
@@ -28,7 +22,7 @@ public class EquipamentoRecurso {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Equipamento> obterPorId(@PathVariable int id){
+    public ResponseEntity<Equipamento> obterPorId(@PathVariable Integer id){
         return null;
     }
 
@@ -42,8 +36,8 @@ public class EquipamentoRecurso {
         return null;
     }
 
-    @DeleteMapping
-    public ResponseEntity<Equipamento> deletar(){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Equipamento> deletar(@PathVariable int id){
         return null;
     }
 }
