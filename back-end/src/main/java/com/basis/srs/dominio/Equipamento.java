@@ -21,5 +21,5 @@ public class Equipamento implements Serializable {
     @Column
     private Double preco_diario;
     @Column
-    private int obrigatorio;
+    private Integer obrigatorio;
 }
