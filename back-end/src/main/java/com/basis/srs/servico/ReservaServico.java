@@ -19,7 +19,7 @@ public class ReservaServico {
         return null;
     }
 
-    public Reserva procurar(int id){
+    public Reserva procurar(Integer id){
         return null;
     }
 
@@ -27,7 +27,7 @@ public class ReservaServico {
         return null;
     }
 
-    public Reserva deletar(int id){
+    public Reserva deletar(Integer id){
         return null;
     }
 

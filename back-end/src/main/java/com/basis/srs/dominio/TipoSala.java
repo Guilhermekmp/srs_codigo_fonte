@@ -21,7 +21,7 @@ public class TipoSala implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @Column(name = "descricao", length = 255)
+    @Column( length = 255)
     private String descricao;
 
 }

@@ -25,7 +25,7 @@ public class ReservaRecurso {
     }
 
     @GetMapping(path="/{id}")
-    public ResponseEntity<Reserva> procurar(@PathVariable int id){
+    public ResponseEntity<Reserva> procurar(@PathVariable Integer id){
         return null;
     }
 
@@ -35,7 +35,7 @@ public class ReservaRecurso {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Reserva> deletar(@PathVariable int id){
+    public ResponseEntity<Reserva> excluir(@PathVariable Integer id){
         return null;
     }
 

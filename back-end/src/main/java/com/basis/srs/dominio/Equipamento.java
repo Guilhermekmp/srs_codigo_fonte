@@ -1,6 +1,5 @@
 package com.basis.srs.dominio;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +16,7 @@ public class Equipamento implements Serializable {
     private String name;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(referencedColumnName = "id")
-    private Tipo_equipamento tipo_equipamento;
+    private TipoEquipamento tipo_equipamento;
     @Column
     private double preco_diario;
     @Column

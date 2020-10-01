@@ -20,7 +20,7 @@ public class EquipamentoRecurso {
         return null;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}")
     public ResponseEntity<Equipamento> obterPorId(@PathVariable Integer id){
         return null;
     }
@@ -35,8 +35,8 @@ public class EquipamentoRecurso {
         return null;
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Equipamento> deletar(@PathVariable int id){
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Equipamento> deletar(@PathVariable Integer id){
         return null;
     }
 }

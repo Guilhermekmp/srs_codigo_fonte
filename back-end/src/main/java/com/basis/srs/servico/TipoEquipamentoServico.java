@@ -1,6 +1,6 @@
 package com.basis.srs.servico;
 
-import com.basis.srs.repositorio.EquipamentoRepositorio;
+import com.basis.srs.repositorio.TipoEquipamentoRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class EquipamentoServico {
+public class TipoEquipamentoServico {
 
-    private EquipamentoRepositorio equipamentoRepositorio;
+    private TipoEquipamentoRepositorio tipo_equipamentoRepositorio;
 }

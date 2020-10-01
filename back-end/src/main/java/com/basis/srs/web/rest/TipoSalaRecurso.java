@@ -28,7 +28,7 @@ public class TipoSalaRecurso {
 
     //GET por id
     @GetMapping(path = "/{id}")
-    public SalaEquipamento buscar(@PathVariable int id){
+    public SalaEquipamento buscar(@PathVariable Integer id){
         return null;
     }
 
@@ -46,7 +46,7 @@ public class TipoSalaRecurso {
 
     //DELETE
     @DeleteMapping(path = "/{id}")
-    public SalaEquipamento deletar(@PathVariable int id){
+    public SalaEquipamento deletar(@PathVariable Integer id){
         return null;
     }
 

@@ -16,7 +16,7 @@ public class SalaEquipamentoServico {
         return;
     }
 
-    public void buscar(int id){
+    public void buscar(Integer id){
         return;
     }
 
@@ -28,7 +28,7 @@ public class SalaEquipamentoServico {
         return;
     }
 
-    public void deletar(int id){
+    public void deletar(Integer id){
         return;
     }
 }
