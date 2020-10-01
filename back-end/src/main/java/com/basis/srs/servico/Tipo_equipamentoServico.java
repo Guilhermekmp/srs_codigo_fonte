@@ -1,4 +1,4 @@
-package com.basis.srs.servicos;
+package com.basis.srs.servico;
 
 import com.basis.srs.repositorio.Tipo_equipamentoRepositorio;
 import lombok.RequiredArgsConstructor;

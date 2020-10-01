@@ -72,11 +72,11 @@
             </column>
             <column name="id_sala" type="INTEGER">
             </column>
-            <column name="dtini" type="TIMESTAMP">
+            <column name="dt_ini" type="TIMESTAMP">
             </column>
-            <column name="dtfin" type="TIMESTAMP">
+            <column name="dt_fin" type="TIMESTAMP">
             </column>
-            <column name="vfin" type="DOUBLE">
+            <column name="total" type="DOUBLE">
             </column>
         </createTable>
 
