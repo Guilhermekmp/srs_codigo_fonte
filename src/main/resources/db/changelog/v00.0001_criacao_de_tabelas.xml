@@ -27,6 +27,17 @@
             <column name="email" type="VARCHAR(255)">
             </column>
          </createTable>
+
+    </changeSet>
+
+    <changeSet  author="antonio"  id="addPrimaryKey">
+    <addPrimaryKey  catalogName="cat"
+                    clustered="true"
+                    columnNames="id"
+                    constraintName="pk_cliente"
+                    schemaName="public"
+                    tableName="cliente"
+                    tablespace=""/>
     </changeSet>
 
 </databaseChangeLog>
