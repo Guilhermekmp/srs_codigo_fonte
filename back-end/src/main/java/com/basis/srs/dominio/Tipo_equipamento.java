@@ -11,7 +11,7 @@ public class Tipo_equipamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private int id;
     @Column(length = 255)
     private String descricao;
 
