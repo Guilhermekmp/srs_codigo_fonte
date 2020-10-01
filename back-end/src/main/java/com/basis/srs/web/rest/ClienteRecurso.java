@@ -22,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 @Setter
-@RequestMapping(path = "/api/clientes")
+@RequestMapping(path ="/api/clientes")
 public class ClienteRecurso {
 
     private ClienteServico servico;
