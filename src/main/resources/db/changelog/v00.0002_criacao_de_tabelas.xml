@@ -1,0 +1,89 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="2" author="andriws.miranda">
+        <createTable tableName="tipo_equipamento" remarks="Tabela Tipo Equipamento">
+            <column autoIncrement="true" name="id" type="INTEGER">
+            </column>
+            <column name="descricao" type="VARCHAR(255)">
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="tipo_equipamento" columnNames="id"/>
+        <createTable  tableName="equipamento" remarks="Tabela Equipamento">
+            <column  autoIncrement ="true" name="id"  type="INTEGER">
+            </column>
+            <column name="nome" type ="VARCHAR(255)">
+            </column>
+            <column name="id_tipo_equipamento" type="INTEGER">
+            </column>
+            <column name="preco_diario" type="DOUBLE">
+            </column>
+            <column name="obrigatorio" type="INTEGER">
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="equipamento" columnNames="id"/>
+        <addForeignKeyConstraint baseTableName="equipamento" baseColumnNames="id_tipo_equipamento" constraintName="equipamento_tipo_equipamento" referencedTableName="tipo_equipamento"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="3" author="antonio.terceiro">
+        <createTable tableName="tipo_sala" remarks="tabela para os tipos de sala">
+            <column autoIncrement="true" name ="id" type="INTEGER">
+            </column>
+            <column name="descricao" type="TEXT">
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="tipo_sala" columnNames="id"/>
+        <createTable  tableName="sala" remarks="tabela para as salas">
+            <column autoIncrement="true" name ="id" type="INTEGER">
+            </column>
+            <column name="descricao" type="TEXT">
+            </column>
+            <column name="id_tipo_sala" type="INTEGER">
+            </column>
+            <column name="capacidade" type="INTEGER">
+            </column>
+            <column name="preco_diario" type="DOUBLE">
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="sala" columnNames="id"/>
+        <addForeignKeyConstraint baseTableName="sala" baseColumnNames="id_tipo_sala" constraintName="sala_tipo_sala" referencedTableName="tipo_sala"
+                             referencedColumnNames="id"/>
+        <createTable tableName="sala_equipamento" remarks="tabela da relação entre sala e equipamentos">
+            <column name="id_equipamento" type="INTEGER">
+            </column>
+            <column name="id_sala" type="INTEGER">
+            </column>
+            <column name="quantidade" type="INTEGER">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="sala_equipamento" baseColumnNames="id_equipamento" constraintName="sala_equipamento_equipamento" referencedTableName="equipamento"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="sala_equipamento" baseColumnNames="id_sala" constraintName="sala_equipamento_sala" referencedTableName="sala"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="4" author="guilherme.maciel">
+        <createTable tableName="reserva" remarks="Tabela reserva" schemaName="public">
+            <column autoIncrement="true" name="id" type="INTEGER">
+            </column>
+            <column name="id_cliente" type="INTEGER">
+            </column>
+            <column name="id_sala" type="INTEGER">
+            </column>
+            <column name="dtini" type="TIMESTAMP">
+            </column>
+            <column name="dtfin" type="TIMESTAMP">
+            </column>
+            <column name="vfin" type="DOUBLE">
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="reserva" columnNames="id" />
+        <addForeignKeyConstraint baseTableName="reserva" baseColumnNames="id_cliente" constraintName="fk_reserva_cliente" referencedTableName="cliente"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="reserva" baseColumnNames="id_sala" constraintName="fk_reserva_sala" referencedTableName="sala"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

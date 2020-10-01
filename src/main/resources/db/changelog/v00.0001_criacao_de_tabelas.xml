@@ -3,146 +3,29 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-
-    <changeSet id="1" author="Guilherme">
-        <createTable tableName="reserva" remarks="A String">
-            <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="id_reserva"/>
-            </column>
-            <column name="id_cliente" type="INTEGER">
-                <constraints nullable="false" foreignKeyName="fk_cliente_id" references="cliente(id)"/>
-            </column>
-            <column name="id_sala" type="INTEGER">
-                <constraints nullable="false" foreignKeyName="fk_sala_id" references="sala(id)"/>
-            </column>
-            <column name="dtini" type="TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="dtfin" type="TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="vfin" type="DOUBLE">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+    <changeSet id="createsequelreserva" author="guilherme.maciel">
+        <createSequence sequenceName="sq_reserva" incrementBy="1" cycle="false" startValue="1" maxValue="20"/>
+        <createSequence sequenceName="sq_cliente" incrementBy="1" cycle="false" startValue="1" maxValue="20"/>
+        <createSequence sequenceName="sq_sala" incrementBy="1" cycle="false" startValue="1" maxValue="20"/>
+        <createSequence sequenceName="sq_equipamento" incrementBy="1" cycle="false" startValue="1" maxValue="20"/>
     </changeSet>
-    <changeSet id="4" author="lucas.colaco">
+    <changeSet id="1" author="lucas.colaco">
         <createTable tableName="cliente">
-            <column autoIncrement="true" name="id" type="NUMBER" >
-                <constraints> nullable="false"
-                    primaryKey="true"
-                    primaryKeyName="id"
-                </constraints>
+            <column autoIncrement="true" name="id" type="INTEGER" >
             </column>
             <column name="nome" type="VARCHAR(255)">
-                <constraints> nullable="false"
-                </constraints>
             </column>
             <column name="cpf" type="VARCHAR(11)">
-                <constraints> nullable="false"
-                </constraints>
             </column>
             <column name="data_nasc" type="DATE">
-                <constraints> nullable="false"
-                </constraints>
             </column>
             <column name="endereco" type="TEXT">
-                <constraints> nullable="false"
-                </constraints>
             </column>
             <column name="telefone" type="VARCHAR(12)">
-                <constraints> nullable="false"
-                </constraints>
             </column>
             <column name="email" type="VARCHAR(255)">
-                <constraints> nullable="false"
-                </constraints>
             </column>
-
-
         </createTable>
-
+        <addPrimaryKey tableName="cliente" columnNames="id"/>
     </changeSet>
-
-    <changeSet id="2" author="antonio">
-        <createTable  tableName="sala" remarks="tabela para as salas">
-            <column autoIncrement="true" name ="id" type="NUMBER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="id"/>
-            </column>
-            <column name="descricao" type="TEXT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_tipo_sala" type="NUMBER">
-                <constraints nullable="false" foreignKeyName="fk_tipo_sala" references="tipo_sala(id)"/>
-            </column>
-            <column name="capacidade" type="NUMBER">
-                <constraints nullable="false"/>
-            </column>
-            <column name="preco_diario" type="DOUBLE">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="tipo_sala" remarks="tabela para os tipos de sala">
-            <column autoIncrement="true" name ="id" type="NUMBER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="id"/>
-            </column>
-            <column name="descricao" type="TEXT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="sala_equipamento" remarks="tabela da relação entre sala e equipamentos">
-            <column name="id_equipamento" type="NUMBER">
-                <constraints nullable="false" foreignKeyName="fk_equipamento" references="tipo_sala(id)"/>
-            </column>
-            <column name="id_sala" type="NUMBER">
-                <constraints nullable="false" foreignKeyName="fk_sala" references="sala(id)"/>
-            </column>
-            <column name="quantidade" type="NUMBER">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="3" author="andriws.miranda">
-        <createTable  tableName="equipamento" remarks="Tabela Equipamento">
-            <column  autoIncrement ="true" name="id"  type="NUMBER">
-                <constrainsts> primarykey="true" nullable="false"
-                </constrainsts>
-            </column>
-            <column name="nome" type ="VARCHAR(255)">
-                <constraints>
-                    nullable="false"
-                </constraints>
-            </column>
-            <column name="id_tipo_equipamento" type="NUMBER">
-                <constrainsts>
-                    foreingKeyName = "fk_id_tipo_equipamento"
-                    nullable="false"
-                </constrainsts>
-            </column>
-            <columns name="preco_diario" type="DOUBLE">
-                <constraints>
-                    nullable="false"
-                </constraints>
-            </columns>
-            <column name="obrigatorio" type="NUMBER">
-                <constrainsts>
-                    nullable="false"
-                </constrainsts>
-            </column>
-        </createTable>
-        <createTable tableName="tipo_equipamento" remarks="Tabela Tipo Equipamento">
-            <column autoIncrement="true" name="id" type="NUMBER">
-                <constrainsts>
-                    nullable="false"
-                </constrainsts>
-            </column>
-            <column name="descricao" type="VARCHAR(255)">
-                <constrainsts>
-                    nullable="false"
-                </constrainsts>
-            </column>
-        </createTable>
-    </changeSet>
-
 </databaseChangeLog>
