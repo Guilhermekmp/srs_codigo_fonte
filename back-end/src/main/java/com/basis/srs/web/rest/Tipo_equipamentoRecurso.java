@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller @RequestMapping("/equipamento/tipo")
+@RestController @RequestMapping("/equipamento/tipo")
 public class Tipo_equipamentoRecurso {
     @GetMapping
     public List<Tipo_equipamento> obter(){
