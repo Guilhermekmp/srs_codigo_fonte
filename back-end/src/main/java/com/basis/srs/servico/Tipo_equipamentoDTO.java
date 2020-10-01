@@ -1,4 +1,4 @@
-package com.basis.srs.servicos.dto;
+package com.basis.srs.servico;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

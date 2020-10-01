@@ -1,12 +1,11 @@
 package com.basis.srs.web.rest;
 
 import com.basis.srs.dominio.Equipamento;
-import com.basis.srs.servicos.EquipamentoServico;
+import com.basis.srs.servico.dto.EquipamentoServico;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
