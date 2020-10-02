@@ -12,7 +12,7 @@
     </changeSet>
     <changeSet id="create_table_cliente" author="lucas.colaco">
         <createTable tableName="cliente" remarks="">
-            <column name="id" type="number">
+            <column autoIncrement="true" name="id" type="number">
                 <constraints nullable="false"/>
             </column>
             <column name="nome" type="VARCHAR(120)">
