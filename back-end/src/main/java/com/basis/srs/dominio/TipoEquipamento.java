@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "tipo_equipamento")
-public class TipoEquipamento {
+public class TipoEquipamento implements Serializable{
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_equipamento")
     @SequenceGenerator(name="sq_equipamento", allocationSize = 1, sequenceName = "sq_equipamento")

@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "cliente")
-public class Cliente {
+public class Cliente implements Serializable{
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_cliente")
     @SequenceGenerator(name="sq_cliente", allocationSize = 1, sequenceName = "sq_cliente")

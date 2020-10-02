@@ -22,7 +22,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "sala")
-public class Sala {
+public class Sala implements Serializable{
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_sala")
     @SequenceGenerator(name="sq_sala", allocationSize = 1, sequenceName = "sq_sala")

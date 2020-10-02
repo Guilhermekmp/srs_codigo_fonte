@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "sala_equipamento")
-public class SalaEquipamento {
+public class SalaEquipamento implements Serializable{
 
     @EmbeddedId
     private SalaEquipamentoId id;

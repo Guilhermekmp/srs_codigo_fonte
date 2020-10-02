@@ -1,8 +1,6 @@
 package com.basis.srs.web.rest;
 
-import com.basis.srs.dominio.Cliente;
-import com.basis.srs.servico.ClienteServico;
-
+import com.basis.srs.servico.dto.ClienteDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,36 +12,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path ="/api/clientes")
+@RequestMapping("/api/clientes")
 public class ClienteRecurso {
 
-    private ClienteServico servico;
+    @GetMapping
+    public ResponseEntity<List<ClienteDTO>> listar(){
+        return ResponseEntity.ok(new ArrayList<>());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteDTO> obterPorId(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(new ClienteDTO());
+    }
 
     @PostMapping
-    public ResponseEntity<Integer> criar(@RequestBody Cliente cliente){
-        return null;
-    }
-    @GetMapping
-    public ResponseEntity<List<Cliente>> listar(){
-        return null;
-    }
-    @GetMapping(path = "{id}")
-    public ResponseEntity<Cliente> procurar(@PathVariable Integer id){
-        return null;
+    public ResponseEntity<ClienteDTO> salvar(@RequestBody ClienteDTO clienteDTO) throws URISyntaxException{
+        ClienteDTO dto = new ClienteDTO();
+        return ResponseEntity.created(new URI("/a/i/clientes/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<Cliente> atualizar(@RequestBody Cliente cliente){
-        return null;
-    }
-    @DeleteMapping(path = "{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Integer id){
-        return null;
+    public ResponseEntity<ClienteDTO> atualizar(@RequestBody ClienteDTO clienteDTO){
+        ClienteDTO dto = new ClienteDTO();
+        return ResponseEntity.ok(dto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+        return ResponseEntity.ok().build();
+    }
 
 }

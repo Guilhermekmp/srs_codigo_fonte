@@ -1,9 +1,8 @@
 package com.basis.srs.web.rest;
 
-import com.basis.srs.dominio.Sala;
-import com.basis.srs.dominio.SalaEquipamento;
-import com.basis.srs.repositorio.SalaRepositorio;
+import com.basis.srs.servico.dto.SalaDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,43 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/salas") @RequiredArgsConstructor
 public class SalaRecurso {
-
-    private SalaRepositorio salaRepositorio;
-
-    //GET todos
     @GetMapping
-    public List<SalaEquipamento> listar(){
-        return null;
+    public ResponseEntity<List<SalaDTO>> listar(){
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
-    //GET por id
-    @GetMapping(path = "/{id}")
-    public SalaEquipamento buscar(@PathVariable Integer id){
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<SalaDTO> obterPorId(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(new SalaDTO());
     }
 
-    //POST
     @PostMapping
-    public SalaEquipamento criar(@RequestBody Sala sala){
-        return null;
+    public ResponseEntity<SalaDTO> salvar(@RequestBody SalaDTO SalaDTO) throws URISyntaxException {
+        SalaDTO dto = new SalaDTO();
+        return ResponseEntity.created(new URI("/a/i/Salas/")).body(dto);
     }
 
-    //PUT
     @PutMapping
-    public SalaEquipamento atualizar(@RequestBody Sala sala){
-        return null;
+    public ResponseEntity<SalaDTO> atualizar(@RequestBody SalaDTO SalaDTO){
+        SalaDTO dto = new SalaDTO();
+        return ResponseEntity.ok(dto);
     }
 
-    //DELETE
-    @DeleteMapping(path = "/{id}")
-    public SalaEquipamento deletar(@PathVariable Integer id){
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+        return ResponseEntity.ok().build();
     }
-
-
 }
