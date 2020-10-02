@@ -5,34 +5,43 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet id="createsequencelreserva" author="guilherme.maciel">
-        <createSequence sequenceName="sq_reserva" incrementBy="1" cycle="false" startValue="1" maxValue="20"/>
-        <createSequence sequenceName="sq_cliente" incrementBy="1" cycle="false" startValue="1" maxValue="20"/>
-        <createSequence sequenceName="sq_sala" incrementBy="1" cycle="false" startValue="1" maxValue="20"/>
-        <createSequence sequenceName="sq_equipamento" incrementBy="1" cycle="false" startValue="1" maxValue="20"/>
+        <createSequence sequenceName="sq_reserva" incrementBy="1" cycle="false" startValue="1" cacheSize="20"/>
+        <createSequence sequenceName="sq_cliente" incrementBy="1" cycle="false" startValue="1" cacheSize="20"/>
+        <createSequence sequenceName="sq_sala" incrementBy="1" cycle="false" startValue="1" cacheSize="20"/>
+        <createSequence sequenceName="sq_equipamento" incrementBy="1" cycle="false" startValue="1" cacheSize="20"/>
     </changeSet>
     <changeSet id="create_table_cliente" author="lucas.colaco">
-        <createTable tableName="cliente">
-            <column autoIncrement="true" name="id" type="INTEGER" >
+        <createTable tableName="cliente" remarks="">
+            <column name="id" type="number">
+                <constraints nullable="false"/>
             </column>
             <column name="nome" type="VARCHAR(120)">
+                <constraints nullable="false"/>
             </column>
             <column name="cpf" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rg" type="VARCHAR(7)">
+                <constraints nullable="false"/>
             </column>
             <column name="data_nascimento" type="DATE">
+                <constraints nullable="false"/>
             </column>
             <column name="endereco" type="TEXT">
+                <constraints nullable="false"/>
             </column>
             <column name="telefone" type="VARCHAR(12)">
+                <constraints nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
             </column>
          </createTable>
 
     </changeSet>
 
     <changeSet  author="antonio.terceiro"  id="addPrimaryKey">
-    <addPrimaryKey  catalogName="cat"
-                    clustered="true"
+    <addPrimaryKey  clustered="true"
                     columnNames="id"
                     constraintName="pk_cliente"
                     schemaName="public"
