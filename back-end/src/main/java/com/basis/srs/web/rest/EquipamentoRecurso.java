@@ -26,28 +26,29 @@ public class EquipamentoRecurso {
 
     @GetMapping
     public ResponseEntity<List<EquipamentoDTO>> listar(){
-        return ResponseEntity.ok(new ArrayList<>());
+        return ResponseEntity.ok(equipamentoServico.listar());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EquipamentoDTO> obterPorId(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(new EquipamentoDTO());
+    public ResponseEntity<EquipamentoDTO> buscar(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(equipamentoServico.buscar(id));
     }
 
     @PostMapping
-    public ResponseEntity<EquipamentoDTO> salvar(@RequestBody EquipamentoDTO EquipamentoDTO) throws URISyntaxException {
-        EquipamentoDTO dto = new EquipamentoDTO();
+    public ResponseEntity<EquipamentoDTO> salvar(@RequestBody EquipamentoDTO equipamentoDTO) throws URISyntaxException {
+        EquipamentoDTO dto = equipamentoServico.criar(equipamentoDTO);
         return ResponseEntity.created(new URI("/a/i/Equipamentos/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<EquipamentoDTO> atualizar(@RequestBody EquipamentoDTO EquipamentoDTO){
-        EquipamentoDTO dto = new EquipamentoDTO();
+    public ResponseEntity<EquipamentoDTO> atualizar(@RequestBody EquipamentoDTO equipamentoDTO){
+        EquipamentoDTO dto = equipamentoServico.criar(equipamentoDTO);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+        equipamentoServico.deletar(id);
         return ResponseEntity.ok().build();
     }
 }
