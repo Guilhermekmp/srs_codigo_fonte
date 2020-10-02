@@ -1,31 +1,46 @@
 package com.basis.srs.dominio;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
-import org.hibernate.engine.internal.Cascade;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity @Data @NoArgsConstructor
-@Table(name = "reservas")
+@Entity
+@Getter
+@Setter
+@Table(name = "reserva")
 public class Reserva implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    @Column(name="total")
-    private double total;
-    @Column(name = "dt_ini")
-    private Date dtIni;
-    @Column(name= "dt_fin")
-    private Date dtFin;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_cliente", referencedColumnName = "id")
+
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_sala", referencedColumnName = "id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_sala")
     private Sala sala;
+
+    @Column(name = "total")
+    private Double total;
+
+    @Column(name = "data_inicio")
+    private Date dataInicio;
+
+    @Column(name= "data_fim'")
+    private Date dataFim;
+
 }

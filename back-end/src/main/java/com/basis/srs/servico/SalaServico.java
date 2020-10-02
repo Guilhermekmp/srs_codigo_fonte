@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-@Service @RequiredArgsConstructor @Transactional
+@Service
+@RequiredArgsConstructor
+@Transactional
 public class SalaServico {
 
     private SalaRepositorio salaRepositorio;
@@ -16,7 +18,7 @@ public class SalaServico {
         return;
     }
 
-    public void buscar(int id){
+    public void buscar(Integer id){
         return;
     }
 
@@ -28,7 +30,7 @@ public class SalaServico {
         return;
     }
 
-    public void deletar(int id){
+    public void deletar(Integer id){
         return;
     }
 }

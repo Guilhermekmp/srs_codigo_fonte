@@ -1,36 +1,39 @@
 package com.basis.srs.dominio;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+@Getter
+@Setter
 @Table(name = "cliente")
 public class Cliente implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private static final long serialVersionUID = 1L;
 
-    @Column(length = 255, name = "nome")
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "nome", length = 120)
     private String nome;
 
-    @Column(length = 11)
+    @Column(name = "cpf", length = 11)
     private String cpf;
 
-    @Column(name = "data_nasc")
-    private Date dataNasc;
+    @Column(name = "data_nascimento")
+    private Date dataNascimento;
 
-    @Column(length = 255)
+    @Column(name = "endereco")
     private String endereco;
 
-    @Column(length = 12)
+    @Column(name = "telefone", length = 12)
     private String telefone;
 
-    @Column(length = 255)
+    @Column(name = "email", length = 255)
     private String email;
 
 }

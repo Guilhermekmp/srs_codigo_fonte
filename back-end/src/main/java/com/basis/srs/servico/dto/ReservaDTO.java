@@ -1,19 +1,16 @@
 package com.basis.srs.servico.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Date;
 
 @Getter
+@AllArgsConstructor
 public class ReservaDTO {
 
     private Date dtIni;
     private Date dtFin;
-    private double total;
+    private Double total;
 
-    public ReservaDTO(Date dtIni, Date dtFin, double total) {
-        this.dtIni = dtIni;
-        this.dtFin = dtFin;
-        this.total = total;
-    }
 }

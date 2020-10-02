@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/sala-equipamento") @RequiredArgsConstructor
+@RestController
+@RequestMapping("/api/sala-equipamento")
+@RequiredArgsConstructor
 public class SalaEquipamentoRecurso {
 
    private SalaEquipamentoServico salaEquipamentoServico;
@@ -27,7 +29,7 @@ public class SalaEquipamentoRecurso {
 
     //GET por id
     @GetMapping(path = "/{id}")
-    public SalaEquipamento buscar(@PathVariable int id){
+    public SalaEquipamento buscar(@PathVariable Integer id){
         return null;
     }
 
@@ -45,7 +47,7 @@ public class SalaEquipamentoRecurso {
 
     //DELETE
     @DeleteMapping(path = "/{id}")
-    public SalaEquipamento deletar(@PathVariable int id){
+    public SalaEquipamento deletar(@PathVariable Integer id){
         return null;
     }
 

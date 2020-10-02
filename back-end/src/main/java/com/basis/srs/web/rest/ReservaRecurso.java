@@ -1,22 +1,25 @@
 package com.basis.srs.web.rest;
 
 import com.basis.srs.dominio.Reserva;
-import com.basis.srs.repositorio.ReservaRepositorio;
 import com.basis.srs.servico.ReservaServico;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(path="/api/reserva")
-@Getter @Setter
 @RequiredArgsConstructor
 public class ReservaRecurso {
+
     private ReservaServico servico;
 
     @GetMapping
@@ -25,7 +28,7 @@ public class ReservaRecurso {
     }
 
     @GetMapping(path="/{id}")
-    public ResponseEntity<Reserva> procurar(@PathVariable int id){
+    public ResponseEntity<Reserva> procurar(@PathVariable Integer id){
         return null;
     }
 
@@ -35,7 +38,7 @@ public class ReservaRecurso {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Reserva> deletar(@PathVariable int id){
+    public ResponseEntity<Reserva> excluir(@PathVariable Integer id){
         return null;
     }
 

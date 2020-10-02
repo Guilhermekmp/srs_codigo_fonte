@@ -46,6 +46,8 @@
             </column>
             <column name="preco_diario" type="DOUBLE">
             </column>
+            <column name="disponivel" type="INTEGER">
+            </column>
         </createTable>
         <addPrimaryKey tableName="sala" columnNames="id"/>
         <addForeignKeyConstraint baseTableName="sala" baseColumnNames="id_tipo_sala" constraintName="sala_tipo_sala" referencedTableName="tipo_sala"
@@ -72,9 +74,9 @@
             </column>
             <column name="id_sala" type="INTEGER">
             </column>
-            <column name="dt_ini" type="TIMESTAMP">
+            <column name="data_inicio" type="TIMESTAMP">
             </column>
-            <column name="dt_fin" type="TIMESTAMP">
+            <column name="data_fim" type="TIMESTAMP">
             </column>
             <column name="total" type="DOUBLE">
             </column>

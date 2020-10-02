@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor @Transactional
+@RequiredArgsConstructor
+@Transactional
 public class ClienteServico {
 
     private ClienteRepositorio repositorio;

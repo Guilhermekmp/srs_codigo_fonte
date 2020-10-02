@@ -14,11 +14,11 @@
         <createTable tableName="cliente">
             <column autoIncrement="true" name="id" type="INTEGER" >
             </column>
-            <column name="nome" type="VARCHAR(255)">
+            <column name="nome" type="VARCHAR(120)">
             </column>
             <column name="cpf" type="VARCHAR(11)">
             </column>
-            <column name="data_nasc" type="DATE">
+            <column name="data_nascimento" type="DATE">
             </column>
             <column name="endereco" type="TEXT">
             </column>

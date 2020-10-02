@@ -10,7 +10,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor @Transactional
+@RequiredArgsConstructor
+@Transactional
 public class ReservaServico {
 
     private ReservaRepositorio repositorio;
@@ -19,7 +20,7 @@ public class ReservaServico {
         return null;
     }
 
-    public Reserva procurar(int id){
+    public Reserva procurar(Integer id){
         return null;
     }
 
@@ -27,7 +28,7 @@ public class ReservaServico {
         return null;
     }
 
-    public Reserva deletar(int id){
+    public Reserva deletar(Integer id){
         return null;
     }
 

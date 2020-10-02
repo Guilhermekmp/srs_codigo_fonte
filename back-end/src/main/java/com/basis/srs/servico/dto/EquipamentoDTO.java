@@ -1,13 +1,14 @@
 package com.basis.srs.servico.dto;
 
-import com.basis.srs.dominio.Tipo_equipamento;
+import com.basis.srs.dominio.TipoEquipamento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Getter @AllArgsConstructor
+@Getter
+@AllArgsConstructor
 public class EquipamentoDTO {
     private String name;
-    private Tipo_equipamento tipo_equipamento;
-    private double reco_diario;
-    private int obrigatorio;
+    private TipoEquipamento tipo_equipamento;
+    private Double preco_diario;
+    private Integer obrigatorio;
 }
