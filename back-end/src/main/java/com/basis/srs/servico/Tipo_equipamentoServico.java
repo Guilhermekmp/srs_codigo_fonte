@@ -1,19 +1,34 @@
 package com.basis.srs.servico;
 
+import com.basis.srs.dominio.TipoEquipamento;
 import com.basis.srs.repositorio.Tipo_equipamentoRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class Tipo_equipamentoServico {
 
-    private final Tipo_equipamentoRepositorio tipo_equipamentoRepositorio;
+    private Tipo_equipamentoRepositorio tipoEquipamentoRepositorio;
 
-    public Tipo_equipamentoServico(Tipo_equipamentoRepositorio tipo_equipamentoRepositorio) {
-        this.tipo_equipamentoRepositorio = tipo_equipamentoRepositorio;
+    public TipoEquipamento cadastrarTipoEquipamento(TipoEquipamento novoTipoEquipamento){
+        return null;
+    }
+
+    public List<TipoEquipamento> buscarTodos(){
+        return null;
+    }
+
+    public TipoEquipamento buscarId(Integer id){
+        return null;
+    }
+
+    public void deletar(Integer id){
+    }
+
+    public void atualizar(){
     }
 }

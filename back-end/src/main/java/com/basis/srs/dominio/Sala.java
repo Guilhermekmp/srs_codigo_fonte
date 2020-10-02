@@ -19,27 +19,32 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@Table(name = "equipamento")
-public class Equipamento implements Serializable {
+@Table(name = "sala")
+public class Sala implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id")
     private Integer id;
 
-    @Column(name = "nome")
-    private String nome;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<SalaEquipamento> equipamentos;
+
+    @Column(name = "descricao")
+    private String descricao;
 
     @OneToOne
-    @JoinColumn(name = "id_tipo_equipamento",referencedColumnName = "id")
-    private TipoEquipamento tipoEquipamento;
+    @JoinColumn(name = "id_tipo_sala", referencedColumnName = "id")
+    private TipoSala tipoSala;
+
+    @Column(name = "capacidade")
+    private Integer capacidade;
 
     @Column(name = "preco_diario")
-    private Double precoDiario;
+    private Double preco_diario;
 
-    @Column(name = "obrigatorio")
-    private Integer obrigatorio;
+    @Column(name = "disponivel")
+    private Integer disponivel;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<SalaEquipamento> salaEquipamentos;
+
 }

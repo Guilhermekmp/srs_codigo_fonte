@@ -1,9 +1,9 @@
 package com.basis.srs.web.rest;
 
-import com.basis.srs.dominio.Equipamento;
-import com.basis.srs.servico.EquipamentoServico;
+import com.basis.srs.dominio.Sala;
+import com.basis.srs.dominio.SalaEquipamento;
+import com.basis.srs.repositorio.SalaRepositorio;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,34 +16,40 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/equipamentos")
-@RequiredArgsConstructor
-public class EquipamentoRecurso {
+@RequestMapping("/api/salas") @RequiredArgsConstructor
+public class SalaRecurso {
 
-    private EquipamentoServico servicoUsuario;
+    private SalaRepositorio salaRepositorio;
 
+    //GET todos
     @GetMapping
-    public ResponseEntity<List<Equipamento>> obter(){
+    public List<SalaEquipamento> listar(){
         return null;
     }
 
+    //GET por id
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Equipamento> obterPorId(@PathVariable Integer id){
+    public SalaEquipamento buscar(@PathVariable Integer id){
         return null;
     }
 
+    //POST
     @PostMapping
-    public ResponseEntity<Equipamento> cadastro(@RequestBody Equipamento newEquipamento){
+    public SalaEquipamento criar(@RequestBody Sala sala){
         return null;
     }
 
+    //PUT
     @PutMapping
-    public ResponseEntity<Equipamento> atualizar(@RequestBody Equipamento newEquipamento){
+    public SalaEquipamento atualizar(@RequestBody Sala sala){
         return null;
     }
 
+    //DELETE
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Equipamento> deletar(@PathVariable Integer id){
+    public SalaEquipamento deletar(@PathVariable Integer id){
         return null;
     }
+
+
 }

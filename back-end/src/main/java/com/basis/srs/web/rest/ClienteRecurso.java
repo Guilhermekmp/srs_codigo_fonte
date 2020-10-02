@@ -45,7 +45,7 @@ public class ClienteRecurso {
         return null;
     }
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Integer id){
+    public ResponseEntity<Void> excluir(@PathVariable Integer id){
         return null;
     }
 
