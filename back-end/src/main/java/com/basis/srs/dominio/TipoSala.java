@@ -17,7 +17,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "tipo_sala")
 public class TipoSala implements Serializable {
 

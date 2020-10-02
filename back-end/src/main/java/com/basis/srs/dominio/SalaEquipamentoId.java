@@ -8,7 +8,8 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-@Getter @Setter
+@Getter
+@Setter
 public class SalaEquipamentoId implements Serializable {
 
     @Column(name = "id_sala")

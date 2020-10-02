@@ -10,7 +10,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor @Transactional
+@RequiredArgsConstructor
+@Transactional
 public class ReservaServico {
 
     private ReservaRepositorio repositorio;

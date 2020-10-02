@@ -1,7 +1,6 @@
 package com.basis.srs.servico;
 
 import com.basis.srs.dominio.Equipamento;
-import com.basis.srs.repositorio.ClienteRepositorio;
 import com.basis.srs.repositorio.EquipamentoRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import java.util.List;
 public class EquipamentoServico {
 
     private EquipamentoRepositorio equipamentoRepositorio;
-    private ClienteRepositorio repositorio;
 
     public Equipamento cadastrarEquipamento(Equipamento novoEquipamento){
         return null;

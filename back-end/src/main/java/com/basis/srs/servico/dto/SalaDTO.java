@@ -4,7 +4,8 @@ import com.basis.srs.dominio.TipoSala;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Getter @AllArgsConstructor
+@Getter
+@AllArgsConstructor
 public class SalaDTO {
 
     private String descricao;

@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "cliente")
 public class Cliente implements Serializable {
 

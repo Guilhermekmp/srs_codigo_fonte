@@ -5,7 +5,8 @@ import lombok.Getter;
 
 import java.util.Date;
 
-@Getter @AllArgsConstructor
+@Getter
+@AllArgsConstructor
 public class ReservaDTO {
 
     private Date dtIni;

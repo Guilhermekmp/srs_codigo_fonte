@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-@Service @RequiredArgsConstructor @Transactional
+@Service
+@RequiredArgsConstructor
+@Transactional
 public class SalaEquipamentoServico {
 
     private SalaEquipamentoRepositorio salaEquipamentoRepositorio;

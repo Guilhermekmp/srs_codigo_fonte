@@ -7,7 +7,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "tipo_equipamento")
 public class TipoEquipamento implements Serializable {
 

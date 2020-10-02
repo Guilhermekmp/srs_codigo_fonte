@@ -18,7 +18,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "equipamento")
 public class Equipamento implements Serializable {
 
