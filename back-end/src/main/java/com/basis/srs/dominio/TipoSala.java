@@ -16,15 +16,16 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity @Getter
-@Setter @Table(name = "tipo_sala")
+@Entity
+@Getter @Setter
+@Table(name = "tipo_sala")
 public class TipoSala implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id")
     private Integer id;
 
-    @Column
+    @Column(name = "descricao")
     private String descricao;
 }

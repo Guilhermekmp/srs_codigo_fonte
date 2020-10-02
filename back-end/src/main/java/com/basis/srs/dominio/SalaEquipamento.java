@@ -14,7 +14,8 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity @Getter @Setter
+@Entity
+@Getter @Setter
 @Table(name = "sala_equipamento")
 public class SalaEquipamento implements Serializable {
 
