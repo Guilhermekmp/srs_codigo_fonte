@@ -27,28 +27,29 @@ public class ReservaRecurso {
 
     @GetMapping
     public ResponseEntity<List<ReservaDTO>> listar(){
-        return ResponseEntity.ok(new ArrayList<>());
+        return ResponseEntity.ok(reservaServico.listar());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ReservaDTO> obterPorId(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(new ReservaDTO());
+        return ResponseEntity.ok(reservaServico.procurar(id));
     }
 
     @PostMapping
-    public ResponseEntity<ReservaDTO> salvar(@RequestBody ReservaDTO ReservaDTO) throws URISyntaxException {
-        ReservaDTO dto = new ReservaDTO();
+    public ResponseEntity<ReservaDTO> salvar(@RequestBody ReservaDTO reservaDTO) throws URISyntaxException {
+        ReservaDTO dto = reservaServico.salvar(reservaDTO);
         return ResponseEntity.created(new URI("/a/i/Reservas/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<ReservaDTO> atualizar(@RequestBody ReservaDTO ReservaDTO){
-        ReservaDTO dto = new ReservaDTO();
+    public ResponseEntity<ReservaDTO> atualizar(@RequestBody ReservaDTO reservaDTO){
+        ReservaDTO dto = reservaServico.salvar(reservaDTO);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+        reservaServico.deletar(id);
         return ResponseEntity.ok().build();
     }
 }
