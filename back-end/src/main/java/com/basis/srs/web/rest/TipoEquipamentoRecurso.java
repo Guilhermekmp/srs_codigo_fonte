@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tipo-equipamentos")
+@RequestMapping("/api/tipos-equipamento")
 @RequiredArgsConstructor
 public class TipoEquipamentoRecurso {
     private TipoEquipamentoServico tipo_equipamentoServico;
