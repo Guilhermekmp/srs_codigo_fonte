@@ -23,37 +23,6 @@ public class ClienteServico {
 
     private ClienteRepositorio clienteRepositorio;
 
-<<<<<<< HEAD
-    public List<ClienteDTO> listar(){
-        return new ArrayList<>();
-    }
-
-    public ClienteDTO obterId(Integer id){
-        return new ClienteDTO();
-    }
-=======
-    public ClienteDTO salvar(Cliente novoCliente){
-        return new ClienteDTO();
-    }
-
-    public List<ClienteDTO> listar(){
-
-        return clienteRepositorio.findAll();
-    }
-    
-    public ClienteDTO obterPorId(Integer id){
-        return new ClienteDTO();
-    }
-
-    public void deletar(Integer id){
-    }
-
-    public void atualizar(ClienteDTO clienteDTO){
-
-    }
-
-
->>>>>>> 2d3b7a30470c9e465dbcf43df90ba1023dc67875
 
 
 }
