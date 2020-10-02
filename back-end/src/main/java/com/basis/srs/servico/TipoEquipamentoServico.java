@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-package com.basis.srs.servico;public class TipoEquipamentoServico {
-=======
-package com.basis.srs.servico;
 
+package com.basis.srs.servico;
 import com.basis.srs.dominio.TipoEquipamento;
 import com.basis.srs.repositorio.TipoEquipamentoRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +31,4 @@ public class TipoEquipamentoServico {
 
     public void atualizar(){
     }
->>>>>>> 65334a2ccc146bc71bd5de46063f7aecbdc9cd3e
 }

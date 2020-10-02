@@ -12,19 +12,29 @@
     </changeSet>
     <changeSet id="create_table_cliente" author="lucas.colaco">
         <createTable tableName="cliente">
-            <column autoIncrement="true" name="id" type="INTEGER" >
+            <column autoIncrement="true" name="id" type="NUMBER" >
+                <constraints nullable="false"/>
             </column>
             <column name="nome" type="VARCHAR(120)">
+                <constraints nullable="false"/>
             </column>
             <column name="cpf" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rg" type="VARCHAR(8)">
+                <constraints nullable="false"/>
             </column>
             <column name="data_nascimento" type="DATE">
+                <constraints nullable="false"/>
             </column>
             <column name="endereco" type="TEXT">
+                <constraints nullable="false"/>
             </column>
             <column name="telefone" type="VARCHAR(12)">
+                <constraints nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
             </column>
          </createTable>
 

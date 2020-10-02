@@ -3,17 +3,25 @@ package com.basis.srs.web.rest;
 import com.basis.srs.dominio.Equipamento;
 import com.basis.srs.dominio.TipoEquipamento;
 import com.basis.srs.servico.EquipamentoServico;
+import com.basis.srs.servico.TipoEquipamentoServico;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/equipamentos")
+@RequestMapping("/api/tipos-equipamento")
 @RequiredArgsConstructor
-public class Tipo_equipamentoRecurso {
-    private EquipamentoServico equipamentoServico;
+public class TipoEquipamentoRecurso {
+
+    private TipoEquipamentoServico tipoEquipamentoServico;
 
     @GetMapping
     public List<TipoEquipamento> obter(){

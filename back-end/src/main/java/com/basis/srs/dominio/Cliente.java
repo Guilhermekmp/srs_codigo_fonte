@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -15,25 +16,30 @@ public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id")
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_cliente")
+    @SequenceGenerator(name = "sq_cliente", allocationSize = 1, sequenceName = "sq_cliente")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "nome", length = 120)
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf", length = 11)
+    @Column(name = "cpf")
     private String cpf;
 
+    @Column(name= "rg")
+    private String rg;
+
     @Column(name = "data_nascimento")
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
     @Column(name = "endereco")
     private String endereco;
 
-    @Column(name = "telefone", length = 12)
+    @Column(name = "telefone")
     private String telefone;
 
-    @Column(name = "email", length = 255)
+    @Column(name = "email")
     private String email;
 
 }
