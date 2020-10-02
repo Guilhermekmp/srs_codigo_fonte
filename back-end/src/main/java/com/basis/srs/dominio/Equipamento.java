@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
@@ -21,12 +22,12 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "equipamento")
-public class Equipamento implements Serializable {
+public class Equipamento implements Serializable{
 
-    private static final long serialVersionUID = 1L;
-
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id")
-    private Integer id;
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_equipamento")
+    @SequenceGenerator(name="sq_equipamento", allocationSize = 1, sequenceName = "sq_equipamento")
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "nome")
     private String nome;
@@ -41,6 +42,6 @@ public class Equipamento implements Serializable {
     @Column(name = "obrigatorio")
     private Integer obrigatorio;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<SalaEquipamento> salaEquipamentos;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SalaEquipamento> salas;
 }
