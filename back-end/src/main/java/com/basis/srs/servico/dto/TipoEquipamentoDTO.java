@@ -4,6 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter @AllArgsConstructor
-public class Tipo_equipamentoDTO {
+public class TipoEquipamentoDTO {
     private String descricao;
 }

@@ -2,7 +2,7 @@ package com.basis.srs.web.rest;
 
 
 
-import com.basis.srs.servico.Tipo_equipamentoServico;
+import com.basis.srs.servico.TipoEquipamentoServico;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.basis.srs.dominio.TipoEquipamento;
@@ -11,8 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tipo-equipamentos")
 @RequiredArgsConstructor
-public class Tipo_equipamentoRecurso {
-    private Tipo_equipamentoServico tipo_equipamentoServico;
+public class TipoEquipamentoRecurso {
+    private TipoEquipamentoServico tipo_equipamentoServico;
 
     @GetMapping
     public List<TipoEquipamento> obter(){
