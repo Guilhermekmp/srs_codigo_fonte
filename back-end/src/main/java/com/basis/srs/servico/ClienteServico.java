@@ -22,8 +22,8 @@ import java.util.Optional;
 @Transactional
 public class ClienteServico {
 
-    private ClienteRepositorio clienteRepositorio;
-    private ClienteMapper clienteMapper;
+    private final ClienteRepositorio clienteRepositorio;
+    private final ClienteMapper clienteMapper;
 
     public ClienteDTO salvar(ClienteDTO clienteDTO){
         Cliente cliente = clienteMapper.toEntity(clienteDTO);

@@ -1,10 +1,7 @@
 package com.basis.srs.servico.mapper;
 
-import org.mapstruct.Mapper;
-
 import java.util.List;
 
-@Mapper
 public interface EntityMapper<D,E> {
     E toEntity(D dto);
 

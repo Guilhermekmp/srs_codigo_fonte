@@ -16,7 +16,7 @@ import java.util.List;
 public class EquipamentoServico {
 
     private final EquipamentoRepositorio equipamentoRepositorio;
-    private EquipamentoMapper equipamentoMapper;
+    private final EquipamentoMapper equipamentoMapper;
 
     public EquipamentoDTO criar(EquipamentoDTO novoEquipamento){
 

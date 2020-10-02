@@ -27,14 +27,12 @@ public class Reserva implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_reserva")
     @SequenceGenerator(name="sq_reserva", allocationSize = 1, sequenceName = "sq_reserva")
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
-    @MapsId("idCliente")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
-    @MapsId("idSala")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sala")
     private Sala sala;

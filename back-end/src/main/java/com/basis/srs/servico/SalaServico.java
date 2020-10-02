@@ -15,8 +15,8 @@ import java.util.List;
 @Transactional
 public class SalaServico {
 
-    private SalaRepositorio salaRepositorio;
-    private SalaMapper salaMapper;
+    private final SalaRepositorio salaRepositorio;
+    private final SalaMapper salaMapper;
 
     public List<SalaDTO> listar(){
         List<SalaDTO> salas = salaMapper.toDto(salaRepositorio.findAll());
@@ -29,8 +29,8 @@ public class SalaServico {
         return salaDTO;
     }
 
-    public SalaDTO criar(Sala sala){
-        Sala novaSala = salaRepositorio.save(sala);
+    public SalaDTO criar(SalaDTO sala){
+        Sala novaSala = salaRepositorio.save(salaMapper.toEntity(sala));
         SalaDTO salaDTO = salaMapper.toDto(novaSala);
         return salaDTO;
     }
