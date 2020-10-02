@@ -31,6 +31,6 @@ public class SalaEquipamento implements Serializable {
     @MapsId("idSala") @JoinColumn(name = "id_sala")
     private Sala sala;
 
-    @Column(name = "qtd_equipamento")
-    private Integer qtd_equipamentos;
+    @Column(name = "quantidade")
+    private Integer quantidade;
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tipo-equipamentos")
 @RequiredArgsConstructor
-public class TipoEquipamentoRecurso {
+public class Tipo_equipamentoRecurso {
     private TipoEquipamentoServico tipo_equipamentoServico;
 
     @GetMapping

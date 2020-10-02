@@ -2,20 +2,23 @@ package com.basis.srs.dominio;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor
+@Entity @Getter @Setter
 @Table(name = "cliente")
 public class Cliente implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @Column(length = 255, name = "nome")
+    @Column(name = "nome")
     private String nome;
 
     @Column(length = 11)
@@ -24,13 +27,13 @@ public class Cliente implements Serializable {
     @Column(name = "data_nasc")
     private Date dataNasc;
 
-    @Column(length = 255)
+    @Column
     private String endereco;
 
     @Column(length = 12)
     private String telefone;
 
-    @Column(length = 255)
+    @Column
     private String email;
 
 }

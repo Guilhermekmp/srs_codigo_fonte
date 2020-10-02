@@ -11,11 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity @Getter @Setter @Table(name = "sala")
 public class Sala implements Serializable {
@@ -31,9 +34,9 @@ public class Sala implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_tipo_sala", referencedColumnName = "id")
-    private TipoSala tipo_sala;
+    private TipoSala tipoSala;
 
     @Column(name = "capacidade")
     private Integer capacidade;
