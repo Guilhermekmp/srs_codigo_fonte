@@ -23,31 +23,32 @@ import java.util.List;
 @RequestMapping("/api/clientes")
 public class ClienteRecurso {
 
-    private ClienteServico clienteServico;
+    private final ClienteServico clienteServico;
 
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> listar(){
-        return ResponseEntity.ok(new ArrayList<>());
+        return ResponseEntity.ok(clienteServico.listar());
     }
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDTO> listar(@PathVariable("{id}") Integer id){
-        return ResponseEntity.ok(new ClienteDTO());
+        return ResponseEntity.ok(clienteServico.listarId(id));
     }
 
     @PostMapping
     public ResponseEntity<ClienteDTO> salvar(@RequestBody ClienteDTO clienteDTO) throws URISyntaxException {
-        ClienteDTO dto = new ClienteDTO();
-        return ResponseEntity.created(new URI(s:"/api/clientes/")).body(dto);
+        ClienteDTO dto = clienteServico.salvar(clienteDTO);
+        return ResponseEntity.created(new URI("/api/clientes/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<ClienteDTO> editar(){
-        ClienteDTO dto = new ClienteDTO();
+    public ResponseEntity<ClienteDTO> editar(@RequestBody ClienteDTO clienteDTO){
+        ClienteDTO dto = clienteServico.salvar(clienteDTO);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable("{id}") Integer id){
+        clienteServico.deletar(id);
         return ResponseEntity.ok().build();
     }
 
