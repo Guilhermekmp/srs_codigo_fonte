@@ -1,5 +1,6 @@
 package com.basis.srs.web.rest;
 
+import com.basis.srs.servico.ClienteServico;
 import com.basis.srs.servico.dto.ClienteDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,10 @@ import java.util.List;
 @RequestMapping("/api/clientes")
 public class ClienteRecurso {
 
+    private final ClienteServico clienteServico;
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> listar(){
+
         return ResponseEntity.ok(new ArrayList<>());
     }
 
@@ -34,18 +37,19 @@ public class ClienteRecurso {
 
     @PostMapping
     public ResponseEntity<ClienteDTO> salvar(@RequestBody ClienteDTO clienteDTO) throws URISyntaxException{
-        ClienteDTO dto = new ClienteDTO();
+        ClienteDTO dto = clienteServico.salvar(clienteDTO);
         return ResponseEntity.created(new URI("/a/i/clientes/")).body(dto);
     }
 
     @PutMapping
     public ResponseEntity<ClienteDTO> atualizar(@RequestBody ClienteDTO clienteDTO){
-        ClienteDTO dto = new ClienteDTO();
+        ClienteDTO dto = clienteServico.salvar(clienteDTO);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+        clienteServico.deletar(id);
         return ResponseEntity.ok().build();
     }
 

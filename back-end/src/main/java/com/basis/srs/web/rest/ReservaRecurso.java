@@ -23,6 +23,8 @@ import java.util.List;
 @RequestMapping(path="/api/reserva")
 @RequiredArgsConstructor
 public class ReservaRecurso {
+    private final ReservaServico reservaServico;
+
     @GetMapping
     public ResponseEntity<List<ReservaDTO>> listar(){
         return ResponseEntity.ok(new ArrayList<>());

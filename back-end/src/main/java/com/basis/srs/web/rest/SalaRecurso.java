@@ -1,5 +1,6 @@
 package com.basis.srs.web.rest;
 
+import com.basis.srs.servico.SalaServico;
 import com.basis.srs.servico.dto.SalaDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/salas") @RequiredArgsConstructor
 public class SalaRecurso {
+    private final SalaServico salaServico;
+
     @GetMapping
     public ResponseEntity<List<SalaDTO>> listar(){
         return ResponseEntity.ok(new ArrayList<>());

@@ -1,5 +1,6 @@
 package com.basis.srs.web.rest;
 
+import com.basis.srs.servico.EquipamentoServico;
 import com.basis.srs.servico.dto.EquipamentoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ import java.util.List;
 @RequestMapping("/api/equipamentos")
 @RequiredArgsConstructor
 public class EquipamentoRecurso {
+    private final EquipamentoServico equipamentoServico;
+
     @GetMapping
     public ResponseEntity<List<EquipamentoDTO>> listar(){
         return ResponseEntity.ok(new ArrayList<>());
