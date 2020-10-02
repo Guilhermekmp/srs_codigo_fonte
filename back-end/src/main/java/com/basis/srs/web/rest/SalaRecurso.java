@@ -4,6 +4,7 @@ import com.basis.srs.dominio.Sala;
 import com.basis.srs.dominio.SalaEquipamento;
 import com.basis.srs.repositorio.SalaRepositorio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

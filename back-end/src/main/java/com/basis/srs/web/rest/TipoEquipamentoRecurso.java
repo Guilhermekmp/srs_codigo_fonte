@@ -4,6 +4,7 @@ package com.basis.srs.web.rest;
 
 import com.basis.srs.servico.TipoEquipamentoServico;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.basis.srs.dominio.TipoEquipamento;
 import java.util.List;

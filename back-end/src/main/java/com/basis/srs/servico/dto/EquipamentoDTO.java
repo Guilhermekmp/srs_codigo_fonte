@@ -8,6 +8,6 @@ import lombok.Getter;
 public class EquipamentoDTO {
     private String name;
     private TipoEquipamento tipo_equipamento;
-    private double reco_diario;
-    private int obrigatorio;
+    private Double reco_diario;
+    private Integer obrigatorio;
 }
