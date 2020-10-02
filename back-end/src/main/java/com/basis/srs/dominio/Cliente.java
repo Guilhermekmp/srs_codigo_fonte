@@ -11,17 +11,17 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "cliente")
-public class Cliente implements Serializable {
+public class Cliente {
 
-    private static final long serialVersionUID = 1L;
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_cliente")
+    @SequenceGenerator(name="sq_cliente", allocationSize = 1, sequenceName = "sq_cliente")
+    @Column(name = "id")
+    private int id;
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id")
-    private Integer id;
-
-    @Column(name = "nome", length = 120)
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf", length = 11)
+    @Column(name = "cpf")
     private String cpf;
 
     @Column(name = "data_nascimento")
@@ -30,10 +30,13 @@ public class Cliente implements Serializable {
     @Column(name = "endereco")
     private String endereco;
 
-    @Column(name = "telefone", length = 12)
-    private String telefone;
+    @Column(name = "rg")
+    private String rg;
 
-    @Column(name = "email", length = 255)
+    @Column(name = "email")
     private String email;
+
+    @Column
+    private String telefone;
 
 }

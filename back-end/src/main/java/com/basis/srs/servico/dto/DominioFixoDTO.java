@@ -1,11 +1,12 @@
 package com.basis.srs.servico.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
-public class TipoSalaDTO {
+@Setter
+public class DominioFixoDTO {
 
+    private Integer id;
     private String descricao;
 }

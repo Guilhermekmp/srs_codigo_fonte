@@ -12,7 +12,9 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
         <addPrimaryKey tableName="tipo_equipamento" columnNames="id" constraintName="pk_tipo_equipamento"/>
+
         <createTable  tableName="equipamento" remarks="Tabela Equipamento">
             <column name="id"  type="number">
                 <constraints nullable="false"/>

@@ -18,18 +18,17 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "sala_equipamento")
-public class SalaEquipamento implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SalaEquipamento {
 
     @EmbeddedId
     private SalaEquipamentoId id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @MapsId("idEquipamento") @JoinColumn (name = "id_equipamento")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idEquipamento")
+    @JoinColumn (name = "id_equipamento")
     private Equipamento equipamento;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idSala") @JoinColumn(name = "id_sala")
     private Sala sala;
 

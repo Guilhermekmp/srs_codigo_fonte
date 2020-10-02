@@ -3,13 +3,15 @@ package com.basis.srs.servico.dto;
 import com.basis.srs.dominio.TipoSala;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
+@Setter
 public class SalaDTO {
 
+    private Integer id;
     private String descricao;
-    private TipoSala tipo_sala;
+    private DominioFixoDTO tipo_sala;
     private Integer capacidade;
     private Double preco_diario;
     private Integer disponivel;
