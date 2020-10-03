@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -27,13 +28,13 @@ public class Equipamento implements Serializable{
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_equipamento")
     @SequenceGenerator(name="sq_equipamento", allocationSize = 1, sequenceName = "sq_equipamento")
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "nome")
     private String nome;
 
-    @OneToOne
-    @JoinColumn(name = "id_tipo_equipamento",referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo_equipamento")
     private TipoEquipamento tipoEquipamento;
 
     @Column(name = "preco_diario")
@@ -42,6 +43,4 @@ public class Equipamento implements Serializable{
     @Column(name = "obrigatorio")
     private Integer obrigatorio;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SalaEquipamento> salas;
 }

@@ -1,7 +1,7 @@
 package com.basis.srs.web.rest;
 
-import com.basis.srs.dominio.Reserva;
 import com.basis.srs.servico.ReservaServico;
+import com.basis.srs.servico.dto.ReservaDTO;
 import com.basis.srs.servico.dto.ReservaDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,28 +27,28 @@ public class ReservaRecurso {
 
     @GetMapping
     public ResponseEntity<List<ReservaDTO>> listar(){
-        return ResponseEntity.ok(new ArrayList<>());
+        return ResponseEntity.ok(reservaServico.listar());
     }
-
     @GetMapping("/{id}")
-    public ResponseEntity<ReservaDTO> obterPorId(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(new ReservaDTO());
+    public ResponseEntity<ReservaDTO> listar(@PathVariable("{id}") Integer id){
+        return ResponseEntity.ok(reservaServico.buscar(id));
     }
 
     @PostMapping
-    public ResponseEntity<ReservaDTO> salvar(@RequestBody ReservaDTO ReservaDTO) throws URISyntaxException {
-        ReservaDTO dto = new ReservaDTO();
-        return ResponseEntity.created(new URI("/a/i/Reservas/")).body(dto);
+    public ResponseEntity<ReservaDTO> salvar(@RequestBody ReservaDTO reservaDTO) throws URISyntaxException {
+        ReservaDTO dto = reservaServico.criar(reservaDTO);
+        return ResponseEntity.created(new URI("/api/clientes/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<ReservaDTO> atualizar(@RequestBody ReservaDTO ReservaDTO){
-        ReservaDTO dto = new ReservaDTO();
+    public ResponseEntity<ReservaDTO> editar(@RequestBody ReservaDTO reservaDTO){
+        ReservaDTO dto = reservaServico.criar(reservaDTO);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+    public ResponseEntity<Void> remover(@PathVariable("{id}") Integer id){
+        reservaServico.deletar(id);
         return ResponseEntity.ok().build();
     }
 }

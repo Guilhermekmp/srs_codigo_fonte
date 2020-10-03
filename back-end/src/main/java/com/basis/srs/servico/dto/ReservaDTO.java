@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 public class ReservaDTO {
 
-    private int id;
+    private Integer id;
     private ClienteDTO cliente;
     private SalaDTO sala;
     private Double total;

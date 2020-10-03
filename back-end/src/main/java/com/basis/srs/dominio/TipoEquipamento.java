@@ -12,10 +12,9 @@ import java.io.Serializable;
 @Table(name = "tipo_equipamento")
 public class TipoEquipamento implements Serializable{
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_equipamento")
-    @SequenceGenerator(name="sq_equipamento", allocationSize = 1, sequenceName = "sq_equipamento")
+    @Id
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "descricao")
     private String descricao;
