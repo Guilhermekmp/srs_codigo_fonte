@@ -44,7 +44,7 @@ public class Sala implements Serializable{
     private Integer capacidade;
 
     @Column(name = "preco_diario")
-    private Double preco_diario;
+    private Double precoDiario;
 
     @Column(name = "disponivel")
     private Integer disponivel;

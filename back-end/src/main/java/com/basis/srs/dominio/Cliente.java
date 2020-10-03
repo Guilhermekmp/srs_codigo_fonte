@@ -24,13 +24,13 @@ public class Cliente implements Serializable {
     private String nome;
 
     @Column(name = "cpf")
-    private String cpf;
+    private Integer cpf;
 
     @Column(name = "rg")
-    private String rg;
+    private Integer rg;
 
     @Column(name = "data_nascimento")
-    private LocalDate dataNascimento;
+    private Date dataNascimento;
 
     @Column(name = "endereco")
     private String endereco;

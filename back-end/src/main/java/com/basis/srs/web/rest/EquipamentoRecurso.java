@@ -30,7 +30,7 @@ public class EquipamentoRecurso {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EquipamentoDTO> buscar(@PathVariable("id") Integer id){
+    public ResponseEntity<EquipamentoDTO> buscar(@PathVariable Integer id){
         return ResponseEntity.ok(equipamentoServico.buscar(id));
     }
 
@@ -47,7 +47,7 @@ public class EquipamentoRecurso {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+    public ResponseEntity<Void> remover(@PathVariable Integer id){
         equipamentoServico.deletar(id);
         return ResponseEntity.ok().build();
     }

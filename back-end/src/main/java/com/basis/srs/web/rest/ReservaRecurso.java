@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/api/reserva")
+@RequestMapping(path="/api/reservas")
 @RequiredArgsConstructor
 public class ReservaRecurso {
     private final ReservaServico reservaServico;
@@ -30,7 +30,7 @@ public class ReservaRecurso {
         return ResponseEntity.ok(reservaServico.listar());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ReservaDTO> listar(@PathVariable("{id}") Integer id){
+    public ResponseEntity<ReservaDTO> listar(@PathVariable Integer id){
         return ResponseEntity.ok(reservaServico.buscar(id));
     }
 
@@ -47,7 +47,7 @@ public class ReservaRecurso {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable("{id}") Integer id){
+    public ResponseEntity<Void> remover(@PathVariable Integer id){
         reservaServico.deletar(id);
         return ResponseEntity.ok().build();
     }

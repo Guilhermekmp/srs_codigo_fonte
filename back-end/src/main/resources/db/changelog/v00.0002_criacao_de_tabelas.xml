@@ -20,12 +20,16 @@
                 <constraints nullable="false"/>
             </column>
             <column name="nome" type ="VARCHAR(255)">
+                <constraints nullable="false"/>
             </column>
             <column name="id_tipo_equipamento" type="NUMBER">
+                <constraints nullable="false"/>
             </column>
             <column name="preco_diario" type="DOUBLE">
+                <constraints nullable="false"/>
             </column>
             <column name="obrigatorio" type="NUMBER">
+                <constraints nullable="false"/>
             </column>
         </createTable>
         <addPrimaryKey tableName="equipamento" columnNames="id" constraintName="pk_equipamento"/>
@@ -58,9 +62,6 @@
         <addForeignKeyConstraint baseTableName="sala" baseColumnNames="id_tipo_sala" constraintName="sala_tipo_sala" referencedTableName="tipo_sala"
                              referencedColumnNames="id"/>
         <createTable tableName="sala_equipamento" remarks="tabela da relação entre sala e equipamentos">
-            <column name="id" type="NUMBER">
-                <constraints nullable="false"/>
-            </column>
             <column name="id_equipamento" type="NUMBER">
                 <constraints nullable="false"/>
             </column>

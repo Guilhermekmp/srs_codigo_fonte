@@ -30,7 +30,7 @@ public class SalaRecurso {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SalaDTO> obterPorId(@PathVariable("id") Integer id){
+    public ResponseEntity<SalaDTO> obterPorId(@PathVariable Integer id){
         return ResponseEntity.ok(salaServico.buscar(id));
     }
 
@@ -47,7 +47,7 @@ public class SalaRecurso {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+    public ResponseEntity<Void> remover(@PathVariable Integer id){
         salaServico.deletar(id);
         return ResponseEntity.ok().build();
     }

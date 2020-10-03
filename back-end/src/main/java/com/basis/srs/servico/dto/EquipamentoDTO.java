@@ -10,8 +10,8 @@ import lombok.Setter;
 public class EquipamentoDTO {
 
     private Integer id;
-    private String name;
-    private DominioFixoDTO tipo_equipamento;
-    private Double preco_diario;
+    private String nome;
+    private DominioFixoDTO tipoEquipamento;
+    private Double precoDiario;
     private Integer obrigatorio;
 }

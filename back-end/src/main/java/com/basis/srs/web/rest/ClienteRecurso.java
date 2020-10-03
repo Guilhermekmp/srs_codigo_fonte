@@ -30,7 +30,7 @@ public class ClienteRecurso {
         return ResponseEntity.ok(clienteServico.listar());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> listar(@PathVariable("{id}") Integer id){
+    public ResponseEntity<ClienteDTO> listar(@PathVariable Integer id){
         return ResponseEntity.ok(clienteServico.listarId(id));
     }
 
@@ -47,7 +47,7 @@ public class ClienteRecurso {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable("{id}") Integer id){
+    public ResponseEntity<Void> remover(@PathVariable Integer id){
         clienteServico.deletar(id);
         return ResponseEntity.ok().build();
     }
