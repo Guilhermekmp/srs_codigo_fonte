@@ -32,16 +32,8 @@ public class ClienteServico {
     }
 
     public List<ClienteDTO> listar(){
-<<<<<<< HEAD
-        return null;
-    }
-    
-    public ClienteDTO obterPorId(Integer id){
-        return new ClienteDTO();
-=======
         List<ClienteDTO> lista = clienteMapper.toDto(clienteRepositorio.findAll());
         return lista;
->>>>>>> origin/develop
     }
 
     public ClienteDTO listarId(Integer id){
@@ -52,5 +44,4 @@ public class ClienteServico {
     public void deletar(Integer id){
         clienteRepositorio.deleteById(id);
     }
-
 }

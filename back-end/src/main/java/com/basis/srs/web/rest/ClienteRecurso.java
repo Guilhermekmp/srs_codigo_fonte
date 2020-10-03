@@ -35,15 +35,6 @@ public class ClienteRecurso {
     }
 
     @PostMapping
-<<<<<<< HEAD
-    public ResponseEntity<ClienteDTO> salvar(@RequestBody ClienteDTO clienteDTO) throws URISyntaxException{
-        return null;
-    }
-
-    @PutMapping
-    public ResponseEntity<ClienteDTO> atualizar(@RequestBody ClienteDTO clienteDTO){
-        return null;
-=======
     public ResponseEntity<ClienteDTO> salvar(@RequestBody ClienteDTO clienteDTO) throws URISyntaxException {
         ClienteDTO dto = clienteServico.salvar(clienteDTO);
         return ResponseEntity.created(new URI("/api/clientes/")).body(dto);
@@ -53,7 +44,6 @@ public class ClienteRecurso {
     public ResponseEntity<ClienteDTO> editar(@RequestBody ClienteDTO clienteDTO){
         ClienteDTO dto = clienteServico.salvar(clienteDTO);
         return ResponseEntity.ok(dto);
->>>>>>> origin/develop
     }
 
     @DeleteMapping("/{id}")
@@ -61,6 +51,4 @@ public class ClienteRecurso {
         clienteServico.deletar(id);
         return ResponseEntity.ok().build();
     }
-
-
 }

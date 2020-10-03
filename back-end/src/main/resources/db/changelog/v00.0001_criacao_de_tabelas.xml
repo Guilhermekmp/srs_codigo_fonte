@@ -10,9 +10,9 @@
         <createSequence sequenceName="sq_sala" incrementBy="1" cycle="false" startValue="1" cacheSize="20"/>
         <createSequence sequenceName="sq_equipamento" incrementBy="1" cycle="false" startValue="1" cacheSize="20"/>
     </changeSet>
-    <changeSet id="create_table_cliente" author="lucas.colaco">
+    <changeSet id="table_cliente" author="lucas.colaco">
         <createTable tableName="cliente" remarks="">
-            <column autoIncrement="true" name="id" type="number">
+            <column name="id" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
             <column name="nome" type="VARCHAR(120)">
