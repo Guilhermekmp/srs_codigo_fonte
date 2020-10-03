@@ -24,8 +24,7 @@ public class ClienteServico {
     }
 
     public List<ClienteDTO> listar(){
-
-        return clienteRepositorio.findAll();
+        return null;
     }
     
     public ClienteDTO obterPorId(Integer id){
