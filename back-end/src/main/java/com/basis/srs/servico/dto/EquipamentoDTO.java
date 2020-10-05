@@ -1,7 +1,5 @@
 package com.basis.srs.servico.dto;
 
-import com.basis.srs.dominio.TipoEquipamento;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
