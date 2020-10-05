@@ -28,7 +28,7 @@ public class SalaEquipamento implements Serializable{
     @JoinColumn (name = "id_equipamento")
     private Equipamento equipamento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("idSala") @JoinColumn(name = "id_sala")
     private Sala sala;
 

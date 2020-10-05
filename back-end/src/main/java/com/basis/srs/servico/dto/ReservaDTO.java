@@ -18,8 +18,8 @@ import java.util.Date;
 public class ReservaDTO {
 
     private Integer id;
-    private ClienteDTO cliente;
-    private SalaDTO sala;
+    private Integer idCliente;
+    private Integer idSala;
     private Double total;
     private LocalDateTime dataInicio;
     private LocalDateTime dataFim;

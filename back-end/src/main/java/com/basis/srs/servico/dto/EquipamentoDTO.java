@@ -11,7 +11,7 @@ public class EquipamentoDTO {
 
     private Integer id;
     private String nome;
-    private DominioFixoDTO tipoEquipamento;
+    private Integer idTipoEquipamento;
     private Double precoDiario;
     private Integer obrigatorio;
 }

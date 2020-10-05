@@ -30,7 +30,7 @@ public class Sala implements Serializable{
     @Column(name = "id")
     private Integer id;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SalaEquipamento> equipamentos;
 
     @Column(name = "descricao")

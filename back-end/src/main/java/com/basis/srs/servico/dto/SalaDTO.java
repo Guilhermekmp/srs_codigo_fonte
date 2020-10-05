@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,8 +15,8 @@ public class SalaDTO {
 
     private Integer id;
     private String descricao;
-    private List<SalaEquipamento> equipamentos;
-    private DominioFixoDTO tipoSala;
+    private ArrayList<SalaEquipamentoDTO> equipamentos;
+    private Integer idTipoSala;
     private Integer capacidade;
     private Double precoDiario;
     private Integer disponivel;

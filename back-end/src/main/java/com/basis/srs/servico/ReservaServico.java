@@ -1,16 +1,13 @@
 package com.basis.srs.servico;
 
 import com.basis.srs.dominio.Reserva;
-import com.basis.srs.dominio.Reserva;
 import com.basis.srs.repositorio.ReservaRepositorio;
 import com.basis.srs.servico.dto.ReservaDTO;
 import com.basis.srs.servico.mapper.ReservaMapper;
-import com.basis.srs.servico.mapper.SalaMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
