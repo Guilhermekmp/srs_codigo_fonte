@@ -2,7 +2,6 @@ package com.basis.srs.web.rest;
 
 import com.basis.srs.servico.ReservaServico;
 import com.basis.srs.servico.dto.ReservaDTO;
-import com.basis.srs.servico.dto.ReservaDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

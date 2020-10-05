@@ -49,5 +49,4 @@ public class Sala implements Serializable{
     @Column(name = "disponivel")
     private Integer disponivel;
 
-
 }
