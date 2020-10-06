@@ -23,8 +23,9 @@ public class SalaServico {
     private final SalaMapper salaMapper;
 
     public List<SalaDTO> listar(){
-        List<SalaDTO> salas = salaMapper.toDto(salaRepositorio.findAll());
-        return salas;
+        List<Sala> salas = salaRepositorio.findAll();
+        List<SalaDTO> salaDTOS = salaMapper.toDto(salas);
+        return salaDTOS;
     }
 
     public SalaDTO buscar(Integer id){
@@ -34,9 +35,10 @@ public class SalaServico {
     }
 
     public SalaDTO criar(SalaDTO sala){
-        Sala novaSala = salaRepositorio.save(salaMapper.toEntity(sala));
+        Sala novaSala = salaMapper.toEntity(sala);
         List<SalaEquipamento> equipamentos = novaSala.getEquipamentos();
         novaSala.setEquipamentos(new ArrayList<>());
+        salaRepositorio.save(novaSala);
         equipamentos.forEach(equipamento ->{
             equipamento.setSala(novaSala);
             equipamento.getId().setIdSala(novaSala.getId());

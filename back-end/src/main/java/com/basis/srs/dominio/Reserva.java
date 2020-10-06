@@ -41,7 +41,7 @@ public class Reserva implements Serializable {
     @Column(name = "data_inicio")
     private LocalDateTime dataInicio;
 
-    @Column(name= "data_fim'")
+    @Column(name= "data_fim")
     private LocalDateTime dataFim;
 
 }
