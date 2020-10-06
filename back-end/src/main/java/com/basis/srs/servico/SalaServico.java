@@ -49,6 +49,7 @@ public class SalaServico {
     }
 
     public void deletar(Integer id){
+        salaEquipamentoRepositorio.deleteAllBySalaId(id);
         salaRepositorio.deleteById(id);
     }
 
