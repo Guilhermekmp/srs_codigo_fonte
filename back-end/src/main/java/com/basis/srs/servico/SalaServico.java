@@ -51,4 +51,5 @@ public class SalaServico {
     public void deletar(Integer id){
         salaRepositorio.deleteById(id);
     }
+
 }

@@ -1,13 +1,7 @@
 package com.basis.srs.servico.mapper;
 
-import com.basis.srs.dominio.Cliente;
-import com.basis.srs.dominio.Equipamento;
 import com.basis.srs.dominio.Reserva;
-import com.basis.srs.dominio.Sala;
-import com.basis.srs.servico.dto.ClienteDTO;
-import com.basis.srs.servico.dto.EquipamentoDTO;
 import com.basis.srs.servico.dto.ReservaDTO;
-import com.basis.srs.servico.dto.SalaDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

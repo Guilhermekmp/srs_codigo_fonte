@@ -38,4 +38,5 @@ public class EquipamentoServico {
     public void deletar(Integer id){
          equipamentoRepositorio.deleteById(id);
     }
+    
 }

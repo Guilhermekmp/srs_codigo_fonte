@@ -21,12 +21,14 @@ import java.util.List;
 @RequestMapping(path="/api/reservas")
 @RequiredArgsConstructor
 public class ReservaRecurso {
+
     private final ReservaServico reservaServico;
 
     @GetMapping
     public ResponseEntity<List<ReservaDTO>> listar(){
         return ResponseEntity.ok(reservaServico.listar());
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ReservaDTO> listar(@PathVariable Integer id){
         return ResponseEntity.ok(reservaServico.buscar(id));
@@ -49,4 +51,5 @@ public class ReservaRecurso {
         reservaServico.deletar(id);
         return ResponseEntity.ok().build();
     }
+
 }

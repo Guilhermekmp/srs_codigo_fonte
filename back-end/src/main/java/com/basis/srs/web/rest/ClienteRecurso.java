@@ -28,6 +28,7 @@ public class ClienteRecurso {
     public ResponseEntity<List<ClienteDTO>> listar(){
         return ResponseEntity.ok(clienteServico.listar());
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDTO> listar(@PathVariable Integer id){
         return ResponseEntity.ok(clienteServico.listarId(id));
@@ -50,6 +51,5 @@ public class ClienteRecurso {
         clienteServico.deletar(id);
         return ResponseEntity.ok().build();
     }
-
 
 }

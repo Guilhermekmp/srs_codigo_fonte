@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping("/api/salas")
 @RequiredArgsConstructor
 public class SalaRecurso {
+
     private final SalaServico salaServico;
 
     @GetMapping
@@ -51,4 +52,5 @@ public class SalaRecurso {
         salaServico.deletar(id);
         return ResponseEntity.ok().build();
     }
+
 }

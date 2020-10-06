@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping("/api/equipamentos")
 @RequiredArgsConstructor
 public class EquipamentoRecurso {
+
     private final EquipamentoServico equipamentoServico;
 
     @GetMapping
@@ -50,4 +51,5 @@ public class EquipamentoRecurso {
         equipamentoServico.deletar(id);
         return ResponseEntity.ok().build();
     }
+
 }

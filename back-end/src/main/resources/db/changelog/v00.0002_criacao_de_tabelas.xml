@@ -32,10 +32,14 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
         <addPrimaryKey tableName="equipamento" columnNames="id" constraintName="pk_equipamento"/>
-        <addForeignKeyConstraint baseTableName="equipamento" baseColumnNames="id_tipo_equipamento" constraintName="fk_tipo_equipamento" referencedTableName="tipo_equipamento"
+
+        <addForeignKeyConstraint baseTableName="equipamento" baseColumnNames="id_tipo_equipamento"
+                                 constraintName="fk_tipo_equipamento" referencedTableName="tipo_equipamento"
                                  referencedColumnNames="id"/>
     </changeSet>
+
     <changeSet id="create_table_sala" author="antonio.terceiro">
         <createTable tableName="tipo_sala" remarks="tabela para os tipos de sala">
             <column name ="id" type="NUMBER">
@@ -43,7 +47,9 @@
             <column name="descricao" type="TEXT">
             </column>
         </createTable>
+
         <addPrimaryKey tableName="tipo_sala" columnNames="id"/>
+
         <createTable  tableName="sala" remarks="tabela para as salas">
             <column name ="id" type="NUMBER">
             </column>
@@ -58,9 +64,12 @@
             <column name="disponivel" type="NUMBER">
             </column>
         </createTable>
+
         <addPrimaryKey tableName="sala" columnNames="id"/>
-        <addForeignKeyConstraint baseTableName="sala" baseColumnNames="id_tipo_sala" constraintName="sala_tipo_sala" referencedTableName="tipo_sala"
-                             referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="sala" baseColumnNames="id_tipo_sala" constraintName="sala_tipo_sala"
+                                 referencedTableName="tipo_sala" referencedColumnNames="id"/>
+
         <createTable tableName="sala_equipamento" remarks="tabela da relação entre sala e equipamentos">
             <column name="id_equipamento" type="NUMBER">
                 <constraints nullable="false"/>
@@ -72,11 +81,14 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
         <addPrimaryKey tableName="sala_equipamento" columnNames="id_sala, id_equipamento" constraintName="pk_sala_equipamento"/>
-        <addForeignKeyConstraint baseTableName="sala_equipamento" baseColumnNames="id_equipamento" constraintName="fk_sala_equipamento_equipamento" referencedTableName="equipamento"
+
+        <addForeignKeyConstraint baseTableName="sala_equipamento" baseColumnNames="id_equipamento"
+                                 constraintName="fk_sala_equipamento_equipamento" referencedTableName="equipamento"
                                  referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="sala_equipamento" baseColumnNames="id_sala" constraintName="fk_sala_equipamento_sala" referencedTableName="sala"
-                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="sala_equipamento" baseColumnNames="id_sala" constraintName="fk_sala_equipamento_sala"
+                                 referencedTableName="sala" referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet id="create_table_reserva" author="guilherme.maciel">
@@ -102,9 +114,10 @@
         </createTable>
 
         <addPrimaryKey tableName="reserva" columnNames="id" constraintName="pk_reserva"/>
-        <addForeignKeyConstraint baseTableName="reserva" baseColumnNames="id_cliente" constraintName="fk_reserva_cliente" referencedTableName="cliente"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="reserva" baseColumnNames="id_sala" constraintName="fk_reserva_sala" referencedTableName="sala"
-                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="reserva" baseColumnNames="id_cliente" constraintName="fk_reserva_cliente"
+                                 referencedTableName="cliente" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="reserva" baseColumnNames="id_sala" constraintName="fk_reserva_sala"
+                                 referencedTableName="sala" referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
