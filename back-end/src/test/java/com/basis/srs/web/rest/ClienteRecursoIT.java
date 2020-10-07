@@ -13,4 +13,5 @@ import org.springframework.transaction.annotation.Transactional;
 public class ClienteRecursoIT extends IntTestComum {
 
     private final ClienteBuilder clienteBuilder;
+
 }
