@@ -2,8 +2,6 @@ package com.basis.srs.web.rest;
 
 import com.basis.srs.builder.SalaBuilder;
 import com.basis.srs.dominio.Sala;
-import com.basis.srs.servico.SalaServico;
-import com.basis.srs.servico.mapper.SalaMapper;
 import com.basis.srs.util.IntTestComum;
 import com.basis.srs.util.TestUtil;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,10 +26,6 @@ public class SalaRecursoIT extends IntTestComum {
 
     private final SalaBuilder salaBuilder;
 
-    private final SalaServico salaServico;
-
-    private final SalaMapper salaMapper;
-
     @BeforeEach
     public void deletarTodos(){
         salaBuilder.deletarTodos();
@@ -37,7 +34,7 @@ public class SalaRecursoIT extends IntTestComum {
     @Test
     public void listar() throws Exception{
         salaBuilder.construir();
-        getMockMvc().perform(MockMvcRequestBuilders.get("/api/salas"))
+        getMockMvc().perform(get("/api/salas"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[*].id", Matchers.hasSize(1)));
     }
@@ -45,7 +42,7 @@ public class SalaRecursoIT extends IntTestComum {
     @Test
     public void salvar() throws Exception{
         Sala sala = salaBuilder.construirEntidade();
-        getMockMvc().perform(MockMvcRequestBuilders.post("/api/salas")
+        getMockMvc().perform(post("/api/salas")
         .contentType(TestUtil.APPLICATION_JSON_UTF8)
         .content(TestUtil.convertObjectToJsonBytes(salaBuilder.converterToDTo(sala))
         ))
@@ -55,7 +52,7 @@ public class SalaRecursoIT extends IntTestComum {
     @Test
     public void buscar() throws Exception{
         Sala sala = salaBuilder.construir();
-        getMockMvc().perform(MockMvcRequestBuilders.get("api/salas/" + sala.getId()))
+        getMockMvc().perform(get("api/salas/" + sala.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(sala.getId()));
     }
@@ -64,7 +61,7 @@ public class SalaRecursoIT extends IntTestComum {
     public void editar() throws Exception{
         Sala sala = salaBuilder.construir();
 
-        getMockMvc().perform(MockMvcRequestBuilders.put("api/salas")
+        getMockMvc().perform(put("api/salas")
         .contentType(TestUtil.APPLICATION_JSON_UTF8)
         .content(TestUtil.convertObjectToJsonBytes(salaBuilder.converterToDTo(sala))
         ))
@@ -74,7 +71,7 @@ public class SalaRecursoIT extends IntTestComum {
     @Test
     public void deletar() throws Exception{
         Sala sala = salaBuilder.construir();
-        getMockMvc().perform(MockMvcRequestBuilders.delete("/api/salas/" + sala.getId()))
+        getMockMvc().perform(delete("/api/salas/" + sala.getId()))
                 .andExpect(status().isOk());
     }
 }
