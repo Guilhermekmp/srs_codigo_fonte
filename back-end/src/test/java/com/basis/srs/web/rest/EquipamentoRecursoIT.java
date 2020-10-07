@@ -74,7 +74,7 @@ public class EquipamentoRecursoIT extends IntTestComum {
     @Test
     public void deletar() throws Exception {
         Equipamento equipamento = equipamentoBuilder.construir();
-        getMockMvc().perform(delete("/api/equipamentos" + equipamento.getId()))
+        getMockMvc().perform(delete("/api/equipamentos/" + equipamento.getId()))
                 .andExpect(status().isOk());
     }
 }
