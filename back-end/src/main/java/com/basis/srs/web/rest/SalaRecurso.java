@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -31,24 +32,24 @@ public class SalaRecurso {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SalaDTO> obterPorId(@PathVariable Integer id){
+    public ResponseEntity<SalaDTO> obterPorId(@Valid @PathVariable Integer id){
         return ResponseEntity.ok(salaServico.buscar(id));
     }
 
     @PostMapping
-    public ResponseEntity<SalaDTO> salvar(@RequestBody SalaDTO sala) throws URISyntaxException {
+    public ResponseEntity<SalaDTO> salvar(@Valid @RequestBody SalaDTO sala) throws URISyntaxException {
         SalaDTO dto = salaServico.criar(sala);
         return ResponseEntity.created(new URI("/a/i/Salas/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<SalaDTO> atualizar(@RequestBody SalaDTO sala){
+    public ResponseEntity<SalaDTO> atualizar(@Valid @RequestBody SalaDTO sala){
         SalaDTO dto = salaServico.criar(sala);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Integer id){
+    public ResponseEntity<Void> remover(@Valid @PathVariable Integer id){
         salaServico.deletar(id);
         return ResponseEntity.ok().build();
     }

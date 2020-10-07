@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -35,13 +36,13 @@ public class ReservaRecurso {
     }
 
     @PostMapping
-    public ResponseEntity<ReservaDTO> salvar(@RequestBody ReservaDTO reservaDTO) throws URISyntaxException {
+    public ResponseEntity<ReservaDTO> salvar(@Valid @RequestBody ReservaDTO reservaDTO) throws URISyntaxException {
         ReservaDTO dto = reservaServico.criar(reservaDTO);
         return ResponseEntity.created(new URI("/api/clientes/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<ReservaDTO> editar(@RequestBody ReservaDTO reservaDTO){
+    public ResponseEntity<ReservaDTO> editar(@Valid @RequestBody ReservaDTO reservaDTO){
         ReservaDTO dto = reservaServico.criar(reservaDTO);
         return ResponseEntity.ok(dto);
     }
