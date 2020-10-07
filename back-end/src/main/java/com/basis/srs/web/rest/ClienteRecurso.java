@@ -52,5 +52,4 @@ public class ClienteRecurso {
         clienteServico.deletar(id);
         return ResponseEntity.ok().build();
     }
-
 }
