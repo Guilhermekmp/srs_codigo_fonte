@@ -11,8 +11,10 @@ public class SalaEquipamentoDTO {
 
     @NotNull
     private Integer idSala;
+
     @NotNull
     private Integer idEquipamento;
+
     @NotNull
     private Integer quantidade;
 }

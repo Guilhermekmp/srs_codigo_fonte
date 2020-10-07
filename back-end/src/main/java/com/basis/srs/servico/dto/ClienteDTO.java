@@ -17,9 +17,11 @@ import java.util.Date;
 public class ClienteDTO {
 
     private Integer id;
+
     @NotNull
     @Size(max = 120)
     private String nome;
+
     @NotNull
     @Size(max = 11, min = 11)
     @NotBlank
