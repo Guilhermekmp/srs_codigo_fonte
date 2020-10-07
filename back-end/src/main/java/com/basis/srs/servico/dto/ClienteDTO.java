@@ -10,6 +10,7 @@ import java.util.Date;
 public class ClienteDTO {
 
     private Integer id;
+
     private String nome;
     private String cpf;
     private Date dataNascimento;
