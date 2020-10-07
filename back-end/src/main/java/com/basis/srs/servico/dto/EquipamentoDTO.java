@@ -13,15 +13,19 @@ import javax.validation.constraints.Size;
 public class EquipamentoDTO {
 
     private Integer id;
+
     @NotNull
     @Size(max = 255)
     private String nome;
+
     @NotNull
     @Min(1)
     @Max(3)
     private Integer idTipoEquipamento;
+
     @NotNull
     private Double precoDiario;
+
     @NotNull
     @Min(0)
     @Max(1)

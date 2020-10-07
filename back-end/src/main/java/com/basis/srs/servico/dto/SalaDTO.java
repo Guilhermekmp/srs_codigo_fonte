@@ -14,8 +14,10 @@ import java.util.ArrayList;
 public class SalaDTO {
 
     private Integer id;
+
     @NotNull
     private String descricao;
+
     @NotNull
     private ArrayList<SalaEquipamentoDTO> equipamentos;
 
