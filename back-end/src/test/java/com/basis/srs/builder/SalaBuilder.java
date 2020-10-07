@@ -3,6 +3,7 @@ package com.basis.srs.builder;
 import com.basis.srs.dominio.Equipamento;
 import com.basis.srs.dominio.Sala;
 import com.basis.srs.dominio.SalaEquipamento;
+import com.basis.srs.dominio.TipoSala;
 import com.basis.srs.repositorio.SalaRepositorio;
 import com.basis.srs.servico.SalaServico;
 import com.basis.srs.servico.dto.SalaDTO;
@@ -32,11 +33,14 @@ public class SalaBuilder extends ConstrutorDeEntidade<Sala>{
     @Override
     public Sala construirEntidade() throws ParseException {
 
+        TipoSala tipoSala = new TipoSala();
+
         Sala sala = new Sala();
         sala.setCapacidade(1);
         sala.setDescricao("AAAAAAAAAAA");
         sala.setDisponivel(1);
         sala.setPrecoDiario(25.0);
+        sala.setTipoSala(tipoSala);
 
         Equipamento equipamento = equipamentoBuilder.construir();
 
