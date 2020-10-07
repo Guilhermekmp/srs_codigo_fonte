@@ -26,19 +26,24 @@ public class ClienteDTO {
     @Size(max = 11, min = 11)
     @NotBlank
     private String cpf;
+
     @NotNull
     @Past
     private Date dataNascimento;
+
     @NotNull
     private String endereco;
+
     @NotNull
     @Size(max = 7, min = 7)
     @NotBlank
     private String rg;
+
     @Email
     @NotNull
     @Size(max = 255)
     private String email;
+
     @NotNull
     @Size(max = 12, min = 12)
     private String telefone;

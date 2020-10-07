@@ -14,15 +14,20 @@ import java.time.LocalDateTime;
 public class ReservaDTO {
 
     private Integer id;
+
     @NotNull
     private Integer idCliente;
+
     @NotNull
     private Integer idSala;
+
     @NotNull
     private Double total;
+
     @NotNull
     @FutureOrPresent
     private LocalDateTime dataInicio;
+    
     @NotNull
     @Future
     private LocalDateTime dataFim;

@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 public class DominioFixoDTO {
 
     private Integer id;
+
     @NotNull
     private String descricao;
 }
