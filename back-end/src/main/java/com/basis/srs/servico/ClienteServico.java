@@ -3,6 +3,7 @@ package com.basis.srs.servico;
 import com.basis.srs.dominio.Cliente;
 import com.basis.srs.repositorio.ClienteRepositorio;
 import com.basis.srs.servico.dto.ClienteDTO;
+import com.basis.srs.servico.exception.RegraNegocioException;
 import com.basis.srs.servico.mapper.ClienteMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +32,8 @@ public class ClienteServico {
     }
 
     public ClienteDTO listarId(Integer id){
-        ClienteDTO cliente = clienteMapper.toDto(clienteRepositorio.findById(id).orElse(null));
+        ClienteDTO cliente = clienteMapper.toDto(clienteRepositorio.findById(id)
+                .orElseThrow(() -> new RegraNegocioException("Usuario não encontrado")));
         return cliente;
     }
 

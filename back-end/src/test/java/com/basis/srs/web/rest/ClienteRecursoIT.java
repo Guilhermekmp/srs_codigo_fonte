@@ -5,6 +5,7 @@ import com.basis.srs.dominio.Cliente;
 import com.basis.srs.util.IntTestComum;
 import com.basis.srs.util.TestUtil;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class ClienteRecursoIT extends IntTestComum {
 
     @Autowired
     private ClienteBuilder clienteBuilder;
+
+    @BeforeEach
+    public void limparBanco(){
+        clienteBuilder.limparBanco();
+    }
 
     @Test
     public void salvar() throws Exception{
