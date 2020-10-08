@@ -35,10 +35,10 @@ public class ReservaServico {
 
         Reserva novaReserva = reservaMapper.toEntity(reserva);
         for (Reserva reservaLista:reservaRepositorio.findAll()){
-            if (reservaLista.getCliente() == novaReserva.getCliente()
-                    && reservaLista.getSala() == novaReserva.getSala()
-                    && reservaLista.getDataInicio() == novaReserva.getDataInicio()
-                    && reservaLista.getDataFim() == novaReserva.getDataFim()) {
+            if (reservaLista.getSala() == novaReserva.getSala()
+                    && (reservaLista.getDataInicio() == novaReserva.getDataInicio()
+                    || reservaLista.getDataFim() == novaReserva.getDataFim()
+                    || !reservaLista.getDataFim().isAfter(novaReserva.getDataInicio()))) {
                 throw new RegraNegocioException("Reserva ja existe");
             }
         }
