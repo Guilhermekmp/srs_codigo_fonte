@@ -42,7 +42,7 @@ public class EquipamentoServico {
 
     public EquipamentoDTO buscar(Integer id){
         EquipamentoDTO dtoEquip = equipamentoMapper.toDto(equipamentoRepositorio.findById(id)
-                .orElseThrow(()->new RegraNegocioException("Usuário não encontrado.")));
+                .orElseThrow(()->new RegraNegocioException("Equipamento não encontrado.")));
         return dtoEquip;
     }
 

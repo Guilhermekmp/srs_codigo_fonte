@@ -24,7 +24,7 @@ public class EquipamentoBuilder extends ConstrutorDeEntidade<Equipamento>{
         tipoEquipamento.setDescricao("Lendário");
         tipoEquipamento.setId(3);
         Equipamento equipamento = new Equipamento();
-        equipamento.setNome("Geladeira");
+        equipamento.setNome("Teste");
         equipamento.setObrigatorio(0);
         equipamento.setPrecoDiario(20.00);
         equipamento.setTipoEquipamento(tipoEquipamento);
