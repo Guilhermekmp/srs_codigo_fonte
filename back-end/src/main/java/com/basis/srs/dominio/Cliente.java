@@ -23,6 +23,7 @@ public class Cliente implements Serializable {
     private String nome;
 
     @Column(name = "cpf")
+
     private String cpf;
 
     @Column(name = "rg")
@@ -38,6 +39,7 @@ public class Cliente implements Serializable {
     private String telefone;
 
     @Column(name = "email")
+
     private String email;
 
 }
