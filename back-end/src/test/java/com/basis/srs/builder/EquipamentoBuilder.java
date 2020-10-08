@@ -1,17 +1,14 @@
 package com.basis.srs.builder;
 
-import com.basis.srs.dominio.Cliente;
 import com.basis.srs.dominio.Equipamento;
 import com.basis.srs.dominio.TipoEquipamento;
 import com.basis.srs.repositorio.EquipamentoRepositorio;
 import com.basis.srs.servico.EquipamentoServico;
 import com.basis.srs.servico.dto.EquipamentoDTO;
 import com.basis.srs.servico.mapper.EquipamentoMapper;
+import java.util.Collection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.text.ParseException;
-import java.util.Collection;
 
 @Component
 @RequiredArgsConstructor
@@ -50,12 +47,10 @@ public class EquipamentoBuilder extends ConstrutorDeEntidade<Equipamento>{
         return null;
     }
 
-    @Override
     public void limparBanco() {
         equipamentoRepositorio.deleteAll();
     }
 
-    @Override
     public EquipamentoDTO construirToDto(Equipamento equipamento) {
         return equipamentoMapper.toDto(equipamento);
     }
