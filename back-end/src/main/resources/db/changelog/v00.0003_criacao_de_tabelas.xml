@@ -4,39 +4,49 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet id="insercao" author="guilherme.maciel">
+
         <insert tableName="tipo_sala">
             <column name="id" value="1"/>
             <column name="descricao" value="Sala de Reunião"/>
         </insert>
+
         <insert tableName="tipo_sala">
             <column name="id" value="2"/>
             <column name="descricao" value="Sala de Trabalho"/>
         </insert>
+
         <insert tableName="tipo_sala">
             <column name="id" value="3"/>
             <column name="descricao" value="Sala de Palestras"/>
         </insert>
+
         <insert tableName="tipo_sala">
             <column name="id" value="4"/>
             <column name="descricao" value="Sala de Video"/>
         </insert>
+
         <insert tableName="tipo_sala">
             <column name="id" value="5"/>
             <column name="descricao" value="Auditorio"/>
         </insert>
+
     </changeSet>
     <changeSet id="insercaoTipoEquipamento" author="guilherme.maciel">
+
         <insert tableName="tipo_equipamento">
             <column name="id" value="1"/>
             <column name="descricao" value="Móvel"/>
         </insert>
+
         <insert tableName="tipo_equipamento">
             <column name="id" value="2"/>
             <column name="descricao" value="Eletrodoméstico"/>
         </insert>
+
         <insert tableName="tipo_equipamento">
             <column name="id" value="3"/>
             <column name="descricao" value="Informática"/>
         </insert>
+
     </changeSet>
  </databaseChangeLog>

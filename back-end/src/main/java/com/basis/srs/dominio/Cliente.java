@@ -1,14 +1,16 @@
 package com.basis.srs.dominio;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor
+@Entity
+@Getter
+@Setter
 @Table(name = "cliente")
 public class Cliente implements Serializable {
 
@@ -21,16 +23,20 @@ public class Cliente implements Serializable {
     private String nome;
 
     @Column(name ="cpf")
+
     private String cpf;
 
-    @Column(name = "data_nasc")
-    private Date dataNasc;
+    @Column(name = "rg")
+    private String rg;
 
     @Column(name ="endereco")
     private String endereco;
 
-    @Column(name ="rg")
-    private String rg;
+    @Column(name = "data_nascimento")
+    private LocalDate dataNascimento;
+
+    @Column(name = "telefone")
+    private String telefone;
 
     @Column(name ="email")
     private String email;
