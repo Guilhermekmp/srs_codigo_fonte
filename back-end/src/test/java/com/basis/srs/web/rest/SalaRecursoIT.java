@@ -59,12 +59,14 @@ public class SalaRecursoIT extends IntTestComum {
 
     @Test
     public void editar() throws Exception{
-        Sala sala = salaBuilder.construir();
+        Sala sala = salaBuilder.construirEntidade();
+
         getMockMvc().perform(put("/api/salas")
-        .contentType(TestUtil.APPLICATION_JSON_UTF8)
-        .content(TestUtil.convertObjectToJsonBytes(salaBuilder.converterToDTo(sala))
-        ))
-        .andExpect(status().isOk());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(
+                        salaBuilder.converterToDTo(sala))
+                ))
+                .andExpect(status().isOk());
     }
 
     @Test

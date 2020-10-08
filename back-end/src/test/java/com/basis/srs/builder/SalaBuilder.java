@@ -34,8 +34,8 @@ public class SalaBuilder extends ConstrutorDeEntidade<Sala>{
     public Sala construirEntidade() throws ParseException {
 
         TipoSala tipoSala = new TipoSala();
-        tipoSala.setId(3);
         tipoSala.setDescricao("sadasdasd");
+        tipoSala.setId(3);
 
         Sala sala = new Sala();
         sala.setCapacidade(1);

@@ -39,11 +39,11 @@ public class SalaRecurso {
     @PostMapping
     public ResponseEntity<SalaDTO> salvar(@Valid @RequestBody SalaDTO sala) throws URISyntaxException {
         SalaDTO dto = salaServico.criar(sala);
-        return ResponseEntity.created(new URI("/a/i/Salas/")).body(dto);
+        return ResponseEntity.created(new URI("/api/salas/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<SalaDTO> atualizar(@Valid @RequestBody SalaDTO sala){
+    public ResponseEntity<SalaDTO> editar(@Valid @RequestBody SalaDTO sala){
         SalaDTO dto = salaServico.criar(sala);
         return ResponseEntity.ok(dto);
     }

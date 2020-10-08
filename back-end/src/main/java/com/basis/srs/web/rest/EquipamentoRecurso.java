@@ -38,7 +38,7 @@ public class EquipamentoRecurso {
     @PostMapping
     public ResponseEntity<EquipamentoDTO> salvar(@Valid @RequestBody EquipamentoDTO equipamentoDTO) throws URISyntaxException {
         EquipamentoDTO dto = equipamentoServico.criar(equipamentoDTO);
-        return ResponseEntity.created(new URI("/a/i/Equipamentos/")).body(dto);
+        return ResponseEntity.created(new URI("/api/equipamentos/")).body(dto);
     }
 
     @PutMapping
