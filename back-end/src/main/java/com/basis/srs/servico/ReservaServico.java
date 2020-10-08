@@ -3,6 +3,7 @@ package com.basis.srs.servico;
 import com.basis.srs.dominio.Reserva;
 import com.basis.srs.repositorio.ReservaRepositorio;
 import com.basis.srs.servico.dto.ReservaDTO;
+import com.basis.srs.servico.exception.RegraNegocioException;
 import com.basis.srs.servico.mapper.ReservaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,18 +25,30 @@ public class ReservaServico {
     }
 
     public ReservaDTO buscar(Integer id){
-        Reserva reserva = reservaRepositorio.findById(id).orElse(null);
+        Reserva reserva = reservaRepositorio.findById(id)
+                .orElseThrow(()-> new RegraNegocioException("Reserva não encontrada"));
         ReservaDTO reservaDTO = reservaMapper.toDto(reserva);
         return reservaDTO;
     }
 
     public ReservaDTO criar(ReservaDTO reserva){
-        Reserva novaReserva = reservaRepositorio.save(reservaMapper.toEntity(reserva));
+
+        Reserva novaReserva = reservaMapper.toEntity(reserva);
+        for (Reserva reservaLista:reservaRepositorio.findAll()){
+            if (reservaLista.getCliente() == novaReserva.getCliente()
+                    && reservaLista.getSala() == novaReserva.getSala()
+                    && reservaLista.getDataInicio() == novaReserva.getDataInicio()
+                    && reservaLista.getDataFim() == novaReserva.getDataFim()) {
+                throw new RegraNegocioException("Reserva ja existe");
+            }
+        }
+        novaReserva = reservaRepositorio.save(novaReserva);
         ReservaDTO reservaDTO = reservaMapper.toDto(novaReserva);
         return reservaDTO;
     }
 
     public void deletar(Integer id){
+        buscar(id);
         reservaRepositorio.deleteById(id);
     }
 
