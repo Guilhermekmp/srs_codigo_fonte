@@ -1,22 +1,50 @@
 package com.basis.srs.builder;
 
 import com.basis.srs.dominio.Cliente;
+import com.basis.srs.servico.ClienteServico;
+import com.basis.srs.servico.dto.ClienteDTO;
+import com.basis.srs.servico.mapper.ClienteMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.util.Collection;
+import java.util.Date;
 
 @Component
+@Transactional
 public class ClienteBuilder extends ConstrutorDeEntidade<Cliente>{
+
+    @Autowired
+    private ClienteServico clienteServico;
+
+    @Autowired
+    private ClienteMapper clienteMapper;
 
     @Override
     public Cliente construirEntidade() throws ParseException {
-        return null;
+
+        Cliente cliente = new Cliente();
+        cliente.setCpf("12345678911");
+        cliente.setNome("Lucas");
+        cliente.setEmail("Lucas@gmai.com");
+        cliente.setEndereco("campina");
+        cliente.setRg("1234567");
+        cliente.setTelefone("12345678");
+        cliente.setDataNascimento(new Date());
+
+        return cliente;
     }
 
     @Override
     public Cliente persistir(Cliente entidade) {
-        return null;
+        ClienteDTO dto = clienteServico.salvar(clienteMapper.toDto(entidade));
+        return clienteMapper.toEntity(dto);
+    }
+
+    public ClienteDTO converterToDto(Cliente cliente){
+        return clienteMapper.toDto(cliente);
     }
 
     @Override
