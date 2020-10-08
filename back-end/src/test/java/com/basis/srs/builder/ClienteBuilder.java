@@ -4,11 +4,13 @@ import com.basis.srs.dominio.Cliente;
 import com.basis.srs.servico.ClienteServico;
 import com.basis.srs.servico.dto.ClienteDTO;
 import com.basis.srs.servico.mapper.ClienteMapper;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -31,8 +33,8 @@ public class ClienteBuilder extends ConstrutorDeEntidade<Cliente>{
         cliente.setEmail("Lucas@gmai.com");
         cliente.setEndereco("campina");
         cliente.setRg("1234567");
-        cliente.setTelefone("12345678");
-        cliente.setDataNascimento(new Date());
+        cliente.setTelefone("123456789102");
+        cliente.setDataNascimento(LocalDate.now().minusDays(500));
 
         return cliente;
     }

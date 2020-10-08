@@ -1,5 +1,6 @@
 package com.basis.srs.dominio;
 
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,13 +14,12 @@ import java.util.Date;
 @Table(name = "cliente")
 public class Cliente implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_cliente")
-    @SequenceGenerator(name = "sq_cliente", allocationSize = 1, sequenceName = "sq_cliente")
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_cliente")
+    @SequenceGenerator(name="sq_cliente", allocationSize = 1, sequenceName = "sq_cliente")
     @Column(name = "id")
-    private Integer id;
+    private int id;
 
-    @Column(name = "nome")
+    @Column( name = "nome")
     private String nome;
 
     @Column(name = "cpf")
@@ -29,17 +29,16 @@ public class Cliente implements Serializable {
     @Column(name = "rg")
     private String rg;
 
-    @Column(name = "data_nascimento")
-    private Date dataNascimento;
-
-    @Column(name = "endereco")
+    @Column(name ="endereco")
     private String endereco;
+
+    @Column(name = "data_nascimento")
+    private LocalDate dataNascimento;
 
     @Column(name = "telefone")
     private String telefone;
 
     @Column(name = "email")
-
     private String email;
 
 }
