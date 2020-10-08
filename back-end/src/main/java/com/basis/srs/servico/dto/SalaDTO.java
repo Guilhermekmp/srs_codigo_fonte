@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 
 @Getter
@@ -15,24 +14,24 @@ public class SalaDTO {
 
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "Descrição é obrigatória")
     private String descricao;
 
-    @NotNull
+    @NotNull(message = "Equipamentos são é obrigatórios")
     private ArrayList<SalaEquipamentoDTO> equipamentos;
 
-    @NotNull
+    @NotNull(message = "Tipo da sala é obrigatório")
     @Min(1)
     @Max(5)
     private Integer idTipoSala;
 
-    @NotNull
+    @NotNull(message = "Capacidade é obrigatória")
     private Integer capacidade;
 
-    @NotNull
+    @NotNull(message = "Preço da diária é obrigatório")
     private Double precoDiario;
 
-    @NotNull
+    @NotNull(message = "Disponibilidade é é obrigatória")
     @Min(0)
     @Max(1)
     private Integer disponivel;

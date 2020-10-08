@@ -11,6 +11,6 @@ public class DominioFixoDTO {
 
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "Descrição é obrigatória")
     private String descricao;
 }
