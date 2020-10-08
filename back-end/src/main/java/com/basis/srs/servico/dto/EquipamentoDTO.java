@@ -14,19 +14,19 @@ public class EquipamentoDTO {
 
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "Campo não pode ser nulo")
     @Size(max = 255)
     private String nome;
 
-    @NotNull
+    @NotNull(message = "Campo não deve ser nulo")
     @Min(1)
     @Max(3)
     private Integer idTipoEquipamento;
 
-    @NotNull
+    @NotNull(message = "Campo não deve ser nulo")
     private Double precoDiario;
 
-    @NotNull
+    @NotNull(message = "Campo não deve ser nulo")
     @Min(0)
     @Max(1)
     private Integer obrigatorio;
