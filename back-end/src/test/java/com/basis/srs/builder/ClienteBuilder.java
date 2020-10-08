@@ -1,18 +1,14 @@
 package com.basis.srs.builder;
-
 import com.basis.srs.dominio.Cliente;
 import com.basis.srs.servico.ClienteServico;
 import com.basis.srs.servico.dto.ClienteDTO;
 import com.basis.srs.servico.mapper.ClienteMapper;
-<<<<<<< HEAD
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional
