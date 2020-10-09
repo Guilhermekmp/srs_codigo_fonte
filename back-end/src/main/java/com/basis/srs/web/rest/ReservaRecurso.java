@@ -43,6 +43,7 @@ public class ReservaRecurso {
 
     @PutMapping
     public ResponseEntity<ReservaDTO> editar(@Valid @RequestBody ReservaDTO reservaDTO){
+        reservaServico.buscar(reservaDTO.getId());
         ReservaDTO dto = reservaServico.criar(reservaDTO);
         return ResponseEntity.ok(dto);
     }

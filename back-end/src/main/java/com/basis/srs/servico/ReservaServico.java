@@ -3,6 +3,8 @@ package com.basis.srs.servico;
 import com.basis.srs.dominio.Reserva;
 import com.basis.srs.repositorio.ReservaRepositorio;
 import com.basis.srs.servico.dto.ReservaDTO;
+import com.basis.srs.servico.exception.RegraNegocioException;
+import com.basis.srs.servico.exception.RegraNegocioExceptionNotFound;
 import com.basis.srs.servico.mapper.ReservaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,18 +26,33 @@ public class ReservaServico {
     }
 
     public ReservaDTO buscar(Integer id){
-        Reserva reserva = reservaRepositorio.findById(id).orElse(null);
+        Reserva reserva = reservaRepositorio.findById(id)
+                .orElseThrow(()-> new RegraNegocioExceptionNotFound("Reserva não encontrada"));
         ReservaDTO reservaDTO = reservaMapper.toDto(reserva);
         return reservaDTO;
     }
 
     public ReservaDTO criar(ReservaDTO reserva){
-        Reserva novaReserva = reservaRepositorio.save(reservaMapper.toEntity(reserva));
+        if (!(reserva.getId() == null)) {
+            if(!reservaRepositorio.existsById(reserva.getId())) {
+                for (Reserva reservaLista : reservaRepositorio.findAll()) {
+                    if (reservaLista.getSala().getId().equals(reserva.getIdSala())
+                            && (reservaLista.getDataInicio().equals(reserva.getDataInicio())
+                            || reservaLista.getDataFim().equals(reserva.getDataFim())
+                            || reservaLista.getDataFim().isAfter(reserva.getDataInicio()))) {
+                        throw new RegraNegocioException("Reserva ja existe");
+                    }
+                }
+            }
+        }
+        Reserva novaReserva = reservaMapper.toEntity(reserva);
+        novaReserva = reservaRepositorio.save(novaReserva);
         ReservaDTO reservaDTO = reservaMapper.toDto(novaReserva);
         return reservaDTO;
     }
 
     public void deletar(Integer id){
+        buscar(id);
         reservaRepositorio.deleteById(id);
     }
 
