@@ -7,11 +7,12 @@ import com.basis.srs.repositorio.ReservaRepositorio;
 import com.basis.srs.servico.ReservaServico;
 import com.basis.srs.servico.dto.ReservaDTO;
 import com.basis.srs.servico.mapper.ReservaMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
@@ -36,6 +37,8 @@ public class ReservaBuilder extends ConstrutorDeEntidade<Reserva>{
 
         reserva.setCliente(cliente);
         reserva.setSala(sala);
+
+        reserva.getSala().setDisponivel(0);
 
         return reserva;
     }
