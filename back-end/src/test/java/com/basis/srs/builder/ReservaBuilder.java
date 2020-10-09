@@ -40,6 +40,23 @@ public class ReservaBuilder extends ConstrutorDeEntidade<Reserva>{
         return reserva;
     }
 
+    public Reserva construirEntidadeDtIni(Reserva reserva) throws ParseException {
+        reserva.setId(reserva.getId() + 1);
+        reserva.setDataFim(LocalDateTime.now().plusDays(91));
+        return reserva;
+    }
+
+    public Reserva construirEntidadeDtFim(Reserva reserva) throws ParseException {
+        reserva.setId(reserva.getId() + 1);
+        reserva.setDataInicio(reserva.getDataFim().plusDays(12));
+        return reserva;
+    }
+    public Reserva construirEntidadeDtIniEntre(Reserva reserva) throws ParseException {
+        reserva.setId(reserva.getId() + 1);
+        reserva.setDataInicio(reserva.getDataInicio().plusDays(1));
+        reserva.setDataFim(reserva.getDataFim().plusDays(21));
+        return reserva;
+    }
     @Override
     public Reserva persistir(Reserva entidade) {
         ReservaDTO dto = reservaServico.criar(reservaMapper.toDto(entidade));
