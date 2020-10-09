@@ -1,6 +1,7 @@
 package com.basis.srs.web.rest;
 
 import com.basis.srs.builder.SalaBuilder;
+import com.basis.srs.dominio.Cliente;
 import com.basis.srs.dominio.Sala;
 import com.basis.srs.util.IntTestComum;
 import com.basis.srs.util.TestUtil;

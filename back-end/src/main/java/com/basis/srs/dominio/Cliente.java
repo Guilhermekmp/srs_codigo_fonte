@@ -27,7 +27,6 @@ public class Cliente implements Serializable {
     private String nome;
 
     @Column(name = "cpf")
-
     private String cpf;
 
     @Column(name = "rg")
