@@ -51,7 +51,7 @@ public class EquipamentoBuilder extends ConstrutorDeEntidade<Equipamento>{
         equipamentoRepositorio.deleteAll();
     }
 
-    public EquipamentoDTO construirToDto(Equipamento equipamento) {
+    public EquipamentoDTO converterToDto(Equipamento equipamento) {
         return equipamentoMapper.toDto(equipamento);
     }
 

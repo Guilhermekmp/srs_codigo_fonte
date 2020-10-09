@@ -7,6 +7,7 @@ import com.basis.srs.repositorio.EquipamentoRepositorio;
 import com.basis.srs.repositorio.SalaRepositorio;
 import com.basis.srs.servico.dto.EquipamentoDTO;
 import com.basis.srs.servico.exception.RegraNegocioException;
+import com.basis.srs.servico.exception.RegraNegocioExceptionNotFound;
 import com.basis.srs.servico.mapper.EquipamentoMapper;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +43,7 @@ public class EquipamentoServico {
 
     public EquipamentoDTO buscar(Integer id){
         EquipamentoDTO dtoEquip = equipamentoMapper.toDto(equipamentoRepositorio.findById(id)
-                .orElseThrow(()->new RegraNegocioException("Equipamento não encontrado.")));
+                .orElseThrow(()->new RegraNegocioExceptionNotFound("Equipamento não encontrado.")));
         return dtoEquip;
     }
 
