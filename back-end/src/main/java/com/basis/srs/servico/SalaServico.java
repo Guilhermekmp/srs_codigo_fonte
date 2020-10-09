@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,10 +42,17 @@ public class SalaServico {
         return salaDTO;
     }
 
-    public SalaDTO criar(SalaDTO sala){
+    public SalaDTO criar(SalaDTO sala) throws RegraNegocioException{
         Sala novaSala = salaMapper.toEntity(sala);
         List<SalaEquipamento> equipamentos = novaSala.getEquipamentos();
         novaSala.setEquipamentos(new ArrayList<>());
+
+        for(SalaDTO salaInstancia: listar()){
+            if(salaInstancia.getDescricao().equals(novaSala.getDescricao())  || salaInstancia.getEquipamentos().equals(sala.getEquipamentos())){
+                throw new RegraNegocioException("Salas duplicadas");
+            }
+        }
+
         salaRepositorio.save(novaSala);
         equipamentos.forEach(equipamento ->{
             equipamento.setSala(novaSala);
@@ -54,19 +60,29 @@ public class SalaServico {
         });
         salaEquipamentoRepositorio.saveAll(equipamentos);
         SalaDTO salaDTO = salaMapper.toDto(novaSala);
+
         return salaDTO;
     }
 
     public void deletar(Integer id) throws RegraNegocioException{
-        if(salaRepositorio.existsById(id))
-            throw new RegraNegocioException("Sala não encontrada");
-        List<ReservaDTO> reservas = reservaServico.listar();
-        for (ReservaDTO reserva: reservas) {
-            if(reserva.getIdSala() == id && (reserva.getDataFim().isAfter(LocalDateTime.now()) || reserva.getDataInicio().isBefore(LocalDateTime.now()))){
-                throw new RegraNegocioException("Não se pode deletar uma sala reservada");
+        for (ReservaDTO reserva: reservaServico.listar()) {
+                if(reserva.getIdSala() == id){
+                    throw new RegraNegocioException("Sala reservada não pode ser deletada");
+                }
+            }
+
+        buscar(id);
+
+        salaRepositorio.deleteById(id);
+        }
+
+    public boolean ehReservada(Integer id){
+        for (ReservaDTO reserva: reservaServico.listar()) {
+            if(reserva.getIdSala() == id){
+                return true;
             }
         }
-        salaRepositorio.deleteById(id);
+        return false;
     }
-
 }
+
