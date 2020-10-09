@@ -43,6 +43,7 @@ public class ClienteRecurso {
 
     @PutMapping
     public ResponseEntity<ClienteDTO> editar(@Valid @RequestBody ClienteDTO clienteDTO){
+        clienteServico.listarId(clienteDTO.getId());
         ClienteDTO dto = clienteServico.salvar(clienteDTO);
         return ResponseEntity.ok(dto);
     }
