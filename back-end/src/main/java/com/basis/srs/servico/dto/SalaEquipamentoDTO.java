@@ -9,12 +9,12 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class SalaEquipamentoDTO {
 
-    @NotNull
+    @NotNull(message = "Id da sala é obrigatório")
     private Integer idSala;
 
-    @NotNull
+    @NotNull(message = "Id do equipamento é obrigatório")
     private Integer idEquipamento;
 
-    @NotNull
+    @NotNull(message = "Quantidade é obrigatória")
     private Integer quantidade;
 }

@@ -54,6 +54,19 @@ public class ReservaRecursoIT extends IntTestComum {
     }
 
     @Test
+    public void erroEditar() throws Exception{
+        Reserva reserva = reservaBuilder.construir();
+        reserva.setId(reserva.getId()+1);
+        getMockMvc().perform(put("/api/reservas")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(
+                        reservaBuilder.converterToDto(reserva))
+                ))
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
     public void salvar() throws Exception{
         Reserva reserva = reservaBuilder.construirEntidade();
         getMockMvc().perform(post("/api/reservas")
@@ -61,6 +74,41 @@ public class ReservaRecursoIT extends IntTestComum {
             .content(TestUtil.convertObjectToJsonBytes(reservaBuilder.converterToDto(reserva))
             ))
             .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void erroSalvarDtIni() throws Exception{
+        Reserva reserva = reservaBuilder.construir();
+        Reserva reserva2 = reservaBuilder.construirEntidadeDtIni(reserva);
+        getMockMvc().perform(post("/api/reservas")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(reservaBuilder.converterToDto(reserva2))
+                ))
+                .andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    public void erroSalvarDtFim() throws Exception{
+        Reserva reserva = reservaBuilder.construir();
+        Reserva reserva2 = reservaBuilder.construirEntidadeDtFim(reserva);
+        getMockMvc().perform(post("/api/reservas")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(reservaBuilder.converterToDto(reserva2))
+                ))
+                .andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    public void erroSalvarDtIniEntre() throws Exception{
+        Reserva reserva = reservaBuilder.construir();
+        Reserva reserva2 = reservaBuilder.construirEntidadeDtIniEntre(reserva);
+        getMockMvc().perform(post("/api/reservas")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(reservaBuilder.converterToDto(reserva2))
+                ))
+                .andExpect(status().isBadRequest());
 
     }
 
@@ -73,10 +121,24 @@ public class ReservaRecursoIT extends IntTestComum {
     }
 
     @Test
+    public void erroObterPorId() throws Exception{
+        Reserva reserva = reservaBuilder.construir();
+        getMockMvc().perform(get("/api/reservas/" + reserva.getId() + 1))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     public void apagar() throws Exception{
         Reserva reserva = reservaBuilder.construir();
         getMockMvc().perform(delete("/api/reservas/" + reserva.getId()))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void erroApagar() throws Exception{
+        Reserva reserva = reservaBuilder.construir();
+        getMockMvc().perform(delete("/api/reservas/" + 5))
+                .andExpect(status().isNotFound());
     }
 
 }
