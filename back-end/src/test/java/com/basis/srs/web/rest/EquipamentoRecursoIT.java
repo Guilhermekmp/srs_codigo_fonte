@@ -45,7 +45,7 @@ public class EquipamentoRecursoIT extends IntTestComum {
         Equipamento equipamento = equipamentoBuilder.construirEntidade();
         getMockMvc().perform(post("/api/equipamentos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(
-                    equipamentoBuilder.construirToDto(equipamento))))
+                    equipamentoBuilder.converterToDto(equipamento))))
             .andExpect(status().isCreated());
 
     }
@@ -71,7 +71,7 @@ public class EquipamentoRecursoIT extends IntTestComum {
     public void editar() throws Exception {
         Equipamento equipamento = equipamentoBuilder.construirEntidade();
         getMockMvc().perform(put("/api/equipamentos").contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(equipamentoBuilder.construirToDto(equipamento))))
+                .content(TestUtil.convertObjectToJsonBytes(equipamentoBuilder.converterToDto(equipamento))))
                 .andExpect((status().isOk()));
         ;
     }
@@ -90,10 +90,10 @@ public class EquipamentoRecursoIT extends IntTestComum {
         equipamento1.setPrecoDiario(200.00);
         getMockMvc().perform(post("/api/equipamentos")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(
-                        equipamentoBuilder.construirToDto(equipamento))));
+                        equipamentoBuilder.converterToDto(equipamento))));
         getMockMvc().perform(post("/api/equipamentos")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(
-                        equipamentoBuilder.construirToDto(equipamento1)))).andExpect(status().isBadRequest());
+                        equipamentoBuilder.converterToDto(equipamento1)))).andExpect(status().isBadRequest());
 
     }
 
@@ -133,8 +133,17 @@ public class EquipamentoRecursoIT extends IntTestComum {
         equipamento.setNome(null);
         getMockMvc().perform(post("/api/equipamentos")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(
-                        equipamentoBuilder.construirToDto(equipamento))));
+                        equipamentoBuilder.converterToDto(equipamento))));
     }
 
+    @Test
+    public void erroEditar() throws Exception {
+        Equipamento equipamento = equipamentoBuilder.construir();
+        equipamento.setId(equipamento.getId()+1);
+        getMockMvc().perform(put("/api/equipamentos")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(
+                        equipamentoBuilder.converterToDto(equipamento)))).andExpect(status().isNotFound());
+
+    }
 
 }

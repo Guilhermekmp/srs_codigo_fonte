@@ -43,6 +43,7 @@ public class EquipamentoRecurso {
 
     @PutMapping
     public ResponseEntity<EquipamentoDTO> atualizar(@Valid @RequestBody EquipamentoDTO equipamentoDTO){
+        equipamentoServico.buscar(equipamentoDTO.getId());
         EquipamentoDTO dto = equipamentoServico.criar(equipamentoDTO);
         return ResponseEntity.ok(dto);
     }
