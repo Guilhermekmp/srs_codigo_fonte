@@ -33,15 +33,15 @@ public class ReservaServico {
     }
 
     public ReservaDTO criar(ReservaDTO reserva){
-        if (!(reserva.getId() == null)) {
-            if(!reservaRepositorio.existsById(reserva.getId())) {
-                for (Reserva reservaLista : reservaRepositorio.findAll()) {
-                    if (reservaLista.getSala().getId().equals(reserva.getIdSala())
-                            && (reservaLista.getDataInicio().equals(reserva.getDataInicio())
-                            || reservaLista.getDataFim().equals(reserva.getDataFim())
-                            || reservaLista.getDataFim().isAfter(reserva.getDataInicio()))) {
-                        throw new RegraNegocioException("Reserva ja existe");
-                    }
+        if (reserva.getId() != null) {
+            buscar(reserva.getId());
+        }else{
+            for (Reserva reservaLista : reservaRepositorio.findAll()) {
+                if (reservaLista.getSala().getId().equals(reserva.getIdSala())
+                        && (reservaLista.getDataInicio().equals(reserva.getDataInicio())
+                        || reservaLista.getDataFim().equals(reserva.getDataFim())
+                        || reservaLista.getDataFim().isAfter(reserva.getDataInicio()))) {
+                    throw new RegraNegocioException("Reserva ja existe para esse periodo");
                 }
             }
         }
