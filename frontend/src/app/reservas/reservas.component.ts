@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { ReservasService } from './reservas.service';
 import { Component, OnInit } from '@angular/core';
-import { reserva } from './reserva';
+import { SortEvent } from 'primeng';
 
 @Component({
   selector: 'app-reservas',
@@ -10,13 +9,33 @@ import { reserva } from './reserva';
 })
 export class ReservasComponent implements OnInit {
 
-  constructor(public reservasServices :ReservasService,public reserva: reserva, private http: HttpClient) { }
+  reservas = [{
+    cliente:'Eu',
+    sala:'Do lado',
+    dtIni:'Data inicio',
+    dtFim:'Data fim',
+    total:10
+  },
+  {
+    cliente:'Eu',
+    sala:'Do lado',
+    dtIni:'Data inicio',
+    dtFim:'Data fim',
+    total:10
+  }];
+
+  constructor(public reservaService: ReservasService) { }
 
   ngOnInit(): void {
+
+    this.reservaService.getAllReservas().subscribe((data)=>{
+
+    }, err =>{
+      console.log(err);
+      
+    })
   }
 
-  consultarReservas(){
-    this.http.get(`http://localhost:8080/api/reservas`);
-  }
+  customSort(event: SortEvent) {}
 
 }

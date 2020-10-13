@@ -1,3 +1,5 @@
+import { ButtonModule } from 'primeng/button';
+import { ReservasService } from './reservas.service';
 import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +15,9 @@ import { ReservasComponent } from './reservas.component';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    TableModule
-  ]
+    TableModule,
+    ButtonModule
+  ],
+  exports:[ReservasComponent]
 })
 export class ReservasModule { }
