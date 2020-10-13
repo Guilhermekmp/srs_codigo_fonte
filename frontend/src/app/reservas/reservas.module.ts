@@ -1,3 +1,4 @@
+import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,8 @@ import { ReservasComponent } from './reservas.component';
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule
   ]
 })
 export class ReservasModule { }
