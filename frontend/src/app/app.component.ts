@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ElementRef, Renderer2, ViewChild, OnDestroy, OnInit, NgZone } from '@angular/core';
 import { ScrollPanel } from 'primeng';
 import { MenusService, MenuOrientation } from '@nuvem/primeng-components';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -50,7 +51,11 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
         this.zone.runOutsideAngular(() => { this.bindRipple(); });
 
         this.menuService.itens = [
-            { label: 'Dashboard', icon: 'dashboard', routerLink: ['/'] }
+            { label: 'Dashboard', icon: 'dashboard', routerLink: ['/'] },
+            { label: 'Clientes', icon: 'person', routerLink:['/clientes']},
+            { label: 'Salas', icon: 'room', routerLink: ['/salas']},
+            { label: 'Equipamentos', icon: 'laptop', routerLink: ['/equipamentos']},
+            { label: 'Reservas', icon: 'event', routerLink: ['/reservas']}
         ];
     }
 
