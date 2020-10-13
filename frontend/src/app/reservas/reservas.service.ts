@@ -1,12 +1,17 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservasService {
 
-  private readonly API = environment.apiUrl + '/reservas';
+  private resouceUrl = environment.apiUrl + '/reservas';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getAllReservas(){
+    return this.http.get(this.resouceUrl,{});
+  }
 }

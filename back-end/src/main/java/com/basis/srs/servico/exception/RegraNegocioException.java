@@ -17,3 +17,4 @@ public class RegraNegocioException extends RuntimeException {
     public RegraNegocioException(final String message, final Throwable cause) {
         super(message, cause);
     }
+}
