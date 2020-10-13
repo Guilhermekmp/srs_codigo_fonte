@@ -1,3 +1,4 @@
+import { ReservasComponent } from './reservas/reservas.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -19,7 +20,8 @@ import { BlockUIModule } from 'ng-block-ui';
         AppComponent,
         AppTopbarComponent,
         AppFooterComponent,
-        DiarioErrosComponent
+        DiarioErrosComponent,
+        ReservasComponent
     ],
     imports: [
         BlockUIModule.forRoot({
