@@ -1,6 +1,6 @@
 <div class="card">
     <h4>Reservas</h4>
-    <p-table> <!---[value]="reservas"--->
+    <p-table> [value]="reservas"
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="cliente">Cliente <p-sortIcon field="cliente"></p-sortIcon></th>
@@ -10,15 +10,14 @@
                 <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
             </tr>
         </ng-template>
-        <!--<ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{reservas.cliente}}</td>
-                <td>{{reservas.sala}}</td>
-                <td>{{reservas.dtIni}}</td>
-                <td>{{reservas.dtFim}}</td>
-                <td>{{reservas.total | currency: 'R$'}}</td>
+                <td>{{reserva.cliente}}</td>
+                <td>{{reserva.sala}}</td>
+                <td>{{reserva.dtIni}}</td>
+                <td>{{reserva.dtFim}}</td>
+                <td>{{reserva.total | currency: 'Real'}}</td>
             </tr>
         </ng-template>
-    --->
     </p-table>
 </div>
