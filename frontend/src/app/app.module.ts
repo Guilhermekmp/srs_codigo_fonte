@@ -1,3 +1,4 @@
+import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -37,6 +38,7 @@ import { ClientesModule } from './clientes/clientes.module';
         BreadcrumbModule,
         ErrorStackModule,
         VersionTagModule,
+        ButtonModule,
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         ReactiveFormsModule,
