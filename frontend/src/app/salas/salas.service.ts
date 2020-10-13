@@ -1,3 +1,6 @@
+import { environment } from './../../environments/environment';
+import { Sala } from './sala';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +8,11 @@ import { Injectable } from '@angular/core';
 })
 export class SalasService {
 
-  constructor() { }
+  private readonly API = environment.apiUrl + '/salas';
+
+  constructor(private http: HttpClient) { }
+
+  list(){
+    return this.http.get<Sala[]>(this.API)
+  }
 }
