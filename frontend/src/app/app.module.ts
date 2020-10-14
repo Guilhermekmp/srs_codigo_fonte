@@ -1,5 +1,9 @@
 
+
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+
+import { SalasComponent } from './salas/salas.component';
+
 import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
 
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -28,7 +33,9 @@ import { ClientesModule } from './clientes/clientes.module';
         AppFooterComponent,
         DiarioErrosComponent,
         ReservasComponent,
-        EquipamentosComponent
+        EquipamentosComponent,
+        SalasComponent
+
     ],
     imports: [
         BlockUIModule.forRoot({
