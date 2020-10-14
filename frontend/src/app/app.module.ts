@@ -16,6 +16,7 @@ import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule 
 import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { BlockUIModule } from 'ng-block-ui';
         AppFooterComponent,
         DiarioErrosComponent,
         ReservasComponent,
-        SalasComponent
+        SalasComponent,
+        EquipamentosComponent
     ],
     imports: [
         BlockUIModule.forRoot({

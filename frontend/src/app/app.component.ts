@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, AfterViewInit, ElementRef, Renderer2, ViewChild, OnDestroy, OnInit, NgZone } from '@angular/core';
 import { ScrollPanel } from 'primeng';
 import { MenusService, MenuOrientation } from '@nuvem/primeng-components';
@@ -45,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
 
     rippleMouseDownListener: EventListenerOrEventListenerObject;
 
-    constructor(public renderer2: Renderer2, public zone: NgZone, public menuService: MenusService) { }
+    constructor(public renderer2: Renderer2, public zone: NgZone, public menuService: MenusService, private http:HttpClient) { }
 
     ngOnInit() {
         this.zone.runOutsideAngular(() => { this.bindRipple(); });
