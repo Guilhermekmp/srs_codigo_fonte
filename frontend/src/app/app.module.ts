@@ -1,3 +1,4 @@
+import { SalasComponent } from './salas/salas.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,13 +17,15 @@ import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
 
+
 @NgModule({
     declarations: [
         AppComponent,
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        ReservasComponent
+        ReservasComponent,
+        SalasComponent
     ],
     imports: [
         BlockUIModule.forRoot({

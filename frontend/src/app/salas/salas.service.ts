@@ -12,7 +12,7 @@ export class SalasService {
 
   constructor(private http: HttpClient) { }
 
-  list(){
-    return this.http.get<Sala[]>(this.API)
+  listarSalas(){
+    return this.http.get<Sala[]>(this.API, {});
   }
 }
