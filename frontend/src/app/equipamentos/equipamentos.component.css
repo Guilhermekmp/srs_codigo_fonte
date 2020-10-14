@@ -1,5 +1,8 @@
 .botao{
     display: flex;
     flex-direction: row-reverse;
+<<<<<<< HEAD
     margin-bottom: 10px;
+=======
+>>>>>>> Front end basico, ainda a corrigir detalhes
 }

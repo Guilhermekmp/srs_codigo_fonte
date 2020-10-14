@@ -22,9 +22,14 @@ import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule 
 import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
+<<<<<<< HEAD
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+=======
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+
+>>>>>>> Front end basico, ainda a corrigir detalhes
 
 @NgModule({
     declarations: [
@@ -33,9 +38,14 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         AppFooterComponent,
         DiarioErrosComponent,
         ReservasComponent,
+<<<<<<< HEAD
         EquipamentosComponent,
         SalasComponent,
         SalasComponent
+=======
+        SalasComponent,
+        EquipamentosComponent
+>>>>>>> Front end basico, ainda a corrigir detalhes
     ],
     imports: [
         BlockUIModule.forRoot({

@@ -1,5 +1,6 @@
 import { EquipamentosService } from './equipamentos.service';
 import { Component, OnInit } from '@angular/core';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-equipamentos',
