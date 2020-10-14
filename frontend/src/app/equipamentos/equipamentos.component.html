@@ -1,1 +1,38 @@
-<p>equipamentos works!</p>
+<div class="card">
+    <h1>Equipamentos</h1> 
+    <div class="botao">
+        <button pButton type="button" label="Cadastrar"></button>
+    </div>
+    
+
+    
+    <p-table [value]="equipamentos" styleClass="p-database-sm">
+        
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
+                <th pSortableColumn="tipoEquipamento">Tipo Equipamento <p-sortIcon field="tipoEquipamento"></p-sortIcon></th>
+                <th pSortableColumn="precoDiario">Preco Diario <p-sortIcon field="precoDiario"></p-sortIcon></th>
+                <th pSortableColumn="Obrigatorio">Obrigatorio <p-sortIcon field="obrigatorio "></p-sortIcon></th>
+                <th>Opções</th>
+            </tr>
+
+        </ng-template>
+
+        <ng-template pTemplate="body" let-equipamento>
+
+            <tr>
+                <td>{{equipamento?.id}}</td>
+                <td>{{equipamento?.nome}}</td>
+                <td>{{equipamento?.tipoEquipamento}}</td>
+                <td>{{equipamento?.precoDiario}}</td>
+                <td>{{equipamento?.obrigatorio}}</td>
+                <td></td>
+            </tr>
+
+        </ng-template>
+
+    </p-table>
+
+</div>

@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-import { ButtonModule } from 'primeng/button';
-=======
+
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { ReservasComponent } from './reservas/reservas.component';
->>>>>>> Tabela de Reservas no Front
+import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -28,7 +27,8 @@ import { ClientesModule } from './clientes/clientes.module';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        ReservasComponent
+        ReservasComponent,
+        EquipamentosComponent
     ],
     imports: [
         BlockUIModule.forRoot({
