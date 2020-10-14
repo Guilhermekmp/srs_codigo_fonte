@@ -1,3 +1,4 @@
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,7 +23,8 @@ import { BlockUIModule } from 'ng-block-ui';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        ReservasComponent
+        ReservasComponent,
+        EquipamentosComponent
     ],
     imports: [
         BlockUIModule.forRoot({
