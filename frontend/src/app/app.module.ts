@@ -1,7 +1,8 @@
 
 
-import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SalasComponent } from './salas/salas.component';
 
 import { ReservasComponent } from './reservas/reservas.component';
@@ -23,8 +24,7 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
-
-
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
     declarations: [
@@ -34,8 +34,8 @@ import { ClientesModule } from './clientes/clientes.module';
         DiarioErrosComponent,
         ReservasComponent,
         EquipamentosComponent,
+        SalasComponent,
         SalasComponent
-
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -56,6 +56,7 @@ import { ClientesModule } from './clientes/clientes.module';
         ReactiveFormsModule,
         FormsModule,
         ClientesModule
+
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
