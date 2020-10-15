@@ -1,7 +1,7 @@
 <div class="card">
     <h1>Equipamentos</h1> 
     <div class="botao">
-        <button pButton type="button" label="Cadastrar" class="p-button-success" icon="pi pi-plus" iconPos="right"></button>
+        <button pButton type="button" label="Cadastrar" class="p-button-success" icon="pi pi-plus" iconPos="right" style="background-color: green;"></button>
     </div>
     <p-table [value]="equipamentos" styleClass="p-database-sm">
         
@@ -25,7 +25,12 @@
                 <td>{{equipamento?.tipoEquipamento}}</td>
                 <td>{{equipamento?.precoDiario}}</td>
                 <td>{{equipamento?.obrigatorio}}</td>
-                <td></td>
+                <td>
+                    <span class="p-buttonset">
+                        <button pButton type="button" label="Delete" icon="pi pi-trash"></button>
+                        <button pButton type="button" label="Edit" icon="pi pi-pencil" style="margin-left: 10px;"></button>
+                    </span>
+                </td>
             </tr>
 
         </ng-template>
