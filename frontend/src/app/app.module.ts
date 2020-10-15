@@ -54,9 +54,14 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         ReactiveFormsModule,
+<<<<<<< HEAD
         FormsModule,
         ClientesModule
 
+=======
+        CurrencyMaskModule,
+        SharedModule
+>>>>>>> O POST ta dando 400 provavelmente por causa do array
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
