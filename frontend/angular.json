@@ -24,7 +24,8 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/@nuvem/angular-base/src/lib/accessibility/accessibility.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
               "node_modules/moment/moment.js",
@@ -141,6 +142,6 @@
     }
   },
   "cli": {
-    "analytics": "2b7ef473-b25a-4a37-ae65-275ff76d8486"
+    "analytics": "73f4df31-c6f7-4b41-b8a7-7fb323ef983d"
   }
 }
