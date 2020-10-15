@@ -13,6 +13,9 @@ import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule 
 import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClientesModule } from './clientes/clientes.module';
+
 
 @NgModule({
     declarations: [
@@ -35,11 +38,14 @@ import { BlockUIModule } from 'ng-block-ui';
         ErrorStackModule,
         VersionTagModule,
         SecurityModule.forRoot(environment.auth),
-        MenuModule
+        MenuModule,
+        ReactiveFormsModule,
+        FormsModule,
+        ClientesModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule { }
