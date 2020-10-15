@@ -48,7 +48,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         ReactiveFormsModule,
-        CurrencyMaskModule
+        CurrencyMaskModule,
+        SharedModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
