@@ -1,3 +1,4 @@
+import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SalasComponent } from './salas/salas.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
@@ -17,7 +18,8 @@ import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
     declarations: [
@@ -28,6 +30,7 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
         ReservasComponent,
         SalasComponent,
         EquipamentosComponent
+        SalasFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -44,7 +47,10 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
         VersionTagModule,
         ButtonModule,
         SecurityModule.forRoot(environment.auth),
-        MenuModule
+        MenuModule,
+        ReactiveFormsModule,
+        CurrencyMaskModule,
+        SharedModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
