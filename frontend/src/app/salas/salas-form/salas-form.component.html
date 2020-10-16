@@ -1,0 +1,52 @@
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <div div class="p-d-block p-d-lg-inline">
+        <div>
+            <label for="descricao" style="font-size: 130%;">Descrição</label>
+        </div>
+        <div style="text-align: center;">
+            <textarea [rows]="5" [cols]="89" pInputTextarea autoResize="autoResize" style="box-sizing: border-box; width: 100%;"
+            formControlName="descricao" id="descricao" placeholder="Endereço, área, etc."></textarea>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div style="width: 15%">
+                <div>
+                    <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
+                </div>
+                <div class="ui-inputgroup">
+                    <input type="text" pInputText placeholder="R$" formControlName="precoDiario" id="precoDiario"
+                    currencyMask [(ngModel)]="value" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
+                </div>
+            </div>
+            <div class="ui-g ui-fluid" style="width: 35%; ">
+                <div style="margin-left: 10px;">
+                    <div>
+                        <label for="idTipoSala" style="font-size: 130%">Tipo</label>
+                    </div>
+                    <p-dropdown [options]="tiposSala" formControlName="idTipoSala"></p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g ui-fluid">
+                    <div style="width: 30%">
+                        <div>
+                            <label for="capacidade" style="font-size: 130%;">Capacidade</label>
+                        </div>
+                        <div class="ui-inputgroup">
+                            <input pInputText type="text" formControlName="capacidade" id="capacidade"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button 
+                pButton 
+                type="button" 
+                class="app-button-success p-d-flex p-jc-center p-ic-center" 
+                style="background-color: green; margin-top: 5px; padding-top: 10%;"
+                (click) = onSubmit()>
+                <span>Criar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
