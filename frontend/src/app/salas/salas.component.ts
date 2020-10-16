@@ -1,3 +1,4 @@
+import { ConfirmationService } from 'primeng';
 import { EquipamentosService } from './../equipamentos/equipamentos.service';
 import { Equipamento } from './../equipamentos/equipamento';
 import { SalasService } from './salas.service';
@@ -18,23 +19,32 @@ export class SalasComponent implements OnInit {
 
   displayCreation: boolean = false;
 
-  constructor(private  salasService: SalasService, private equipamentosService: EquipamentosService) { }
+  constructor(private  salasService: SalasService, private equipamentosService: EquipamentosService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+    this.listar();
+  }
 
+  listar(){
     this.salasService.listarSalas().subscribe((data)=>{
       this.salas = data;
       console.log(data);
     }, err =>{
       console.log(err);
-      
     })
-
   }
 
-  listarEquipamentos(sala: Sala): string{
-    
-    return sala.equipamentos[1] + sala.equipamentos[2];
+  deletar(id:any){
+    this.confirmationService.confirm({
+      message: "Tem certeza que deseja excluir esta sala?",
+      accept: () => {
+        this.salasService.deletar(id).subscribe(
+          s => {
+            this.listar();
+          }
+        )
+      }
+    })
   }
 
   getTipoSala(sala: Sala): string{

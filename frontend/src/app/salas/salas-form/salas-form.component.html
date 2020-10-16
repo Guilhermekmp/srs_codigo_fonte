@@ -1,5 +1,5 @@
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <div div class="p-d-block p-d-lg-inline">
+    <div class="p-d-lg-inline">
         <div>
             <label for="descricao" style="font-size: 130%;">Descrição</label>
         </div>
@@ -7,7 +7,7 @@
             <textarea [rows]="5" [cols]="89" pInputTextarea autoResize="autoResize" style="box-sizing: border-box; width: 100%;"
             formControlName="descricao" id="descricao" placeholder="Endereço, área, etc."></textarea>
         </div>
-        <div class="ui-g ui-fluid">
+        <div class="p-d-lg-inline" style="justify-content: space-between; display: flex;">
             <div style="width: 15%">
                 <div>
                     <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
@@ -17,7 +17,7 @@
                     currencyMask [(ngModel)]="value" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
                 </div>
             </div>
-            <div class="ui-g ui-fluid" style="width: 35%; ">
+            <div class="ui-g ui-fluid">
                 <div style="margin-left: 10px;">
                     <div>
                         <label for="idTipoSala" style="font-size: 130%">Tipo</label>
@@ -37,16 +37,36 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div formGroupName="equipamentos" class="p-d-lg-inline">
+            <h2>Equipamentos</h2>
+            <div>
+                <label for="equipametos" style="font-size: 130%">Nome</label>
+            </div>
+            <p-dropdown [options]="equipamentos" formControlName="equipamentos"></p-dropdown>
+            <div class="ui-g ui-fluid">
+                <div style="width: 30%">
+                    <div>
+                        <label for="capacidade" style="font-size: 130%;">Quantidade</label>
+                    </div>
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" formControlName="quantidade" id="quantidade"> 
+                    </div>
+                </div>
+            </div>
+        <div  style="justify-content: space-between;">
+        </div>
             <div>
                 <button 
                 pButton 
                 type="button" 
                 class="app-button-success p-d-flex p-jc-center p-ic-center" 
-                style="background-color: green; margin-top: 5px; padding-top: 10%;"
+                style="background-color: green;"
                 (click) = onSubmit()>
                 <span>Criar</span>
                 </button>
             </div>
         </div>
+        
     </div>
 </form>
