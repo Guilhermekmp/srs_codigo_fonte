@@ -1,3 +1,4 @@
+import { ButtonModule } from 'primeng/button';
 import { ReservasModule } from './reservas/reservas.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +36,7 @@ import { BlockUIModule } from 'ng-block-ui';
         BreadcrumbModule,
         ErrorStackModule,
         VersionTagModule,
+        ButtonModule,
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         ReservasModule
