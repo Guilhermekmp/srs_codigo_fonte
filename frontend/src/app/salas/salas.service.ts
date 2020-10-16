@@ -17,7 +17,7 @@ export class SalasService {
     return this.http.get<Sala[]>(this.API, {});
   }
 
-  criar(sala){
+  criar(sala: Sala){
     return this.http.post(this.API, sala).pipe(take(1));
   }
 }
