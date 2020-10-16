@@ -1,5 +1,5 @@
+import { EquipamentosService } from './../../equipamentos/equipamentos.service';
 import { SalasService } from './../salas.service';
-import { Equipamento } from './../../equipamentos/equipamento';
 import { Sala } from './../sala';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
@@ -15,7 +15,9 @@ export class SalasFormComponent implements OnInit {
 
   tiposSala: any[];
 
-  constructor(private formBuilder: FormBuilder, private salasService: SalasService ) {}
+  equipamentos: any[];
+
+  constructor(private formBuilder: FormBuilder, private salasService: SalasService, private equipamentosService: EquipamentosService ) {}
 
   ngOnInit(): void {
 
@@ -24,34 +26,29 @@ export class SalasFormComponent implements OnInit {
       {label: 'Trabalho', value: 2},
       {label: 'Palestras', value: 3},
       {label: 'Auditório', value: 4},
-  ];
+    ]
+
+      this.equipamentosService.listarEquipamentos().subscribe((data)=>{
+        this.equipamentos = data.map(e => {return { label: e.nome, value: e.id }});
+        console.log(this.equipamentos);
+      }, err =>{
+        console.log(err);
+      });
+
+    console.log(this.tiposSala);
 
     this.formulario = this.formBuilder.group({
-      descricao: null,
-      equipamentos: [
-        {
+      descricao: [null],
+      equipamentos: this.formBuilder.group({
         idSala: null,
         idEquipamento: 1,
-        quantidade: 5
+        quantidade: 1
         }
-      ],
-      idTipoSala: 1,
-      capacidade: 0,
-      precoDiario: 0.00,
-      disponivel: 1,
-
-      // id: number;
-      // nome: string;
-      // idTipoEquipamento: number;
-      // precoDiario: number;
-      // obrigatorio: number;
-
-      // descricao: String,
-      // idTipoSala: number
-      // precoDiario:number,
-      // disponivel: number,
-      // capacidade: number,
-      // equipamentos: any[]
+      ),
+      idTipoSala: [1],
+      capacidade: [0],
+      precoDiario: [0.00],
+      disponivel: [1],
     })
   }
 
@@ -70,6 +67,4 @@ export class SalasFormComponent implements OnInit {
       );
     }
   }
-
-
 }
