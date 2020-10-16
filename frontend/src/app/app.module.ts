@@ -1,3 +1,4 @@
+import { SalasModule } from './salas/salas.module';
 import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SalasComponent } from './salas/salas.component';
 import { ReservasComponent } from './reservas/reservas.component';
@@ -20,7 +21,6 @@ import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
@@ -30,9 +30,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         AppFooterComponent,
         DiarioErrosComponent,
         ReservasComponent,
-        SalasComponent,
-        EquipamentosComponent
-        SalasFormComponent
+        EquipamentosComponent,
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -52,8 +50,9 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         MenuModule,
         ReactiveFormsModule,
         FormsModule,
-        ClientesModule
+        ClientesModule,
         CurrencyMaskModule,
+        SalasModule,
         SharedModule
     ],
     providers: [

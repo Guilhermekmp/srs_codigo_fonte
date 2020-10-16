@@ -21,7 +21,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/nova-light/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/quill/dist/quill.snow.css",
@@ -142,12 +141,5 @@
     "@schematics/angular:directive": {
       "prefix": "app"
     }
-  },
-  "cli": {
-
-    "analytics": false
-
-    "analytics": "73f4df31-c6f7-4b41-b8a7-7fb323ef983d"
-
   }
 }
