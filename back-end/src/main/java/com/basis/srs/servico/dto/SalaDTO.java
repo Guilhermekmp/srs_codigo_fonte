@@ -6,11 +6,14 @@ import lombok.Setter;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
-public class SalaDTO {
+public class SalaDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 
@@ -18,7 +21,7 @@ public class SalaDTO {
     private String descricao;
 
     @NotNull(message = "Equipamentos são obrigatórios")
-    private ArrayList<SalaEquipamentoDTO> equipamentos;
+    private List<SalaEquipamentoDTO> equipamentos;
 
     @NotNull(message = "Tipo da sala é obrigatório")
     @Min(1)

@@ -18,8 +18,7 @@ import { SalasComponent } from './salas.component';
     HttpClientModule,
     ButtonModule,
     ReactiveFormsModule,
-    SharedModule,
-    InputTextModule
+    SharedModule
   ],
   exports: [
     SalasComponent
