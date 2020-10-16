@@ -16,3 +16,7 @@ td {
  :host .ui-button /deep/ .ui-button-text{
      display: none;
  }
+
+ .myClass {
+    color: red;
+ }
