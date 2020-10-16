@@ -1,0 +1,40 @@
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.nome" pInputText placeholder="Nome">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="email" [(ngModel)]="cliente.email" pInputText placeholder="Email">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.endereco" pInputText placeholder="Endereco">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.cpf" pInputText placeholder="CPF">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.rg" pInputText placeholder="RG">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.telefone" pInputText placeholder="Telefone">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" pInputText placeholder="dataNascimento">
+        </div>
+    </div>
+    <div>
+        <button pButton (click)="salvar()" label="Salvar"></button>
+    </div>
+</div>

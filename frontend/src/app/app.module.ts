@@ -1,3 +1,7 @@
+import { SalasFormComponent } from './salas/salas-form/salas-form.component';
+import { SalasComponent } from './salas/salas.component';
+import { ReservasComponent } from './reservas/reservas.component';
+import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -15,14 +19,20 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
-
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
     declarations: [
         AppComponent,
         AppTopbarComponent,
         AppFooterComponent,
-        DiarioErrosComponent
+        DiarioErrosComponent,
+        ReservasComponent,
+        SalasComponent,
+        EquipamentosComponent
+        SalasFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -37,11 +47,14 @@ import { ClientesModule } from './clientes/clientes.module';
         BreadcrumbModule,
         ErrorStackModule,
         VersionTagModule,
+        ButtonModule,
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         ReactiveFormsModule,
         FormsModule,
         ClientesModule
+        CurrencyMaskModule,
+        SharedModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
