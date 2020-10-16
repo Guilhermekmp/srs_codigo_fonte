@@ -1,4 +1,4 @@
-import { ReservasComponent } from './reservas/reservas.component';
+import { ReservasModule } from './reservas/reservas.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -21,7 +21,6 @@ import { BlockUIModule } from 'ng-block-ui';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        ReservasComponent
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -37,7 +36,8 @@ import { BlockUIModule } from 'ng-block-ui';
         ErrorStackModule,
         VersionTagModule,
         SecurityModule.forRoot(environment.auth),
-        MenuModule
+        MenuModule,
+        ReservasModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
