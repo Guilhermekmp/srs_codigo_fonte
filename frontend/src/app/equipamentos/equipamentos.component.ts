@@ -11,7 +11,6 @@ import { ConfirmationService } from 'primeng';
   providers:[ConfirmationService]
 })
 export class EquipamentosComponent implements OnInit {
-
   displayCreation:boolean = false;
   equipamentos = [];
   equipamento = new Equipamento();
@@ -36,7 +35,6 @@ export class EquipamentosComponent implements OnInit {
         return null;
     }
   }
-
   listar(){
     this.equipamentosService.listarEquipamentos().subscribe((data)=>{
       this.equipamentos = data;
@@ -73,5 +71,4 @@ export class EquipamentosComponent implements OnInit {
   abrirPopUp(){
     this.displayCreation = true;
   }
-
 }

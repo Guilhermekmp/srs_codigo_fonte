@@ -32,5 +32,6 @@ export class EquipamentosService {
   salvar(equipamento:Equipamento):Observable<Equipamento>{
     return this.http.post<Equipamento>(this.url, equipamento);
   }
+
   
 }
