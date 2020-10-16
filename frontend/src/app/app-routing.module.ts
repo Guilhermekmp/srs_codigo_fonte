@@ -1,3 +1,4 @@
+import { InputTextModule } from 'primeng/inputtext';
 import { ReservasComponent } from './reservas/reservas.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
