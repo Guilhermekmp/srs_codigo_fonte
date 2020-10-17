@@ -1,8 +1,6 @@
 package com.basis.srs.dominio;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -11,16 +9,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "sala_equipamento")
-public class SalaEquipamento implements Serializable{
+public class ReservaEquipamento implements Serializable{
 
     @EmbeddedId
-    private SalaEquipamentoId id;
+    private ReservaEquipamentoId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idEquipamento")
@@ -28,8 +27,8 @@ public class SalaEquipamento implements Serializable{
     private Equipamento equipamento;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @MapsId("idSala") @JoinColumn(name = "id_sala")
-    private Sala sala;
+    @MapsId("idReserva") @JoinColumn(name = "id_reserva")
+    private Reserva reserva;
 
     @Column(name = "quantidade")
     private Integer quantidade;

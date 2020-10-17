@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class ReservaEquipamentoId implements Serializable {
 
-    private Integer idSala;
+    private Integer idReserva;
 
     private Integer idEquipamento;
 

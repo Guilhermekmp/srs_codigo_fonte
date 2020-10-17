@@ -1,12 +1,12 @@
 package com.basis.srs.repositorio;
 
-import com.basis.srs.dominio.SalaEquipamento;
-import com.basis.srs.dominio.SalaEquipamentoId;
+import com.basis.srs.dominio.ReservaEquipamento;
+import com.basis.srs.dominio.ReservaEquipamentoId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SalaEquipamentoRepositorio extends JpaRepository<SalaEquipamento, SalaEquipamentoId> {
+public interface ReservaEquipamentoRepositorio extends JpaRepository<ReservaEquipamento, ReservaEquipamentoId> {
 
-    void deleteAllBySalaId(Integer id);
+    void deleteAllByReservaId(Integer id);
 }
