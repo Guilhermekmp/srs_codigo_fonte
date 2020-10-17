@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = {})
 public interface ReservaEquipamentoMapper extends EntityMapper<ReservaEquipamentoDTO, ReservaEquipamento> {
+
     @Override
     @Mapping(source = "idReserva", target = "reserva.id")
     @Mapping(source = "idEquipamento", target = "equipamento.id")
@@ -15,7 +16,7 @@ public interface ReservaEquipamentoMapper extends EntityMapper<ReservaEquipament
     ReservaEquipamento toEntity(ReservaEquipamentoDTO dto);
 
     @Override
-    @Mapping(target = "idSala", source = "sala.id")
+    @Mapping(target = "idReserva", source = "reserva.id")
     @Mapping(target = "idEquipamento", source = "equipamento.id")
     ReservaEquipamentoDTO toDto(ReservaEquipamento reservaEquipamento);
 }

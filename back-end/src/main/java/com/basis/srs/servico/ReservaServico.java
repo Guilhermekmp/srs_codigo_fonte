@@ -41,7 +41,8 @@ public class ReservaServico {
     public ReservaDTO criar(ReservaDTO reserva){
         if (reserva.getId() != null) {
             buscar(reserva.getId());
-        }else{
+        }
+        else{
             for (Reserva reservaLista : reservaRepositorio.findAll()) {
                 if (reservaLista.getSala().getId().equals(reserva.getIdSala())
                         && (reservaLista.getDataInicio().equals(reserva.getDataInicio())
@@ -51,6 +52,7 @@ public class ReservaServico {
                 }
             }
         }
+
         Reserva novaReserva = reservaMapper.toEntity(reserva);
         List<ReservaEquipamento> reservaEquipamentos = novaReserva.getEquipamentos();
         for (SalaEquipamento salaEquipamento: salaEquipamentoRepositorio.findAll()) {

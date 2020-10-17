@@ -32,5 +32,5 @@ public class ReservaDTO {
     private LocalDateTime dataFim;
 
     @NotNull
-    private ArrayList<ReservaEquipamentoDTO> equipamentoOpcionais;
+    private ArrayList<ReservaEquipamentoDTO> equipamentos;
 }
