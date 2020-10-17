@@ -1,5 +1,5 @@
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <div class="p-d-lg-inline">
+    <div>
         <div>
             <label for="descricao" style="font-size: 130%;">Descrição</label>
         </div>
@@ -7,8 +7,8 @@
             <textarea [rows]="5" [cols]="89" pInputTextarea autoResize="autoResize" style="box-sizing: border-box; width: 100%;"
             formControlName="descricao" id="descricao" placeholder="Endereço, área, etc."></textarea>
         </div>
-        <div class="p-d-lg-inline" style="justify-content: space-between; display: flex;">
-            <div style="width: 15%">
+        <div style="justify-content: space-between; display: inline-flex;">
+            <div>
                 <div>
                     <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
                 </div>
@@ -17,35 +17,36 @@
                     currencyMask [(ngModel)]="value" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
                 </div>
             </div>
-            <div class="ui-g ui-fluid">
-                <div style="margin-left: 10px;">
-                    <div>
-                        <label for="idTipoSala" style="font-size: 130%">Tipo</label>
-                    </div>
-                    <p-dropdown [options]="tiposSala" formControlName="idTipoSala"></p-dropdown>
+            <div style="margin-left: 10px;">
+                <div>
+                    <label for="idTipoSala" style="font-size: 130%">Tipo</label>
                 </div>
+                <p-dropdown [options]="tiposSala" formControlName="idTipoSala"></p-dropdown>
             </div>
-            <div class="ui-g ui-fluid">
-                <div class="ui-g ui-fluid">
-                    <div style="width: 30%">
-                        <div>
-                            <label for="capacidade" style="font-size: 130%;">Capacidade</label>
-                        </div>
-                        <div class="ui-inputgroup">
-                            <input pInputText type="text" formControlName="capacidade" id="capacidade"> 
-                        </div>
+            <div style="margin-left: 10px; display: flexbox;">
+                <div>
+                    <label for="capacidade" style="font-size: 130%;">Capacidade</label>
+                </div>
+                <div class="ui-inputgroup">
+                    <input pInputText type="text" formControlName="capacidade" id="capacidade" style="width: 40%; border-right-width: 1px;">
+                    <div style="margin-left: 5px; line-height: 30px; width: 30%; font-size: 17px;">
+                        pessoas
                     </div>
                 </div>
             </div>
         </div>
-        <div formGroupName="equipamentos" class="p-d-lg-inline">
-            <h2>Equipamentos</h2>
+    </div>
+    <div formGroupName="equipamentos" class="p-d-lg-inline">
+        <h2>Equipamentos obrigatórios</h2>
+        <div style=" display: inline-flex;">
             <div>
-                <label for="equipametos" style="font-size: 130%">Nome</label>
+                <div>
+                    <label for="equipametos" style="font-size: 130%">Nome</label>
+                </div>
+                <p-dropdown [options]="equipamentos" formControlName="idEquipamento"></p-dropdown>
             </div>
-            <p-dropdown [options]="equipamentos" formControlName="equipamentos"></p-dropdown>
             <div class="ui-g ui-fluid">
-                <div style="width: 30%">
+                <div style="width: 5.4vw; margin-left: 10px;" >
                     <div>
                         <label for="capacidade" style="font-size: 130%;">Quantidade</label>
                     </div>
@@ -54,19 +55,17 @@
                     </div>
                 </div>
             </div>
-        <div  style="justify-content: space-between;">
-        </div>
-            <div>
-                <button 
-                pButton 
-                type="button" 
-                class="app-button-success p-d-flex p-jc-center p-ic-center" 
-                style="background-color: green;"
-                (click) = onSubmit()>
-                <span>Criar</span>
-                </button>
+            <div style="line-height: 65px; margin-left: 10px;">
+                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;"></button>
             </div>
         </div>
-        
     </div>
+    <button 
+    pButton 
+    type="button" 
+    class="app-button-success p-d-flex p-jc-center p-ic-center" 
+    style="background-color: green; margin-top: 10px; font-weight: bold; line-height: 30px;"
+    (click) = onSubmit()>
+    <span>Criar</span>
+    </button>
 </form>
