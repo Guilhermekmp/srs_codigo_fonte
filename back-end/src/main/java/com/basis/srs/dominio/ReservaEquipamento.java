@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "sala_equipamento")
+@Table(name = "reserva_equipamento")
 public class ReservaEquipamento implements Serializable{
 
     @EmbeddedId
