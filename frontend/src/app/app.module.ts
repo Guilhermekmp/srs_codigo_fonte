@@ -1,3 +1,7 @@
+import { SalasModule } from './salas/salas.module';
+import { SalasFormComponent } from './salas/salas-form/salas-form.component';
+import { SalasComponent } from './salas/salas.component';
+import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
 import { ReservasModule } from './reservas/reservas.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +19,10 @@ import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule 
 import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClientesModule } from './clientes/clientes.module';
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
     declarations: [
@@ -22,6 +30,8 @@ import { BlockUIModule } from 'ng-block-ui';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
+        ReservasComponent,
+        EquipamentosComponent,
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -39,11 +49,17 @@ import { BlockUIModule } from 'ng-block-ui';
         ButtonModule,
         SecurityModule.forRoot(environment.auth),
         MenuModule,
-        ReservasModule
+        ReservasModule,
+        ReactiveFormsModule,
+        FormsModule,
+        ClientesModule,
+        CurrencyMaskModule,
+        SalasModule,
+        SharedModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

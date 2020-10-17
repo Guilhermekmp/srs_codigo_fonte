@@ -1,20 +1,71 @@
-<div class="card">
-    <h1>Salas</h1>
-    <button pButton type="button" label="Click" style="float: right;">Nova Sala</button>
-    <p-button label="Click" ></p-button>
+<div class="card" style = "height:65px; display: block;">
+    <div style= "height: 2.7rem; text-align: left; line-height: 60%; display: flex;
+    justify-content: space-between;">
+        <h1 style = "font-size: 30px;">Salas</h1>
+            <button 
+            pButton 
+            type="button" 
+            class="app-button-success p-d-flex p-jc-center p-ic-center" 
+            style="background-color: green; margin-top: 5px;"
+            (click) = abrirPopUp()>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span>Nova sala</span>
+            </button>
+    </div>
 </div>
 
-<table>
-    <thead>
-        <th>Id</th>
-        <th>Descrição</th>
-        <th>Preço</th>
-        <th>Disponibilidade</th>  
-    </thead>
-    <tbody>
+<p-dialog header = "Nova Sala" [(visible)]="displayCreation" [style]="{width: '40vw'}">
+    <app-salas-form></app-salas-form>
+</p-dialog>
+
+<p-table [value]="salas">
+    
+    <ng-template pTemplate="header">
         <tr>
-            <td></td>
-            <td></td>
+            <th pSortableColumn="id" style="width: 5rem;" >Código <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="descricao">Descrição <p-sortIcon field="descricao"></p-sortIcon></th>
+            <th pSortableColumn="idTipoSala" style="width: 10rem;">Tipo <p-sortIcon field="idTipoSala"></p-sortIcon></th>
+            <th pSortableColumn="precoDiario" style="width: 8rem;">Preço Diário <p-sortIcon field="precoDiario"></p-sortIcon></th>
+            <th pSortableColumn="disponivel" style="width: 9rem;">Disponibilidade <p-sortIcon field="disponivel"></p-sortIcon></th>
+            <th pSortableColumn="capacidade"  style="width: 9rem;">Capacidade <p-sortIcon field="capacidade"></p-sortIcon></th>
+            <th pSortableColumn="equipamentos">Equipamentos <p-sortIcon field="equipamentos"></p-sortIcon></th>
+            <th style="width: 13rem;"></th>
         </tr>
-    </tbody>
-</table>
+    </ng-template>
+    <ng-template pTemplate="body" let-sala>
+        <tr>
+            
+            <td id="1" style="text-align: center;">{{sala?.id}}</td>
+            <td>{{sala?.descricao}}</td>
+            <td style="text-align: center;">{{getTipoSala(sala)}}</td>
+            <td style="text-align: center;">{{sala?.precoDiario | currency: 'R$ '}}</td>
+            <td style="text-align: center;">{{sala?.disponivel}}</td>
+            <td style="text-align: center;">{{sala?.capacidade}}</td>
+            <td>
+                <div *ngFor="let equipamento of sala.equipamentos">
+                    <div>
+                        id -{{equipamento.idEquipamento}} - qtd - {{equipamento.quantidade}} 
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span style="float: center">
+                    <button 
+                    pButton 
+                    type="button" 
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <span>Editar</span>
+                    </button>       
+                    <button 
+                    pButton 
+                    type="button" 
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: red;">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <span>Deletar</span>
+                    </button>
+                </span>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

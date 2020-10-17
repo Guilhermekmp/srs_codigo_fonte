@@ -1,0 +1,22 @@
+th{
+    white-space:wrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 12px;
+}
+
+td {
+    white-space:nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+    font-size: 14px;
+ }
+
+ :host .ui-button /deep/ .ui-button-text{
+     display: none;
+ }
+
+ .myClass {
+    color: red;
+ }

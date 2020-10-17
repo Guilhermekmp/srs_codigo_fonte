@@ -7,7 +7,7 @@ import { PRIMENG_IMPORTS } from './primeng-imports';
     ],
     providers: [],
     exports: [
-        PRIMENG_IMPORTS,
+        PRIMENG_IMPORTS
     ]
 })
 export class SharedModule { }
