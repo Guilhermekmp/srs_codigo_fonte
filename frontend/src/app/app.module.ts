@@ -51,8 +51,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         FormsModule,
-        ConfirmDialogModule
-        ReservasModule,
+        ConfirmDialogModule,
         ReactiveFormsModule,
         FormsModule,
         ClientesModule,
