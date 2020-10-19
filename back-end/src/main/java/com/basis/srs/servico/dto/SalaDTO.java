@@ -17,7 +17,7 @@ public class SalaDTO {
     @NotNull(message = "Descrição é obrigatória")
     private String descricao;
 
-    @NotNull(message = "Equipamentos são é obrigatórios")
+    @NotNull(message = "Equipamentos são obrigatórios")
     private ArrayList<SalaEquipamentoDTO> equipamentos;
 
     @NotNull(message = "Tipo da sala é obrigatório")
