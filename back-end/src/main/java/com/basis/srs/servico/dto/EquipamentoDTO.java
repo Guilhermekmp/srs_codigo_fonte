@@ -26,8 +26,4 @@ public class EquipamentoDTO {
     @NotNull(message = "Campo não deve ser nulo")
     private Double precoDiario;
 
-    @NotNull(message = "Campo não deve ser nulo")
-    @Min(0)
-    @Max(1)
-    private Integer obrigatorio;
 }

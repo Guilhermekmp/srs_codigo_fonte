@@ -28,9 +28,6 @@
             <column name="preco_diario" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
-            <column name="obrigatorio" type="NUMBER">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
 
         <addPrimaryKey tableName="equipamento" columnNames="id" constraintName="pk_equipamento"/>

@@ -1,3 +1,6 @@
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FormsModule } from '@angular/forms';
+import { EquipamentosFormComponent } from './equipamentos/equipamentos-form/equipamentos-form.component';
 import { SalasComponent } from './salas/salas.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
@@ -17,6 +20,7 @@ import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -27,7 +31,8 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
         DiarioErrosComponent,
         ReservasComponent,
         SalasComponent,
-        EquipamentosComponent
+        EquipamentosComponent,
+        EquipamentosFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -44,7 +49,9 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
         VersionTagModule,
         ButtonModule,
         SecurityModule.forRoot(environment.auth),
-        MenuModule
+        MenuModule,
+        FormsModule,
+        ConfirmDialogModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }

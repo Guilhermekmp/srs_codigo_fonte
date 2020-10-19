@@ -10,6 +10,7 @@ import com.basis.srs.servico.exception.RegraNegocioException;
 import com.basis.srs.servico.exception.RegraNegocioExceptionNotFound;
 import com.basis.srs.servico.mapper.EquipamentoMapper;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import java.lang.reflect.Array;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,7 @@ public class EquipamentoServico {
 
     public EquipamentoDTO criar(EquipamentoDTO novoEquipamento) {
         for (Equipamento equipamento : equipamentoRepositorio.findAll()) {
-            if (equipamento.getNome().equals(novoEquipamento.getNome())) {
+            if (equipamento.equals(novoEquipamento)) {
                 throw new RegraNegocioException("Equipamento já existe");
             }
         }
@@ -47,25 +48,16 @@ public class EquipamentoServico {
         return dtoEquip;
     }
 
-    public void deletar(Integer id){
-        for (Equipamento equipamento:equipamentoRepositorio.findAll()) {
-            if (equipamento.getId()== id && equipamento.getObrigatorio()==0){
-                    for (Sala sala:salaRepositorio.findAll()){
-                        for (SalaEquipamento salaEquipamento : sala.getEquipamentos()) {
-                            if(salaEquipamento.getEquipamento().getId()==id){
-                                throw new RegraNegocioException("Equipamento está sendo utilizado em uma sala.");
-                        }else{
-                                equipamentoRepositorio.deleteById(id);
-                            }
-                        }
-                    }
-
-            }else {
-                throw new RegraNegocioException("Equipamento é obrigatório");
-                }
-            }
+    public void deletar(Integer id) {
+        EquipamentoDTO equipamento = buscar(id);
+        List<Sala> salas = salaRepositorio.findAll();
+        if(salas.contains(equipamento)) {
+            throw new RegraNegocioException("Equipamento está sendo utilizado.");
         }
-
+        else {
+            equipamentoRepositorio.deleteById(id);
+        }
+    }
 }
 
 
