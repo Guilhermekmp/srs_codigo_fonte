@@ -23,7 +23,7 @@ export class ReservasService {
     return this.http.get<Reserva[]>(this.API,{});
   }
 
-  deletar(id:any):Observable<any>{
+  deletar(id:number):Observable<any>{
     return this.http.delete(this.API + "/" + id );
   }
 

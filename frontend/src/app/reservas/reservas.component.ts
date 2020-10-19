@@ -20,7 +20,7 @@ export class ReservasComponent implements OnInit {
   reservas: Reserva[];
 
   constructor(
-    private reservasService: ReservasService){
+    private reservasService: ReservasService, private confirmationService:ConfirmationService){
     // private formBuilder: FormBuilder,
     // private confirmationService: ConfirmationService) {
     // this.formulario = this.formBuilder.group({
@@ -49,14 +49,25 @@ export class ReservasComponent implements OnInit {
 
 
   listar(){
-    console.log("GET");
+    console.log;
     this.reservasService.getAllReservas().subscribe((dados) => {
       this.reservas = dados;
-    console.log("AAAAAAAAAaa");
     }, err => {
       console.log('erro', err);
     })
       
+  }
+
+  deletar(id:number){
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir esse registro?',
+      accept: () => {
+        this.reservasService.deletar(id).subscribe(
+          r => {
+            this.listar()
+          }
+        )}
+    })
   }
 
   // deletar(id:any){

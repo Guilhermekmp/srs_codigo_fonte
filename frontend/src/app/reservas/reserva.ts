@@ -6,6 +6,6 @@ export class Reserva{
     dataFim : Date;
     total : number;
 
-    equipamentosOpcionais: any[];
+    equipamentos: any[];
 
 }
