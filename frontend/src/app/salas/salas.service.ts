@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { Sala } from './sala';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +18,11 @@ export class SalasService {
     return this.http.get<Sala[]>(this.API, {});
   }
 
-  criar(sala){
+  criar(sala: Sala){
     return this.http.post(this.API, sala).pipe(take(1));
+  }
+
+  deletar(id: any):Observable<any>{
+    return this.http.delete(this.API + "/" + id);
   }
 }

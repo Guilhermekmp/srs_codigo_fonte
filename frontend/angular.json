@@ -21,8 +21,10 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/quill/dist/quill.snow.css",
+              "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/@nuvem/angular-base/src/lib/accessibility/accessibility.scss",
               "src/styles.scss",
               "node_modules/font-awesome/css/font-awesome.css"
@@ -140,8 +142,5 @@
     "@schematics/angular:directive": {
       "prefix": "app"
     }
-  },
-  "cli": {
-    "analytics": "73f4df31-c6f7-4b41-b8a7-7fb323ef983d"
   }
 }

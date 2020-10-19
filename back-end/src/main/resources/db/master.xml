@@ -8,4 +8,5 @@
     <include file="/db/changelog/v00.0001_criacao_de_tabelas.xml" relativeToChangelogFile="false"/>
     <include file="/db/changelog/v00.0002_criacao_de_tabelas.xml" relativeToChangelogFile="false"/>
     <include file="/db/changelog/v00.0003_criacao_de_tabelas.xml" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/v00.0005_criacao_relacionamento_reserva_equipamento.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

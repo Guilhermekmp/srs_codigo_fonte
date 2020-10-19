@@ -109,6 +109,17 @@ public class ReservaRecursoIT extends IntTestComum {
                 .content(TestUtil.convertObjectToJsonBytes(reservaBuilder.converterToDto(reserva2))
                 ))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void erroSalvarReservaEquipamento() throws Exception{
+        Reserva reserva = reservaBuilder.construir();
+        Reserva reserva2 = reservaBuilder.construirEntidadeEquipamento(reserva);
+        getMockMvc().perform(post("/api/reservas")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(reservaBuilder.converterToDto(reserva2))
+                ))
+                .andExpect(status().isBadRequest());
 
     }
 

@@ -1,18 +1,15 @@
 package com.basis.srs.servico.dto;
 
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-
 @Getter
 @Setter
-public class SalaEquipamentoDTO implements Serializable {
-
+public class ReservaEquipamentoDTO {
     private static final long serialVersionUID = 1L;
 
-    private Integer idSala;
+    private Integer idReserva;
 
     @NotNull(message = "Id do equipamento é obrigatório")
     private Integer idEquipamento;
