@@ -107,7 +107,6 @@ public class EquipamentoRecursoIT extends IntTestComum {
     @Test
     public void erroApagarObrigatorio() throws Exception {
         Equipamento equipamento = equipamentoBuilder.construirEntidade();
-        equipamento.setObrigatorio(0);
         getMockMvc().perform(delete("/api/equipamentos/" + equipamento.getId()))
                 .andExpect(status().isBadRequest());
     }
