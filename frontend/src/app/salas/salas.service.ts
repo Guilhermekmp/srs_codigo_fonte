@@ -25,4 +25,8 @@ export class SalasService {
   deletar(id: any):Observable<any>{
     return this.http.delete(this.API + "/" + id);
   }
+
+  buscarSala(id: any): Observable<Sala>{
+    return this.http.get<Sala>(this.API + "/" + id);
+  }
 }

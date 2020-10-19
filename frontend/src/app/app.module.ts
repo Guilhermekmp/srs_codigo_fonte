@@ -30,7 +30,6 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        ReservasComponent,
         EquipamentosComponent,
     ],
     imports: [

@@ -25,7 +25,8 @@ export class SalasFormComponent implements OnInit {
       {label: 'Reunião', value: 1},
       {label: 'Trabalho', value: 2},
       {label: 'Palestras', value: 3},
-      {label: 'Auditório', value: 4},
+      {label: 'Video', value: 4},
+      {label: 'Auditório', value: 5}
     ]
 
       this.equipamentosService.listarEquipamentos().subscribe((data)=>{

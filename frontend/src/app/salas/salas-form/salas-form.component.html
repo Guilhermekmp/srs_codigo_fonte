@@ -3,7 +3,7 @@
         <div>
             <label for="descricao" style="font-size: 130%;">Descrição</label>
         </div>
-        <div style="text-align: center;">
+        <div style="text-align: center; margin-top: 3px;">
             <textarea [rows]="5" [cols]="89" pInputTextarea autoResize="autoResize" style="box-sizing: border-box; width: 100%;"
             formControlName="descricao" id="descricao" placeholder="Endereço, área, etc."></textarea>
         </div>
@@ -57,6 +57,9 @@
             </div>
             <div style="line-height: 65px; margin-left: 10px;">
                 <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;"></button>
+            </div>
+            <div style="line-height: 65px; margin-left: 10px;">
+                <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;"></button>
             </div>
         </div>
     </div>
