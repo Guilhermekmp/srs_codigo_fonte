@@ -19,7 +19,6 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
-import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
