@@ -1,6 +1,4 @@
 import { SalasModule } from './salas/salas.module';
-import { SalasFormComponent } from './salas/salas-form/salas-form.component';
-import { SalasComponent } from './salas/salas.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
 import { ReservasModule } from './reservas/reservas.module';
@@ -29,9 +27,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         AppComponent,
         AppTopbarComponent,
         AppFooterComponent,
-        DiarioErrosComponent,
-        ReservasComponent,
-        EquipamentosComponent,
+        DiarioErrosComponent
     ],
     imports: [
         BlockUIModule.forRoot({

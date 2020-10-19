@@ -1,4 +1,3 @@
-import { InputTextModule } from 'primeng/inputtext';
 import { SharedModule } from './../shared/shared.module';
 import { SalasFormComponent } from './salas-form/salas-form.component';
 import { ButtonModule } from 'primeng/button';
@@ -9,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SalasComponent } from './salas.component';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
   declarations: [SalasComponent, SalasFormComponent],
@@ -18,7 +18,8 @@ import { SalasComponent } from './salas.component';
     HttpClientModule,
     ButtonModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    CurrencyMaskModule
   ],
   exports: [
     SalasComponent

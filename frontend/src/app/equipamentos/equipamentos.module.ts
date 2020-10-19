@@ -1,3 +1,4 @@
+import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EquipamentoFormModule } from './equipamento-form/equipamento-form.module';
 import { EquipamentosService } from './equipamentos.service';
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     EquipamentoFormModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TableModule
   ],
   exports: [
     EquipamentosComponent
