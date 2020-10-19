@@ -1,8 +1,11 @@
-export interface reserva{
+export class Reserva{
     id: number;
-    sala: number;
-    cliente: number;
-    dtIni : Date;
-    dtFim : Date;
-    total : Number
+    idSala: number;
+    idCliente: number;
+    dataInicio : Date;
+    dataFim : Date;
+    total : number;
+
+    equipamentosOpcionais: any[];
+
 }

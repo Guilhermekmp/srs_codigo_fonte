@@ -1,1 +1,74 @@
-<p>clientes works!</p>
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.nome" pInputText placeholder="Nome">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="email" [(ngModel)]="cliente.email" pInputText placeholder="Email">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.endereco" pInputText placeholder="Endereco">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.cpf" pInputText placeholder="CPF">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.rg" pInputText placeholder="RG">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" [(ngModel)]="cliente.telefone" pInputText placeholder="Telefone">
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <input type="text" pInputText placeholder="dataNascimento">
+        </div>
+    </div>
+    <div>
+        <button pButton (click)="salvar()" label="Salvar"></button>
+    </div>
+</div>
+
+
+
+<h3 class="first">CLIENTES</h3>
+<p-table [value]="client">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Endereco</th>
+            <th>CPF</th>
+            <th>RG</th>
+            <th>Telefone</th>
+            <th>Data Nascimento</th>
+            <th>Ações</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-client>
+        <tr>
+            <td>{{client.nome}}</td>
+            <td>{{client.email}}</td>
+            <td>{{client.endereco}}</td>
+            <td>{{client.cpf}}</td>
+            <td>{{client.rg}}</td>
+            <td>{{client.telefone}}</td>
+            <td>{{client.dataNascimento}}</td>
+            <td>
+                <button pButton class="ui-button-danger" (click)="deletar(client.id)" style="text-align:center"> Deletar</button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-confirmDialog header="Atenção" icon="pi pi-exclamation-triangle"></p-confirmDialog>
