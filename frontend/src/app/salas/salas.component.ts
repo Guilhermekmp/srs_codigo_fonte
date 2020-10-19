@@ -23,6 +23,7 @@ export class SalasComponent implements OnInit {
 
   ngOnInit(): void {
     this.listar();
+    console.log(this.salasService.buscarSala(81));
   }
 
   listar(){

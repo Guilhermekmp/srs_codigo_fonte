@@ -27,7 +27,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     ReactiveFormsModule,
     ConfirmDialogModule,
     DialogModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
     ReservasComponent,
