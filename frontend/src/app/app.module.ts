@@ -1,3 +1,5 @@
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { EquipamentosFormComponent } from './equipamentos/equipamentos-form/equipamentos-form.component';
 import { SalasModule } from './salas/salas.module';
 import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SalasComponent } from './salas/salas.component';
@@ -22,6 +24,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+import { InputTextModule } from 'primeng/inputtext';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
@@ -30,7 +33,6 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        EquipamentosComponent,
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -48,6 +50,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         ButtonModule,
         SecurityModule.forRoot(environment.auth),
         MenuModule,
+        FormsModule,
+        ConfirmDialogModule
         ReservasModule,
         ReactiveFormsModule,
         FormsModule,

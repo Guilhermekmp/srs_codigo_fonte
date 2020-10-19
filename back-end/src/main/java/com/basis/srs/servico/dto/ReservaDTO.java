@@ -1,13 +1,12 @@
 package com.basis.srs.servico.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -31,4 +30,7 @@ public class ReservaDTO {
     @NotNull
     @Future
     private LocalDateTime dataFim;
+
+    @NotNull
+    private ArrayList<ReservaEquipamentoDTO> equipamentos;
 }
