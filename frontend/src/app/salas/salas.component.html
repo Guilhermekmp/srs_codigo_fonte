@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<p-dialog header = "Nova Sala" [(visible)]="displayCreation" [style]="{'width':'40vw', 'height':'45vh'}">
+<p-dialog header = "Nova Sala" [(visible)]="displayCreation" [style]="{'width':'40vw', 'height':'fit-content'}">
     <div style="height: auto;">
     <app-salas-form></app-salas-form>        
     </div>
@@ -46,7 +46,7 @@
             <td>
                 <div *ngFor="let equipamento of sala.equipamentos">
                     <div>
-                        id -{{equipamento.idEquipamento}} - qtd - {{equipamento.quantidade}} 
+                        {{getNomeEquipamento(equipamento.idEquipamento)}}: {{equipamento.quantidade}} 
                     </div>
                 </div>
             </td>
