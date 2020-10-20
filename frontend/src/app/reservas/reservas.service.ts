@@ -27,7 +27,15 @@ export class ReservasService {
     return this.http.delete(this.API + "/" + id );
   }
 
+  getByid(id:number):Observable<Reserva>{
+    return this.http.get<Reserva>(this.API + "/" + id);
+  }
+
   salvar(reserva: Reserva):Observable<Reserva>{
     return this.http.post<Reserva>(this.API, reserva);
+  }
+
+  editar(reserva: Reserva):Observable<Reserva>{
+    return this.http.put<Reserva>(this.API, reserva);
   }
 }

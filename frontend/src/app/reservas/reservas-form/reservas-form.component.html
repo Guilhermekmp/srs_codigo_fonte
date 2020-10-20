@@ -6,7 +6,10 @@
                 <div>
                     <label for="salas" style="font-size: 130%">Descrição da Sala</label>
                 </div>
-                <p-dropdown [options]="salas" formControlName="idSala" autoWidth="false"  [style]="{'width':'150px'}"></p-dropdown>
+                <p-dropdown [options]="salas" [(ngModel)]=salaSelecionada formControlName="idSala" 
+                [filter]="true" filterBy="label,value.descricao" 
+                (onBlur)="listarOpcionais(salaSelecionada)"
+                ></p-dropdown>
             </div>
         </div>
         
@@ -15,7 +18,8 @@
                 <div>
                     <label for="clientes" style="font-size: 130%">CPF do Cliente</label>
                 </div>
-                <p-dropdown [options]="clientes" formControlName="idCliente"></p-dropdown>
+                <p-dropdown [options]="clientes" [(ngModel)]=clienteSelecionado formControlName="idCliente" 
+                [filter]="true" filterBy="label,value.cpf"></p-dropdown>
             </div>
         </div>
         
@@ -38,6 +42,17 @@
                 </div>
             </div>
         </div>
+        
+        <div>
+            <div>
+                <label for="equipametos" style="font-size: 130%">Equipamentos Opcionais</label>
+            </div>
+            <p-dropdown [options]="equipamentoOpcionais" ></p-dropdown>
+            <div>
+                <label for="equipamentos" style="font-size: 130%">Quantidade</label>   
+            </div>
+            <input type="number"> 
+        </div>
 
         <div class="ui-g ui-fluid">
             <div class="ui-g-12 ui-md-4">
@@ -50,13 +65,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- <div>
-            <div>
-                <label for="equipametos" style="font-size: 130%">Nome</label>
-            </div>
-            <p-dropdown [options]="opcionais(reserva.idSala)" formControlName="idEquipamento"></p-dropdown>
-        </div> -->
 
         <div class="ui-g ui-fluid">
             <div>

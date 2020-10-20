@@ -57,6 +57,13 @@ export class ReservasComponent implements OnInit {
     //this.formulario.reset()
   //}
 
+  buscar(id:number){
+    this.reservasService.getByid(id).subscribe((dado) =>{
+      this.reserva = dado;
+    }, err =>{
+      console.log('erro',err);
+    })
+  }
 
   listar(){
     console.log;
@@ -91,4 +98,15 @@ export class ReservasComponent implements OnInit {
        }
      )
    }
+
+  editar(reservaEditada:Reserva){
+    this.reservasService.editar(this.reserva).subscribe(
+      response =>{
+        this.reserva = response
+      },
+      error => {
+        alert("Reserva não existente")
+      }
+    )
+  }
 }

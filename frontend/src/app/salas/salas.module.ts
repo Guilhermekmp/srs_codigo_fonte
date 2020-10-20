@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-=======
->>>>>>> 5be359b0023994fd35f4c6c68e8b7fe791e5f7db
 import { SharedModule } from './../shared/shared.module';
 import { SalasFormComponent } from './salas-form/salas-form.component';
 import { ButtonModule } from 'primeng/button';
@@ -12,10 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SalasComponent } from './salas.component';
-<<<<<<< HEAD
 import { ConfirmationService } from 'primeng';
-=======
->>>>>>> 5be359b0023994fd35f4c6c68e8b7fe791e5f7db
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
@@ -27,10 +21,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     ButtonModule,
     ReactiveFormsModule,
     SharedModule,
-<<<<<<< HEAD
     ConfirmDialogModule,
-=======
->>>>>>> 5be359b0023994fd35f4c6c68e8b7fe791e5f7db
     CurrencyMaskModule
   ],
   exports: [

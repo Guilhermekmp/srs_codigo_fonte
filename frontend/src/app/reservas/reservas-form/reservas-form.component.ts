@@ -1,3 +1,4 @@
+import { EquipamentoOpcional } from './../reservas-equipamento';
 import { ClientesService } from './../../clientes/clientes.service';
 import { EquipamentosService } from './../../equipamentos/equipamentos.service';
 import { SalasService } from './../../salas/salas.service';
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Reserva } from '../reserva';
 import { Sala } from 'src/app/salas/sala';
+import { Cliente } from 'src/app/clientes/models/cliente.interface';
+import { Equipamento } from 'src/app/equipamentos/equipamento';
 
 @Component({
   selector: 'app-reservas-form',
@@ -17,13 +20,14 @@ export class ReservasFormComponent implements OnInit {
 
   formulario: FormGroup;
 
-  equipamentoOpcionais: any[];
+  equipamentoOpcionais = [];
+  EquipamentoOpcionalSelecionado: Equipamento;
 
-  sala: Sala;
+  salas = [];
+  salaSelecionada: Sala;
 
-  equipamento: any[];
-  salas: any[];
   clientes: any[];
+  clienteSelecionado: Cliente;
 
   constructor(private reservasService:ReservasService, private formBuilder: FormBuilder
     ,private salasService:SalasService, private equipamentosService: EquipamentosService
@@ -55,6 +59,10 @@ export class ReservasFormComponent implements OnInit {
 
   }
 
+  teste(val:any[]){
+    console.log(val)
+  }
+
   onSubmit(){
     console.log(this.formulario.value);
       const reserva: Reserva = {
@@ -70,29 +78,41 @@ export class ReservasFormComponent implements OnInit {
   }
 
   listarOpcionais(idSala:number){
+    
+    var sala:Sala;
     this.salasService.buscarSala(idSala).subscribe((dado) =>{
-      this.sala = dado;
+      sala = dado;
     }, err => {
       console.log('erro', err);
     });
+
+    console.log(sala);
+    
+    var equipamento = [];
+    
     this.equipamentosService.listarEquipamentos().subscribe((dados) => {
-      this.equipamento = dados;
+      equipamento = dados;
+      console.log(equipamento);
     }, err => {
       console.log('erro', err);
     });
-    for (let index = 0; index < this.equipamento.length; index++) {
-      const equip = this.equipamento[index];
+    console.log(equipamento, "aq");
+    for (let index = 0; index < equipamento.length; index++) {
+      console.log("cheguei aqui")
+      var equip = equipamento[index];
       var adicionar = new Boolean(true);
-      var j = 0;
-      for (j; j < this.sala.equipamentos.length; j++) {
-        const element = this.sala.equipamentos[j];
-        if(element.idEquipamento === equip.idEquipamento){
+
+      for (let j = 0; j < sala.equipamentos.length; j++) {
+      
+        const element = sala.equipamentos[j];
+        if(element.idEquipamento == equip.idEquipamento){
           adicionar = false;
         }
       }
       if(adicionar){
-        this.equipamentoOpcionais.push(equip)
-      }       
+        this.equipamentoOpcionais.push(equip);
+       }       
     }
+    console.log(this.equipamentoOpcionais);
   }
 }
