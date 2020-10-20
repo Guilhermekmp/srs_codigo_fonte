@@ -4,13 +4,13 @@
             <label for="descricao" style="font-size: 130%;">Descrição</label>
         </div>
         <div style="text-align: center; margin-top: 3px;">
-            <textarea [rows]="5" [cols]="89" pInputTextarea autoResize="autoResize" style="box-sizing: border-box; width: 100%;"
+            <textarea required [rows]="5" [cols]="89" pInputTextarea autoResize="autoResize" style="box-sizing: border-box; width: 100%;"
             formControlName="descricao" id="descricao" placeholder="Endereço, área, etc."></textarea>
         </div>
         <div style="justify-content: space-between; display: inline-flex;">
             <div>
                 <div>
-                    <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
+                    <label for="precoDiario" style="font-size: 130%;">Preço Diário Base</label>
                 </div>
                 <div class="ui-inputgroup">
                     <input type="text" pInputText placeholder="R$" formControlName="precoDiario" id="precoDiario"
@@ -28,7 +28,7 @@
                     <label for="capacidade" style="font-size: 130%;">Capacidade</label>
                 </div>
                 <div class="ui-inputgroup">
-                    <input pInputText type="text" formControlName="capacidade" id="capacidade" style="width: 40%; border-right-width: 1px;">
+                    <input pInputText type="number" min="0" formControlName="capacidade" id="capacidade" style="width: 40%; border-right-width: 1px;">
                     <div style="margin-left: 5px; line-height: 30px; width: 30%; font-size: 17px;">
                         pessoas
                     </div>

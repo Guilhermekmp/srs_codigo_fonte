@@ -1,6 +1,6 @@
 export interface Sala{
     descricao: String,
-    idTipoSala: number
+    idTipoSala: number,
     precoDiario:number,
     disponivel: number,
     capacidade: number,
