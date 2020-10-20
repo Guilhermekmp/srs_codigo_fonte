@@ -88,7 +88,6 @@ export class ClientesComponent {
     }
     
   }
-
   atualizarCliente(clienteId: number) {
     this.clienteId = clienteId
     this.abrirPopUp()
