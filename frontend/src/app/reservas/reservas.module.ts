@@ -1,3 +1,5 @@
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { SharedModule } from './../shared/shared.module';
 import { ReservasService } from './reservas.service';
 import { NgModule } from '@angular/core';
@@ -28,6 +30,11 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     ConfirmDialogModule,
     DialogModule,
     SharedModule,
+<<<<<<< HEAD
+=======
+    MultiSelectModule,
+    AutoCompleteModule
+>>>>>>> 2c444c3... Reservas formulario correto
   ],
   exports: [
     ReservasComponent,

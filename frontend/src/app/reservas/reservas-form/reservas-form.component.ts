@@ -55,45 +55,44 @@ export class ReservasFormComponent implements OnInit {
 
   }
 
-    onSubmit(){
-      console.log(this.formulario.value);
-        const reserva: Reserva = {
-          ...this.formulario.value,
-          equipamentos: [this.formulario.value.equipamentos]
-        }
-        console.log('submit');
-        this.reservasService.salvar(reserva).subscribe(
-          success => console.log('sucesso'),
-          error => console.error(error),
-          () => console.log('request completo')
-        );
-    }
-
-    listarOpcionais(idSala:number){
-      this.salasService.buscarSala(idSala).subscribe((dado) =>{
-        this.sala = dado;
-      }, err => {
-        console.log('erro', err);
-      });
-      this.equipamentosService.listarEquipamentos().subscribe((dados) => {
-        this.equipamento = dados;
-      }, err => {
-        console.log('erro', err);
-      });
-      for (let index = 0; index < this.equipamento.length; index++) {
-        const equip = this.equipamento[index];
-        var adicionar = new Boolean(true);
-        var j = 0;
-        for (j; j < this.sala.equipamentos.length; j++) {
-          const element = this.sala.equipamentos[j];
-          if(element.idEquipamento === equip.idEquipamento){
-            adicionar = false;
-          }
-        }
-        if(adicionar){
-          this.equipamentoOpcionais.push(equip)
-        }
-        
+  onSubmit(){
+    console.log(this.formulario.value);
+      const reserva: Reserva = {
+        ...this.formulario.value,
+        equipamentos: [this.formulario.value.equipamentos]
       }
+      console.log('submit');
+      this.reservasService.salvar(reserva).subscribe(
+        success => console.log('sucesso'),
+        error => console.error(error),
+        () => console.log('request completo')
+      );
+  }
+
+  listarOpcionais(idSala:number){
+    this.salasService.buscarSala(idSala).subscribe((dado) =>{
+      this.sala = dado;
+    }, err => {
+      console.log('erro', err);
+    });
+    this.equipamentosService.listarEquipamentos().subscribe((dados) => {
+      this.equipamento = dados;
+    }, err => {
+      console.log('erro', err);
+    });
+    for (let index = 0; index < this.equipamento.length; index++) {
+      const equip = this.equipamento[index];
+      var adicionar = new Boolean(true);
+      var j = 0;
+      for (j; j < this.sala.equipamentos.length; j++) {
+        const element = this.sala.equipamentos[j];
+        if(element.idEquipamento === equip.idEquipamento){
+          adicionar = false;
+        }
+      }
+      if(adicionar){
+        this.equipamentoOpcionais.push(equip)
+      }       
     }
   }
+}

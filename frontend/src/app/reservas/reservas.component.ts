@@ -59,6 +59,7 @@ export class ReservasComponent implements OnInit {
 
 
   listar(){
+    console.log;
     this.reservasService.getAllReservas().subscribe((dados) => {
       this.reservas = dados;
     }, err => {
@@ -67,7 +68,7 @@ export class ReservasComponent implements OnInit {
       
   }
 
-  deletar(id:any){
+  deletar(id:number){
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir esse registro?',
       accept: () => {
@@ -76,7 +77,6 @@ export class ReservasComponent implements OnInit {
             this.listar()
           }
         )
-
       }
     })
   }

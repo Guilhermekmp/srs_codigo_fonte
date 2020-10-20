@@ -38,8 +38,13 @@
         <tr>
             <td>{{reserva?.idCliente}}</td>
             <td>{{reserva?.idSala}}</td>
+<<<<<<< HEAD
             <td>{{reserva?.dataInicio | date:"dd/MM/yyyy HH:mm:ss"}}</td>
             <td>{{reserva?.dataFim | date:"dd/MM/yyyy HH:mm:ss"}}</td>
+=======
+            <td>{{reserva?.dataInicio}}</td>
+            <td>{{reserva?.dataFim}}</td>
+>>>>>>> 2c444c3... Reservas formulario correto
             <td>
                 <div *ngFor="let equipamento of reserva.equipamentos">
                     <div>
@@ -60,7 +65,11 @@
                 pButton 
                 type="button" 
                 class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: red;"
+<<<<<<< HEAD
                 (click)=deletar(reserva.id)>
+=======
+                (click) = deletar(reserva.id)>
+>>>>>>> 2c444c3... Reservas formulario correto
                 <i class="fa fa-trash" aria-hidden="true"></i>
                 <span> Deletar</span>
                 </button>
@@ -68,3 +77,5 @@
         </tr>
     </ng-template>
 </p-table>
+
+<p-confirmDialog header="Atenção" icon="pi pi-exclamation-triangle"></p-confirmDialog>
