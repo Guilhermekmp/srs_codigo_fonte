@@ -74,6 +74,8 @@ export class SalasComponent implements OnInit {
         return "Palestras";
       case 4:
         return "Video";
+      case 5:
+        return "Auditório";
       default:
         return null;
     }

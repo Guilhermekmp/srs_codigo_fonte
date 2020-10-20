@@ -32,11 +32,11 @@ export class SalasFormComponent implements OnInit {
       {label: 'Trabalho', value: 2},
       {label: 'Palestras', value: 3},
       {label: 'Video', value: 4},
-      {label: 'Auditórtio', value: 5}
+      {label: 'Auditório', value: 5}
     ]
 
-      this.initForm();
-
+  this.initForm();
+  this.listarEquipamentos();
   }
 
   private initForm(){
@@ -55,6 +55,14 @@ export class SalasFormComponent implements OnInit {
       idSala: null,
       idEquipamento: 1,
       quantidade: 1
+    })
+  }
+
+  listarEquipamentos(){
+    this.equipamentosService.listarEquipamentos().subscribe((data)=>{
+      this.listaEquipamentos = data.map(e => {return { label: e.nome, value: e.id, preco: e.precoDiario}}), err =>{
+      console.log(err);
+      }
     })
   }
 

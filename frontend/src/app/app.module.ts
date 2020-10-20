@@ -1,3 +1,5 @@
+import { ClientesComponent } from './clientes/clientes.component';
+import { TableModule } from 'primeng/table';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +26,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputNumberModule } from 'primeng';
+import { ConfirmationService, InputNumberModule } from 'primeng';
 
 @NgModule({
     declarations: [
@@ -32,6 +34,12 @@ import { InputNumberModule } from 'primeng';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
+        SalasComponent,
+        SalasFormComponent,
+        EquipamentosComponent,
+        ReservasComponent,
+        ClientesComponent,
+        EquipamentosFormComponent,
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -54,10 +62,13 @@ import { InputNumberModule } from 'primeng';
         ReactiveFormsModule,
         CurrencyMaskModule,
         SharedModule,
-        InputNumberModule
+        FormsModule,
+        InputNumberModule,
+        TableModule
     ],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        ConfirmationService
     ],
     bootstrap: [AppComponent]
 })
