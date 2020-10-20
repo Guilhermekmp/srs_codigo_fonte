@@ -1,4 +1,5 @@
 import { SharedModule } from './../shared/shared.module';
+import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EquipamentosService } from './equipamentos.service';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,13 @@ import { EquipamentosFormModule } from './equipamentos-form/equipamentos-form.mo
 @NgModule({
   declarations: [EquipamentosComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    EquipamentosFormModule,
+    ConfirmDialogModule,
+    TableModule,
+    SharedModule
   ],
   exports: [
     EquipamentosComponent

@@ -1,9 +1,5 @@
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { EquipamentosFormComponent } from './equipamentos/equipamentos-form/equipamentos-form.component';
 import { SalasModule } from './salas/salas.module';
-import { SalasFormComponent } from './salas/salas-form/salas-form.component';
-import { SalasComponent } from './salas/salas.component';
-import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
 import { ReservasModule } from './reservas/reservas.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,9 +19,8 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
-import { EquipamentosComponent } from './equipamentos/equipamentos.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { EquipamentosModule } from './equipamentos/equipamentos.module';
 
 @NgModule({
     declarations: [
@@ -57,7 +52,9 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         ClientesModule,
         CurrencyMaskModule,
         SalasModule,
-        SharedModule
+        SharedModule,
+        ReservasModule,
+        EquipamentosModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }

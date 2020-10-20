@@ -2,26 +2,20 @@
     <div div class="p-d-block p-d-lg-inline">
         
         <div class="ui-g ui-fluid">
-            <div style="width: 15%">
+            <div style="width: 30%">
                 <div>
-                    <label for="idSala" style="font-size: 130%;">Id da Sala</label>
+                    <label for="salas" style="font-size: 130%">Descrição da Sala</label>
                 </div>
-                 <div class="ui-inputgroup">
-                    <input type="text" pInputText placeholder="Digite uma sala" 
-                    formControlName="idSala" id="idSala">
-                </div> 
+                <p-dropdown [options]="salas" formControlName="idSala" autoWidth="false"  [style]="{'width':'150px'}"></p-dropdown>
             </div>
         </div>
         
         <div class="ui-g ui-fluid">
-            <div style="width: 15%">
+            <div style="width: 30%">
                 <div>
-                    <label for="idCliente" style="font-size: 130%;">Id da Cliente</label>
+                    <label for="clientes" style="font-size: 130%">CPF do Cliente</label>
                 </div>
-                 <div class="ui-inputgroup">
-                    <input type="text" pInputText placeholder="Digite um cliente" 
-                    formControlName="idCliente" id="idCliente" >
-                </div> 
+                <p-dropdown [options]="clientes" formControlName="idCliente"></p-dropdown>
             </div>
         </div>
         
@@ -57,6 +51,13 @@
             </div>
         </div>
         
+        <!-- <div>
+            <div>
+                <label for="equipametos" style="font-size: 130%">Nome</label>
+            </div>
+            <p-dropdown [options]="opcionais(reserva.idSala)" formControlName="idEquipamento"></p-dropdown>
+        </div> -->
+
         <div class="ui-g ui-fluid">
             <div>
                 <button 

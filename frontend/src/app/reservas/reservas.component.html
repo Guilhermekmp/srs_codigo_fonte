@@ -26,33 +26,41 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
             <th pSortableColumn="cliente">Cliente <p-sortIcon field="cliente"></p-sortIcon></th>
             <th pSortableColumn="sala">Sala <p-sortIcon field="sala"></p-sortIcon></th>
             <th pSortableColumn="dtIni">Data Inicial <p-sortIcon field="dtIni"></p-sortIcon></th>
             <th pSortableColumn="dtFim">Data Final <p-sortIcon field="dtFim"></p-sortIcon></th>
+            <th pSortableColumn="equipamentos">Opcionais <p-sortIcon field="equipamentos"></p-sortIcon></th>
             <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-reserva>
         <tr>
-            <td>{{reserva?.id}}</td>
             <td>{{reserva?.idCliente}}</td>
             <td>{{reserva?.idSala}}</td>
-            <td>{{reserva?.dataInicio}}</td>
-            <td>{{reserva?.dataFim}}</td>
+            <td>{{reserva?.dataInicio | date:"dd/MM/yyyy HH:mm:ss"}}</td>
+            <td>{{reserva?.dataFim | date:"dd/MM/yyyy HH:mm:ss"}}</td>
+            <td>
+                <div *ngFor="let equipamento of reserva.equipamentos">
+                    <div>
+                        id -{{equipamento.idEquipamento}} - qtd - {{equipamento.quantidade}} 
+                    </div>
+                </div>
+            </td>
             <td>{{reserva?.total | currency: 'R$ '}}</td>
             <span style="float: center">
                 <button 
                 pButton 
                 type="button" 
-                class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;">                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;">                       
+                <i class="fa fa-pencil" aria-hidden="true"></i>
                 <span> Editar</span>
                 </button>       
                 <button 
                 pButton 
                 type="button" 
-                class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: red;">
+                class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: red;"
+                (click)=deletar(reserva.id)>
                 <i class="fa fa-trash" aria-hidden="true"></i>
                 <span> Deletar</span>
                 </button>
