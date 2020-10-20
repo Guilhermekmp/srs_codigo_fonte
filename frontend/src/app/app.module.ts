@@ -32,12 +32,6 @@ import { InputNumberModule } from 'primeng';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        ReservasComponent,
-        SalasComponent,
-        EquipamentosComponent,
-        EquipamentosFormComponent,
-        EquipamentosComponent,
-        SalasFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({

@@ -17,12 +17,16 @@ export class SalasComponent implements OnInit {
 
   equipamentos: Equipamento[];
 
+  listaEquipamentos: any[];
+
   displayCreation: boolean = false;
 
   constructor(private  salasService: SalasService, private equipamentosService: EquipamentosService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.listar();
+    this.listarEquipamentos();
+    console.log("Lista Equipamentos " + this.listaEquipamentos);
   }
 
   listar(){
@@ -32,6 +36,19 @@ export class SalasComponent implements OnInit {
     }, err =>{
       console.log(err);
     })
+  }
+
+  listarEquipamentos(){
+    this.equipamentosService.listarEquipamentos().subscribe((data)=>{
+      this.listaEquipamentos = data.map(e => {return { label: e.nome, value: e.id }}), err =>{
+      console.log(err);
+      }
+    })
+  }
+
+  getNomeEquipamento(id: number){
+    let item = this.listaEquipamentos.find(i => i.value === id);
+    return item.label;
   }
 
   deletar(id:any){

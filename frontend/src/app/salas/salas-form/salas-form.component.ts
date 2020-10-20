@@ -1,8 +1,9 @@
+import { SalasComponent } from './../salas.component';
 import { EquipamentosService } from './../../equipamentos/equipamentos.service';
 import { SalasService } from './../salas.service';
 import { Sala } from './../sala';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-salas-form',
@@ -13,43 +14,61 @@ export class SalasFormComponent implements OnInit {
 
   formulario: FormGroup;
 
+  equipamentos: FormArray;
+
   tiposSala: any[];
 
-  equipamentos: any[];
+  listaEquipamentos: any[];
 
-  constructor(private formBuilder: FormBuilder, private salasService: SalasService, private equipamentosService: EquipamentosService ) {}
+  constructor(private formBuilder: FormBuilder, 
+    private salasService: SalasService, 
+    private equipamentosService: EquipamentosService,
+    private salasComponent: SalasComponent ) {}
 
   ngOnInit(): void {
-
+    
     this.tiposSala = [
       {label: 'Reunião', value: 1},
       {label: 'Trabalho', value: 2},
       {label: 'Palestras', value: 3},
-      {label: 'Auditório', value: 4},
+      {label: 'Video', value: 4},
+      {label: 'Auditórtio', value: 5}
     ]
 
-      this.equipamentosService.listarEquipamentos().subscribe((data)=>{
-        this.equipamentos = data.map(e => {return { label: e.nome, value: e.id }});
-        console.log(this.equipamentos);
-      }, err =>{
-        console.log(err);
-      });
+      this.initForm();
 
-    console.log(this.tiposSala);
+  }
 
+  private initForm(){
     this.formulario = this.formBuilder.group({
-      descricao: [null],
-      equipamentos: this.formBuilder.group({
-        idSala: null,
-        idEquipamento: 1,
-        quantidade: 1
-        }
-      ),
-      idTipoSala: [1],
-      capacidade: [0],
-      precoDiario: [0.00],
-      disponivel: [1],
+      descricao: null,
+      equipamentos: this.formBuilder.array([this.criarEquipamento()]),
+      idTipoSala: 1,
+      capacidade: 0,
+      precoDiario: 0.00,
+      disponivel: 1,
     })
+  }
+
+  criarEquipamento(){
+    return this.formBuilder.group({
+      idSala: null,
+      idEquipamento: 1,
+      quantidade: 1
+    })
+  }
+
+  addEquipamento(){
+    this.equipamentos = this.formulario.get('equipamentos') as FormArray;
+    this.equipamentos.push(this.criarEquipamento());
+  }
+
+  removerEquipamento(index: number){
+    this.equipamentos.removeAt(index);
+  }
+
+  clear(){
+    this.equipamentos.clear();
   }
 
   onSubmit(){
@@ -57,9 +76,9 @@ export class SalasFormComponent implements OnInit {
     if(this.formulario.valid) {
       const sala: Sala = {
         ...this.formulario.value,
-        equipamentos: [this.formulario.value.equipamentos]
       }
-      console.log('submit');
+      this.salasComponent.listar();
+      console.log(this.formulario.value.equipamentos);
       this.salasService.criar(sala).subscribe(
         success => console.log('sucesso'),
         error => console.error(error),
