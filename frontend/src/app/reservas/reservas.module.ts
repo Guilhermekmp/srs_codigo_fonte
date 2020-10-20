@@ -31,10 +31,15 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     DialogModule,
     SharedModule,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     MultiSelectModule,
     AutoCompleteModule
 >>>>>>> 2c444c3... Reservas formulario correto
+=======
+    MultiSelectModule,
+    AutoCompleteModule
+>>>>>>> 5be359b0023994fd35f4c6c68e8b7fe791e5f7db
   ],
   exports: [
     ReservasComponent,
