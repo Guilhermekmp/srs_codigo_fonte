@@ -60,7 +60,7 @@ export class EquipamentosComponent implements OnInit {
     })
   }
 
-  salvar(){
+  salvar(equipamento:Equipamento){
     console.log('equipamento', this.equipamento);
     this.equipamentosService.salvar(this.equipamento).subscribe(response=>{
       this.equipamento = response;

@@ -12,7 +12,7 @@ import { EquipamentosFormModule } from './equipamentos-form/equipamentos-form.mo
 @NgModule({
   declarations: [EquipamentosComponent],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     EquipamentosComponent
