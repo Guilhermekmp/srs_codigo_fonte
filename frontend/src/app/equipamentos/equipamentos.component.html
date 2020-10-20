@@ -18,10 +18,10 @@
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="id" style="width: 5rem;">Id <p-sortIcon field="id"></p-sortIcon></th>
-            <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
-            <th pSortableColumn="idTipoEquipamento">Tipo <p-sortIcon field="idTipoEquipamento"></p-sortIcon></th>
+            <th pSortableColumn="nome" style="width:15rem">Nome <p-sortIcon field="nome"></p-sortIcon></th>
+            <th pSortableColumn="idTipoEquipamento" style="width: 13rem;">Tipo <p-sortIcon field="idTipoEquipamento"></p-sortIcon></th>
             <th pSortableColumn="precoDiario" style="width: 10rem;">Preço Diário <p-sortIcon field="precoDiario"></p-sortIcon></th>
-            <th style="width: 13rem;">Opções</th>
+            <th style="width: 10rem;">Opções</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-equipamento>
@@ -54,32 +54,6 @@
 
 <p-confirmDialog header="Atenção" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-<p-dialog header = "Criar novo equipamento" [(visible)]="displayCreation" [style]="{width: '50vw'}" style="align-self: center;">
-    <div class="ui-g ui-fluid">
-        <div class="ui-g-12 ui-md-4">
-            <div class="ui-inputgroup">
-                <input type="text" [(ngModel)]="equipamento.nome" pInputText placeholder="Nome">
-            </div>
-        </div>
-        <div class="ui-g-12 ui-md-4">
-            <div class="ui-inputgroup">
-                <input type="text" [(ngModel)]="equipamento.idTipoEquipamento" pInputText placeholder="1 - 2 - 3">
-            </div>
-        </div>
-        <div class="ui-g-12 ui-md-4">
-            <div class="ui-inputgroup">
-                <input type="text" [(ngModel)]="equipamento.precoDiario" pInputText placeholder="00,00">
-            </div>
-        </div>
-        <div>
-            <button 
-                pButton 
-                type="button" 
-                class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color:blue; margin-left: 5px;" 
-                (click)="salvar()">
-                <i class="fa fa-check"></i>
-                <span style="padding-left: 5px;">Submit</span>
-            </button>
-        </div>
-    </div>    
+<p-dialog header = "Criar novo equipamento" [(visible)]="displayCreation" [style]="{width: '50%'}" style="align-content: center;">
+        <app-equipamentos-form></app-equipamentos-form>    
 </p-dialog>

@@ -24,6 +24,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputNumberModule } from 'primeng';
 
 @NgModule({
     declarations: [
@@ -58,7 +59,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         ConfirmDialogModule,
         ReactiveFormsModule,
         CurrencyMaskModule,
-        SharedModule
+        SharedModule,
+        InputNumberModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
