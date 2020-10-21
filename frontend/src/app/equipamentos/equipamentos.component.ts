@@ -11,10 +11,10 @@ import { ConfirmationService } from 'primeng';
   providers:[ConfirmationService]
 })
 export class EquipamentosComponent implements OnInit {
-
   displayCreation:boolean = false;
   equipamentos = [];
   equipamento = new Equipamento();
+  
 
   constructor(private confirmationService: ConfirmationService, public equipamentosService: EquipamentosService) { 
     
@@ -75,3 +75,4 @@ export class EquipamentosComponent implements OnInit {
   }
 
 }
+

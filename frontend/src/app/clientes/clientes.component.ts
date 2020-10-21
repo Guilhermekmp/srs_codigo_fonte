@@ -72,7 +72,7 @@ export class ClientesComponent {
       )
 
     }else{
-      var cliente = this.formulario.getRawValue();
+    var cliente = this.formulario.getRawValue();
     this.clientesService.salvar(cliente).subscribe(
       response => {
         alert("Cadastrado com sucesso!")

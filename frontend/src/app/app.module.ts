@@ -1,10 +1,6 @@
 
-
-
-import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SalasComponent } from './salas/salas.component';
-
 import { ReservasComponent } from './reservas/reservas.component';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +21,8 @@ import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+
 
 @NgModule({
     declarations: [
@@ -42,7 +40,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     imports: [
         BlockUIModule.forRoot({
             message: "Carregando..."
-          }),
+        }),
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,

@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import {InputMaskModule} from 'primeng/inputmask';
 
 
+
 @NgModule({
   declarations: [ClientesComponent],
   imports: [
@@ -23,8 +24,7 @@ import {InputMaskModule} from 'primeng/inputmask';
     TableModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
-    SharedModule,
-    InputMaskModule
+    SharedModule
   ],
   exports: [
     ClientesComponent,
