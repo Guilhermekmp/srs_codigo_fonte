@@ -14,7 +14,8 @@ export class EquipamentosComponent implements OnInit {
   displayCreation:boolean = false;
   equipamentos = [];
   equipamento = new Equipamento();
-  
+  equipament: Array<Equipamento>;
+
 
   constructor(private confirmationService: ConfirmationService, public equipamentosService: EquipamentosService) { 
     
@@ -61,10 +62,11 @@ export class EquipamentosComponent implements OnInit {
     })
   }
 
-  salvar(){
+  salvar(equipamento:Equipamento){
     console.log('equipamento', this.equipamento);
     this.equipamentosService.salvar(this.equipamento).subscribe(response=>{
       this.equipamento = response;
+      this.listar()
     },
     error=>
     alert("ERROR!"))

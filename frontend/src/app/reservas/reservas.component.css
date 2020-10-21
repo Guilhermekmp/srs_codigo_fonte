@@ -1,0 +1,23 @@
+ .app-button-success {
+     background-color: green;
+     color: #fff;
+ }
+
+ :host .ui-button /deep/ .ui-button-text {
+     display: none;
+ }
+
+ th{
+    white-space:wrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 12px;
+}
+
+td {
+    white-space:nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+    font-size: 14px;
+ }

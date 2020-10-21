@@ -1,4 +1,8 @@
-
+import { ClientesComponent } from './clientes/clientes.component';
+import { TableModule } from 'primeng/table';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { EquipamentosFormComponent } from './equipamentos/equipamentos-form/equipamentos-form.component';
 import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SalasComponent } from './salas/salas.component';
 import { ReservasComponent } from './reservas/reservas.component';
@@ -20,9 +24,9 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
-import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { ConfirmationService, InputNumberModule } from 'primeng';
 
 @NgModule({
     declarations: [
@@ -33,9 +37,9 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
         ReservasComponent,
         EquipamentosComponent,
         SalasComponent,
-        SalasComponent,
-        SalasComponent,
-        EquipamentosComponent
+        SalasFormComponent,
+        ClientesComponent,
+        EquipamentosFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -53,15 +57,20 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
         ButtonModule,
         SecurityModule.forRoot(environment.auth),
         MenuModule,
-        ReactiveFormsModule,
         FormsModule,
         ClientesModule,
+        ConfirmDialogModule,
+        ReactiveFormsModule,
         CurrencyMaskModule,
-        SharedModule
+        SharedModule,
+        FormsModule,
+        InputNumberModule,
+        TableModule
     ],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        ConfirmationService
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

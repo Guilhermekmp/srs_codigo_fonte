@@ -1,0 +1,42 @@
+<div class="ui-fluid" style="height: 100%;">
+    <div class="p-field">
+        <label for="nome" style="font-size: 130%;">Nome</label>
+        <input id="nome" type="text" [(ngModel)]="equipamento.nome" placeholder="Digite o nome" pInputText
+        style="margin-top: 3px;">
+    </div>
+    <div style="justify-content: space-between; display: inline-flex; margin-top: 10px;">
+        <div class="p-field" style="display: flex;">
+            <div>
+                <label for="tipo" style="font-size: 130%;">Tipo </label>
+                <p-dropdown id="tipo" [options]="tipos" 
+                [(ngModel)]="tipoSelecionado" placeholder="Selecione..." 
+                optionLabel="nome" [showClear]="true"></p-dropdown>
+
+            </div>
+            <div class="p-field"  style="width: 35%;margin-left: 10px;">
+                <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
+                <input id="precoDiario" 
+                pInputText
+                type="text"
+                placeholder="R$ 0,00"
+                [(ngModel)]="equipamento.precoDiario"
+                inputId="minmaxfraction" 
+                currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
+            </div>
+        </div>  
+    </div>
+    
+    <div style="width: 6rem;">
+        <button 
+        pButton 
+        type="button" 
+        class="app-button-success p-d-flex p-jc-center p-ic-center" 
+        style="background-color: green; margin-top: 47px; font-weight: bold; line-height: 30px;"
+        (click) = onSubmit()>
+        <span>Criar</span>
+        </button>
+    </div>
+</div>
+
+
+    

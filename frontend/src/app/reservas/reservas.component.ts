@@ -1,41 +1,87 @@
 import { ReservasService } from './reservas.service';
 import { Component, OnInit } from '@angular/core';
-import { SortEvent } from 'primeng';
+import { ConfirmationService, SortEvent } from 'primeng';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Reserva } from './reserva';
 
 @Component({
   selector: 'app-reservas',
   templateUrl: './reservas.component.html',
-  styleUrls: ['./reservas.component.css']
+  styleUrls: ['./reservas.component.css'],
+  providers: [ConfirmationService]
 })
 export class ReservasComponent implements OnInit {
 
-  reservas = [{
-    cliente:'Eu',
-    sala:'Do lado',
-    dtIni:'Data inicio',
-    dtFim:'Data fim',
-    total:10
-  },
-  {
-    cliente:'Eu',
-    sala:'Do lado',
-    dtIni:'Data inicio',
-    dtFim:'Data fim',
-    total:10
-  }];
+  openPopUp: boolean = false;
 
-  constructor(public reservaService: ReservasService) { }
+  //Reservas2: any;
+  //clonedReservas: { [s: string]: Reserva; } = {};
 
-  ngOnInit(): void {
+  reservas: Reserva[];
 
-    this.reservaService.getAllReservas().subscribe((data)=>{
+  constructor(
+    private reservasService: ReservasService){
+    // private formBuilder: FormBuilder,
+    // private confirmationService: ConfirmationService) {
+    // this.formulario = this.formBuilder.group({
+    //   sala: ['', [Validators.required]],
+    //   cliente: ['', [Validators.required]], 
+    //   dtIni: ['', [Validators.required]],
+    //   dtFim: ['', [Validators.required]],
+    //   total: ['', [Validators.required]],
+    // });
 
-    }, err =>{
-      console.log(err);
-      
-    })
   }
 
-  customSort(event: SortEvent) {}
+  ngOnInit(){
+    this.listar();
+  }
 
+  popUpOpen(){
+    this.openPopUp=true;
+  }
+
+  //adicionarReserva() {
+    //this.Reservas2 = this.ReservasService.adicionarReserva(this.formulario.getRawValue());
+    //console.log(this.Reservas)
+    //this.formulario.reset()
+  //}
+
+
+  listar(){
+    console.log("GET");
+    this.reservasService.getAllReservas().subscribe((dados) => {
+      this.reservas = dados;
+    console.log("AAAAAAAAAaa");
+    }, err => {
+      console.log('erro', err);
+    })
+      
+  }
+
+  // deletar(id:any){
+  //   this.confirmationService.confirm({
+  //     message: 'Tem certeza que deseja excluir esse registro?',
+  //     accept: () => {
+  //       this.reservasService.deletar(id).subscribe(
+  //         r => {
+  //           this.listar()
+  //         }
+  //       )
+
+  //     }
+  //   })
+  // }
+
+  // salvar(){
+  //   this.reservasService.salvar(this.reserva).subscribe(
+  //     response =>{
+  //       this.reserva = response
+  //     },
+  //     error => {
+  //       alert("deu merda ai")
+  //     }
+  //   )
+
+  // }
 }
