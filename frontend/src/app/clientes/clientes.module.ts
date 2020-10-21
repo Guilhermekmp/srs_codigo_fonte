@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { SharedModule } from '../shared/shared.module';
+import {InputMaskModule} from 'primeng/inputmask';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SharedModule } from '../shared/shared.module';
     TableModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
-    SharedModule
+    SharedModule,
+    InputMaskModule
   ],
   exports: [
     ClientesComponent,
