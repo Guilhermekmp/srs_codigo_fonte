@@ -1,7 +1,16 @@
-<div>
-    <button style="background-color: green; border: green;" pButton (click)="abrirPopUp()" id="novo">
-        <label for="novo" style="line-height: 30px;">Novo Cliente</label>
-    </button>
+<div class="card" style = "height:65px; display: block;">
+    <div style= "height: 2.7rem; text-align: left; line-height: 60%; display: flex;
+    justify-content: space-between;">
+        <h1 style = "font-size: 30px;">Clientes</h1>
+            <button 
+            pButton 
+            type="button" 
+            class="app-button-success p-d-flex p-jc-center p-ic-center" 
+            style="background-color: green; margin-top: 5px; padding-top: 5px;" (click)="abrirPopUp()">
+            <i class="fa fa-plus" aria-hidden="true" style="padding-right: 10px;"></i>
+            <span>Novo Cliente</span>
+            </button>
+    </div>
 </div>
 <p-dialog header="Novo Cliente" [(visible)]="displayCreation" [style]="{width: '50vw'}">
 
@@ -62,17 +71,24 @@
 </p-dialog>
 
 <h3 class="first">CLIENTES</h3>
-<p-table [value]="client">
+<p-table #dt [value]="client" [globalFilterFields]="['nome']">
     <ng-template pTemplate="header">
         <tr>
-            <th>Nome</th>
-            <th style="width: 10.8rem;">Email</th>
-            <th>Endereco</th>
-            <th>CPF</th>
-            <th style="width: 5rem;">RG</th>
-            <th>Telefone</th>
-            <th>Data Nascimento</th>
-            <th style="width: 10.8rem;">Ações</th>
+            <th pSortableColumn="nome" style="width: 9rem;">Nome</th>
+            <th pSortableColumn="email" style="width: 10.8rem;">Email</th>
+            <th pSortableColumn="endereco" style="width: 9rem;">Endereco</th>
+            <th pSortableColumn="cpf" style="width: 7rem;">CPF</th>
+            <th pSortableColumn="rg" style="width: 6rem;">RG</th>
+            <th pSortableColumn="telefone" style="width: 9rem;">Telefone</th>
+            <th pSortableColumn="dataNascimento" style="width: 8rem;">Data Nascimento</th>
+            <th style="width: 10.8rem;">
+                <div style="display: flex;">
+                    <div style="padding-top: 5px; padding-right: 2px;">
+                        <i class="pi pi-search"></i>
+                    </div>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." style="width: 85%;"/>
+                </div> 
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-client>

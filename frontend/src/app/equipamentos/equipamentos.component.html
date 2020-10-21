@@ -17,7 +17,7 @@
     
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="id" style="width: 5rem;">Id <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="id" style="width: 9rem;">Id <p-sortIcon field="id"></p-sortIcon></th>
             <th pSortableColumn="nome"S>Nome <p-sortIcon field="nome"></p-sortIcon></th>
             <th pSortableColumn="idTipoEquipamento" style="width: 13rem;">Tipo <p-sortIcon field="idTipoEquipamento"></p-sortIcon></th>
             <th pSortableColumn="precoDiario" style="width: 10rem;">Preço Diário <p-sortIcon field="precoDiario"></p-sortIcon></th>
@@ -27,7 +27,8 @@
                         <i class="pi pi-search"></i>
                     </div>
                     <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." style="width: 85%;"/>
-                </div> </th>
+                </div> 
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-equipamento>
