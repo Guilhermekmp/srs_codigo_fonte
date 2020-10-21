@@ -1,3 +1,4 @@
+import { EquipamentosService } from './../equipamentos/equipamentos.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SharedModule } from './../shared/shared.module';
 import { SalasFormComponent } from './salas-form/salas-form.component';
@@ -25,11 +26,11 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     CurrencyMaskModule
   ],
   exports: [
-    SalasComponent
   ],
   providers: [
     SalasService,
-    ConfirmationService
+    ConfirmationService,
+    EquipamentosService
   ]
 })
 export class SalasModule { }

@@ -2,8 +2,11 @@ import { SalasComponent } from './../salas.component';
 import { EquipamentosService } from './../../equipamentos/equipamentos.service';
 import { SalasService } from './../salas.service';
 import { Sala } from './../sala';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
+import { debounceTime } from 'rxjs/operators';
+import { debounce } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-salas-form',
@@ -12,9 +15,13 @@ import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 })
 export class SalasFormComponent implements OnInit {
 
+  @Output() criarSalaEvento = new EventEmitter();
+
   formulario: FormGroup;
 
   equipamentos: FormArray;
+
+  salaId: number;
 
   tiposSala: any[];
 
@@ -46,7 +53,6 @@ export class SalasFormComponent implements OnInit {
       idTipoSala: new FormControl(),
       capacidade: new FormControl(),
       precoDiario: new FormControl(),
-      disponivel: new FormControl(),
     })
   }
 
@@ -80,18 +86,33 @@ export class SalasFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.formulario.value);
-    if(this.formulario.valid) {
+    if(this.formulario.valid){
+      if(this.salaId){
+    var sala = this.formulario.getRawValue();
+    sala.id = this.salaId;
+    this.salasService.atualizarSala(sala).subscribe(
+      success => {
+      alert("Cadastrada com sucesso")
+      this.criarSalaEvento.emit();
+      this.formulario.reset();
+      },
+      error => {alert(error.message)
+      })
+    }
+    else{
       const sala: Sala = {
         ...this.formulario.value,
       }
-      this.salasComponent.listar();
-      console.log(this.formulario.value.equipamentos);
       this.salasService.criar(sala).subscribe(
-        success => console.log('sucesso'),
+        success => {
+          console.log('sucesso')},
         error => console.error(error),
-        () => console.log('request completo')
-      );
+        () => {console.log('request completo')
+       debounce(this.criarSalaEvento.emit(), 2)
+      });
+   
+    this.formulario.reset();
     }
+  } 
   }
 }

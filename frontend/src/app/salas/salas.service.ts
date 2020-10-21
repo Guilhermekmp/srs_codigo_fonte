@@ -1,3 +1,5 @@
+import { SalasComponent } from './salas.component';
+import { EquipamentosService } from './../equipamentos/equipamentos.service';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { Sala } from './sala';
@@ -29,4 +31,9 @@ export class SalasService {
   buscarSala(id: any): Observable<Sala>{
     return this.http.get<Sala>(this.API + "/" + id);
   }
+
+  atualizarSala(sala: Sala): Observable<Sala>{
+    return this.http.put<Sala>(this.API, sala);
+  }
+
 }

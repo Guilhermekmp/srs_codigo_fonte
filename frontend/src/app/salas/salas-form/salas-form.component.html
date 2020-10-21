@@ -5,7 +5,7 @@
         </div>
         <div style="text-align: center; margin-top: 3px;">
             <textarea required [rows]="5" [cols]="89" pInputTextarea autoResize="autoResize" style="box-sizing: border-box; width: 100%;"
-            formControlName="descricao" id="descricao" placeholder="Endereço, área, etc."></textarea>
+            formControlName="descricao" [(ngModel)]="descricao" id="descricao" placeholder="Endereço, área, etc."></textarea>
         </div>
         <div style="justify-content: space-between; display: inline-flex;">
             <div>
@@ -14,21 +14,22 @@
                 </div>
                 <div class="ui-inputgroup">
                     <input type="text" pInputText placeholder="R$ 0,00" formControlName="precoDiario" id="precoDiario"
-                    currencyMask [(ngModel)]="value" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
+                    currencyMask [(ngModel)]="precoDiario" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
                 </div>
             </div>
             <div style="margin-left: 10px;">
                 <div>
                     <label for="idTipoSala" style="font-size: 130%">Tipo</label>
                 </div>
-                <p-dropdown [options]="tiposSala" formControlName="idTipoSala"></p-dropdown>
+                <p-dropdown [options]="tiposSala" formControlName="idTipoSala" [(ngModel)]="idTipoSala" placeholder="Selecione..."></p-dropdown>
             </div>
             <div style="margin-left: 10px; display: flexbox;">
                 <div>
                     <label for="capacidade" style="font-size: 130%;">Capacidade</label>
                 </div>
                 <div class="ui-inputgroup">
-                    <input pInputText type="number" min="0" formControlName="capacidade" id="capacidade" style="width: 40%; border-right-width: 1px;">
+                    <input pInputText type="number" min="0" formControlName="capacidade" [(ngModel)]="capacidade" 
+                    id="capacidade" style="width: 40%; border-right-width: 1px;" placeholder="0">
                     <div style="margin-left: 5px; line-height: 30px; width: 30%; font-size: 17px;">
                         pessoas
                     </div>
@@ -46,7 +47,8 @@
                     <div>
                         <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
                     </div>
-                    <p-dropdown [options]="listaEquipamentos" formControlName="idEquipamento" id="listaEquipamentos"></p-dropdown>
+                    <p-dropdown [options]="listaEquipamentos" formControlName="idEquipamento"
+                    [(ngModel)]="equipamento.idEquipamento" id="listaEquipamentos" placeholder="Selecione..."></p-dropdown>
                 </div>
                 <div class="ui-g ui-fluid">
                     <div style="width: 5.4vw; margin-left: 10px" >
@@ -54,7 +56,7 @@
                             <label for="capacidade" style="font-size: 130%;">Quantidade</label>
                         </div>
                         <div class="ui-inputgroup">
-                            <input pInputText type="text" formControlName="quantidade" id="quantidade"> 
+                            <input pInputText type="text" formControlName="quantidade" [(ngModel)]="equipamento.quantidade" placeholder="1" id="quantidade"> 
                         </div>
                     </div>
                 </div>
