@@ -13,7 +13,6 @@
     </div>
 </div>
 <p-dialog header="Novo Cliente" [(visible)]="displayCreation" [style]="{width: '50vw'}">
-
     <form [formGroup]="formulario">
         <div class="p-grid p-fluid">
             <div class="p-col-12 p-md-4">
@@ -37,8 +36,8 @@
 
         <div class="p-col-12 p-md-4">
             <div class="p-inputgroup">
-                <input type="text" formControlName="cpf" pInputText placeholder="CPF">
-            </div> <br>
+                <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" placeholder="CPF"></p-inputMask>
+            </div><br>
         </div>
 
         <div class="p-col-12 p-md-4">
@@ -49,7 +48,7 @@
 
         <div class="p-col-12 p-md-4">
             <div class="p-inputgroup">
-                <input type="text" formControlName="telefone" pInputText placeholder="Telefone">
+                <p-inputMask mask="(999) 99999-9999" unmask="true" formControlName="telefone" placeholder="Telefone"></p-inputMask>
             </div> <br>
         </div>
 

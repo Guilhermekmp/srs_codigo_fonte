@@ -2,7 +2,6 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { TableModule } from 'primeng/table';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { FormsModule } from '@angular/forms';
 import { EquipamentosFormComponent } from './equipamentos/equipamentos-form/equipamentos-form.component';
 import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SalasComponent } from './salas/salas.component';
@@ -23,9 +22,10 @@ import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule 
 import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClientesModule } from './clientes/clientes.module';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, InputNumberModule } from 'primeng';
 
 @NgModule({
@@ -34,17 +34,17 @@ import { ConfirmationService, InputNumberModule } from 'primeng';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
+        ReservasComponent,
+        EquipamentosComponent,
         SalasComponent,
         SalasFormComponent,
-        EquipamentosComponent,
-        ReservasComponent,
         ClientesComponent,
-        EquipamentosFormComponent,
+        EquipamentosFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({
             message: "Carregando..."
-          }),
+        }),
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
@@ -58,6 +58,7 @@ import { ConfirmationService, InputNumberModule } from 'primeng';
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         FormsModule,
+        ClientesModule,
         ConfirmDialogModule,
         ReactiveFormsModule,
         CurrencyMaskModule,

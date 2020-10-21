@@ -2,7 +2,7 @@ import { ClientesService } from './clientes.service';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from './models/cliente.interface';
 import { ConfirmationService } from 'primeng/api';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-clientes',
@@ -23,13 +23,13 @@ export class ClientesComponent {
     private confirmationService: ConfirmationService,
     private formBuilder: FormBuilder) {
       this.formulario = this.formBuilder.group({
-        nome:[''],
-        email:[''],
-        endereco:[''],
-        cpf: [''],
-        rg: [''],
-        telefone:[''],
-        dataNascimento:['']
+        nome:['', [Validators.required]],
+        email:['', [Validators.required]],
+        endereco:['', [Validators.required]],
+        cpf: ['', [Validators.required]],
+        rg: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(7)]],
+        telefone:['', [Validators.required]],
+        dataNascimento:['', [Validators.required]]
       })
     }
 
@@ -72,7 +72,7 @@ export class ClientesComponent {
       )
 
     }else{
-      var cliente = this.formulario.getRawValue();
+    var cliente = this.formulario.getRawValue();
     this.clientesService.salvar(cliente).subscribe(
       response => {
         alert("Cadastrado com sucesso!")
@@ -97,7 +97,10 @@ export class ClientesComponent {
   }
 
   abrirPopUp() {
-    this.displayCreation = true;
+    if(this.displayCreation = true){
+      this.formulario.reset()
   }
+}
 
+  
 }

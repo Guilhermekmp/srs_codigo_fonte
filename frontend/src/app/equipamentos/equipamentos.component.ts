@@ -16,6 +16,7 @@ export class EquipamentosComponent implements OnInit {
   equipamento = new Equipamento();
   equipament: Array<Equipamento>;
 
+
   constructor(private confirmationService: ConfirmationService, public equipamentosService: EquipamentosService) { 
     
   }
@@ -36,6 +37,7 @@ export class EquipamentosComponent implements OnInit {
         return null;
     }
   }
+
   listar(){
     this.equipamentosService.listarEquipamentos().subscribe((data)=>{
       this.equipamentos = data;
@@ -73,4 +75,6 @@ export class EquipamentosComponent implements OnInit {
   abrirPopUp(){
     this.displayCreation = true;
   }
+
 }
+

@@ -37,4 +37,5 @@ export class EquipamentosService {
     return this.http.get<Equipamento>(this.url+"/",id)
   }
   
+
 }
