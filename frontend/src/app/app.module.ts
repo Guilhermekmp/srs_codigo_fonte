@@ -25,18 +25,21 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SharedModule } from './shared/shared.module';
+import { ClientesModule } from './clientes/clientes.module';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
     declarations: [
         AppComponent,
         AppTopbarComponent,
         AppFooterComponent,
-        DiarioErrosComponent, SalasComponent,
-        SalasFormComponent,
-        EquipamentosComponent,
+        DiarioErrosComponent,
+        SalasComponent,
         ReservasComponent,
+        EquipamentosComponent,
+        SalasFormComponent,
         ClientesComponent,
-        EquipamentosFormComponent,
+        EquipamentosFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -55,6 +58,7 @@ import { SharedModule } from './shared/shared.module';
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         FormsModule,
+        ClientesModule,
         ConfirmDialogModule,
         ReactiveFormsModule,
         CurrencyMaskModule,
