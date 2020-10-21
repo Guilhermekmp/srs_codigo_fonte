@@ -1,11 +1,12 @@
+import { SharedModule } from './../../shared/shared.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { EquipamentosFormComponent } from './equipamentos-form.component';
 import { ConfirmDialogModule, InputNumberModule } from 'primeng';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 
 
@@ -15,7 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    InputNumberModule
+    InputNumberModule,
+    SharedModule,
+    CurrencyMaskModule
   ]
 })
 export class EquipamentosFormModule { }
