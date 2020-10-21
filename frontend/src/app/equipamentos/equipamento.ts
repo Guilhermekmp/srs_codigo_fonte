@@ -4,4 +4,5 @@ export class Equipamento{
     nome: string;
     idTipoEquipamento: number;
     precoDiario: number;
+    selected?:boolean;
 }

@@ -1,15 +1,21 @@
 package com.basis.srs.servico;
 
+import com.basis.srs.dominio.Equipamento;
 import com.basis.srs.dominio.Reserva;
 import com.basis.srs.dominio.ReservaEquipamento;
+import com.basis.srs.dominio.Sala;
 import com.basis.srs.dominio.SalaEquipamento;
+import com.basis.srs.repositorio.EquipamentoRepositorio;
 import com.basis.srs.repositorio.ReservaEquipamentoRepositorio;
 import com.basis.srs.repositorio.ReservaRepositorio;
 import com.basis.srs.repositorio.SalaEquipamentoRepositorio;
+import com.basis.srs.repositorio.SalaRepositorio;
 import com.basis.srs.servico.dto.ReservaDTO;
+import com.basis.srs.servico.dto.ReservaEquipamentoDTO;
 import com.basis.srs.servico.exception.RegraNegocioException;
 import com.basis.srs.servico.exception.RegraNegocioExceptionNotFound;
 import com.basis.srs.servico.mapper.ReservaMapper;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +29,8 @@ public class ReservaServico {
 
     private final ReservaRepositorio reservaRepositorio;
     private final ReservaEquipamentoRepositorio reservaEquipamentoRepositorio;
+    private final SalaRepositorio salaRepositorio;
+    private final EquipamentoRepositorio equipamentoRepositorio;
     private final SalaEquipamentoRepositorio salaEquipamentoRepositorio;
     private final ReservaMapper reservaMapper;
 
@@ -80,6 +88,28 @@ public class ReservaServico {
         buscar(id);
         reservaEquipamentoRepositorio.deleteAllByReservaId(id);
         reservaRepositorio.deleteById(id);
+    }
+
+    public Double custoTotal(ReservaDTO dto){
+        Sala sala = salaRepositorio.findById(dto.getIdSala()).get();
+        List<SalaEquipamento> salaEquipamentos = sala.getEquipamentos();
+        List<ReservaEquipamentoDTO> reservaEquipamentos = dto.getEquipamentos();
+
+        Double custo = sala.getPrecoDiario();
+
+        long dias = ChronoUnit.DAYS.between(dto.getDataInicio(), dto.getDataFim());
+
+        for (int i = 0; i < salaEquipamentos.size(); i++) {
+            Equipamento equip = equipamentoRepositorio.findById(salaEquipamentos.get(i).getEquipamento().getId()).get();
+            custo += equip.getPrecoDiario();
+        }
+
+        for (int i = 0; i < reservaEquipamentos.size(); i++) {
+            Equipamento equip = equipamentoRepositorio.findById(reservaEquipamentos.get(i).getIdEquipamento()).get();
+            custo += equip.getPrecoDiario();
+        }
+        custo *= dias;
+        return custo;
     }
 
 }

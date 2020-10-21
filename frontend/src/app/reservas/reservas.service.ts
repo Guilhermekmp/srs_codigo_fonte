@@ -23,11 +23,23 @@ export class ReservasService {
     return this.http.get<Reserva[]>(this.API,{});
   }
 
-  deletar(id:any):Observable<any>{
+  deletar(id:number):Observable<any>{
     return this.http.delete(this.API + "/" + id );
+  }
+
+  getByid(id:number):Observable<Reserva>{
+    return this.http.get<Reserva>(this.API + "/" + id);
   }
 
   salvar(reserva: Reserva):Observable<Reserva>{
     return this.http.post<Reserva>(this.API, reserva);
+  }
+
+  editar(reserva: Reserva):Observable<Reserva>{
+    return this.http.put<Reserva>(this.API, reserva);
+  }
+
+  getTotal(){
+    return this.http.get<Number>(this.API + "/total");
   }
 }

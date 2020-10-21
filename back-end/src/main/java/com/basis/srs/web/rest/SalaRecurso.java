@@ -1,7 +1,12 @@
 package com.basis.srs.web.rest;
 
 import com.basis.srs.servico.SalaServico;
+import com.basis.srs.servico.dto.EquipamentoDTO;
 import com.basis.srs.servico.dto.SalaDTO;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,11 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/salas")
@@ -52,6 +52,11 @@ public class SalaRecurso {
     public ResponseEntity<Void> remover(@PathVariable Integer id){
         salaServico.deletar(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/equipamentos")
+    public ResponseEntity<List<EquipamentoDTO>> listarEquipamentosOp(@PathVariable Integer id){
+        return ResponseEntity.ok(salaServico.listarEquipamentosOpcionais(salaServico.buscar(id)));
     }
 
 }

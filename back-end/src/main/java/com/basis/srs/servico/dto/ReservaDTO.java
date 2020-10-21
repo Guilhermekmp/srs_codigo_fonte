@@ -1,7 +1,8 @@
 package com.basis.srs.servico.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
@@ -10,7 +11,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ReservaDTO {
+public class ReservaDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 
@@ -32,5 +35,5 @@ public class ReservaDTO {
     private LocalDateTime dataFim;
 
     @NotNull
-    private ArrayList<ReservaEquipamentoDTO> equipamentos;
+    private List<ReservaEquipamentoDTO> equipamentos;
 }

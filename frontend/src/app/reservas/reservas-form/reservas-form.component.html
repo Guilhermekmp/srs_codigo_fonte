@@ -2,26 +2,24 @@
     <div div class="p-d-block p-d-lg-inline">
         
         <div class="ui-g ui-fluid">
-            <div style="width: 15%">
+            <div style="width: 30%">
                 <div>
-                    <label for="idSala" style="font-size: 130%;">Id da Sala</label>
+                    <label for="salas" style="font-size: 130%">Descrição da Sala</label>
                 </div>
-                 <div class="ui-inputgroup">
-                    <input type="text" pInputText placeholder="Digite uma sala" 
-                    formControlName="idSala" id="idSala">
-                </div> 
+                <p-dropdown [options]="salas" formControlName="idSala" 
+                [filter]="true" filterBy="label,value.descricao" 
+                (onHide)="listarOpcionais()"
+                ></p-dropdown>
             </div>
         </div>
         
         <div class="ui-g ui-fluid">
-            <div style="width: 15%">
+            <div style="width: 30%">
                 <div>
-                    <label for="idCliente" style="font-size: 130%;">Id da Cliente</label>
+                    <label for="clientes" style="font-size: 130%">CPF do Cliente</label>
                 </div>
-                 <div class="ui-inputgroup">
-                    <input type="text" pInputText placeholder="Digite um cliente" 
-                    formControlName="idCliente" id="idCliente" >
-                </div> 
+                <p-dropdown [options]="clientes" [(ngModel)]=clienteSelecionado formControlName="idCliente" 
+                [filter]="true" filterBy="label,value.cpf"></p-dropdown>
             </div>
         </div>
         
@@ -44,31 +42,78 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="p-d-lg-inline">
+
+        <div >
+            <h2>Equipamentos opcionais</h2>
+        </div>
+
+        <div>
+                <p-multiSelect [options]="equipamentoOpcionais" [overlayVisible]="true"
+                optionLabel="label" (onPanelHide)="objetoEquipamento()" 
+                [(ngModel)] = "equipamentosSelecionados" [ngModelOptions]="{standalone: true}"></p-multiSelect>
+        </div>
+
+        <div style=" display: flexbox;" formArrayName="equipamentos" 
+        *ngFor="let equipamento of formulario.get('equipamentos').controls; let i = index;">
+            
+            <div [formGroupName]="i" style="display: flex;">
+            
+                <div style="width: fit-content;">
+                    <div>
+                        <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
+                    </div>
+                    <p-dropdown [options]="equipamentoOpcionais" formControlName="idEquipamento" id="listaEquipamentos"></p-dropdown>
+                </div>
+                
+                <div class="ui-g ui-fluid">
+                    <div style="width: 5.4vw; margin-left: 10px" >
+                        <div>
+                            <label for="capacidade" style="font-size: 130%;">Quantidade</label>
+                        </div>
+                        <div class="ui-inputgroup">
+                            <input pInputText type="text" formControlName="quantidade" id="quantidade"> 
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="line-height: 65px; margin-left: 10px;">
+                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" 
+                    style="background-color: green;" (click) = addEquipamento()></button>
+                </div>
+            </div>
+
+        </div>
 
         <div class="ui-g ui-fluid">
+        
             <div class="ui-g-12 ui-md-4">
                 <label for="Total" style="font-size: 130%;">Total</label>
                 <div class="ui-inputgroup">
                     <input currencyMask
                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' 
                     , precision: 2, allowNegative: false}"
-                    placeholder="R$ 0,00">
+                    placeholder="R$ 30000,00">
                 </div>
             </div>
-        </div>
         
-        <div class="ui-g ui-fluid">
-            <div>
-                <button 
-                pButton 
-                type="button" 
-                class="app-button-success p-d-flex p-jc-center p-ic-center" 
-                style="background-color: green; margin-top: 5px; padding-top: 10%;"
-                (click) = onSubmit()>
-                <i class="fa fa-check" aria-hidden="true"></i>
-                <span>Realizar Reserva</span>
-                </button>
-            </div>
         </div>
+
+    </div>
+    <div class="ui-g ui-fluid">
+        
+        <div>
+            <button 
+            pButton 
+            type="button" 
+            class="app-button-success p-d-flex p-jc-center p-ic-center" 
+            style="background-color: green; margin-top: 5px; padding-top: 10%;"
+            (click) = onSubmit()>
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <span>Realizar Reserva</span>
+            </button>
+        </div>
+   
     </div>
 </form>

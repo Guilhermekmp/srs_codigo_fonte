@@ -13,8 +13,8 @@
                     <label for="precoDiario" style="font-size: 130%;">Preço Diário Base</label>
                 </div>
                 <div class="ui-inputgroup">
-                    <input type="text" pInputText placeholder="R$ 0,00" formControlName="precoDiario" id="precoDiario"
-                    currencyMask [(ngModel)]="precoDiario" [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
+                    <input type="text" pInputText placeholder="R$" formControlName="precoDiario" id="precoDiario"
+                    currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
                 </div>
             </div>
             <div style="margin-left: 10px;">
