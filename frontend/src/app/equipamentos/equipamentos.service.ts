@@ -33,5 +33,9 @@ export class EquipamentosService {
     return this.http.post<Equipamento>(this.url, equipamento);
   }
 
+  buscar(id:any):Observable<any>{
+    return this.http.get<Equipamento>(this.url+"/",id)
+  }
   
+
 }

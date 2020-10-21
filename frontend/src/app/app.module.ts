@@ -1,26 +1,38 @@
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SalasModule } from './salas/salas.module';
 import { ButtonModule } from 'primeng/button';
 import { ReservasModule } from './reservas/reservas.module';
+import { SalasComponent } from './salas/salas.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
+import { BreadcrumbModule, ErrorStackModule, MenuModule, PageNotificationModule } from '@nuvem/primeng-components';
+import { BlockUIModule } from 'ng-block-ui';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { ConfirmationService, InputNumberModule } from 'primeng';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableModule } from 'primeng/table';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { AppTopbarComponent } from './components/topbar/app.topbar.component';
-import { AppFooterComponent } from './components/footer/app.footer.component';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
-import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule } from '@nuvem/primeng-components';
-import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
+import { ClientesComponent } from './clientes/clientes.component';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
-import { BlockUIModule } from 'ng-block-ui';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
-import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { EquipamentosModule } from './equipamentos/equipamentos.module';
+import { AppFooterComponent } from './components/footer/app.footer.component';
+import { AppTopbarComponent } from './components/topbar/app.topbar.component';
+import { EquipamentosFormComponent } from './equipamentos/equipamentos-form/equipamentos-form.component';
+import { EquipamentosComponent } from './equipamentos/equipamentos.component';
+import { ReservasComponent } from './reservas/reservas.component';
+import { SalasFormComponent } from './salas/salas-form/salas-form.component';
+import { SharedModule } from './shared/shared.module';
+import { ClientesModule } from './clientes/clientes.module';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 @NgModule({
     declarations: [
@@ -28,11 +40,17 @@ import { EquipamentosModule } from './equipamentos/equipamentos.module';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
+        SalasComponent,
+        ReservasComponent,
+        EquipamentosComponent,
+        SalasFormComponent,
+        ClientesComponent,
+        EquipamentosFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({
             message: "Carregando..."
-          }),
+        }),
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
@@ -46,19 +64,21 @@ import { EquipamentosModule } from './equipamentos/equipamentos.module';
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         FormsModule,
+        ClientesModule,
         ConfirmDialogModule,
         ReactiveFormsModule,
-        FormsModule,
-        ClientesModule,
         CurrencyMaskModule,
         SalasModule,
         SharedModule,
         ReservasModule,
-        EquipamentosModule
+        EquipamentosModule,
+        InputNumberModule,
+        TableModule
     ],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        ConfirmationService
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

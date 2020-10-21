@@ -58,8 +58,6 @@
             </column>
             <column name="preco_diario" type="DOUBLE">
             </column>
-            <column name="disponivel" type="NUMBER">
-            </column>
         </createTable>
 
         <addPrimaryKey tableName="sala" columnNames="id"/>
