@@ -32,7 +32,7 @@ export class SalasFormComponent implements OnInit {
         {
         idSala: null,
         idEquipamento: 1,
-        quantidade: 5
+        quantidade: 5,
         }
       ],
       idTipoSala: 1,

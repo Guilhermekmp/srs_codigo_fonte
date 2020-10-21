@@ -22,14 +22,9 @@ import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule 
 import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
-<<<<<<< HEAD
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesModule } from './clientes/clientes.module';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-=======
-import { EquipamentosComponent } from './equipamentos/equipamentos.component';
-
->>>>>>> Front end basico, ainda a corrigir detalhes
 
 @NgModule({
     declarations: [
@@ -38,14 +33,11 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
         AppFooterComponent,
         DiarioErrosComponent,
         ReservasComponent,
-<<<<<<< HEAD
         EquipamentosComponent,
         SalasComponent,
-        SalasComponent
-=======
+        SalasComponent,
         SalasComponent,
         EquipamentosComponent
->>>>>>> Front end basico, ainda a corrigir detalhes
     ],
     imports: [
         BlockUIModule.forRoot({
@@ -64,14 +56,10 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
         SecurityModule.forRoot(environment.auth),
         MenuModule,
         ReactiveFormsModule,
-<<<<<<< HEAD
         FormsModule,
-        ClientesModule
-
-=======
+        ClientesModule,
         CurrencyMaskModule,
         SharedModule
->>>>>>> O POST ta dando 400 provavelmente por causa do array
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }

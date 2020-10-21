@@ -144,15 +144,6 @@
     }
   },
   "cli": {
-<<<<<<< HEAD
-<<<<<<< HEAD
     "analytics": false
-
-=======
-    "analytics": "2b7ef473-b25a-4a37-ae65-275ff76d8486"
->>>>>>> Front end basico, ainda a corrigir detalhes
-=======
-    "analytics": "73f4df31-c6f7-4b41-b8a7-7fb323ef983d"
->>>>>>> Correções
   }
 }
