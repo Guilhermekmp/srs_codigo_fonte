@@ -33,10 +33,10 @@
             <th pSortableColumn="equipamentos">Equipamentos <p-sortIcon field="equipamentos"></p-sortIcon></th>
             <th style="width: 13rem;"> 
                 <div style="display: flex;">
-                    <div style="padding-top: 5px">
+                    <div style="padding-top: 5px; padding-right: 2px;">
                         <i class="pi pi-search"></i>
                     </div>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." style="width: 85%;"/>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." style="width: 85%;"/>
                 </div>       
             </th>
         </tr>
