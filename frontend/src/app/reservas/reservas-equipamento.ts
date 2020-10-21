@@ -1,4 +1,5 @@
 export class EquipamentoOpcional{
-    nome:String;
+    idReserva:number;
+    idEquipamento:number;
     quantidade:number;
 }

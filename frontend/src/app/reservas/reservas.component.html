@@ -17,8 +17,10 @@
     </div>
 </div>
     
-<p-dialog header="Nova Reserva" [(visible)]="openPopUp" [style]="{'width': '60vw'}">
-    <app-reservas-form></app-reservas-form>
+<p-dialog header="Nova Reserva" [(visible)]="openPopUp" [style]="{'width':'40vw', 'height':'fit-content'}">
+    <div style="height: auto;">
+        <app-reservas-form></app-reservas-form>
+    </div>
 </p-dialog>
 
 

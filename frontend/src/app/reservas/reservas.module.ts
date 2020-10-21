@@ -1,3 +1,4 @@
+import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SharedModule } from './../shared/shared.module';
@@ -31,6 +32,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     DialogModule,
     SharedModule,
     MultiSelectModule,
+    DropdownModule,
     AutoCompleteModule
     ],
   exports: [

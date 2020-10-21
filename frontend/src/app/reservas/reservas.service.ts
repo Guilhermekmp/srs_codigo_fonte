@@ -38,4 +38,8 @@ export class ReservasService {
   editar(reserva: Reserva):Observable<Reserva>{
     return this.http.put<Reserva>(this.API, reserva);
   }
+
+  getTotal(){
+    return this.http.get<Number>(this.API + "/total");
+  }
 }

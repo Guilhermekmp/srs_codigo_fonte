@@ -6,16 +6,16 @@ import com.basis.srs.repositorio.EquipamentoRepositorio;
 import com.basis.srs.repositorio.ReservaRepositorio;
 import com.basis.srs.repositorio.SalaEquipamentoRepositorio;
 import com.basis.srs.repositorio.SalaRepositorio;
+import com.basis.srs.servico.dto.EquipamentoDTO;
 import com.basis.srs.servico.dto.ReservaDTO;
 import com.basis.srs.servico.dto.SalaDTO;
 import com.basis.srs.servico.exception.RegraNegocioException;
 import com.basis.srs.servico.mapper.SalaMapper;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -83,6 +83,23 @@ public class SalaServico {
             }
         }
         return false;
+    }
+
+    public List<EquipamentoDTO> listarEquipamentosOpcionais(SalaDTO dto){
+        Sala sala = salaMapper.toEntity(dto);
+        List<EquipamentoDTO> listaEquipamentoOpc = equipamentoServico.listar();
+        for (EquipamentoDTO equipamento:listaEquipamentoOpc) {
+            boolean obrigatorio = false;
+            for (SalaEquipamento equipamentoObrigatorio :sala.getEquipamentos()) {
+                if(equipamentoObrigatorio.getId().getIdEquipamento().equals(equipamento.getId())){
+                   obrigatorio = true;
+                }
+            }
+            if(obrigatorio){
+                listaEquipamentoOpc.remove(equipamento);
+            }
+        }
+        return listaEquipamentoOpc;
     }
 }
 

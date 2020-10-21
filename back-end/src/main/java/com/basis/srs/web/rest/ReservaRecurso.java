@@ -30,6 +30,12 @@ public class ReservaRecurso {
         return ResponseEntity.ok(reservaServico.listar());
     }
 
+    @GetMapping("/total")
+    public ResponseEntity<Double> getTotal(@RequestBody ReservaDTO dto){
+        return ResponseEntity.ok(reservaServico.custoTotal(dto));
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<ReservaDTO> listar(@PathVariable Integer id){
         return ResponseEntity.ok(reservaServico.buscar(id));

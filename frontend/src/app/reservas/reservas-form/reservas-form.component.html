@@ -6,9 +6,9 @@
                 <div>
                     <label for="salas" style="font-size: 130%">Descrição da Sala</label>
                 </div>
-                <p-dropdown [options]="salas" [(ngModel)]=salaSelecionada formControlName="idSala" 
+                <p-dropdown [options]="salas" formControlName="idSala" 
                 [filter]="true" filterBy="label,value.descricao" 
-                (onBlur)="listarOpcionais(salaSelecionada)"
+                (onHide)="listarOpcionais()"
                 ></p-dropdown>
             </div>
         </div>
@@ -42,19 +42,52 @@
                 </div>
             </div>
         </div>
-        
+    </div>
+    <div class="p-d-lg-inline">
+
+        <div >
+            <h2>Equipamentos opcionais</h2>
+        </div>
+
         <div>
-            <div>
-                <label for="equipametos" style="font-size: 130%">Equipamentos Opcionais</label>
+                <p-multiSelect [options]="equipamentoOpcionais" [overlayVisible]="true"
+                optionLabel="label" (onPanelHide)="objetoEquipamento()" 
+                [(ngModel)] = "equipamentosSelecionados" [ngModelOptions]="{standalone: true}"></p-multiSelect>
+        </div>
+
+        <div style=" display: flexbox;" formArrayName="equipamentos" 
+        *ngFor="let equipamento of formulario.get('equipamentos').controls; let i = index;">
+            
+            <div [formGroupName]="i" style="display: flex;">
+            
+                <div style="width: fit-content;">
+                    <div>
+                        <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
+                    </div>
+                    <p-dropdown [options]="equipamentoOpcionais" formControlName="idEquipamento" id="listaEquipamentos"></p-dropdown>
+                </div>
+                
+                <div class="ui-g ui-fluid">
+                    <div style="width: 5.4vw; margin-left: 10px" >
+                        <div>
+                            <label for="capacidade" style="font-size: 130%;">Quantidade</label>
+                        </div>
+                        <div class="ui-inputgroup">
+                            <input pInputText type="text" formControlName="quantidade" id="quantidade"> 
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="line-height: 65px; margin-left: 10px;">
+                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" 
+                    style="background-color: green;" (click) = addEquipamento()></button>
+                </div>
             </div>
-            <p-dropdown [options]="equipamentoOpcionais" ></p-dropdown>
-            <div>
-                <label for="equipamentos" style="font-size: 130%">Quantidade</label>   
-            </div>
-            <input type="number"> 
+
         </div>
 
         <div class="ui-g ui-fluid">
+        
             <div class="ui-g-12 ui-md-4">
                 <label for="Total" style="font-size: 130%;">Total</label>
                 <div class="ui-inputgroup">
@@ -64,20 +97,23 @@
                     placeholder="R$ 30000,00">
                 </div>
             </div>
+        
         </div>
 
-        <div class="ui-g ui-fluid">
-            <div>
-                <button 
-                pButton 
-                type="button" 
-                class="app-button-success p-d-flex p-jc-center p-ic-center" 
-                style="background-color: green; margin-top: 5px; padding-top: 10%;"
-                (click) = onSubmit()>
-                <i class="fa fa-check" aria-hidden="true"></i>
-                <span>Realizar Reserva</span>
-                </button>
-            </div>
+    </div>
+    <div class="ui-g ui-fluid">
+        
+        <div>
+            <button 
+            pButton 
+            type="button" 
+            class="app-button-success p-d-flex p-jc-center p-ic-center" 
+            style="background-color: green; margin-top: 5px; padding-top: 10%;"
+            (click) = onSubmit()>
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <span>Realizar Reserva</span>
+            </button>
         </div>
+   
     </div>
 </form>
