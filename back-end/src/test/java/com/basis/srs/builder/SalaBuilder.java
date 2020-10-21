@@ -40,7 +40,6 @@ public class SalaBuilder extends ConstrutorDeEntidade<Sala>{
         Sala sala = new Sala();
         sala.setCapacidade(1);
         sala.setDescricao("AAAAAAAAAAA");
-        sala.setDisponivel(1);
         sala.setPrecoDiario(25.0);
         sala.setTipoSala(tipoSala);
 

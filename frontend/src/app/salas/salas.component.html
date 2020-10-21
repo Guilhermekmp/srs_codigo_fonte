@@ -19,6 +19,8 @@
     <app-salas-form></app-salas-form>        
     </div>
 </p-dialog>
+<app-item-output (criarSalaEvento)="listar()"></app-item-output>
+
 
 <p-table #dt [value]="salas" [globalFilterFields]="['descricao']">
     
@@ -28,7 +30,6 @@
             <th pSortableColumn="descricao">Descrição <p-sortIcon field="descricao"></p-sortIcon></th>
             <th pSortableColumn="idTipoSala" style="width: 10rem;">Tipo <p-sortIcon field="idTipoSala"></p-sortIcon></th>
             <th pSortableColumn="precoDiario" style="width: 8rem;">Preço Diário <p-sortIcon field="precoDiario"></p-sortIcon></th>
-            <th pSortableColumn="disponivel" style="width: 9rem;">Disponibilidade <p-sortIcon field="disponivel"></p-sortIcon></th>
             <th pSortableColumn="capacidade"  style="width: 9rem;">Capacidade <p-sortIcon field="capacidade"></p-sortIcon></th>
             <th pSortableColumn="equipamentos" style="width: 12rem;">Equipamentos <p-sortIcon field="equipamentos"></p-sortIcon></th>
             <th style="width: 13rem;"> 
@@ -48,7 +49,6 @@
             <td>{{sala?.descricao}}</td>
             <td style="text-align: center;">{{getTipoSala(sala)}}</td>
             <td style="text-align: center;">{{sala?.precoDiario | currency: 'R$ '}}</td>
-            <td style="text-align: center;">{{sala?.disponivel}}</td>
             <td style="text-align: center;">{{sala?.capacidade}}</td>
             <td>
                 <div *ngFor="let equipamento of sala.equipamentos">
