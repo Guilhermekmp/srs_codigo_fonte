@@ -8,7 +8,7 @@
                 </div>
                 <p-dropdown [options]="salas" formControlName="idSala" 
                 [filter]="true" filterBy="label,value.descricao" 
-                (onHide)="listarOpcionais()"
+                (onHide)="listarOpcionais();valorTotal()"
                 ></p-dropdown>
             </div>
         </div>
@@ -18,7 +18,8 @@
                 <div>
                     <label for="clientes" style="font-size: 130%">CPF do Cliente</label>
                 </div>
-                <p-dropdown [options]="clientes" [(ngModel)]=clienteSelecionado formControlName="idCliente" 
+                <p-dropdown [options]="clientes" [(ngModel)]=clienteSelecionado 
+                formControlName="idCliente" 
                 [filter]="true" filterBy="label,value.cpf"></p-dropdown>
             </div>
         </div>
@@ -49,10 +50,11 @@
             <h2>Equipamentos opcionais</h2>
         </div>
 
-        <div>
+        <div class = "p-d-md-none">
                 <p-multiSelect [options]="equipamentoOpcionais" [overlayVisible]="true"
                 optionLabel="label" (onPanelHide)="objetoEquipamento()" 
-                [(ngModel)] = "equipamentosSelecionados" [ngModelOptions]="{standalone: true}"></p-multiSelect>
+                [(ngModel)] = "equipamentosSelecionados" [ngModelOptions]="{standalone: true}"
+                style="width: 30px; height: 15px ;"></p-multiSelect>
         </div>
 
         <div style=" display: flexbox;" formArrayName="equipamentos" 
@@ -80,7 +82,7 @@
                 
                 <div style="line-height: 65px; margin-left: 10px;">
                     <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" 
-                    style="background-color: green;" (click) = addEquipamento()></button>
+                    style="background-color: green;" (click) = addEquipamento();valorTotal()></button>
                 </div>
             </div>
 
@@ -91,10 +93,7 @@
             <div class="ui-g-12 ui-md-4">
                 <label for="Total" style="font-size: 130%;">Total</label>
                 <div class="ui-inputgroup">
-                    <input currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' 
-                    , precision: 2, allowNegative: false}"
-                    placeholder="R$ 30000,00">
+                    Total: R$ {{formulario.get('total').value}}
                 </div>
             </div>
         

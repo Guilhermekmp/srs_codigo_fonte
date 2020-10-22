@@ -30,8 +30,8 @@ public class ReservaRecurso {
         return ResponseEntity.ok(reservaServico.listar());
     }
 
-    @GetMapping("/total")
-    public ResponseEntity<Double> getTotal(@RequestBody ReservaDTO dto){
+    @PostMapping("/total")
+    public ResponseEntity<ReservaDTO> getTotal(@RequestBody ReservaDTO dto){
         return ResponseEntity.ok(reservaServico.custoTotal(dto));
     }
 

@@ -90,7 +90,7 @@ public class ReservaServico {
         reservaRepositorio.deleteById(id);
     }
 
-    public Double custoTotal(ReservaDTO dto){
+    public ReservaDTO custoTotal(ReservaDTO dto){
         Sala sala = salaRepositorio.findById(dto.getIdSala()).get();
         List<SalaEquipamento> salaEquipamentos = sala.getEquipamentos();
         List<ReservaEquipamentoDTO> reservaEquipamentos = dto.getEquipamentos();
@@ -101,15 +101,16 @@ public class ReservaServico {
 
         for (int i = 0; i < salaEquipamentos.size(); i++) {
             Equipamento equip = equipamentoRepositorio.findById(salaEquipamentos.get(i).getEquipamento().getId()).get();
-            custo += equip.getPrecoDiario();
+            custo += (equip.getPrecoDiario() * salaEquipamentos.get(i).getQuantidade());
         }
 
         for (int i = 0; i < reservaEquipamentos.size(); i++) {
             Equipamento equip = equipamentoRepositorio.findById(reservaEquipamentos.get(i).getIdEquipamento()).get();
-            custo += equip.getPrecoDiario();
+            custo += (equip.getPrecoDiario() * reservaEquipamentos.get(i).getQuantidade());
         }
         custo *= dias;
-        return custo;
+        dto.setTotal(custo);
+        return dto;
     }
 
 }
