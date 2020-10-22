@@ -41,7 +41,7 @@
         <div style="display: flex;">
             <h2>Equipamentos obrigatórios</h2>
         </div>
-        <div style=" display: flexbox;" formArrayName="equipamentos" *ngFor="let equipamento of formulario.get('equipamentos').controls; let i = index;">
+        <div style="display: flexbox;" formArrayName="equipamentos" *ngFor="let equipamento of formulario.get('equipamentos').controls; let i = index;">
             <div [formGroupName]="i" style="display: flex;">
                 <div style="width: fit-content;">
                     <div>

@@ -5,7 +5,6 @@ import { Sala } from './../sala';
 import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
-import { debounceTime } from 'rxjs/operators';
 import { debounce } from '@fullcalendar/core';
 
 @Component({
@@ -49,13 +48,7 @@ export class SalasFormComponent implements OnInit {
   private initForm(){
     this.formulario = this.formBuilder.group({
       descricao: new FormControl(),
-      equipamentos: [
-        {
-        idSala: null,
-        idEquipamento: 1,
-        quantidade: 5,
-        }
-      ],
+      equipamentos: this.formBuilder.array([this.criarEquipamento()]),
       idTipoSala: new FormControl(),
       capacidade: new FormControl(),
       precoDiario: new FormControl(),

@@ -1,7 +1,6 @@
 import { SalasModule } from './salas/salas.module';
 import { ButtonModule } from 'primeng/button';
 import { ReservasModule } from './reservas/reservas.module';
-import { SalasComponent } from './salas/salas.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -18,16 +17,11 @@ import { TableModule } from 'primeng/table';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClientesComponent } from './clientes/clientes.component';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { ClientesModule } from './clientes/clientes.module';
 import { EquipamentosModule } from './equipamentos/equipamentos.module';
 import { AppFooterComponent } from './components/footer/app.footer.component';
 import { AppTopbarComponent } from './components/topbar/app.topbar.component';
-import { EquipamentosFormComponent } from './equipamentos/equipamentos-form/equipamentos-form.component';
-import { EquipamentosComponent } from './equipamentos/equipamentos.component';
-import { ReservasComponent } from './reservas/reservas.component';
-import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -37,12 +31,6 @@ import { SharedModule } from './shared/shared.module';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        SalasComponent,
-        ReservasComponent,
-        EquipamentosComponent,
-        SalasFormComponent,
-        ClientesComponent,
-        EquipamentosFormComponent
     ],
     imports: [
         BlockUIModule.forRoot({
