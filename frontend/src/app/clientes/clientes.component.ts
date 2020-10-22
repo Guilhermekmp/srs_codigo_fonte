@@ -1,9 +1,8 @@
 import { ClientesService } from './clientes.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from './models/cliente.interface';
 import { ConfirmationService } from 'primeng/api';
-import { ClientesModule } from './clientes.module';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-clientes',
@@ -13,47 +12,37 @@ import { ClientesModule } from './clientes.module';
 })
 export class ClientesComponent {
 
-  formulario: FormGroup;
+  clienteId: number
   clientes: Array<Cliente> = new Array<Cliente>();
-  //clientes2: any;
-  //clonedClientes: { [s: string]: Cliente; } = {};
-
+  formulario: FormGroup;
   client: Array<Cliente>;
-  cliente = new Cliente();
+  displayCreation: boolean = false;
 
   constructor(
     public clientesService: ClientesService,
-    private formBuilder: FormBuilder,
-    private confirmationService: ConfirmationService) {
-    this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.maxLength(120)]],
-      email: ['', [Validators.required, Validators.maxLength(255)]], 
-      endereco: ['', [Validators.required]],
-      cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
-      rg: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(7)]],
-      telefone: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
-      dataNascimento: ['',[Validators.required]]
-    });
+    private confirmationService: ConfirmationService,
+    private formBuilder: FormBuilder) {
+      this.formulario = this.formBuilder.group({
+        nome:['', [Validators.required]],
+        email:['', [Validators.required]],
+        endereco:['', [Validators.required]],
+        cpf: ['', [Validators.required]],
+        rg: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(7)]],
+        telefone:['', [Validators.required]],
+        dataNascimento:['', [Validators.required]]
+      })
+    }
 
-  }
-
-  ngOnInit(){
+  ngOnInit() {
     this.listar()
-
   }
 
-  //adicionarCliente() {
-    //this.clientes2 = this.clientesService.adicionarCliente(this.formulario.getRawValue());
-    //console.log(this.clientes)
-    //this.formulario.reset()
-  //}
-
-
-  listar(){
+  listar() {
     this.clientesService.listar().subscribe(dados => this.client = dados)
   }
 
-  deletar(id:any){
+
+  deletar(id: any) {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir esse registro?',
       accept: () => {
@@ -67,19 +56,51 @@ export class ClientesComponent {
     })
   }
 
-  salvar(){
-    this.cliente.dataNascimento = new Date();
-    this.cliente.dataNascimento.setDate(1);
-    console.log('cliente', this.cliente);
-    this.clientesService.salvar(this.cliente).subscribe(
-      response =>{
-        this.cliente = response
+  salvar() {
+    if(this.clienteId){
+      var cliente = this.formulario.getRawValue();
+      cliente.id = this.clienteId
+      this.clientesService.atualizarCliente(cliente).subscribe(
+        response => {
+          alert("Cadastrado com sucesso!")
+          this.listar()
+          this.formulario.reset()
+        },
+        error => {
+          alert(error.message)
+        }
+      )
+
+    }else{
+    var cliente = this.formulario.getRawValue();
+    this.clientesService.salvar(cliente).subscribe(
+      response => {
+        alert("Cadastrado com sucesso!")
+        this.listar()
+        this.formulario.reset()
       },
       error => {
-        alert("deu merda ai")
+        alert(error.message)
+
       }
     )
 
+    }
+    
+  }
+  atualizarCliente(clienteId: number) {
+    this.clienteId = clienteId
+    this.abrirPopUp()
+    var cliente;
+    this.clientesService.buscarPorId(clienteId).subscribe(
+      res => this.formulario.patchValue(res))
   }
 
+  abrirPopUp() {
+    if(this.displayCreation = true){
+      this.formulario.reset()
+  }
+}
+
+  
 }

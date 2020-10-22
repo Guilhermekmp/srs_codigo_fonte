@@ -34,9 +34,4 @@ public class SalaDTO implements Serializable {
     @NotNull(message = "Preço da diária é obrigatório")
     private Double precoDiario;
 
-    @NotNull(message = "Disponibilidade é é obrigatória")
-    @Min(0)
-    @Max(1)
-    private Integer disponivel;
-
 }

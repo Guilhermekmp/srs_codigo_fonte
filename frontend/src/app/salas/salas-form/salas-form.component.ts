@@ -1,8 +1,12 @@
+import { SalasComponent } from './../salas.component';
 import { EquipamentosService } from './../../equipamentos/equipamentos.service';
 import { SalasService } from './../salas.service';
 import { Sala } from './../sala';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, Output } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
+import { debounceTime } from 'rxjs/operators';
+import { debounce } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-salas-form',
@@ -11,16 +15,25 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class SalasFormComponent implements OnInit {
 
+  @Output() criarSalaEvento = new EventEmitter();
+
   formulario: FormGroup;
+
+  equipamentos: FormArray;
+
+  salaId: number;
 
   tiposSala: any[];
 
-  equipamentos: any[];
+  listaEquipamentos: any[];
 
-  constructor(private formBuilder: FormBuilder, private salasService: SalasService, private equipamentosService: EquipamentosService ) {}
+  constructor(private formBuilder: FormBuilder, 
+    private salasService: SalasService, 
+    private equipamentosService: EquipamentosService,
+    private salasComponent: SalasComponent ) {}
 
   ngOnInit(): void {
-
+    
     this.tiposSala = [
       {label: 'Reunião', value: 1},
       {label: 'Trabalho', value: 2},
@@ -29,43 +42,89 @@ export class SalasFormComponent implements OnInit {
       {label: 'Auditório', value: 5}
     ]
 
-      this.equipamentosService.listarEquipamentos().subscribe((data)=>{
-        this.equipamentos = data.map(e => {return { label: e.nome, value: e.id }});
-        console.log(this.equipamentos);
-      }, err =>{
-        console.log(err);
-      });
+  this.initForm();
+  this.listarEquipamentos();
+  }
 
-    console.log(this.tiposSala);
-
+  private initForm(){
     this.formulario = this.formBuilder.group({
-      descricao: [null],
-      equipamentos: this.formBuilder.group({
+      descricao: null,
+      equipamentos: [
+        {
         idSala: null,
         idEquipamento: 1,
-        quantidade: 1
+        quantidade: 5,
         }
-      ),
-      idTipoSala: [1],
-      capacidade: [0],
-      precoDiario: [0.00],
-      disponivel: [1],
+      ],
+      idTipoSala: 1,
+      capacidade: 0,
+      precoDiario: 0.00,
+      disponivel: 1,
+      descricao: new FormControl(),
+      equipamentos: this.formBuilder.array([this.criarEquipamento()]),
+      idTipoSala: new FormControl(),
+      capacidade: new FormControl(),
+      precoDiario: new FormControl(),
     })
   }
 
+  criarEquipamento(){
+    return this.formBuilder.group({
+      idSala: null,
+      idEquipamento: new FormControl(),
+      quantidade: new FormControl()
+    })
+  }
+
+  listarEquipamentos(){
+    this.equipamentosService.listarEquipamentos().subscribe((data)=>{
+      this.listaEquipamentos = data.map(e => {return { label: e.nome, value: e.id, preco: e.precoDiario}}), err =>{
+      console.log(err);
+      }
+    })
+  }
+
+  addEquipamento(){
+    this.equipamentos = this.formulario.get('equipamentos') as FormArray;
+    this.equipamentos.push(this.criarEquipamento());
+  }
+
+  removerEquipamento(index: number){
+    this.equipamentos.removeAt(index);
+  }
+
+  clear(){
+    this.equipamentos.clear();
+  }
+
   onSubmit(){
-    console.log(this.formulario.value);
-    if(this.formulario.valid) {
+    if(this.formulario.valid){
+      if(this.salaId){
+    var sala = this.formulario.getRawValue();
+    sala.id = this.salaId;
+    this.salasService.atualizarSala(sala).subscribe(
+      success => {
+      alert("Cadastrada com sucesso")
+      this.criarSalaEvento.emit();
+      this.formulario.reset();
+      },
+      error => {alert(error.message)
+      })
+    }
+    else{
       const sala: Sala = {
         ...this.formulario.value,
-        equipamentos: [this.formulario.value.equipamentos]
       }
-      console.log('submit');
       this.salasService.criar(sala).subscribe(
-        success => console.log('sucesso'),
+        success => {
+          console.log('sucesso')},
         error => console.error(error),
-        () => console.log('request completo')
-      );
+        () => {console.log('request completo')
+       debounce(this.criarSalaEvento.emit(), 2)
+      });
+   
+    this.formulario.reset();
     }
+  } 
   }
 }
