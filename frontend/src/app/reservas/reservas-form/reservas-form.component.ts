@@ -21,6 +21,8 @@ export class ReservasFormComponent implements OnInit {
 
   formulario: FormGroup;
 
+  reserva: Reserva;
+
   equipamentoOpcionais = [];
   EquipamentoOpcionalSelecionado: Equipamento;
   equipamentosSelecionados = [];
@@ -68,10 +70,10 @@ export class ReservasFormComponent implements OnInit {
   private initForm() {
     this.formulario = this.formBuilder.group({
       equipamentos: this.formBuilder.array(this.equipamentosAdicionados),
-      idSala: 1,
-      idCliente: 1,
-      dataInicio: null,
-      dataFim: null,
+      idSala: [1],
+      idCliente: [1],
+      dataInicio:'2020-11-15T12:30:20',
+      dataFim: '2021-01-15T12:30:20',
       total: 0
     })
   }
@@ -111,12 +113,25 @@ export class ReservasFormComponent implements OnInit {
     }, err => {
       console.log('erro', err);
     });
+  }
 
-    valorTotal() {
-      this.formulario
+  valorTotal() {
+      this.reserva = {
+        ...this.formulario.value,
+      }
+      this.reserva.total = 0;
+      this.getTotal(this.reserva);
+      this.formulario.patchValue({total:this.reserva.total})
+      console.log(this.formulario.get('total').value);
+      
     }
-
-
+  getTotal(reserva:Reserva){
+    console.log(reserva);
+    
+    this.reservasService.getTotal(reserva).subscribe((dado) =>{
+      console.log(dado,'novaReserva');
+      this.reserva = dado;
+    });
   }
 
   objetoEquipamento() {

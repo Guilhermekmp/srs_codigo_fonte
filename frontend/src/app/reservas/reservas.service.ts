@@ -39,7 +39,7 @@ export class ReservasService {
     return this.http.put<Reserva>(this.API, reserva);
   }
 
-  getTotal(){
-    return this.http.get<Number>(this.API + "/total");
+  getTotal(reserva: Reserva){
+    return this.http.post<Reserva>(this.API + "/total", reserva);
   }
 }
