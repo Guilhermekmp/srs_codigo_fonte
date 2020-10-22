@@ -48,7 +48,7 @@ export class SalasFormComponent implements OnInit {
 
   private initForm(){
     this.formulario = this.formBuilder.group({
-      descricao: null,
+      descricao: new FormControl(),
       equipamentos: [
         {
         idSala: null,
@@ -56,12 +56,6 @@ export class SalasFormComponent implements OnInit {
         quantidade: 5,
         }
       ],
-      idTipoSala: 1,
-      capacidade: 0,
-      precoDiario: 0.00,
-      disponivel: 1,
-      descricao: new FormControl(),
-      equipamentos: this.formBuilder.array([this.criarEquipamento()]),
       idTipoSala: new FormControl(),
       capacidade: new FormControl(),
       precoDiario: new FormControl(),
