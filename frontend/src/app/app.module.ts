@@ -1,5 +1,4 @@
 import { SalasModule } from './salas/salas.module';
-import { ButtonModule } from 'primeng/button';
 import { ReservasModule } from './reservas/reservas.module';
 import { SalasComponent } from './salas/salas.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -21,7 +20,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
-import { ClientesModule } from './clientes/clientes.module';
 import { EquipamentosModule } from './equipamentos/equipamentos.module';
 import { AppFooterComponent } from './components/footer/app.footer.component';
 import { AppTopbarComponent } from './components/topbar/app.topbar.component';
