@@ -85,9 +85,11 @@ public class SalaServico {
         return false;
     }
 
-    public List<EquipamentoDTO> listarEquipamentosOpcionais(SalaDTO dto){
+    public List<EquipamentoDTO> listarEquipamentosOpcionais(Integer id){
+        SalaDTO dto = this.buscar(id);
         Sala sala = salaMapper.toEntity(dto);
         List<EquipamentoDTO> listaEquipamentoOpc = equipamentoServico.listar();
+        List<EquipamentoDTO> lista = new ArrayList<EquipamentoDTO>();
         for (EquipamentoDTO equipamento:listaEquipamentoOpc) {
             boolean obrigatorio = false;
             for (SalaEquipamento equipamentoObrigatorio :sala.getEquipamentos()) {
@@ -95,11 +97,11 @@ public class SalaServico {
                    obrigatorio = true;
                 }
             }
-            if(obrigatorio){
-                listaEquipamentoOpc.remove(equipamento);
+            if(!obrigatorio){
+                lista.add(equipamento);
             }
         }
-        return listaEquipamentoOpc;
+        return lista;
     }
 }
 

@@ -56,7 +56,7 @@ public class SalaRecurso {
 
     @GetMapping("/{id}/equipamentos")
     public ResponseEntity<List<EquipamentoDTO>> listarEquipamentosOp(@PathVariable Integer id){
-        return ResponseEntity.ok(salaServico.listarEquipamentosOpcionais(salaServico.buscar(id)));
+        return ResponseEntity.ok(salaServico.listarEquipamentosOpcionais(id));
     }
 
 }
