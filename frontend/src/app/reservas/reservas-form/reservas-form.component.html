@@ -1,118 +1,98 @@
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <div div class="p-d-block p-d-lg-inline">
-        
+
         <div class="ui-g ui-fluid">
             <div style="width: 30%">
                 <div>
                     <label for="salas" style="font-size: 130%">Descrição da Sala</label>
                 </div>
-                <p-dropdown [options]="salas" formControlName="idSala" 
-                [filter]="true" filterBy="label,value.descricao" 
-                (onHide)="listarOpcionais();valorTotal()"
-                ></p-dropdown>
+                <p-dropdown [options]="salas" formControlName="idSala" [filter]="true" filterBy="label,value.descricao"
+                    (onHide)="listarOpcionais();valorTotal()"></p-dropdown>
             </div>
         </div>
-        
+
         <div class="ui-g ui-fluid">
             <div style="width: 30%">
                 <div>
                     <label for="clientes" style="font-size: 130%">CPF do Cliente</label>
                 </div>
-                <p-dropdown [options]="clientes" [(ngModel)]=clienteSelecionado 
-                formControlName="idCliente" 
-                [filter]="true" filterBy="label,value.cpf"></p-dropdown>
+                <p-dropdown [options]="clientes" [(ngModel)]=clienteSelecionado formControlName="idCliente"
+                    [filter]="true" filterBy="label,value.cpf"></p-dropdown>
             </div>
         </div>
-        
+
         <div class="ui-g ui-fluid">
             <div class="ui-g-12 ui-md-4">
                 <label for="dataInicio" style="font-size: 130%;">Data Inicial</label>
                 <div class="ui-inputgroup">
-                    <input type="datetime-local"  pInputText 
-                    formControlName="dataInicio" id="dataInicio">
+                    <input type="datetime-local" pInputText formControlName="dataInicio" id="dataInicio">
                 </div>
             </div>
         </div>
-            
+
         <div class="ui-g ui-fluid">
             <div class="ui-g-12 ui-md-4">
                 <label for="dataFim" style="font-size: 130%;">Data Final</label>
                 <div class="ui-inputgroup">
-                    <input type="datetime-local"  pInputText 
-                    formControlName="dataFim" id="dataFim">
+                    <input type="datetime-local" pInputText formControlName="dataFim" id="dataFim">
                 </div>
             </div>
         </div>
     </div>
     <div class="p-d-lg-inline">
 
-        <div >
+        <div>
             <h2>Equipamentos opcionais</h2>
         </div>
 
-        <div class = "p-d-md-none">
-                <p-multiSelect [options]="equipamentoOpcionais" [overlayVisible]="true"
-                optionLabel="label" (onPanelHide)="objetoEquipamento()" 
-                [(ngModel)] = "equipamentosSelecionados" [ngModelOptions]="{standalone: true}"
-                style="width: 30px; height: 15px ;"></p-multiSelect>
+        <div class="p-d-md-none">
+            <p-multiSelect [options]="equipamentoOpcionais" [overlayVisible]="true" optionLabel="label"
+                (onPanelHide)="objetoEquipamento()" [(ngModel)]="equipamentosSelecionados"
+                [ngModelOptions]="{standalone: true}"></p-multiSelect>
         </div>
 
-        <div style=" display: flexbox;" formArrayName="equipamentos" 
-        *ngFor="let equipamento of formulario.get('equipamentos').controls; let i = index;">
-            
-            <div [formGroupName]="i" style="display: flex;">
-            
-                <div style="width: fit-content;">
-                    <div>
-                        <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
-                    </div>
-                    <p-dropdown [options]="equipamentoOpcionais" formControlName="idEquipamento" id="listaEquipamentos"></p-dropdown>
-                </div>
-                
+        <div style=" display: flexbox;" *ngFor="let equipamento of equipamentosAdicionados; let i = index;">
+
+            <div style="display: flex;">
+
                 <div class="ui-g ui-fluid">
-                    <div style="width: 5.4vw; margin-left: 10px" >
+                    <label for="listaEquipamentos">{{equipamento.label}}</label>
+
+                </div>
+
+                <div class="ui-g ui-fluid">
+                    <div style="width: 5.4vw; margin-left: 10px">
                         <div>
-                            <label for="capacidade" style="font-size: 130%;">Quantidade</label>
+                            <label for="capacidade" style="font-size: 100%;">Quantidade</label>
                         </div>
-                        <div class="ui-inputgroup">
-                            <input pInputText type="text" formControlName="quantidade" id="quantidade"> 
-                        </div>
+                        <input pInputTet type="text" onblur=setQuantidade(equipamento.value.idEquipamento) id="quantidade">
                     </div>
                 </div>
-                
-                <div style="line-height: 65px; margin-left: 10px;">
-                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" 
-                    style="background-color: green;" (click) = addEquipamento();valorTotal()></button>
-                </div>
+
             </div>
 
         </div>
 
         <div class="ui-g ui-fluid">
-        
+
             <div class="ui-g-12 ui-md-4">
-                <label for="Total" style="font-size: 130%;">Total</label>
                 <div class="ui-inputgroup">
-                    Total: R$ {{formulario.get('total').value}}
+                    Total: R$ {{this.formulario.get('total').value}}
                 </div>
             </div>
-        
+
         </div>
 
     </div>
     <div class="ui-g ui-fluid">
-        
+
         <div>
-            <button 
-            pButton 
-            type="button" 
-            class="app-button-success p-d-flex p-jc-center p-ic-center" 
-            style="background-color: green; margin-top: 5px; padding-top: 10%;"
-            (click) = onSubmit()>
-            <i class="fa fa-check" aria-hidden="true"></i>
-            <span>Realizar Reserva</span>
+            <button pButton type="button" class="app-button-success p-d-flex p-jc-center p-ic-center"
+                style="background-color: green; margin-top: 5px; padding-top: 10%;" (click)=onSubmit()>
+                <i class="fa fa-check" aria-hidden="true"></i>
+                <span>Realizar Reserva</span>
             </button>
         </div>
-   
+
     </div>
 </form>

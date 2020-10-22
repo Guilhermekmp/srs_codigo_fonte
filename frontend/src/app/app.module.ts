@@ -37,13 +37,7 @@ import { InputTextModule } from 'primeng/inputtext';
         AppComponent,
         AppTopbarComponent,
         AppFooterComponent,
-        DiarioErrosComponent,
-        SalasComponent,
-        ReservasComponent,
-        EquipamentosComponent,
-        SalasFormComponent,
-        ClientesComponent,
-        EquipamentosFormComponent
+        DiarioErrosComponent
     ],
     imports: [
         BlockUIModule.forRoot({

@@ -28,7 +28,7 @@ export class ReservasFormComponent implements OnInit {
   equipamentosSelecionados = [];
   equipamentosAdicionados = [];
 
-  equipamentos : FormArray;
+  equipamentos: FormArray;
 
   salas = [];
   salaSelecionada: Sala;
@@ -70,9 +70,9 @@ export class ReservasFormComponent implements OnInit {
   private initForm() {
     this.formulario = this.formBuilder.group({
       equipamentos: this.formBuilder.array(this.equipamentosAdicionados),
-      idSala: [1],
-      idCliente: [1],
-      dataInicio:'2020-11-15T12:30:20',
+      idSala: new FormControl(),
+      idCliente: new FormControl(),
+      dataInicio: '2020-11-15T12:30:20',
       dataFim: '2021-01-15T12:30:20',
       total: 0
     })
@@ -99,7 +99,7 @@ export class ReservasFormComponent implements OnInit {
     })
   }
 
-  addEquipamento(){
+  addEquipamento() {
     this.equipamentos = this.formulario.get('equipamentos') as FormArray;
     this.equipamentos.push(this.criarEquipamento());
   }
@@ -116,48 +116,38 @@ export class ReservasFormComponent implements OnInit {
   }
 
   valorTotal() {
-      this.reserva = {
-        ...this.formulario.value,
-      }
-      this.reserva.total = 0;
-      this.getTotal(this.reserva);
-      this.formulario.patchValue({total:this.reserva.total})
-      console.log(this.formulario.get('total').value);
-      
+    this.reserva = {
+      ...this.formulario.value,
     }
-  getTotal(reserva:Reserva){
+    this.getTotal(this.reserva);
+  }
+  getTotal(reserva: Reserva) {
     console.log(reserva);
-    
-    this.reservasService.getTotal(reserva).subscribe((dado) =>{
-      console.log(dado,'novaReserva');
-      this.reserva = dado;
+    this.reservasService.getTotal(reserva).subscribe((dado) => {
+      this.formulario.patchValue({ total: dado.total });
     });
   }
 
   objetoEquipamento() {
     this.equipamentosAdicionados = [];
     console.log(this.equipamentosSelecionados);
-    this.equipamentosSelecionados.forEach(element => {
+    this.equipamentosAdicionados = this.equipamentosSelecionados.map(element => {
       var valor: EquipamentoOpcional = new EquipamentoOpcional;
       console.log(valor);
-      valor.idReserva = null;
+
       valor.idEquipamento = element.value;
       valor.quantidade = 0;
-      this.equipamentosAdicionados.push({ label: element.label, value: valor });
-      console.log(this.equipamentosAdicionados);
-      
+      return { label: element.label, value: valor };
+
     });
     console.log(this.equipamentosAdicionados);
   }
 
-
-  // private retirarListaEquipamento(){
-  //   for (let index = 0; index < this.equipamentoOpcionais.length; index++) {
-  //     const element = this.equipamentoOpcionais[index];
-  //     if(element.value == this.equipamentosAdicionados.value.idEquipamento){
-  //       this.equipamentoOpcionais.slice(index,1);
-  //     }
-
-  //   }
-  // }
+  setQuantidade(id:number){
+    this.equipamentosAdicionados.forEach(element => {
+      if(element.value.idEquipamento == id){
+        element
+      }
+    });
+  }
 }
