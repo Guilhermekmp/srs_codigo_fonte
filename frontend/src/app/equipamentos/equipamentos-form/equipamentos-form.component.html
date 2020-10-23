@@ -1,42 +1,31 @@
-<div class="ui-fluid" style="height: 100%;">
+<div class="ui-fluid" style="width: 60%; margin-left: 6.5rem;">
     <div class="p-field">
-        <label for="nome" style="font-size: 130%;">Nome</label>
-        <input id="nome" type="text" [(ngModel)]="equipamento.nome" placeholder="Digite o nome" pInputText
-        style="margin-top: 3px;">
+        <label for="nome">Digite o nome do equipamento</label>
+        <input id="nome" type="text" [(ngModel)]="equipamento.nome" placeholder="Digite o nome" pInputText>
     </div>
-    <div style="justify-content: space-between; display: inline-flex; margin-top: 10px;">
-        <div class="p-field" style="display: flex;">
-            <div>
-                <label for="tipo" style="font-size: 130%;">Tipo </label>
-                <p-dropdown id="tipo" [options]="tipos" 
-                [(ngModel)]="tipoSelecionado" placeholder="Selecione..." 
-                optionLabel="nome" [showClear]="true"></p-dropdown>
-
+    <br>
+    <div class="p-field">
+        <label for="tipo">Escolha o tipo do Equipamento</label>
+        <p-dropdown id="tipo" [options]="tipos" [(ngModel)]="tipoSelecionado" placeholder="Selecione o tipo do equipamento" optionLabel="nome" [showClear]="true"></p-dropdown>
+    <br>
+    <br>
+    <div>
+        <div class="p-field">
+            <div class="p-field p-col-12 p-md-3">
+                <label for="precoDiario">Digite o Preço Diário</label>
+                <p-inputNumber id="precoDiario" placeholder="0,00" [(ngModel)]="equipamento.precoDiario" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5">
+                </p-inputNumber>
             </div>
-            <div class="p-field"  style="width: 35%;margin-left: 10px;">
-                <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
-                <input id="precoDiario" 
-                pInputText
-                type="text"
-                placeholder="R$ 0,00"
-                [(ngModel)]="equipamento.precoDiario"
-                inputId="minmaxfraction" 
-                currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
-            </div>
-        </div>  
+        </div>
     </div>
-    
+    <br>
     <div style="width: 6rem;">
         <button 
         pButton 
         type="button" 
-        class="app-button-success p-d-flex p-jc-center p-ic-center" 
-        style="background-color: green; margin-top: 47px; font-weight: bold; line-height: 30px;"
-        (click) = onSubmit()>
-        <span>Criar</span>
+        class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: green; margin-left: 7rem;" (click)="onSubmit()">
+        <i class="fa fa-check" aria-hidden="true" style="padding-right: 5px;"></i>
+        <span style="line-height: 30px;">Salvar</span>
         </button>
     </div>
-</div>
-
-
-    
+</div> 

@@ -15,9 +15,11 @@ export class SalasComponent implements OnInit {
 
   salas: Sala[];
 
-  equipamentos: Equipamento[];
+  salaSelecionadaId: number;
 
-  listaEquipamentos: any[];
+  equipamentos: Equipamento[] = [];
+
+  listaEquipamentos: any[] = [];
 
   displayCreation: boolean = false;
 
@@ -48,10 +50,15 @@ export class SalasComponent implements OnInit {
 
   getNomeEquipamento(id: number){
     let item = this.listaEquipamentos.find(i => i.value === id);
-    return item.label;
+    return item ? item.label : '';
   }
 
-  deletar(id:any){
+  editar(id: number){
+    this.salaSelecionadaId = id;
+    this.abrirPopUp();
+  }
+
+  deletar(id: number){
     this.confirmationService.confirm({
       message: "Tem certeza que deseja excluir esta sala?",
       accept: () => {
@@ -92,6 +99,12 @@ export class SalasComponent implements OnInit {
       default:
         return null;
     }
+  }
+
+
+  criarNovaSala(){
+    this.salaSelecionadaId = null;
+    this.abrirPopUp();
   }
 
   abrirPopUp(){

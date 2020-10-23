@@ -1,47 +1,3 @@
-
-
-<div class="card">
-    <h1>Equipamentos</h1> 
-    <div class="botao">
-
-        <button pButton type="button" label="Cadastrar" class="p-button-success" icon="pi pi-plus" iconPos="right" style="background-color: green;"></button>
-    </div>
-        <button pButton type="button" label="Cadastrar"></button>
-    </div>
-
-        <button pButton type="button" label="Cadastrar" class="p-button-success" icon="pi pi-plus" iconPos="right"></button>
-
-        <button pButton type="button" label="Cadastrar" class="p-button-success" icon="pi pi-plus" iconPos="right" style="background-color: green;"></button>
-
-    <p-table [value]="equipamentos" styleClass="p-database-sm">
-        
-        <ng-template pTemplate="header">
-            <tr>
-                <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
-                <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
-                <th pSortableColumn="tipoEquipamento">Tipo Equipamento <p-sortIcon field="tipoEquipamento"></p-sortIcon></th>
-                <th pSortableColumn="precoDiario">Preco Diario <p-sortIcon field="precoDiario"></p-sortIcon></th>
-                <th pSortableColumn="Obrigatorio">Obrigatorio <p-sortIcon field="obrigatorio "></p-sortIcon></th>
-                <th>Opções</th>
-            </tr>
-
-        </ng-template>
-
-        <ng-template pTemplate="body" let-equipamento>
-
-            <tr>
-                <td>{{equipamento?.id}}</td>
-                <td>{{equipamento?.nome}}</td>
-                <td>{{equipamento?.tipoEquipamento}}</td>
-                <td>{{equipamento?.precoDiario}}</td>
-                <td>{{equipamento?.obrigatorio}}</td>
-                <td>
-                    <span class="p-buttonset">
-                        <button pButton type="button" label="Delete" icon="pi pi-trash"></button>
-                        <button pButton type="button" label="Edit" icon="pi pi-pencil" style="margin-left: 10px;"></button>
-                    </span>
-                </td>
-            </tr>
 <div class="card" style = "height:65px; display: block;">
     <div style= "height: 2.7rem; text-align: left; line-height: 60%; display: flex;
     justify-content: space-between;">
@@ -56,28 +12,15 @@
             </button>
     </div>
 </div>
-<!-- <p-dialog header = "Criar novo equipamento" [(visible)]="displayCreation" [style]="{width: '50vw'}" style="align-content: center;" class="popup">
-    <app-equipamento-form></app-equipamento-form>
-</p-dialog> -->
-    
-
-
-<p-table #dt [value]="equipamentos" [globalFilterFields]="['nome']">
+<p-table [value]="equipamentos">
     
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="id" style="width: 9rem;">Id <p-sortIcon field="id"></p-sortIcon></th>
-            <th pSortableColumn="nome"S>Nome <p-sortIcon field="nome"></p-sortIcon></th>
+            <th pSortableColumn="id" style="width: 5rem;">Id <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="nome" style="width:15rem">Nome <p-sortIcon field="nome"></p-sortIcon></th>
             <th pSortableColumn="idTipoEquipamento" style="width: 13rem;">Tipo <p-sortIcon field="idTipoEquipamento"></p-sortIcon></th>
             <th pSortableColumn="precoDiario" style="width: 10rem;">Preço Diário <p-sortIcon field="precoDiario"></p-sortIcon></th>
-            <th style="width: 13rem;">
-                <div style="display: flex;">
-                    <div style="padding-top: 5px; padding-right: 2px;">
-                        <i class="pi pi-search"></i>
-                    </div>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." style="width: 85%;"/>
-                </div> 
-            </th>
+            <th style="width: 10rem;">Opções</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-equipamento>
@@ -85,7 +28,7 @@
             <td style="text-align: center;">{{equipamento?.id}}</td>
             <td>{{equipamento?.nome}}</td>
             <td style="text-align: center;">{{getTipoEquipamento(equipamento)}}</td>
-            <td style="text-align: center;">R${{equipamento?.precoDiario}}</td>
+            <td style="text-align: center;">{{equipamento?.precoDiario}}</td>
             <td style="text-align: center;">
                 <span style="float: center">
                     <button 
@@ -106,11 +49,10 @@
             </td>
         </tr>
     </ng-template>
-
 </p-table>
 
-<p-confirmDialog header="Atenção" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-
-<p-dialog header = "Novo Equipamento" [(visible)]="displayCreation" [style]="{'width':'20vw', 'height':'fit-content'}">
+<p-dialog header = "Criar novo equipamento" [(visible)]="displayCreation" [style]="{width: '50%'}" style="align-content: center;">
     <app-equipamentos-form></app-equipamentos-form>    
 </p-dialog>
+
+<p-confirmDialog header="Atenção" icon="pi pi-exclamation-triangle"></p-confirmDialog>
