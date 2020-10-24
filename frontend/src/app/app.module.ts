@@ -11,7 +11,7 @@ import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { BreadcrumbModule, ErrorStackModule, MenuModule, PageNotificationModule } from '@nuvem/primeng-components';
 import { BlockUIModule } from 'ng-block-ui';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { ConfirmationService, InputNumberModule } from 'primeng';
+import { ButtonModule, ConfirmationService, InputNumberModule } from 'primeng';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { environment } from '../environments/environment';
@@ -25,6 +25,7 @@ import { AppTopbarComponent } from './components/topbar/app.topbar.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SharedModule } from './shared/shared.module';
+import { ClientesModule } from './clientes/clientes.module';
 
 
 @NgModule({
