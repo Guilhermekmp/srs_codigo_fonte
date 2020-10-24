@@ -11,11 +11,12 @@ import com.basis.srs.servico.dto.ReservaDTO;
 import com.basis.srs.servico.dto.SalaDTO;
 import com.basis.srs.servico.exception.RegraNegocioException;
 import com.basis.srs.servico.mapper.SalaMapper;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -44,24 +45,30 @@ public class SalaServico {
 
     public SalaDTO criar(SalaDTO sala) throws RegraNegocioException{
         Sala novaSala = salaMapper.toEntity(sala);
+        if(novaSala.getId() == null){
+            checarDuplicata(novaSala);
+        }
         List<SalaEquipamento> equipamentos = novaSala.getEquipamentos();
         novaSala.setEquipamentos(new ArrayList<>());
-
-        for(SalaDTO salaInstancia: listar()){
-            if(salaInstancia.getDescricao().equals(novaSala.getDescricao())  || salaInstancia.getEquipamentos().equals(sala.getEquipamentos())){
-                throw new RegraNegocioException("Salas duplicadas");
-            }
-        }
 
         salaRepositorio.save(novaSala);
         equipamentos.forEach(equipamento ->{
             equipamento.setSala(novaSala);
             equipamento.getId().setIdSala(novaSala.getId());
         });
+
         salaEquipamentoRepositorio.saveAll(equipamentos);
         SalaDTO salaDTO = salaMapper.toDto(novaSala);
 
         return salaDTO;
+    }
+
+    private void checarDuplicata(Sala novaSala){
+        for(SalaDTO salaInstancia: listar()){
+            if(salaInstancia.getDescricao().equals(novaSala.getDescricao())){
+                throw new RegraNegocioException("Salas duplicadas");
+            }
+        }
     }
 
     public void deletar(Integer id) throws RegraNegocioException{
@@ -85,11 +92,9 @@ public class SalaServico {
         return false;
     }
 
-    public List<EquipamentoDTO> listarEquipamentosOpcionais(Integer id){
-        SalaDTO dto = this.buscar(id);
+    public List<EquipamentoDTO> listarEquipamentosOpcionais(SalaDTO dto){
         Sala sala = salaMapper.toEntity(dto);
         List<EquipamentoDTO> listaEquipamentoOpc = equipamentoServico.listar();
-        List<EquipamentoDTO> lista = new ArrayList<EquipamentoDTO>();
         for (EquipamentoDTO equipamento:listaEquipamentoOpc) {
             boolean obrigatorio = false;
             for (SalaEquipamento equipamentoObrigatorio :sala.getEquipamentos()) {
@@ -97,11 +102,11 @@ public class SalaServico {
                    obrigatorio = true;
                 }
             }
-            if(!obrigatorio){
-                lista.add(equipamento);
+            if(obrigatorio){
+                listaEquipamentoOpc.remove(equipamento);
             }
         }
-        return lista;
+        return listaEquipamentoOpc;
     }
 }
 

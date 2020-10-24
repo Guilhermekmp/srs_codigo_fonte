@@ -2,20 +2,16 @@ package com.basis.srs.servico;
 
 import com.basis.srs.dominio.Equipamento;
 import com.basis.srs.dominio.Sala;
-import com.basis.srs.dominio.SalaEquipamento;
 import com.basis.srs.repositorio.EquipamentoRepositorio;
 import com.basis.srs.repositorio.SalaRepositorio;
 import com.basis.srs.servico.dto.EquipamentoDTO;
 import com.basis.srs.servico.exception.RegraNegocioException;
 import com.basis.srs.servico.exception.RegraNegocioExceptionNotFound;
 import com.basis.srs.servico.mapper.EquipamentoMapper;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-import java.lang.reflect.Array;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -27,19 +23,18 @@ public class EquipamentoServico {
     private final SalaRepositorio salaRepositorio;
 
     public EquipamentoDTO criar(EquipamentoDTO novoEquipamento) {
-        List<Equipamento> equipamentos = equipamentoRepositorio.findAll();
-        for (Equipamento equipamento: equipamentos) {
-            if(equipamento.getId().equals(novoEquipamento.getId()) &&
-                equipamento.getNome().equals(novoEquipamento.getNome()) &&
-                equipamento.getPrecoDiario().equals(novoEquipamento.getPrecoDiario()) &&
-                equipamento.getTipoEquipamento().equals(novoEquipamento.getIdTipoEquipamento())){
-                throw new RegraNegocioException("Equipamento já existente!");
+        for (Equipamento equipamento:equipamentoRepositorio.findAll()) {
+            if (equipamento.getNome().equals(novoEquipamento.getNome())
+                    && equipamento.getPrecoDiario().equals(novoEquipamento.getPrecoDiario())
+                    && equipamento.getTipoEquipamento().getId().equals(novoEquipamento.getIdTipoEquipamento())) {
+                throw new RegraNegocioException("Equipamento já existe!");
             }
         }
         Equipamento equip = equipamentoRepositorio.save(equipamentoMapper.toEntity(novoEquipamento));
         EquipamentoDTO equipDTO = equipamentoMapper.toDto(equip);
         return equipDTO;
     }
+
 
     public List<EquipamentoDTO> listar(){
         List<EquipamentoDTO> dtoEquips = equipamentoMapper.toDto(equipamentoRepositorio.findAll());

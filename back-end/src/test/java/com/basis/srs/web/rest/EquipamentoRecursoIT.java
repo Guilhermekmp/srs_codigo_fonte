@@ -69,7 +69,8 @@ public class EquipamentoRecursoIT extends IntTestComum {
 
     @Test
     public void editar() throws Exception {
-        Equipamento equipamento = equipamentoBuilder.construirEntidade();
+        Equipamento equipamento = equipamentoBuilder.construir();
+        equipamento.setNome("alteração");
         getMockMvc().perform(put("/api/equipamentos").contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(equipamentoBuilder.converterToDto(equipamento))))
                 .andExpect((status().isOk()));
@@ -87,7 +88,6 @@ public class EquipamentoRecursoIT extends IntTestComum {
     public void erroSalvarExistente() throws Exception {
         Equipamento equipamento = equipamentoBuilder.construirEntidade();
         Equipamento equipamento1 = equipamentoBuilder.construirEntidade();
-        equipamento1.setPrecoDiario(200.00);
         getMockMvc().perform(post("/api/equipamentos")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(
                         equipamentoBuilder.converterToDto(equipamento))));
@@ -101,7 +101,7 @@ public class EquipamentoRecursoIT extends IntTestComum {
     public void erroBuscar() throws Exception {
         Equipamento equipamento = equipamentoBuilder.construir();
         getMockMvc().perform(get("/api/equipamentos/" + 666))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -115,7 +115,7 @@ public class EquipamentoRecursoIT extends IntTestComum {
     public void erroApagarInexistente() throws Exception {
         Equipamento equipamento = equipamentoBuilder.construir();
         getMockMvc().perform(delete("/api/equipamentos/" + 500))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
     }
 
     @Test
