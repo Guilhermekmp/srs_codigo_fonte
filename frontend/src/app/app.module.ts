@@ -23,8 +23,6 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { EquipamentosModule } from './equipamentos/equipamentos.module';
 import { AppFooterComponent } from './components/footer/app.footer.component';
 import { AppTopbarComponent } from './components/topbar/app.topbar.component';
-import { EquipamentosFormComponent } from './equipamentos/equipamentos-form/equipamentos-form.component';
-import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { SalasFormComponent } from './salas/salas-form/salas-form.component';
 import { SharedModule } from './shared/shared.module';

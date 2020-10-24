@@ -26,9 +26,9 @@ export class ClientesComponent {
         nome:['', [Validators.required]],
         email:['', [Validators.required]],
         endereco:['', [Validators.required]],
-        cpf: ['', [Validators.required]],
-        rg: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(7)]],
-        telefone:['', [Validators.required]],
+        cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+        rg: ['', [Validators.required]],
+        telefone:['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
         dataNascimento:['', [Validators.required]]
       })
     }
@@ -55,22 +55,21 @@ export class ClientesComponent {
       }
     })
   }
-
   salvar() {
     if(this.clienteId){
       var cliente = this.formulario.getRawValue();
       cliente.id = this.clienteId
       this.clientesService.atualizarCliente(cliente).subscribe(
         response => {
-          alert("Cadastrado com sucesso!")
+          alert("Editado com sucesso!")
           this.listar()
           this.formulario.reset()
+          this.displayCreation=false;
         },
         error => {
           alert(error.message)
         }
       )
-
     }else{
     var cliente = this.formulario.getRawValue();
     this.clientesService.salvar(cliente).subscribe(
@@ -78,13 +77,12 @@ export class ClientesComponent {
         alert("Cadastrado com sucesso!")
         this.listar()
         this.formulario.reset()
+        this.displayCreation=false;
       },
       error => {
         alert(error.message)
-
       }
     )
-
     }
     
   }

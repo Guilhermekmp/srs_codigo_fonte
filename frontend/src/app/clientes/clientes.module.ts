@@ -6,15 +6,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import {TableModule} from 'primeng/table';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SharedModule } from '../shared/shared.module';
-import {InputMaskModule} from 'primeng/inputmask';
+import { InputMaskModule } from 'primeng/inputmask';
+import { CPFPipe } from './pipes/cpf.pipe';
+import { TELEFONEPipe } from './pipes/telefone.pipe';
 
 
 
 @NgModule({
-  declarations: [ClientesComponent],
+  declarations: [ClientesComponent, CPFPipe, TELEFONEPipe],
   imports: [
     CommonModule,
     HttpClientModule,

@@ -37,5 +37,8 @@ export class EquipamentosService {
     return this.http.get<Equipamento>(this.url+"/",id)
   }
   
-
+  atualizarEquipamento(equipamento:Equipamento): Observable<Equipamento> {
+    return this.http.put<Equipamento>(this.url, equipamento);
+  }
+  
 }

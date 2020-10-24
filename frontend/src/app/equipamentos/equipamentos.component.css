@@ -1,13 +1,6 @@
 .botao{
     display: flex;
     flex-direction: row-reverse;
-    margin-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-th {
-    white-space: wrap !important;
-
 }
 
 th{
@@ -28,3 +21,17 @@ td {
  :host .ui-button /deep/ .ui-button-text{
      display: none;
  }
+
+ .custom-toast .ui-toast{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;   
+ }
+
+ .custom-toast .ui-toast-message-content{
+    font-family: 'Courier New', Courier, monospace;
+    background: #FFD07B;
+ }
+

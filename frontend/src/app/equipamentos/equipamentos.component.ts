@@ -1,23 +1,26 @@
 import { EquipamentosService } from './equipamentos.service';
-import { Component, OnInit } from '@angular/core';
-import { style } from '@angular/animations';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Equipamento } from './equipamento';
-import { ConfirmationService } from 'primeng';
+import { ConfirmationService, MessageService, Message } from 'primeng';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-equipamentos',
   templateUrl: './equipamentos.component.html',
   styleUrls: ['./equipamentos.component.css'],
-  providers:[ConfirmationService]
+  providers:[ConfirmationService],
 })
 export class EquipamentosComponent implements OnInit {
+ 
+  
   displayCreation:boolean = false;
   equipamentos = [];
   equipamento = new Equipamento();
   equipament: Array<Equipamento>;
+  equipamentoId:number;
 
-
-  constructor(private confirmationService: ConfirmationService, public equipamentosService: EquipamentosService) { 
+  constructor(private confirmationService: ConfirmationService, public equipamentosService: EquipamentosService,
+    private messageService:MessageService) { 
     
   }
 
@@ -37,7 +40,6 @@ export class EquipamentosComponent implements OnInit {
         return null;
     }
   }
-
   listar(){
     this.equipamentosService.listarEquipamentos().subscribe((data)=>{
       this.equipamentos = data;
@@ -50,14 +52,15 @@ export class EquipamentosComponent implements OnInit {
 
   deletar(id:any){
     this.confirmationService.confirm({
-      message: 'Tem certeza que deseja excluir esse registro?',
+      message:'Deseja mesmo deletar esse equipamento?',
+      header:'Atenção',
       accept: () => {
         this.equipamentosService.deletar(id).subscribe(
           r => {
             this.listar()
           }
         )
-
+        this.messageService.add({severity:'success', summary:'Sucesso!', detail:'Requisição efetuada com sucesso'})
       }
     })
   }
@@ -74,7 +77,14 @@ export class EquipamentosComponent implements OnInit {
 
   abrirPopUp(){
     this.displayCreation = true;
+
+  }
+  messagemErro(){
+    this.messageService.add({severity:'error', summary:'Erro', detail:'Algo de errado aconteceu...'});
+  }
+  mensagemSucesso(){
+    this.messageService.add({severity:'success', summary:'Sucesso', detail:'Requisição efetuada com sucesso'});
   }
 
-}
 
+}
