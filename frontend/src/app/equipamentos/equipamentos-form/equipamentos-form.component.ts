@@ -30,7 +30,7 @@ export class EquipamentosFormComponent implements OnInit {
   ngOnInit(){
 
   }
-  onSubmit(Equipamento){
+  onSubmit(){
     this.equipamento.idTipoEquipamento = this.tipoSelecionado.idTipoEquipamento;
     console.log('Equipamento', this.equipamento);
     this.equipamentosService.salvar(this.equipamento).subscribe(

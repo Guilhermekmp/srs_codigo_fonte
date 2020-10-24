@@ -15,6 +15,7 @@ import { TableModule } from 'primeng/table';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ReservasFormComponent } from './reservas-form/reservas-form.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { InputNumberModule } from 'primeng';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     SharedModule,
     MultiSelectModule,
     DropdownModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    InputNumberModule
     ],
   exports: [
     ReservasComponent,

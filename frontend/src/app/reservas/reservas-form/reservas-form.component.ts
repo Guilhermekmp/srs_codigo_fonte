@@ -24,11 +24,7 @@ export class ReservasFormComponent implements OnInit {
   reserva: Reserva;
 
   equipamentoOpcionais = [];
-  EquipamentoOpcionalSelecionado: Equipamento;
   equipamentosSelecionados = [];
-  equipamentosAdicionados = [];
-
-  equipamentos: FormArray;
 
   salas = [];
   salaSelecionada: Sala;
@@ -69,7 +65,7 @@ export class ReservasFormComponent implements OnInit {
 
   private initForm() {
     this.formulario = this.formBuilder.group({
-      equipamentos: this.formBuilder.array(this.equipamentosAdicionados),
+      equipamentos: this.formBuilder.array(this.equipamentosSelecionados),
       idSala: new FormControl(),
       idCliente: new FormControl(),
       dataInicio: '2020-11-15T12:30:20',
@@ -77,6 +73,11 @@ export class ReservasFormComponent implements OnInit {
       total: 0
     })
   }
+
+  addEquipamento(){
+    this.formulario.value.equipamentos = this.equipamentosSelecionados
+  }
+  
 
   onSubmit() {
     console.log(this.formulario.value);
@@ -89,19 +90,6 @@ export class ReservasFormComponent implements OnInit {
       error => console.error(error),
       () => console.log('request completo')
     );
-  }
-
-  criarEquipamento() {
-    return this.formBuilder.group({
-      idReserva: null,
-      idEquipamento: new FormControl,
-      quantidade: new FormControl
-    })
-  }
-
-  addEquipamento() {
-    this.equipamentos = this.formulario.get('equipamentos') as FormArray;
-    this.equipamentos.push(this.criarEquipamento());
   }
 
   listarOpcionais() {
@@ -119,6 +107,15 @@ export class ReservasFormComponent implements OnInit {
     this.reserva = {
       ...this.formulario.value,
     }
+    var lista = this.formulario.value.equipamentos;
+    if(lista != null){
+      this.reserva.equipamentos = []
+      lista.forEach(element => {
+        this.reserva.equipamentos.push(element.value);
+      });
+    }
+    console.log(this.formulario.value);
+    
     this.getTotal(this.reserva);
   }
   getTotal(reserva: Reserva) {
@@ -129,25 +126,26 @@ export class ReservasFormComponent implements OnInit {
   }
 
   objetoEquipamento() {
-    this.equipamentosAdicionados = [];
     console.log(this.equipamentosSelecionados);
-    this.equipamentosAdicionados = this.equipamentosSelecionados.map(element => {
+    this.equipamentosSelecionados.map(element => {
       var valor: EquipamentoOpcional = new EquipamentoOpcional;
       console.log(valor);
-
+      valor.idReserva = null;
       valor.idEquipamento = element.value;
       valor.quantidade = 0;
-      return { label: element.label, value: valor };
+      element.value = valor;
 
     });
-    console.log(this.equipamentosAdicionados);
   }
 
-  setQuantidade(id:number){
-    this.equipamentosAdicionados.forEach(element => {
-      if(element.value.idEquipamento == id){
-        element
+  setQuantidade(id:number,qtd:number){
+    this.formulario.value.equipamentos.forEach(element => {
+      if(element.value.idEquipamento === id){
+        element.value.quantidade = qtd;
+        console.log(element.value.quantidade);
       }
     });
+    console.log(this.equipamentosSelecionados);
+    
   }
 }
