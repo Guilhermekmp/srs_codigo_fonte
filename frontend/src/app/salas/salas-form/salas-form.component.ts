@@ -24,6 +24,7 @@ export class SalasFormComponent implements OnInit {
   controlDrop = new FormControl();
 
   equipamentos: FormArray;
+  
   listaEquipamentosNew: SalaEquipamento[] = [];
   
   @Input() set salaId(id: number){
@@ -34,6 +35,8 @@ export class SalasFormComponent implements OnInit {
       console.log(this.mostrarLista);
     }
   }
+
+  listaEquipamentosAdicionados: SalaEquipamento[] = [];
 
   mostrarLista: boolean = false;
 
@@ -50,6 +53,7 @@ export class SalasFormComponent implements OnInit {
       this.initForm();
       if(!this.salaId){
         this.mostrarLista = false;
+        this.formulario.reset();
       }
     }
 
@@ -68,7 +72,7 @@ export class SalasFormComponent implements OnInit {
   console.log("SALAID " + this.salaId);
   this.formulario2 = this.formBuilder.group({});
 
-  this.listaEquipamentosNew.push(new SalaEquipamento());
+  // this.listaEquipamentosAdicionados.push(new SalaEquipamento());
 
   }
 
@@ -78,7 +82,7 @@ export class SalasFormComponent implements OnInit {
       this.atualizarForm();
       console.log(data);
       this.listaEquipamentosNew = this.sala.equipamentos;
-      console.log(this.listaEquipamentosNew);
+      console.log("EQUIPAMENTOS DA SALA", this.listaEquipamentosNew);
     }, err =>{
       console.log(err);
     });
@@ -94,8 +98,8 @@ export class SalasFormComponent implements OnInit {
     this.formulario.get('idTipoSala').setValue(this.sala.idTipoSala);
     // this.formulario.get('equipamentos').patchValue(equipamentos);
 
-    console.log("AAAAAAAAA", this.sala);
-    console.log("BBBBBBBBB", this.formulario.value);
+    console.log("VALOR DA SALA", this.sala);
+    console.log("VALOR DO FORMULARIO", this.formulario.value);
 
   }
 
@@ -117,6 +121,7 @@ export class SalasFormComponent implements OnInit {
     })
   }
 
+  //Funções que usam listaEquipamentos
   listarEquipamentos(){
     this.equipamentosService.listarEquipamentos().subscribe((data)=>{
       this.listaEquipamentos = data.map(e => {return { label: e.nome, value: e.id }}), err =>{
@@ -125,26 +130,83 @@ export class SalasFormComponent implements OnInit {
     })
   }
 
-  addEquipamento(){
-    this.listaEquipamentosNew.push(new SalaEquipamento());
+  getNomeEquipamento(idEquipamento: number): string {
+    let item = this.listaEquipamentos.find(i => i.value === idEquipamento);
+    return item ? item.label : '';
+  }
+
+  /* ListaEquipamentosNew é a lista dos equipamentos que já estavam adicionados 
+  * na sala. Unicamente utilizada no formulário de editar.
+  * 
+  * ListaEquipamentosAdicionados é a lista dos novos equipamentos a serem 
+  * adicionados. Usada tanto em Nova Sala quanto em Editar.
+  * 
+  * Há uma junção (concatenação) das duas listas quando o formulário 
+  * for submetido.
+  */
+
+  //Funções que usam listaEquipamentosNew
+  alterarIdEquipamento(idEquipamento: number, index: number){
+    this.listaEquipamentosNew[index].idSala = null;
+    this.listaEquipamentosNew[index].idEquipamento = idEquipamento;
   }
 
   removerEquipamento(index: number){
     this.listaEquipamentosNew.splice(index, 1);
   }
 
-  clear(){
-    this.equipamentos.clear();
+  alterarQuantidade(quantidade: number, index: number){
+    console.log(quantidade, index);
+    this.listaEquipamentosNew[index].quantidade = Number(quantidade);
+  }
+
+  removerTodosEquipamentos(){
+    this.listaEquipamentosNew = [];
+  }
+
+  //Funções que usam listaEquipamentosAdicionados
+  addEquipamento(){
+    this.listaEquipamentosAdicionados.push(new SalaEquipamento());
+  }
+
+  alterarIdEquipamentoAdicionado(idEquipamento: number, index: number){
+    this.listaEquipamentosAdicionados[index].idSala = null;
+    this.listaEquipamentosAdicionados[index].idEquipamento = idEquipamento;
+  }
+
+  removerEquipamentoAdicionado(index: number){
+    this.listaEquipamentosAdicionados.splice(index, 1);
+  }
+
+  alterarQuantidadeAdicionado(quantidade: number, index: number){
+    console.log(quantidade, index);
+    this.listaEquipamentosAdicionados[index].quantidade = Number(quantidade);
+  }
+
+  juntarListas(): SalaEquipamento[]{
+    var listaCompleta :SalaEquipamento[];
+    listaCompleta = this.listaEquipamentosAdicionados;
+    for (let index = 0; index < this.listaEquipamentosNew.length; index++) {
+       var salaEquipamento: SalaEquipamento = new SalaEquipamento(); 
+       
+       salaEquipamento.idSala = null;
+       salaEquipamento.idEquipamento = this.listaEquipamentosNew[index].idEquipamento;
+       salaEquipamento.quantidade = this.listaEquipamentosNew[index].quantidade;
+       
+      listaCompleta.push(salaEquipamento);
+    }
+    console.log("LISTA COMPLETA", listaCompleta);
+    return listaCompleta;
   }
 
   onSubmit(){
     if(this.formulario.valid){
       if(this.sala.id){
-        console.log('sala editada' , this.sala);
+        // console.log('sala editada' , this.sala);
 
         this.salasService.atualizarSala(this.construirObjetoSala()).subscribe(
           success => {
-            console.log('PUT' + this.sala)},
+            console.log('PUT', this.sala)},
           error => console.error(error),
           () => {console.log('request completo')
          debounce(this.criarSalaEvento.emit(), 2)
@@ -164,9 +226,9 @@ export class SalasFormComponent implements OnInit {
      
       }
       this.formulario.reset();
-      //window.location.reload();
+      window.location.reload();
     }
-  } 
+  }
 
   construirObjetoSala(): Sala {
     const sala = new Sala();
@@ -176,29 +238,16 @@ export class SalasFormComponent implements OnInit {
     sala.idTipoSala = this.formulario.get('idTipoSala').value;
     sala.precoDiario = this.formulario.get('precoDiario').value;
 
-    sala.equipamentos = this.listaEquipamentosNew.map(item=>{
+    sala.equipamentos = this.juntarListas()
+    .map(item=>{
       console.log('item lista', item);
       
       if(item.idEquipamento && item.quantidade){
         return item;
       }
       });
+    console.log("EQUIPAMENTOS SALA EDITADA", sala.equipamentos);
     return sala;
-  }
-
-  alterarIdEquipamento(idEquipamento: number, index: number){
-    this.listaEquipamentosNew[index].idSala = null;
-    this.listaEquipamentosNew[index].idEquipamento = idEquipamento;
-  }
-
-  alterarQuantidade(quantidade: number, index: number){
-    console.log(quantidade, index);
-    this.listaEquipamentosNew[index].quantidade = Number(quantidade);
-  }
-
-  getNomeEquipamento(idEquipamento: number): string {
-    let item = this.listaEquipamentos.find(i => i.value === idEquipamento);
-    return item ? item.label : '';
   }
 
 }
