@@ -159,6 +159,10 @@ export class SalasFormComponent implements OnInit {
     this.listaEquipamentosNew[index].quantidade = Number(quantidade);
   }
 
+  removerTodosEquipamentos(){
+    this.listaEquipamentosNew = [];
+  }
+
   //Funções que usam listaEquipamentosAdicionados
   addEquipamento(){
     this.listaEquipamentosAdicionados.push(new SalaEquipamento());

@@ -43,6 +43,9 @@
             <div style="padding-top: 10px; margin-left: 10px;">
                 <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
             </div>
+            <div style="padding-top: 10px; margin-left: 10px;">
+                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded" style="background-color: red;" (click) = removerTodosEquipamentos()></button>
+            </div>
         </div>
         <div style="display: flex;">
             <div style="margin-right: 75px;">
@@ -97,8 +100,6 @@
                 <div style="margin-left: 10px;">
                     <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamentoAdicionado(i)></button>
                 </div>
-                
-                
             </div>
         </div>
     </div>
