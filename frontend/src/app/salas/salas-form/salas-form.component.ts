@@ -53,6 +53,7 @@ export class SalasFormComponent implements OnInit {
       this.initForm();
       if(!this.salaId){
         this.mostrarLista = false;
+        this.formulario.reset();
       }
     }
 
