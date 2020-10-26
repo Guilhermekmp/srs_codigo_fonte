@@ -52,7 +52,12 @@ export class ReservasFormComponent implements OnInit {
 
   constructor(private reservasService: ReservasService, private formBuilder: FormBuilder
     , private salasService: SalasService, private equipamentosService: EquipamentosService
-    , private clientesService: ClientesService) { }
+    , private clientesService: ClientesService) {
+      this.initForm();
+      if(!this.reservaId){
+        this.mostrarLista = false;
+      }
+     }
 
   ngOnInit(): void {
 
@@ -60,6 +65,8 @@ export class ReservasFormComponent implements OnInit {
 
     this.listarSalas();
     this.listarClientes();
+    
+    this.formulario2 = this.formBuilder.group({});
 
     this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
   }
@@ -186,15 +193,16 @@ export class ReservasFormComponent implements OnInit {
     this.reserva = {
       ...this.formulario.value,
     }
-    var lista = this.formulario.value.equipamentos;
+    var lista = this.reserva.equipamentos;
     if(lista != null){
       this.reserva.equipamentos = []
       lista.forEach(element => {
         this.reserva.equipamentos.push(element.value);
       });
     }
-    console.log(this.formulario.value);
+    console.log(this.reserva,'reserva valor');
     
+    this.reserva.total = 0;
     this.getTotal(this.reserva);
   }
   getTotal(reserva: Reserva) {
@@ -208,11 +216,11 @@ export class ReservasFormComponent implements OnInit {
   construirObjetoReserva(): Reserva {
     const reserva = new Reserva();
     reserva.id = this.reserva.id? this.reserva.id : null;
-    reserva.idSala = this.formulario.get('capacidade').value;
-    reserva.idCliente = this.formulario.get('descricao').value;
-    reserva.dataInicio = this.formulario.get('idTiporeserva').value;
-    reserva.dataFim = this.formulario.get('precoDiario').value;
-    reserva.total = this.formulario.get('precoDiario').value;
+    reserva.idSala = this.formulario.get('idSala').value;
+    reserva.idCliente = this.formulario.get('idCliente').value;
+    reserva.dataInicio = this.formulario.get('dataInicio').value;
+    reserva.dataFim = this.formulario.get('dataFim').value;
+    reserva.total = this.formulario.get('total').value;
 
     reserva.equipamentos = this.equipamentosOpcionaisNew.map(item=>{
       console.log('item lista', item);
