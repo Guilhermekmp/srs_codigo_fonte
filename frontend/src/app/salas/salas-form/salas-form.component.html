@@ -42,43 +42,56 @@
             <h2>Equipamentos obrigatórios</h2>
             <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
         </div>
+        <div style="display: flex;">
+            <div style="margin-right: 75px;">
+                <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
+            </div>
+            <div>
+                <label for="quantidade" style="font-size: 130%;">Quantidade</label>
+            </div>
+        </div>
         <div *ngIf="mostrarLista">
             <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosNew; let i=index">
-                <div class="ui-g ui-fluid">
-                    <div style="width: 5.4vw; margin-left: 10px" >
-                        <input pInputText type="text" id="idEquipento"
-                        readonly value="{{getNomeEquipamento(listaEquipamentosNew[i].idEquipamento)}}"> 
+                <div class="ui-g ui-fluid" style="display: flex; margin-bottom: 10px;">
+                    <div>
+                        <div style="width: fit-content; margin-right: 10px" >
+                            <input pInputText type="text" id="idEquipamento" style="width: 175px; background-color: darkgray;"
+                            readonly value="{{getNomeEquipamento(listaEquipamentosNew[i].idEquipamento)}}"> 
+                        </div>
+                    </div>
+                    <div class="ui-g ui-fluid">
+                        <div style="width: 5.4vw;" >
+                            <input pInputText type="number" min="1" [value]="listaEquipamentosNew[i].quantidade" id="quantidade"
+                            #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <form action="" [formGroup]="formulario2"></form>
         <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosNew; let i=index">
-            <div class="equipamento">
+            <div class="equipamento" style="display: flex; margin-bottom: 10px;">
                 <div style="width: fit-content;">
-                    <div>
-                        <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
-                    </div>
+
                     <p-dropdown [options]="listaEquipamentos" #idEquipamento
                          id="listaEquipamentos" placeholder="Selecione..."
                         (onChange) = "alterarIdEquipamento(idEquipamento.value, i)"></p-dropdown>
                 </div>
                 <div class="ui-g ui-fluid">
                     <div style="width: 5.4vw; margin-left: 10px" >
-                        <div>
-                            <label for="quantidade" style="font-size: 130%;">Quantidade</label>
-                        </div>
+
                         <input pInputText type="number" min="1" [value]="listaEquipamentosNew[i].quantidade" id="quantidade"
                         #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
                     </div>
                 </div>
 
-                <!-- <div style="line-height: 65px; margin-left: 10px;"> -->
+                <div style="margin-left: 10px;">
                     <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
-                <!-- </div>
-                <div style="line-height: 65px; margin-left: 10px;"> -->
+                </div>
+                <div style="margin-left: 10px;">
                     <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
-                <!-- </div> -->
+                </div>
                 
                 
             </div>
