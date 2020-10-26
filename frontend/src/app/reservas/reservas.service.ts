@@ -35,7 +35,7 @@ export class ReservasService {
     return this.http.post<Reserva>(this.API, reserva);
   }
 
-  editar(reserva: Reserva):Observable<Reserva>{
+  atualizarReserva(reserva: Reserva): Observable<Reserva>{
     return this.http.put<Reserva>(this.API, reserva);
   }
 

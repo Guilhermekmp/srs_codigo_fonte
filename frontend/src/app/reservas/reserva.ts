@@ -1,4 +1,5 @@
 export class Reserva{
+    id:null;
     idSala: number;
     idCliente: number;
     dataInicio : Date;

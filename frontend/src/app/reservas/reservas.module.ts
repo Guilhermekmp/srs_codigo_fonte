@@ -1,3 +1,4 @@
+import { ConfirmationService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -41,7 +42,8 @@ import { InputNumberModule } from 'primeng';
     ReservasComponent,
   ],
   providers: [
-    ReservasService
+    ReservasService,
+    ConfirmationService
   ],
 })
 export class ReservasModule { }

@@ -43,9 +43,65 @@
 
         <div>
             <h2>Equipamentos opcionais</h2>
+            <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
+        </div>
+        <div style="display: flex;">
+            <div style="margin-right: 75px;">
+                <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
+            </div>
+            <div>
+                <label for="quantidade" style="font-size: 130%;">Quantidade</label>
+            </div>
         </div>
 
-        <div class="ui-g ui-fluid">
+        <div *ngIf="mostrarLista">
+            <div class="nova-lista-equipamentos" *ngFor="let item of equipamentosOpcionaisNew; let i=index">
+                <div class="ui-g ui-fluid" style="display: flex; margin-bottom: 10px;">
+                    <div>
+                        <div style="width: fit-content; margin-right: 10px" >
+                            <input pInputText type="text" id="idEquipamento" style="width: 175px; background-color: darkgray;"
+                            readonly value="{{getNomeEquipamento(equipamentosOpcionaisNew[i].idEquipamento)}}"> 
+                        </div>
+                    </div>
+                    <div class="ui-g ui-fluid">
+                        <div style="width: 5.4vw;" >
+                            <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
+                            #qtd (blur) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form action="" [formGroup]="formulario2"></form>
+        <div class="nova-lista-equipamentos" *ngFor="let item of equipamentosOpcionaisNew; let i=index">
+            <div class="equipamento" style="display: flex; margin-bottom: 10px;">
+                <div style="width: fit-content;">
+
+                    <p-dropdown [options]="equipamentosOpcionaisNew" #idEquipamento
+                         id="listaEquipamentos" placeholder="Selecione..."
+                        (onChange) = "alterarIdEquipamento(idEquipamento.value, i)"></p-dropdown>
+                </div>
+                <div class="ui-g ui-fluid">
+                    <div style="width: 5.4vw; margin-left: 10px" >
+
+                        <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
+                        #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
+                    </div>
+                </div>
+
+                <div style="margin-left: 10px;">
+                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento();valorTotal()></button>
+                </div>
+                <div style="margin-left: 10px;">
+                    <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i);valorTotal()></button>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <!-- <div class="ui-g ui-fluid">
             <p-multiSelect [options]="equipamentoOpcionais" [overlayVisible]="true" optionLabel="label"
                 (onPanelHide)="objetoEquipamento();addEquipamento()" [(ngModel)]="equipamentosSelecionados"
                 [ngModelOptions]="{standalone: true}" placeholder="Nome do Equipamentos"
@@ -74,7 +130,7 @@
 
             </div>
 
-        </div>
+        </div> -->
 
         <div class="ui-g ui-fluid">
 
@@ -90,8 +146,11 @@
     <div class="ui-g ui-fluid">
 
         <div>
-            <button pButton type="button" class="app-button-success p-d-flex p-jc-center p-ic-center"
-                style="background-color: green; margin-top: 5px; padding-top: 10%;" (click)=onSubmit()>
+            <button pButton 
+            type="button" 
+            class="app-button-success p-d-flex p-jc-center p-ic-center" 
+            style="background-color: green; margin-top: 10px; font-weight: bold; line-height: 30px;"
+            (click) = onSubmit()>
                 <i class="fa fa-check" aria-hidden="true"></i>
                 <span>Realizar Reserva</span>
             </button>

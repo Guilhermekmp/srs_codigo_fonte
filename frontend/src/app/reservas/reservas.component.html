@@ -2,24 +2,20 @@
     <div style= "height: 2.7rem; text-align: left; line-height: 60%; display: flex;
     justify-content: space-between;">
         <h1 style = "font-size: 30px;">Reservas</h1>
-            <span class="p-float-label">
-                <i class="fa fa-search" aria-hidden="true"></i>
-                <input placeholder="buscar">
-            </span>
-            <button 
+        <button 
             pButton 
             type="button" 
             class="app-button-success p-d-flex p-jc-center p-ic-center"
             (click) = popUpOpen()>
             <i class="fa fa-plus" aria-hidden="true"></i>
             <span> Nova Reserva</span>
-            </button>
+        </button>
     </div>
 </div>
     
 <p-dialog header="Nova Reserva" [(visible)]="openPopUp" [style]="{'width':'60vw', 'height':'fit-content'}">
     <div style="height: auto;">
-        <app-reservas-form></app-reservas-form>
+        <app-reservas-form [reservaId]="reservaSelecionadaId"></app-reservas-form>
     </div>
 </p-dialog>
 
@@ -34,6 +30,14 @@
             <th pSortableColumn="dtFim">Data Final <p-sortIcon field="dtFim"></p-sortIcon></th>
             <th pSortableColumn="equipamentos">Opcionais <p-sortIcon field="equipamentos"></p-sortIcon></th>
             <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+            <th style="width: 13rem;"> 
+                <div style="display: flex;">
+                    <div style="padding-top: 5px; padding-right: 2px;">
+                        <i class="pi pi-search"></i>
+                    </div>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." style="width: 85%;"/>
+                </div>       
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-reserva>
@@ -45,28 +49,31 @@
             <td>
                 <div *ngFor="let equipamento of reserva.equipamentos">
                     <div>
-                        id -{{equipamento.idEquipamento}} - qtd - {{equipamento.quantidade}} 
+                        {{getNomeEquipamento(equipamento.idEquipamento)}}: {{equipamento.quantidade}} 
                     </div>
                 </div>
             </td>
             <td>{{reserva?.total | currency: 'R$ '}}</td>
-            <span style="float: center">
-                <button 
-                pButton 
-                type="button" 
-                class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;">                       
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-                <span> Editar</span>
-                </button>       
-                <button 
-                pButton 
-                type="button" 
-                class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: red;"
-                (click)=deletar(reserva.id)>
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                <span> Deletar</span>
-                </button>
-            </span>
+            <td>
+                <span style="float: center">
+                    <button 
+                    (click)="editar(sala.id)"
+                    pButton 
+                    type="button" 
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <span>Editar</span>
+                    </button>       
+                    <button 
+                    pButton 
+                    type="button" 
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: red;"
+                    (click)="deletar(sala.id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <span>Deletar</span>
+                    </button>
+                </span>
+            </td>
         </tr>
     </ng-template>
 </p-table>

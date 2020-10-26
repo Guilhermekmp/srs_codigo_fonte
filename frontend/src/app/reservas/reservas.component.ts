@@ -21,7 +21,7 @@ export class ReservasComponent implements OnInit {
   //clonedReservas: { [s: string]: Reserva; } = {};
 
   reservas: Reserva[];
-  reserva: Reserva;
+  reservaSelecionadaId: number;
   opcionais: any[];
   
   sala:Sala;
@@ -29,7 +29,7 @@ export class ReservasComponent implements OnInit {
 
   constructor(
     private reservasService: ReservasService, private confirmationService:ConfirmationService,
-    private salasService:SalasService, private equipamnetosService: EquipamentosService){
+    private salasService:SalasService, private equipamentosService: EquipamentosService){
     // private formBuilder: FormBuilder,
     // private confirmationService: ConfirmationService) {
     // this.formulario = this.formBuilder.group({
@@ -57,12 +57,18 @@ export class ReservasComponent implements OnInit {
     //this.formulario.reset()
   //}
 
-  buscar(id:number){
-    this.reservasService.getByid(id).subscribe((dado) =>{
-      this.reserva = dado;
-    }, err =>{
-      console.log('erro',err);
+
+  listarEquipamentos(){
+    this.equipamentosService.listarEquipamentos().subscribe((data)=>{
+      this.equipamento = data.map(e => {return { label: e.nome, value: e.id }}), err =>{
+      console.log(err);
+      }
     })
+  }
+
+  getNomeEquipamento(id: number){
+    let item = this.equipamento.find(i => i.value === id);
+    return item ? item.label : '';
   }
 
   listar(){
@@ -75,38 +81,26 @@ export class ReservasComponent implements OnInit {
       
   }
 
-  deletar(id:number){
+  deletar(id: number){
     this.confirmationService.confirm({
-      message: 'Tem certeza que deseja excluir esse registro?',
+      message: "Tem certeza que deseja excluir esta reserva?",
       accept: () => {
         this.reservasService.deletar(id).subscribe(
-          r => {
-            this.listar()
+          s => {
+            this.listar();
           }
         )
       }
     })
   }
 
-  salvar(){
-     this.reservasService.salvar(this.reserva).subscribe(
-       response =>{
-         this.reserva = response
-       },
-       error => {
-         alert("Reserva Invalida")
-       }
-     )
-   }
+   criarNovaReserva(){
+    this.reservaSelecionadaId = null;
+    this.popUpOpen();
+  }
 
-  editar(reservaEditada:Reserva){
-    this.reservasService.editar(this.reserva).subscribe(
-      response =>{
-        this.reserva = response
-      },
-      error => {
-        alert("Reserva não existente")
-      }
-    )
+   editar(id: number){
+    this.reservaSelecionadaId = id;
+    this.popUpOpen();
   }
 }

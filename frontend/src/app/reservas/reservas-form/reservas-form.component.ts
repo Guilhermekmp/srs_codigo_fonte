@@ -4,13 +4,14 @@ import { EquipamentosService } from './../../equipamentos/equipamentos.service';
 import { SalasService } from './../../salas/salas.service';
 import { ReservasComponent } from './../reservas.component';
 import { ReservasService } from './../reservas.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Reserva } from '../reserva';
 import { Sala } from 'src/app/salas/sala';
 import { Cliente } from 'src/app/clientes/models/cliente.interface';
-import { Equipamento } from 'src/app/equipamentos/equipamento';
+import { Equipamento } from 'src/app/equipamentos/models/equipamento';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { debounce } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-reservas-form',
@@ -19,18 +20,35 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 })
 export class ReservasFormComponent implements OnInit {
 
+  @Output() criarReservaEvento = new EventEmitter();
+
   formulario: FormGroup;
+  formulario2: FormGroup;
+
+  controlDrop = new FormControl();
 
   reserva: Reserva;
 
+  equipamentos: FormArray;
   equipamentoOpcionais = [];
-  equipamentosSelecionados = [];
+  equipamentosOpcionaisNew: EquipamentoOpcional[] = []; 
 
   salas = [];
   salaSelecionada: Sala;
 
   clientes: any[];
   clienteSelecionado: Cliente;
+
+  mostrarLista: boolean = false;
+
+  @Input() set reservaId(id: number){
+    if(id)  {
+      this.buscarReservaPorId(id);
+      console.log("ID " + id);
+      this.mostrarLista = true;
+      console.log(this.mostrarLista);
+    }
+  }
 
   constructor(private reservasService: ReservasService, private formBuilder: FormBuilder
     , private salasService: SalasService, private equipamentosService: EquipamentosService
@@ -43,6 +61,7 @@ export class ReservasFormComponent implements OnInit {
     this.listarSalas();
     this.listarClientes();
 
+    this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
   }
 
   private listarClientes() {
@@ -63,33 +82,93 @@ export class ReservasFormComponent implements OnInit {
     });
   }
 
+  atualizarForm() {
+    var equipamentos = this.equipamentosOpcionaisNew.map(e => {return { idReserva: null, idEquipamento: e.idEquipamento, quantidade: e.quantidade }});
+
+    this.formulario.get('idCliente').setValue(this.reserva.idCliente);
+    this.formulario.get('idSala').setValue(this.reserva.idSala);
+    this.formulario.get('dataInicio').setValue(this.reserva.dataInicio);
+    this.formulario.get('dataFim').setValue(this.reserva.dataFim);
+    this.formulario.get('total').setValue(this.reserva.total);
+    // this.formulario.get('equipamentos').patchValue(equipamentos);
+
+    console.log("AAAAAAAAA", this.reserva);
+    console.log("BBBBBBBBB", this.formulario.value);
+
+  }
+
   private initForm() {
     this.formulario = this.formBuilder.group({
-      equipamentos: this.formBuilder.array(this.equipamentosSelecionados),
       idSala: new FormControl(),
       idCliente: new FormControl(),
-      dataInicio: '2020-11-15T12:30:20',
-      dataFim: '2021-01-15T12:30:20',
-      total: 0
+      dataInicio: new FormControl(),
+      dataFim: new FormControl(),
+      total: new FormControl()
     })
   }
 
-  addEquipamento(){
-    this.formulario.value.equipamentos = this.equipamentosSelecionados
-  }
-  
+  private buscarReservaPorId(id: number){
+    this.reservasService.getByid(id).subscribe((data)=>{
+      this.reserva = data;
+      this.atualizarForm();
+      console.log(data);
+      this.equipamentosOpcionaisNew = this.reserva.equipamentos;
+      console.log(this.equipamentosOpcionaisNew);
+    }, err =>{
+      console.log(err);
+    });
 
-  onSubmit() {
-    console.log(this.formulario.value);
-    const reserva: Reserva = {
-      ...this.formulario.value,
+  }
+
+  addEquipamento(){
+    this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
+  }
+
+  removerEquipamento(index: number){
+    this.equipamentosOpcionaisNew.splice(index, 1);
+  }
+
+  clear(){
+    this.equipamentos.clear();
+  }
+
+  criarEquipamento(){
+    return this.formBuilder.group({
+      idReserva: null,
+      idEquipamento: new FormControl(),
+      quantidade: new FormControl()
+    })
+  }
+
+  onSubmit(){
+    if(this.formulario.valid){
+      if(this.reserva.id){
+        console.log('sala editada' , this.reserva);
+
+        this.reservasService.atualizarReserva(this.construirObjetoReserva()).subscribe(
+          success => {
+            console.log('PUT' + this.reserva)},
+          error => console.error(error),
+          () => {console.log('request completo')
+         debounce(this.criarReservaEvento.emit(), 2)
+        });
+     
+      }
+      else{
+       console.log('nova sala', this.construirObjetoReserva());
+       
+        this.reservasService.salvar(this.construirObjetoReserva()).subscribe(
+          success => {
+            console.log('POST')},
+          error => console.error(error),
+          () => {console.log('request completo')
+         debounce(this.criarReservaEvento.emit(), 2)
+        });
+     
+      }
+      this.formulario.reset();
+      //window.location.reload();
     }
-    console.log('submit');
-    this.reservasService.salvar(reserva).subscribe(
-      success => console.log('sucesso'),
-      error => console.error(error),
-      () => console.log('request completo')
-    );
   }
 
   listarOpcionais() {
@@ -125,27 +204,39 @@ export class ReservasFormComponent implements OnInit {
     });
   }
 
-  objetoEquipamento() {
-    console.log(this.equipamentosSelecionados);
-    this.equipamentosSelecionados.map(element => {
-      var valor: EquipamentoOpcional = new EquipamentoOpcional;
-      console.log(valor);
-      valor.idReserva = null;
-      valor.idEquipamento = element.value;
-      valor.quantidade = 0;
-      element.value = valor;
 
-    });
-  }
+  construirObjetoReserva(): Reserva {
+    const reserva = new Reserva();
+    reserva.id = this.reserva.id? this.reserva.id : null;
+    reserva.idSala = this.formulario.get('capacidade').value;
+    reserva.idCliente = this.formulario.get('descricao').value;
+    reserva.dataInicio = this.formulario.get('idTiporeserva').value;
+    reserva.dataFim = this.formulario.get('precoDiario').value;
+    reserva.total = this.formulario.get('precoDiario').value;
 
-  setQuantidade(id:number,qtd:number){
-    this.formulario.value.equipamentos.forEach(element => {
-      if(element.value.idEquipamento === id){
-        element.value.quantidade = qtd;
-        console.log(element.value.quantidade);
+    reserva.equipamentos = this.equipamentosOpcionaisNew.map(item=>{
+      console.log('item lista', item);
+      
+      if(item.idEquipamento && item.quantidade){
+        return item;
       }
-    });
-    console.log(this.equipamentosSelecionados);
-    
+      });
+    return reserva;
   }
+  
+  alterarIdEquipamento(idEquipamento: number, index: number){
+    this.equipamentosOpcionaisNew[index].idReserva = null;
+    this.equipamentosOpcionaisNew[index].idEquipamento = idEquipamento;
+  }
+
+  alterarQuantidade(quantidade: number, index: number){
+    console.log(quantidade, index);
+    this.equipamentosOpcionaisNew[index].quantidade = Number(quantidade);
+  }
+
+  getNomeEquipamento(idEquipamento: number): string {
+    let item = this.equipamentoOpcionais.find(i => i.value === idEquipamento);
+    return item ? item.label : '';
+  }
+
 }

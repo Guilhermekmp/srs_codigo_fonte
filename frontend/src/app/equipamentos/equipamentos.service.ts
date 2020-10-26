@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Equipamento } from './equipamento';
+import { Equipamento } from './models/equipamento';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -33,8 +33,8 @@ export class EquipamentosService {
     return this.http.post<Equipamento>(this.url, equipamento);
   }
 
-  buscar(id:any):Observable<any>{
-    return this.http.get<Equipamento>(this.url+"/",id)
+  buscar(id: number):Observable<Equipamento>{
+    return this.http.get<Equipamento>(`${this.url}/${id}`);
   }
   
   atualizarEquipamento(equipamento:Equipamento): Observable<Equipamento> {

@@ -6,7 +6,7 @@ import { Sala } from './sala';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { Equipamento } from '../equipamentos/equipamento';
+import { Equipamento } from '../equipamentos/models/equipamento';
 
 @Injectable({
   providedIn: 'root'

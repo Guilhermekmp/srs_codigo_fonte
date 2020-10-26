@@ -1,6 +1,6 @@
 import { ConfirmationService } from 'primeng';
 import { EquipamentosService } from './../equipamentos/equipamentos.service';
-import { Equipamento } from './../equipamentos/equipamento';
+import { Equipamento } from './../equipamentos/models/equipamento';
 import { SalasService } from './salas.service';
 import { Component, OnInit } from '@angular/core';
 import { Sala } from './sala';
