@@ -52,21 +52,12 @@ export class ReservasFormComponent implements OnInit {
 
   constructor(private reservasService: ReservasService, private formBuilder: FormBuilder
     , private salasService: SalasService, private equipamentosService: EquipamentosService
-<<<<<<< HEAD
     , private clientesService: ClientesService) { 
-=======
-    , private clientesService: ClientesService) {
->>>>>>> 1b0cd65... erros
       this.initForm();
       if(!this.reservaId){
         this.mostrarLista = false;
       }
-<<<<<<< HEAD
     }
-=======
-     }
->>>>>>> 1b0cd65... erros
-
   ngOnInit(): void {
 
     this.initForm();
@@ -74,8 +65,6 @@ export class ReservasFormComponent implements OnInit {
     this.listarSalas();
     this.listarClientes();
     
-    this.formulario2 = this.formBuilder.group({});
-
     this.formulario2 = this.formBuilder.group({});
 
     this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
