@@ -40,7 +40,9 @@
     <div class="p-d-lg-inline">
         <div style="display: flex;">
             <h2>Equipamentos obrigatórios</h2>
-            <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
+            <div style="padding-top: 10px; margin-left: 10px;">
+                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
+            </div>
         </div>
         <div style="display: flex;">
             <div style="margin-right: 75px;">
@@ -50,6 +52,7 @@
                 <label for="quantidade" style="font-size: 130%;">Quantidade</label>
             </div>
         </div>
+        <!-- LISTA DE EQUIPAMENTOS PREVIAMENTE ADICIONADOS -->
         <div *ngIf="mostrarLista">
             <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosNew; let i=index">
                 <div class="ui-g ui-fluid" style="display: flex; margin-bottom: 10px;">
@@ -59,30 +62,32 @@
                             readonly value="{{getNomeEquipamento(listaEquipamentosNew[i].idEquipamento)}}"> 
                         </div>
                     </div>
-                    <div class="ui-g ui-fluid">
-                        <div style="width: 5.4vw;" >
-                            <input pInputText type="number" min="1" [value]="listaEquipamentosNew[i].quantidade" id="quantidade"
-                            #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
-                        </div>
+                    <div class="ui-g ui-fluid" style="width: 5.4vw;" >
+                        <input pInputText type="number" min="1" [value]="listaEquipamentosNew[i].quantidade" id="quantidade"
+                        #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
+                    </div>
+                    <div style="margin-left: 10px;">
+                        <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- LISTA DE EQUIPAMENTOS A SEREM ADICIONADOS -->
         <form action="" [formGroup]="formulario2"></form>
-        <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosNew; let i=index">
+        <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosAdicionados; let i=index">
             <div class="equipamento" style="display: flex; margin-bottom: 10px;">
                 <div style="width: fit-content;">
 
                     <p-dropdown [options]="listaEquipamentos" #idEquipamento
                          id="listaEquipamentos" placeholder="Selecione..."
-                        (onChange) = "alterarIdEquipamento(idEquipamento.value, i)"></p-dropdown>
+                        (onChange) = "alterarIdEquipamentoAdicionado(idEquipamento.value, i)"></p-dropdown>
                 </div>
                 <div class="ui-g ui-fluid">
                     <div style="width: 5.4vw; margin-left: 10px" >
 
-                        <input pInputText type="number" min="1" [value]="listaEquipamentosNew[i].quantidade" id="quantidade"
-                        #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
+                        <input pInputText type="number" min="1" [value]="listaEquipamentosAdicionados[i].quantidade" id="quantidade"
+                        #qtd (blur) = "alterarQuantidadeAdicionado(qtd.value, i)"> 
                     </div>
                 </div>
 
@@ -90,40 +95,12 @@
                     <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
                 </div>
                 <div style="margin-left: 10px;">
-                    <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
+                    <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamentoAdicionado(i)></button>
                 </div>
                 
                 
             </div>
         </div>
-        <!-- <div style="display: flexbox;" formArrayName="equipamentos"  *ngFor="let equipamento of formulario.get('equipamentos').controls; let i = index;">
-            <div [formGroupName]="i" style="display: flex;">
-                <div style="width: fit-content;">
-                    <div>
-                        <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
-                    </div>
-                    <p-dropdown [options]="listaEquipamentos" formControlName="idEquipamento"
-                    [(ngModel)]="equipamento.idEquipamento" id="listaEquipamentos" placeholder="Selecione..."></p-dropdown>
-                </div>
-                <div class="ui-g ui-fluid">
-                    <div style="width: 5.4vw; margin-left: 10px" >
-                        <div>
-                            <label for="capacidade" style="font-size: 130%;">Quantidade</label>
-                        </div>
-                        <div class="ui-inputgroup">
-                            <input pInputText type="number" min="1" formControlName="quantidade" [(ngModel)]="equipamento.quantidade" id="quantidade"> 
-                        </div>
-                    </div>
-                </div>
-                <div style="line-height: 65px; margin-left: 10px;">
-                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
-                </div>
-                <div style="line-height: 65px; margin-left: 10px;">
-                    <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
-                </div>
-            </div>
-
-        </div> -->
     </div>
     <button 
     pButton 

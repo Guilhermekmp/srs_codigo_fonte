@@ -43,27 +43,29 @@ public class SalaServico {
         return salaDTO;
     }
 
-    public SalaDTO criar(SalaDTO sala) throws RegraNegocioException{
-        Sala novaSala = salaMapper.toEntity(sala);
-        if(novaSala.getId() == null){
-            checarDuplicata(novaSala);
+    public SalaDTO criar(SalaDTO salaDTO) throws RegraNegocioException{
+
+        if(salaDTO.getId() != null){
+            Sala sala = salaRepositorio.findById(salaDTO.getId()).orElseThrow(() -> new RegraNegocioException(("Essa sala não existe")));
         }
-        List<SalaEquipamento> equipamentos = novaSala.getEquipamentos();
-        novaSala.setEquipamentos(new ArrayList<>());
+        else{
+            checarDuplicata(salaDTO);
+        }
 
-        salaRepositorio.save(novaSala);
-        equipamentos.forEach(equipamento ->{
-            equipamento.setSala(novaSala);
-            equipamento.getId().setIdSala(novaSala.getId());
+        Sala sala2 = salaMapper.toEntity(salaDTO);
+        List<SalaEquipamento> novosEquipamentos = sala2.getEquipamentos();
+        sala2.setEquipamentos(new ArrayList<>());
+        novosEquipamentos.forEach(equipamento -> {
+            equipamento.setSala(sala2);
+            equipamento.getId().setIdSala(sala2.getId());
         });
+        salaEquipamentoRepositorio.saveAll(novosEquipamentos);
+        sala2.setEquipamentos(novosEquipamentos);
+        return salaMapper.toDto(sala2);
 
-        salaEquipamentoRepositorio.saveAll(equipamentos);
-        SalaDTO salaDTO = salaMapper.toDto(novaSala);
-
-        return salaDTO;
     }
 
-    private void checarDuplicata(Sala novaSala){
+    private void checarDuplicata(SalaDTO novaSala){
         for(SalaDTO salaInstancia: listar()){
             if(salaInstancia.getDescricao().equals(novaSala.getDescricao())){
                 throw new RegraNegocioException("Salas duplicadas");
