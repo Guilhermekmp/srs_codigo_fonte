@@ -6,8 +6,14 @@
                 <div>
                     <label for="salas" style="font-size: 130%">Descrição da Sala</label>
                 </div>
+<<<<<<< HEAD
                 <p-dropdown required [options]="salas" formControlName="idSala"
                      placeholder="Selecione um Sala" [(ngModel)]=salaSelecionada></p-dropdown>
+=======
+                <p-dropdown [options]="salas" formControlName="idSala" [filter]="true" filterBy="label,value.descricao"
+                    (onHide)="valorTotal()" placeholder="Selecione um Sala"
+                    [(ngModel)]=salaSelecionada></p-dropdown>
+>>>>>>> 1b0cd65... erros
             </div>
         </div>
 
