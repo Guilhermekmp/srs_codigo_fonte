@@ -207,25 +207,27 @@ export class SalasFormComponent implements OnInit {
 
         this.salasService.atualizarSala(this.construirObjetoSala()).subscribe(
           success => {
-            //console.log('PUT', this.sala)},
+            this.salasComponent.throwMessageSuccess('Atualizada com sucesso!');
+            //window.location.reload();
+            //console.log('PUT', this.sala)
+          },
           error => console.error(error)
-        });
-     
+        );
+        
       }
       else{
        //console.log('nova sala', this.construirObjetoSala());
        
         this.salasService.criar(this.construirObjetoSala()).subscribe(
           success => {
+            this.salasComponent.throwMessageSuccess('Criada com sucesso!');
+            //window.location.reload();
             //console.log('POST')
           },
-          error => console.error(error),
-          () => {//console.log('request completo')
-        });
-     
+          error => console.error(error)
+          //console.log('request completo')
+        );
       }
-      this.formulario.reset();
-      window.location.reload();
     }
   }
 
