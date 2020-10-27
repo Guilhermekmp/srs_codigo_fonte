@@ -36,7 +36,7 @@
             <td style="text-align: center;">{{equipamento?.id}}</td>
             <td>{{equipamento?.nome}}</td>
             <td style="text-align: center;">{{getTipoEquipamento(equipamento)}}</td>
-            <td style="text-align: center;">R${{equipamento?.precoDiario}}</td>
+            <td style="text-align: center;">{{equipamento?.precoDiario | currency: 'R$ '}}</td>
             <td style="text-align: center;">
                 <span style="float: center">
                     <button 
