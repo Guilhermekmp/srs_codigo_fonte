@@ -12,11 +12,9 @@ import { SharedModule } from '../shared/shared.module';
 import { InputMaskModule } from 'primeng/inputmask';
 import { CPFPipe } from './pipes/cpf.pipe';
 import { TELEFONEPipe } from './pipes/telefone.pipe';
-<<<<<<< HEAD
-=======
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
->>>>>>> somar
+
 
 
 
