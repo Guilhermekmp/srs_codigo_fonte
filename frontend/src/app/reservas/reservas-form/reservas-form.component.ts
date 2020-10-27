@@ -27,7 +27,7 @@ export class ReservasFormComponent implements OnInit {
 
   controlDrop = new FormControl();
 
-  reserva: Reserva;
+  reserva = new Reserva();
 
   equipamentos: FormArray;
   equipamentoOpcionais = [];
@@ -118,7 +118,8 @@ export class ReservasFormComponent implements OnInit {
     this.reservasService.getByid(id).subscribe((data)=>{
       this.reserva = data;
       this.atualizarForm();
-      console.log(data);
+      console.log("DATA", data);
+      console.log("RESERVA", this.reserva);
       this.equipamentosOpcionaisNew = this.reserva.equipamentos;
       console.log(this.equipamentosOpcionaisNew);
     }, err =>{
@@ -193,12 +194,14 @@ export class ReservasFormComponent implements OnInit {
     this.reserva = {
       ...this.formulario.value,
     }
-    var lista = this.reserva.equipamentos;
+    var lista = this.equipamentosOpcionaisNew;
     if(lista != null){
       this.reserva.equipamentos = []
       lista.forEach(element => {
-        this.reserva.equipamentos.push(element.value);
+        this.reserva.equipamentos.push(element);
       });
+    }else{
+      this.reserva.equipamentos = []
     }
     console.log(this.reserva,'reserva valor');
     
@@ -206,9 +209,12 @@ export class ReservasFormComponent implements OnInit {
     this.getTotal(this.reserva);
   }
   getTotal(reserva: Reserva) {
-    console.log(reserva);
+    console.log(reserva,'chegou aqui');
     this.reservasService.getTotal(reserva).subscribe((dado) => {
       this.formulario.patchValue({ total: dado.total });
+      this.reserva.total = dado.total;
+      console.log(this.reserva,'total');
+      
     });
   }
 

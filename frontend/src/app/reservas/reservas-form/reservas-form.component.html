@@ -7,8 +7,7 @@
                     <label for="salas" style="font-size: 130%">Descrição da Sala</label>
                 </div>
                 <p-dropdown [options]="salas" formControlName="idSala" [filter]="true" filterBy="label,value.descricao"
-                    (onHide)="valorTotal()" placeholder="Selecione um Sala"
-                    [(ngModel)]=salaSelecionada></p-dropdown>
+                     placeholder="Selecione um Sala" [(ngModel)]=salaSelecionada></p-dropdown>
             </div>
         </div>
 
@@ -89,7 +88,7 @@
                     <div style="width: 5.4vw; margin-left: 10px" >
 
                         <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
-                        #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
+                        #qtd (blur) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
                     </div>
                 </div>
 
@@ -100,40 +99,8 @@
                     <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i);valorTotal()></button>
                 </div>
                 
-                
             </div>
         </div>
-
-        <!-- <div class="ui-g ui-fluid">
-            <p-multiSelect [options]="equipamentoOpcionais" [overlayVisible]="true" optionLabel="label"
-                (onPanelHide)="objetoEquipamento();addEquipamento()" [(ngModel)]="equipamentosSelecionados"
-                [ngModelOptions]="{standalone: true}" placeholder="Nome do Equipamentos"
-                ></p-multiSelect>
-        </div>
-
-        <div style=" display: flexbox;" *ngFor="let equipamento of equipamentosSelecionados; let i = index;">
-
-            <div style="display: flex;">
-
-                <div class="ui-g ui-fluid">
-                    <label for="listaEquipamentos">{{equipamento.label}}</label>
-
-                </div>
-
-                <div class="ui-g ui-fluid">
-                    <div style="width: 5.4vw; margin-left: 10px">
-                        <div>
-                            <label for="capacidade" style="font-size: 100%;">Quantidade</label>
-                        </div>
-                        <p-inputNumber type="number" id="quantidade" #quantidade 
-                        (onBlur)="setQuantidade(equipamento.value.idEquipamento,quantidade.value)"
-                        (onBlur)="valorTotal()" placeholder="0"></p-inputNumber>
-                    </div>
-                </div>
-
-            </div>
-
-        </div> -->
 
         <div class="ui-g ui-fluid">
 

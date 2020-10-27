@@ -44,6 +44,7 @@ export class ReservasComponent implements OnInit {
 
   ngOnInit(){
     this.listar();
+    this.listarEquipamentos();
   }
 
 
