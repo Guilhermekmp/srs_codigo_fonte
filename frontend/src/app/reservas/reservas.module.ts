@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { SharedModule } from './../shared/shared.module';
 import { ReservasService } from './reservas.service';
 import { NgModule } from '@angular/core';
@@ -9,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReservasFormComponent } from './reservas-form/reservas-form.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ConfirmationService, InputNumberModule } from 'primeng';
-
 
 
 @NgModule({

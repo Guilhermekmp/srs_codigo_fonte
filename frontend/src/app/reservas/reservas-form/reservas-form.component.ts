@@ -53,19 +53,27 @@ export class ReservasFormComponent implements OnInit {
   constructor(private reservasService: ReservasService, private formBuilder: FormBuilder
     , private salasService: SalasService, private equipamentosService: EquipamentosService
 <<<<<<< HEAD
+<<<<<<< HEAD
     , private clientesService: ClientesService) { 
 =======
     , private clientesService: ClientesService) {
 >>>>>>> 1b0cd65... erros
+=======
+    , private clientesService: ClientesService) {
+>>>>>>> 6716e323b37b3eeee56ff844e4c0fcbf410e28fc
       this.initForm();
       if(!this.reservaId){
         this.mostrarLista = false;
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
 =======
      }
 >>>>>>> 1b0cd65... erros
+=======
+     }
+>>>>>>> 6716e323b37b3eeee56ff844e4c0fcbf410e28fc
 
   ngOnInit(): void {
 
@@ -75,8 +83,11 @@ export class ReservasFormComponent implements OnInit {
     this.listarClientes();
     
     this.formulario2 = this.formBuilder.group({});
+<<<<<<< HEAD
 
     this.formulario2 = this.formBuilder.group({});
+=======
+>>>>>>> 6716e323b37b3eeee56ff844e4c0fcbf410e28fc
 
     this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
   }
@@ -205,6 +216,7 @@ export class ReservasFormComponent implements OnInit {
       ...this.formulario.value,
     }
     var lista = this.equipamentosOpcionaisNew;
+<<<<<<< HEAD
     this.reserva.equipamentos = []
     lista.forEach(element => {
       if(element.idEquipamento != null){
@@ -214,6 +226,16 @@ export class ReservasFormComponent implements OnInit {
         this.reserva.equipamentos = []
       }
     });
+=======
+    if(lista != null){
+      this.reserva.equipamentos = []
+      lista.forEach(element => {
+        this.reserva.equipamentos.push(element);
+      });
+    }else{
+      this.reserva.equipamentos = []
+    }
+>>>>>>> 6716e323b37b3eeee56ff844e4c0fcbf410e28fc
     console.log(this.reserva,'reserva valor');
     
     this.reserva.total = 0;

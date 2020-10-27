@@ -35,8 +35,13 @@
             <div class="ui-g-12 ui-md-4">
                 <label for="dataFim" style="font-size: 130%;">Data Final</label>
                 <div class="ui-inputgroup">
+<<<<<<< HEAD
                     <input required type="datetime-local" pInputText formControlName="dataFim" id="dataFim"
                     (mouseleave)='valorTotal()'>
+=======
+                    <input type="datetime-local" pInputText formControlName="dataFim" id="dataFim"
+                    (blur)='valorTotal()'>
+>>>>>>> 6716e323b37b3eeee56ff844e4c0fcbf410e28fc
                 </div>
             </div>
         </div>
@@ -90,10 +95,14 @@
 
                         <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
 <<<<<<< HEAD
+<<<<<<< HEAD
                         #qtd (mouseleave) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
 =======
                         #qtd (blur) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
 >>>>>>> 6716e32... Reserva form post funcionando
+=======
+                        #qtd (blur) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
+>>>>>>> 6716e323b37b3eeee56ff844e4c0fcbf410e28fc
                     </div>
                 </div>
 
