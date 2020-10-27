@@ -5,7 +5,7 @@ import { EquipamentosService } from './../../equipamentos/equipamentos.service';
 import { SalasService } from './../salas.service';
 import { Sala } from './../sala';
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { debounce } from '@fullcalendar/core';
 
@@ -15,8 +15,6 @@ import { debounce } from '@fullcalendar/core';
   styleUrls: ['./salas-form.component.css']
 })
 export class SalasFormComponent implements OnInit {
-
-  @Output() criarSalaEvento = new EventEmitter();  
   
   formulario: FormGroup;
   formulario2: FormGroup;
@@ -30,9 +28,9 @@ export class SalasFormComponent implements OnInit {
   @Input() set salaId(id: number){
     if(id)  {
       this.buscarSalaPorId(id);
-      console.log("ID " + id);
+      //console.log("ID " + id);
       this.mostrarLista = true;
-      console.log(this.mostrarLista);
+      //console.log(this.mostrarLista);
     }
     else{
       this.resetarSala();
@@ -72,7 +70,7 @@ export class SalasFormComponent implements OnInit {
 
   this.listarEquipamentos();
 
-  console.log("SALAID " + this.salaId);
+  //console.log("SALAID " + this.salaId);
   this.formulario2 = this.formBuilder.group({});
 
   // this.listaEquipamentosAdicionados.push(new SalaEquipamento());
@@ -83,11 +81,11 @@ export class SalasFormComponent implements OnInit {
     this.salasService.buscarSala(id).subscribe((data)=>{
       this.sala = data;
       this.atualizarForm();
-      console.log(data);
+      //console.log(data);
       this.listaEquipamentosNew = this.sala.equipamentos;
-      console.log("EQUIPAMENTOS DA SALA", this.listaEquipamentosNew);
+      //console.log("EQUIPAMENTOS DA SALA", this.listaEquipamentosNew);
     }, err =>{
-      console.log(err);
+      //console.log(err);
     });
 
   }
@@ -101,18 +99,18 @@ export class SalasFormComponent implements OnInit {
     this.formulario.get('idTipoSala').setValue(this.sala.idTipoSala);
     // this.formulario.get('equipamentos').patchValue(equipamentos);
 
-    console.log("VALOR DA SALA", this.sala);
-    console.log("VALOR DO FORMULARIO", this.formulario.value);
+    //console.log("VALOR DA SALA", this.sala);
+    //console.log("VALOR DO FORMULARIO", this.formulario.value);
 
   }
 
   private initForm(){
     this.formulario = this.formBuilder.group({
-      descricao: new FormControl(),
+      descricao: [null, Validators.required],
       // equipamentos: new FormControl(),
-      idTipoSala: new FormControl(),
-      capacidade: new FormControl(),
-      precoDiario: new FormControl(),
+      idTipoSala: [null, Validators.required],
+      capacidade: [null, [Validators.required, Validators.min(0)]],
+      precoDiario: [null, [Validators.required, Validators.min(0)]],
     })
   }
 
@@ -128,7 +126,7 @@ export class SalasFormComponent implements OnInit {
   listarEquipamentos(){
     this.equipamentosService.listarEquipamentos().subscribe((data)=>{
       this.listaEquipamentos = data.map(e => {return { label: e.nome, value: e.id }}), err =>{
-      console.log(err);
+      //console.log(err);
       }
     })
   }
@@ -159,7 +157,7 @@ export class SalasFormComponent implements OnInit {
   }
 
   alterarQuantidade(quantidade: number, index: number){
-    console.log(quantidade, index);
+    //console.log(quantidade, index);
     this.listaEquipamentosNew[index].quantidade = Number(quantidade);
   }
 
@@ -182,7 +180,7 @@ export class SalasFormComponent implements OnInit {
   }
 
   alterarQuantidadeAdicionado(quantidade: number, index: number){
-    console.log(quantidade, index);
+    //console.log(quantidade, index);
     this.listaEquipamentosAdicionados[index].quantidade = Number(quantidade);
   }
 
@@ -198,33 +196,31 @@ export class SalasFormComponent implements OnInit {
        
       listaCompleta.push(salaEquipamento);
     }
-    console.log("LISTA COMPLETA", listaCompleta);
+    //console.log("LISTA COMPLETA", listaCompleta);
     return listaCompleta;
   }
 
   onSubmit(){
     if(this.formulario.valid){
       if(this.sala.id){
-        // console.log('sala editada' , this.sala);
+        // //console.log('sala editada' , this.sala);
 
         this.salasService.atualizarSala(this.construirObjetoSala()).subscribe(
           success => {
-            console.log('PUT', this.sala)},
-          error => console.error(error),
-          () => {console.log('request completo')
-         debounce(this.criarSalaEvento.emit(), 2)
+            //console.log('PUT', this.sala)},
+          error => console.error(error)
         });
      
       }
       else{
-       console.log('nova sala', this.construirObjetoSala());
+       //console.log('nova sala', this.construirObjetoSala());
        
         this.salasService.criar(this.construirObjetoSala()).subscribe(
           success => {
-            console.log('POST')},
+            //console.log('POST')
+          },
           error => console.error(error),
-          () => {console.log('request completo')
-         debounce(this.criarSalaEvento.emit(), 2)
+          () => {//console.log('request completo')
         });
      
       }
@@ -243,13 +239,13 @@ export class SalasFormComponent implements OnInit {
 
     sala.equipamentos = this.juntarListas()
     .map(item=>{
-      console.log('item lista', item);
+      //console.log('item lista', item);
       
       if(item.idEquipamento && item.quantidade){
         return item;
       }
       });
-    console.log("EQUIPAMENTOS SALA EDITADA", sala.equipamentos);
+    //console.log("EQUIPAMENTOS SALA EDITADA", sala.equipamentos);
     return sala;
   }
 
