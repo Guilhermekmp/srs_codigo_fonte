@@ -34,6 +34,9 @@ export class SalasFormComponent implements OnInit {
       this.mostrarLista = true;
       console.log(this.mostrarLista);
     }
+    else{
+      this.resetarSala();
+    }
   }
 
   listaEquipamentosAdicionados: SalaEquipamento[] = [];
@@ -248,6 +251,16 @@ export class SalasFormComponent implements OnInit {
       });
     console.log("EQUIPAMENTOS SALA EDITADA", sala.equipamentos);
     return sala;
+  }
+
+  resetarSala(){
+    this.sala.id = null;
+    this.sala.descricao = null;
+    this.sala.capacidade = null;
+    this.sala.idTipoSala = null;
+    this.sala.precoDiario = null;
+
+    this.removerTodosEquipamentos();
   }
 
 }
