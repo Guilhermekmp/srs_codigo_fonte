@@ -96,9 +96,6 @@ public class ReservaServico {
         List<ReservaEquipamentoDTO> reservaEquipamentos = dto.getEquipamentos();
 
         Double custo = sala.getPrecoDiario();
-
-        long dias = ChronoUnit.DAYS.between(dto.getDataInicio(), dto.getDataFim());
-
         for (int i = 0; i < salaEquipamentos.size(); i++) {
             Equipamento equip = equipamentoRepositorio.findById(salaEquipamentos.get(i).getEquipamento().getId()).get();
             custo += (equip.getPrecoDiario() * salaEquipamentos.get(i).getQuantidade());
@@ -108,7 +105,10 @@ public class ReservaServico {
             Equipamento equip = equipamentoRepositorio.findById(reservaEquipamentos.get(i).getIdEquipamento()).get();
             custo += (equip.getPrecoDiario() * reservaEquipamentos.get(i).getQuantidade());
         }
-        custo *= dias;
+        if(dto.getDataInicio() != null) {
+            long dias = ChronoUnit.DAYS.between(dto.getDataInicio(), dto.getDataFim());
+            custo *= dias;
+        }
         dto.setTotal(custo);
         return dto;
     }
