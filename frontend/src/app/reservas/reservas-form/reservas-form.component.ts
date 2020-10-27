@@ -53,7 +53,11 @@ export class ReservasFormComponent implements OnInit {
   constructor(private reservasService: ReservasService, private formBuilder: FormBuilder
     , private salasService: SalasService, private equipamentosService: EquipamentosService
     , private clientesService: ClientesService) { 
+<<<<<<< HEAD
       this.initForm();
+=======
+    this.initForm();
+>>>>>>> e268a26... conflitos em reserva
       if(!this.reservaId){
         this.mostrarLista = false;
       }
