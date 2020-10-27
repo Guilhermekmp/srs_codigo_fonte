@@ -27,7 +27,7 @@ export class ReservasFormComponent implements OnInit {
 
   controlDrop = new FormControl();
 
-  reserva: Reserva;
+  reserva = new Reserva();
 
   equipamentos: FormArray;
   equipamentoOpcionais = [];
@@ -128,7 +128,8 @@ export class ReservasFormComponent implements OnInit {
     this.reservasService.getByid(id).subscribe((data)=>{
       this.reserva = data;
       this.atualizarForm();
-      console.log(data);
+      console.log("DATA", data);
+      console.log("RESERVA", this.reserva);
       this.equipamentosOpcionaisNew = this.reserva.equipamentos;
       console.log(this.equipamentosOpcionaisNew);
     }, err =>{
