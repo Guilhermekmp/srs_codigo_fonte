@@ -15,10 +15,10 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class EquipamentosFormComponent implements OnInit {
 
-  formulario:FormGroup
-  tipos:TipoEquipamento[]
-  tipoSelecionado:TipoEquipamento
-  equipamentoId:number
+  formulario:FormGroup;
+  tipos:TipoEquipamento[];
+  tipoSelecionado:TipoEquipamento;
+  equipamentoId:number;
 
   constructor(private formBuilder:FormBuilder, private equipamentoComponent:EquipamentosComponent,
     private messageService:MessageService, private equipamentosService:EquipamentosService) { 
@@ -51,7 +51,7 @@ export class EquipamentosFormComponent implements OnInit {
   constroiObjetoEquipamento():Equipamento{
     var equipamento = new Equipamento();
     equipamento = this.formulario.getRawValue();
-    equipamento.idTipoEquipamento = this.tipoSelecionado.idTipoEquipamento
+    equipamento.idTipoEquipamento = this.tipoSelecionado.idTipoEquipamento;
     return equipamento;
   }
 
@@ -62,13 +62,16 @@ export class EquipamentosFormComponent implements OnInit {
         equipamentoComId.id = this.equipamentoId;
         this.equipamentosService.atualizarEquipamento(equipamentoComId).subscribe(
           response=>{
-            this.equipamentoComponent.throwMessageSuccess('Atualizado com Sucesso!')
+            this.equipamentoComponent.throwMessageSuccess('Atualizado com Sucesso!');
             this.equipamentoComponent.listar();
             this.formulario.reset();
             this.equipamentoComponent.displayCreation=false;
-            this.equipamentoComponent
+            this.equipamentoId = null;
           },
           error=>{
+            if(error.status===400){
+              this.equipamentoComponent.throwMessageError('O equipamento já existe, tente alterar o nome')
+            }
             this.validaForm();
           }
         )
@@ -81,7 +84,7 @@ export class EquipamentosFormComponent implements OnInit {
          error=>
          this.validaForm(),
          ()=>{
-         this.equipamentoComponent.listar()
+         this.equipamentoComponent.listar();
         })
         this.formulario.reset();
         this.equipamentoComponent.displayCreation=false;
@@ -93,30 +96,31 @@ export class EquipamentosFormComponent implements OnInit {
 
 preencheForm(equipamento:Equipamento){
   this.formulario.patchValue(equipamento);
-  this.formulario.get('idTipoEquipamento').setValue(this.getTipoEquipamentoForm(equipamento))
+  this.formulario.get('idTipoEquipamento').setValue(this.getTipoEquipamentoForm(equipamento));
 }
 
 resetaForm(){
   this.formulario.reset();
+  this.equipamentoId = null;
 }
 
 atualizarEquipamento(equipamentoId:number){
-  this.equipamentoId = equipamentoId
+  this.equipamentoId = equipamentoId;
   this.equipamentoComponent.abrirPopUp()
   var equipamentoAtualizar;
   this.equipamentosService.buscar(equipamentoId).subscribe(
     res => 
-    this.preencheForm(res))
+    this.preencheForm(res));
 }
 
 validaForm(){
   if(this.formulario.get('nome').value == null && this.formulario.get('idTipoEquipamento').value == null 
-    && this.formulario.get('precoDiario').value == null){
+    || this.formulario.get('nome').value === "" && this.formulario.get('precoDiario').value == null){
 
-      this.equipamentoComponent.throwMessageError('Campos inválidos, tente novamente');
+      this.equipamentoComponent.throwMessageError('Campos vazios, insira um nome e um preço e escolha um tipo para o equipamento');
 
     }else if(this.formulario.get('nome').value == null || this.formulario.get('nome') == undefined 
-    && this.formulario.get('idTipoEquipamento').value == null){
+    || this.formulario.get('nome').value === "" && this.formulario.get('idTipoEquipamento').value == null){
 
       this.equipamentoComponent.throwMessageError('Digite um nome e escolha o tipo para o equipamento');
 
@@ -142,6 +146,5 @@ validaForm(){
       this.equipamentoComponent.throwMessageError('Digite um preço para o equipamento');
 
     }
-    console.log(this.formulario.get('nome'))
 }
 }

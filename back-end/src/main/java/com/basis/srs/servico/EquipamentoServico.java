@@ -24,6 +24,12 @@ public class EquipamentoServico {
 
     public EquipamentoDTO criar(EquipamentoDTO novoEquipamento) {
         if(novoEquipamento.getId()!=null){
+            for (Equipamento equipamento: equipamentoRepositorio.findAll()
+                 ) {
+                if(equipamento.getNome().equals(novoEquipamento.getNome())){
+                    throw new RegraNegocioException("Equipamento já existe");
+                }
+            }
             Equipamento equip = equipamentoRepositorio.save(equipamentoMapper.toEntity(novoEquipamento));
             EquipamentoDTO equipDTO = equipamentoMapper.toDto(equip);
             return equipDTO;

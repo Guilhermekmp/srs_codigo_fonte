@@ -66,7 +66,7 @@ export class EquipamentosComponent implements OnInit {
             this.listar()
           }
         )
-        this.messageService.add({severity:'success', summary:'Sucesso!', detail:'Requisição efetuada com sucesso'})
+        this.throwMessageSuccess('Deletado com sucesso!')
       }
     })
   }
