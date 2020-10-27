@@ -9,10 +9,12 @@ import { CommonModule } from '@angular/common';
 import { EquipamentosComponent } from './equipamentos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EquipamentosFormComponent } from './equipamentos-form/equipamentos-form.component';
+import { InputNumberModule } from 'primeng';
 
 
 @NgModule({
-  declarations: [EquipamentosComponent],
+  declarations: [EquipamentosComponent, EquipamentosFormComponent],
   imports: [
     CommonModule,
     MessageModule,
@@ -20,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    InputNumberModule
   ],
   exports: [
   ],

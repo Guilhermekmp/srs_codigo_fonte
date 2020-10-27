@@ -6,7 +6,7 @@
             pButton 
             type="button" 
             class="app-button-success p-d-flex p-jc-center p-ic-center" 
-            style="background-color: green; margin-top: 5px;" (click)= abrirPopUp()>
+            style="background-color: green; margin-top: 5px;" (click)="abrirPopUp()" (focus)="appChild.resetaForm()">
             <i class="fa fa-plus" aria-hidden="true" style="padding-right: 10px;"></i>
             <span>Novo Equipamento</span>
             </button>
@@ -36,13 +36,13 @@
             <td style="text-align: center;">{{equipamento?.id}}</td>
             <td>{{equipamento?.nome}}</td>
             <td style="text-align: center;">{{getTipoEquipamento(equipamento)}}</td>
-            <td style="text-align: center;">R${{equipamento?.precoDiario}}</td>
+            <td style="text-align: center;">{{equipamento?.precoDiario | currency: 'BRL'}}</td>
             <td style="text-align: center;">
                 <span style="float: center">
                     <button 
                     pButton 
                     type="button" 
-                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;" (click)="atualizarEquipamento(equipamento?.id)">
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;" (focus)="appChild.atualizarEquipamento(equipamento?.id)">
                     <i class="fa fa-pencil" aria-hidden="true" style="padding-right: 5px;"></i>
                     <span>Editar</span>
                     </button>  
@@ -61,50 +61,8 @@
 
 <p-confirmDialog icon="fa fa-exclamation-triangle"></p-confirmDialog>
 
-<p-dialog header = "Novo Equipamento" [modal]="true" [(visible)]="displayCreation" [style]="{'width':'22vw', 'height':'fit-content'}">
-    <form [formGroup]="formulario">
-        <div class="p-field">
-            <label for="nome" style="font-size: 130%;">Nome</label>
-            <br>
-            <input  class="p-invalid" maxlength="255" id="nome" type="text" formControlName="nome" [(ngModel)]="nome" placeholder="Digite o nome" pInputText
-            style="margin-top: 3px;">
-        </div>
-        <div style="justify-content: space-between; display: inline-flex; margin-top: 10px;">
-            <div class="p-field" style="display: flex;">
-                <div>
-                    <label for="tipo" style="font-size: 130%;">Tipo </label>
-                    <br>
-                    <p-dropdown id="tipo" [options]="tipos" 
-                    formControlName="idTipoEquipamento" [(ngModel)]="tipoSelecionado" placeholder="Selecione..." 
-                    optionLabel="nome" [showClear]="true"></p-dropdown>
-                </div>
-                <br>
-                <div class="p-field"  style="width: 35%;margin-left: 10px;">
-                    <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
-                    <br>
-                    <input id="precoDiario" 
-                    pInputText
-                    type="text"
-                    placeholder="R$ 0,00"
-                    formControlName="precoDiario"
-                    [(ngModel)]="precoDiario"
-                    inputId="minmaxfraction" 
-                    currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
-                </div>
-            </div>  
-        </div>
-
-        <div style="width: 6rem;">
-            <button 
-            pButton 
-            type="button" 
-            class="app-button-success p-d-flex p-jc-center p-ic-center" 
-            style="background-color: green; margin-top: 47px; font-weight: bold; line-height: 30px;"
-            (click) = salvar()>
-            <span>Criar</span>
-            </button>
-        </div>
-    </form>
+<p-dialog header = "Novo Equipamento" [modal]="true" [(visible)]="displayCreation" [style]="{'width':'22wv', 'height':'40wv'}">
+    <app-equipamentos-form #appChild></app-equipamentos-form>    
 </p-dialog>
 
-<p-toast position="center"></p-toast>
+<p-toast position="top-center"></p-toast>
