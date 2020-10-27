@@ -3,7 +3,7 @@
         <label for="novo" style="line-height: 30px;">Novo Cliente</label>
     </button>
 </div>
-<p-dialog header="Novo Cliente" [(visible)]="displayCreation" [style]="{width: '50vw'}">
+<p-dialog header="Novo Cliente" [(visible)]="displayCreation" [style]="{width: '50vw'}" (onHide)="apagarId()">
     <form [formGroup]="formulario">
         <div class="p-grid p-fluid">
             <div class="p-col-12 p-md-4">
@@ -28,7 +28,10 @@
         <div class="p-col-12 p-md-4">
             <div class="p-inputgroup">
                 <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" placeholder="CPF"></p-inputMask>
-            </div><br>
+            </div>
+            <div *ngIf="formulario.get('cpf').getError('cpfNotValid')"> 
+                O cpf não é válido.
+              </div><br>
         </div>
 
         <div class="p-col-12 p-md-4">

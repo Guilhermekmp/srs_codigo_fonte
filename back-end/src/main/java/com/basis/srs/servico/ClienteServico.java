@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -23,15 +24,30 @@ public class ClienteServico {
     private final ClienteMapper clienteMapper;
     private final ReservaRepositorio reservaRepositorio;
 
-    public ClienteDTO salvar(ClienteDTO clienteDTO){
+    public ClienteDTO salvar(ClienteDTO clienteDTO) {
         Cliente cliente = clienteMapper.toEntity(clienteDTO);
-        for (Cliente user : clienteRepositorio.findAll()){
-            if(user.getCpf().equals(cliente.getCpf()) || user.getRg().equals(cliente.getRg())){
+        if(clienteDTO.getId() == null){
+            validarDuplicidade(cliente.getCpf());
+        }
+        validarClientePorCPFeRG(cliente.getCpf(), cliente.getRg(), cliente);
+        ClienteDTO retorno = clienteMapper.toDto(clienteRepositorio.save(cliente));
+        return retorno;
+
+    }
+    private void validarDuplicidade(String cpf) {
+        Integer existe;
+        existe = clienteRepositorio.findByCpf(cpf);
+        if(existe != 0){
+            throw new RegraNegocioException("Cpf já cadastrado na base");
+        }
+    }
+
+    private void validarClientePorCPFeRG(String cpf, String rg, Cliente cliente) {
+        for (Cliente user : clienteRepositorio.findAll()) {
+            if (Objects.nonNull(cliente.getId()) && cliente.getId() != user.getId() && (user.getCpf().equals(cpf) || user.getRg().equals(rg))) {
                 throw new RegraNegocioException("Cpf ou rg iguais");
             }
         }
-        ClienteDTO salvar = clienteMapper.toDto(clienteRepositorio.save(cliente));
-        return salvar;
     }
 
     public List<ClienteDTO> listar(){
