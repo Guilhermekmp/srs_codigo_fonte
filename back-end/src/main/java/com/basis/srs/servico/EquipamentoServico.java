@@ -23,16 +23,22 @@ public class EquipamentoServico {
     private final SalaRepositorio salaRepositorio;
 
     public EquipamentoDTO criar(EquipamentoDTO novoEquipamento) {
-        for (Equipamento equipamento:equipamentoRepositorio.findAll()) {
-            if (equipamento.getNome().equals(novoEquipamento.getNome())
-                    && equipamento.getPrecoDiario().equals(novoEquipamento.getPrecoDiario())
-                    && equipamento.getTipoEquipamento().getId().equals(novoEquipamento.getIdTipoEquipamento())) {
-                throw new RegraNegocioException("Equipamento já existe!");
+        if(novoEquipamento.getId()!=null){
+            Equipamento equip = equipamentoRepositorio.save(equipamentoMapper.toEntity(novoEquipamento));
+            EquipamentoDTO equipDTO = equipamentoMapper.toDto(equip);
+            return equipDTO;
+        }else {
+            for (Equipamento equipamento : equipamentoRepositorio.findAll()) {
+                if (equipamento.getNome().equals(novoEquipamento.getNome())
+                        && equipamento.getPrecoDiario().equals(novoEquipamento.getPrecoDiario())
+                        && equipamento.getTipoEquipamento().getId().equals(novoEquipamento.getIdTipoEquipamento())) {
+                    throw new RegraNegocioException("Equipamento já existe!");
+                }
             }
+            Equipamento equip = equipamentoRepositorio.save(equipamentoMapper.toEntity(novoEquipamento));
+            EquipamentoDTO equipDTO = equipamentoMapper.toDto(equip);
+            return equipDTO;
         }
-        Equipamento equip = equipamentoRepositorio.save(equipamentoMapper.toEntity(novoEquipamento));
-        EquipamentoDTO equipDTO = equipamentoMapper.toDto(equip);
-        return equipDTO;
     }
 
 
