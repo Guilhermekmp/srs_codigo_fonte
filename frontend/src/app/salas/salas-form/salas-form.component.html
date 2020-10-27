@@ -108,7 +108,8 @@
     type="button" 
     class="app-button-success p-d-flex p-jc-center p-ic-center" 
     style="background-color: green; margin-top: 10px; font-weight: bold; line-height: 30px;"
-    (click) = onSubmit()>
+    (click) = onSubmit()
+    [disabled] = "!formulario.valid">
     <span>Criar</span>
     </button>
 </form>
