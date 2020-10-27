@@ -51,10 +51,10 @@ public class SalaServico {
         else{
             checarDuplicata(salaDTO);
         }
-
         Sala sala2 = salaMapper.toEntity(salaDTO);
         List<SalaEquipamento> novosEquipamentos = sala2.getEquipamentos();
         sala2.setEquipamentos(new ArrayList<>());
+        salaRepositorio.save(sala2);
         novosEquipamentos.forEach(equipamento -> {
             equipamento.setSala(sala2);
             equipamento.getId().setIdSala(sala2.getId());
