@@ -6,8 +6,8 @@
                 <div>
                     <label for="salas" style="font-size: 130%">Descrição da Sala</label>
                 </div>
-                <p-dropdown [options]="salas" formControlName="idSala" [filter]="true" filterBy="label,value.descricao"
-                    (onHide)="listarOpcionais();valorTotal()" placeholder="Selecione um Sala"></p-dropdown>
+                <p-dropdown required [options]="salas" formControlName="idSala"
+                     placeholder="Selecione um Sala" [(ngModel)]=salaSelecionada></p-dropdown>
             </div>
         </div>
 
@@ -16,8 +16,8 @@
                 <div>
                     <label for="clientes" style="font-size: 130%">CPF do Cliente</label>
                 </div>
-                <p-dropdown [options]="clientes" [(ngModel)]=clienteSelecionado formControlName="idCliente"
-                    [filter]="true" filterBy="label,value.cpf" placeholder="Selecione um Cpf de Cliente"></p-dropdown>
+                <p-dropdown required [options]="clientes" [(ngModel)]=clienteSelecionado formControlName="idCliente"
+                    placeholder="Selecione um Cpf de Cliente"></p-dropdown>
             </div>
         </div>
 
@@ -25,7 +25,8 @@
             <div class="ui-g-12 ui-md-4">
                 <label for="dataInicio" style="font-size: 130%;">Data Inicial</label>
                 <div class="ui-inputgroup">
-                    <input type="datetime-local" pInputText formControlName="dataInicio" id="dataInicio">
+                    <input required type="datetime-local" pInputText formControlName="dataInicio" 
+                    id="dataInicio">
                 </div>
             </div>
         </div>
@@ -34,7 +35,8 @@
             <div class="ui-g-12 ui-md-4">
                 <label for="dataFim" style="font-size: 130%;">Data Final</label>
                 <div class="ui-inputgroup">
-                    <input type="datetime-local" pInputText formControlName="dataFim" id="dataFim">
+                    <input required type="datetime-local" pInputText formControlName="dataFim" id="dataFim"
+                    (mouseleave)='valorTotal()'>
                 </div>
             </div>
         </div>
@@ -66,7 +68,7 @@
                     <div class="ui-g ui-fluid">
                         <div style="width: 5.4vw;" >
                             <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
-                            #qtd (blur) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
+                            #qtd (mouseleave) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
                         </div>
                     </div>
                 </div>
@@ -78,15 +80,16 @@
             <div class="equipamento" style="display: flex; margin-bottom: 10px;">
                 <div style="width: fit-content;">
 
-                    <p-dropdown [options]="equipamentosOpcionaisNew" #idEquipamento
+                    <p-dropdown [options]="equipamentoOpcionais" #idEquipamento
                          id="listaEquipamentos" placeholder="Selecione..."
+                         (onClick) = 'listarOpcionais()'
                         (onChange) = "alterarIdEquipamento(idEquipamento.value, i)"></p-dropdown>
                 </div>
                 <div class="ui-g ui-fluid">
                     <div style="width: 5.4vw; margin-left: 10px" >
 
                         <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
-                        #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
+                        #qtd (mouseleave) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
                     </div>
                 </div>
 
@@ -97,40 +100,8 @@
                     <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i);valorTotal()></button>
                 </div>
                 
-                
             </div>
         </div>
-
-        <!-- <div class="ui-g ui-fluid">
-            <p-multiSelect [options]="equipamentoOpcionais" [overlayVisible]="true" optionLabel="label"
-                (onPanelHide)="objetoEquipamento();addEquipamento()" [(ngModel)]="equipamentosSelecionados"
-                [ngModelOptions]="{standalone: true}" placeholder="Nome do Equipamentos"
-                ></p-multiSelect>
-        </div>
-
-        <div style=" display: flexbox;" *ngFor="let equipamento of equipamentosSelecionados; let i = index;">
-
-            <div style="display: flex;">
-
-                <div class="ui-g ui-fluid">
-                    <label for="listaEquipamentos">{{equipamento.label}}</label>
-
-                </div>
-
-                <div class="ui-g ui-fluid">
-                    <div style="width: 5.4vw; margin-left: 10px">
-                        <div>
-                            <label for="capacidade" style="font-size: 100%;">Quantidade</label>
-                        </div>
-                        <p-inputNumber type="number" id="quantidade" #quantidade 
-                        (onBlur)="setQuantidade(equipamento.value.idEquipamento,quantidade.value)"
-                        (onBlur)="valorTotal()" placeholder="0"></p-inputNumber>
-                    </div>
-                </div>
-
-            </div>
-
-        </div> -->
 
         <div class="ui-g ui-fluid">
 
@@ -150,7 +121,7 @@
             type="button" 
             class="app-button-success p-d-flex p-jc-center p-ic-center" 
             style="background-color: green; margin-top: 10px; font-weight: bold; line-height: 30px;"
-            (click) = onSubmit()>
+            (click) = onSubmit() [disabled]="!formulario.valid">
                 <i class="fa fa-check" aria-hidden="true"></i>
                 <span>Realizar Reserva</span>
             </button>

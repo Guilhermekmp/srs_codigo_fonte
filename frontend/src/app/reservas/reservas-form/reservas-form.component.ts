@@ -5,7 +5,7 @@ import { SalasService } from './../../salas/salas.service';
 import { ReservasComponent } from './../reservas.component';
 import { ReservasService } from './../reservas.service';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Reserva } from '../reserva';
 import { Sala } from 'src/app/salas/sala';
 import { Cliente } from 'src/app/clientes/models/cliente.interface';
@@ -52,7 +52,12 @@ export class ReservasFormComponent implements OnInit {
 
   constructor(private reservasService: ReservasService, private formBuilder: FormBuilder
     , private salasService: SalasService, private equipamentosService: EquipamentosService
-    , private clientesService: ClientesService) { }
+    , private clientesService: ClientesService) { 
+      this.initForm();
+      if(!this.reservaId){
+        this.mostrarLista = false;
+      }
+    }
 
   ngOnInit(): void {
 
@@ -60,6 +65,8 @@ export class ReservasFormComponent implements OnInit {
 
     this.listarSalas();
     this.listarClientes();
+
+    this.formulario2 = this.formBuilder.group({});
 
     this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
   }
@@ -99,10 +106,10 @@ export class ReservasFormComponent implements OnInit {
 
   private initForm() {
     this.formulario = this.formBuilder.group({
-      idSala: new FormControl(),
-      idCliente: new FormControl(),
-      dataInicio: new FormControl(),
-      dataFim: new FormControl(),
+      idSala: new FormControl(null,Validators.required),
+      idCliente: new FormControl(null,Validators.required),
+      dataInicio: new FormControl(null,Validators.required),
+      dataFim: new FormControl(null,Validators.required),
       total: new FormControl()
     })
   }
@@ -186,21 +193,28 @@ export class ReservasFormComponent implements OnInit {
     this.reserva = {
       ...this.formulario.value,
     }
-    var lista = this.formulario.value.equipamentos;
-    if(lista != null){
-      this.reserva.equipamentos = []
-      lista.forEach(element => {
-        this.reserva.equipamentos.push(element.value);
-      });
-    }
-    console.log(this.formulario.value);
+    var lista = this.equipamentosOpcionaisNew;
+    this.reserva.equipamentos = []
+    lista.forEach(element => {
+      if(element.idEquipamento != null){
+        this.reserva.equipamentos.push(element);
+      }
+      else{
+        this.reserva.equipamentos = []
+      }
+    });
+    console.log(this.reserva,'reserva valor');
     
+    this.reserva.total = 0;
     this.getTotal(this.reserva);
   }
   getTotal(reserva: Reserva) {
-    console.log(reserva);
+    console.log(reserva,'chegou aqui');
     this.reservasService.getTotal(reserva).subscribe((dado) => {
       this.formulario.patchValue({ total: dado.total });
+      this.reserva.total = dado.total;
+      console.log(this.reserva,'total');
+      
     });
   }
 
@@ -208,11 +222,11 @@ export class ReservasFormComponent implements OnInit {
   construirObjetoReserva(): Reserva {
     const reserva = new Reserva();
     reserva.id = this.reserva.id? this.reserva.id : null;
-    reserva.idSala = this.formulario.get('capacidade').value;
-    reserva.idCliente = this.formulario.get('descricao').value;
-    reserva.dataInicio = this.formulario.get('idTiporeserva').value;
-    reserva.dataFim = this.formulario.get('precoDiario').value;
-    reserva.total = this.formulario.get('precoDiario').value;
+    reserva.idSala = this.formulario.get('idSala').value;
+    reserva.idCliente = this.formulario.get('idCliente').value;
+    reserva.dataInicio = this.formulario.get('dataInicio').value;
+    reserva.dataFim = this.formulario.get('dataFim').value;
+    reserva.total = this.formulario.get('total').value;
 
     reserva.equipamentos = this.equipamentosOpcionaisNew.map(item=>{
       console.log('item lista', item);
