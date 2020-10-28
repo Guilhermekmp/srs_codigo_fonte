@@ -1,7 +1,7 @@
 <form [formGroup]="formulario">
     <div class="p-field">
         <label for="nome" style="font-size: 130%;">Nome</label>
-        <small> *</small>
+        <small style="color: red;"> *</small>
         <br>
         <input  class="p-invalid" maxlength="255" id="nome" type="text" formControlName="nome" [(ngModel)]="nome" placeholder="Digite o nome" pInputText
         style="margin-top: 3px;" required>
@@ -10,7 +10,7 @@
         <div class="p-field" style="display: flex;">
             <div>
                 <label for="tipo" style="font-size: 130%;">Tipo </label>
-                <small> *</small>
+                <small style="color: red;"> *</small>
                 <br>
                 <p-dropdown id="tipo" [options]="tipos" 
                 formControlName="idTipoEquipamento" [(ngModel)]="tipoSelecionado" placeholder="Selecione..." 
@@ -19,9 +19,9 @@
             <br>
             <div class="p-field"  style="width: 35%;margin-left: 10px;">
                 <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
-                <small> *</small>
+                <small style="color: red;"> *</small>
                 <br>
-                <input id="preco" pInputText min="0" formControlName="precoDiario" [(ngModel)]="precoDiario" 
+                <input id="preco" pInputText min="1" formControlName="precoDiario" [(ngModel)]="precoDiario" 
                 placeholder="R$ 0.00" currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}" required>
             </div>
         </div>  
@@ -34,8 +34,9 @@
         class="app-button-success p-d-flex p-jc-center p-ic-center" 
         style="background-color: green; margin-top: 47px; font-weight: bold; line-height: 30px;"
         (click) = salvar()>
+        <i class="fa fa-check" aria-hidden="true" style="padding-right: 5px;"></i>
         <span>Criar</span>
         </button>
     </div>
-    <small><b>* Campos Obrigatórios</b></small>
+    <small style="color: red;"><b>* Campos Obrigatórios</b></small>
 </form>
