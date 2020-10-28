@@ -35,22 +35,22 @@
             <div class="ui-g-12 ui-md-4">
                 <label for="dataFim" style="font-size: 130%;">Data Final</label>
                 <div class="ui-inputgroup">
-<<<<<<< HEAD
                     <input required type="datetime-local" pInputText formControlName="dataFim" id="dataFim"
                     (mouseleave)='valorTotal()'>
-=======
-                    <input type="datetime-local" pInputText formControlName="dataFim" id="dataFim"
-                    (blur)='valorTotal()'>
->>>>>>> 6716e323b37b3eeee56ff844e4c0fcbf410e28fc
                 </div>
             </div>
         </div>
     </div>
     <div class="p-d-lg-inline">
 
-        <div>
+        <div style="display: flex;">
             <h2>Equipamentos opcionais</h2>
-            <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
+            <div style="padding-top: 10px; margin-left: 10px;">
+                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
+            </div>
+            <div style="padding-top: 10px; margin-left: 10px;">
+                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded" style="background-color: red;" (click) = removerTodosEquipamentos()></button>
+            </div>
         </div>
         <div style="display: flex;">
             <div style="margin-right: 75px;">
@@ -73,7 +73,10 @@
                     <div class="ui-g ui-fluid">
                         <div style="width: 5.4vw;" >
                             <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
-                            #qtd (mouseleave) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
+                            #qtd (change) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
                         </div>
                     </div>
                 </div>
@@ -81,28 +84,20 @@
         </div>
 
         <form action="" [formGroup]="formulario2"></form>
-        <div class="nova-lista-equipamentos" *ngFor="let item of equipamentosOpcionaisNew; let i=index">
+        <div class="nova-lista-equipamentos" *ngFor="let item of equipamentosOpcionaisAdicionados; let i=index">
             <div class="equipamento" style="display: flex; margin-bottom: 10px;">
                 <div style="width: fit-content;">
 
                     <p-dropdown [options]="equipamentoOpcionais" #idEquipamento
                          id="listaEquipamentos" placeholder="Selecione..."
                          (onClick) = 'listarOpcionais()'
-                        (onChange) = "alterarIdEquipamento(idEquipamento.value, i)"></p-dropdown>
+                        (onChange) = "alterarIdEquipamentoAdicionado(idEquipamento.value, i)"></p-dropdown>
                 </div>
                 <div class="ui-g ui-fluid">
                     <div style="width: 5.4vw; margin-left: 10px" >
 
-                        <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        #qtd (mouseleave) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
-=======
-                        #qtd (blur) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
->>>>>>> 6716e32... Reserva form post funcionando
-=======
-                        #qtd (blur) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
->>>>>>> 6716e323b37b3eeee56ff844e4c0fcbf410e28fc
+                        <input pInputText required type="number" min="1" [value]="equipamentosOpcionaisAdicionados[i].quantidade" id="quantidade"
+                        #qtd (change) = "alterarQuantidadeAdicionado(qtd.value, i);valorTotal()"> 
                     </div>
                 </div>
 
@@ -110,7 +105,7 @@
                     <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento();valorTotal()></button>
                 </div>
                 <div style="margin-left: 10px;">
-                    <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i);valorTotal()></button>
+                    <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamentoAdicionado(i);valorTotal()></button>
                 </div>
                 
             </div>
@@ -127,18 +122,12 @@
         </div>
 
     </div>
-    <div class="ui-g ui-fluid">
-
-        <div>
-            <button pButton 
-            type="button" 
-            class="app-button-success p-d-flex p-jc-center p-ic-center" 
-            style="background-color: green; margin-top: 10px; font-weight: bold; line-height: 30px;"
-            (click) = onSubmit() [disabled]="!formulario.valid">
-                <i class="fa fa-check" aria-hidden="true"></i>
-                <span>Realizar Reserva</span>
-            </button>
-        </div>
-
-    </div>
+        <button pButton 
+        type="button" 
+        class="app-button-success p-d-flex p-jc-center p-ic-center" 
+        style="background-color: green; margin-top: 10px; font-weight: bold; line-height: 30px;"
+        (click) = onSubmit() [disabled]="!formulario.valid">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        <span>Realizar Reserva</span>
+    </button>
 </form>
