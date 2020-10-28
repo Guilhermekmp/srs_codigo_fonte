@@ -70,7 +70,7 @@ export class EquipamentosFormComponent implements OnInit {
           },
           error=>{
             if(error.status===400){
-              this.equipamentoComponent.throwMessageError('O equipamento já existe, tente alterar o nome')
+              this.equipamentoComponent.throwMessageError('O equipamento já existe, verifique os equipamentos já existentes e altere o correspondente')
             }
             this.validaForm();
           }
@@ -132,7 +132,7 @@ validaForm(){
 
       this.equipamentoComponent.throwMessageError('Escolha um tipo e digite um preço para o equipamento');
 
-    }else if(this.formulario.get('nome').value == null){
+    }else if(this.formulario.get('nome').value == null || this.formulario.get('nome').value == undefined || this.formulario.get('nome').value == "" ){
 
 
       this.equipamentoComponent.throwMessageError('Digite um nome para o equipamento');

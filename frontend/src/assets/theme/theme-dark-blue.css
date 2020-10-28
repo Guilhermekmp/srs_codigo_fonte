@@ -29817,7 +29817,6 @@ body .ui-button:focus, body .ui-datepicker-buttonpane > button:focus {
 }
 body .ui-button .ui-button-text, body .ui-datepicker-buttonpane > button .ui-button-text {
   padding: 0;
-  line-height: 2.25em;
 }
 body .ui-button .pi, body .ui-datepicker-buttonpane > button .pi {
   color: #ffffff;

@@ -1,25 +1,28 @@
 <form [formGroup]="formulario">
     <div class="p-field">
         <label for="nome" style="font-size: 130%;">Nome</label>
+        <small> *</small>
         <br>
         <input  class="p-invalid" maxlength="255" id="nome" type="text" formControlName="nome" [(ngModel)]="nome" placeholder="Digite o nome" pInputText
-        style="margin-top: 3px;">
+        style="margin-top: 3px;" required>
     </div>
     <div style="justify-content: space-between; display: inline-flex; margin-top: 10px;">
         <div class="p-field" style="display: flex;">
             <div>
                 <label for="tipo" style="font-size: 130%;">Tipo </label>
+                <small> *</small>
                 <br>
                 <p-dropdown id="tipo" [options]="tipos" 
                 formControlName="idTipoEquipamento" [(ngModel)]="tipoSelecionado" placeholder="Selecione..." 
-                optionLabel="nome" [showClear]="true"></p-dropdown>
+                optionLabel="nome" [showClear]="true" required></p-dropdown>
             </div>
             <br>
             <div class="p-field"  style="width: 35%;margin-left: 10px;">
                 <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
+                <small> *</small>
                 <br>
                 <input id="preco" pInputText min="0" formControlName="precoDiario" [(ngModel)]="precoDiario" 
-                placeholder="R$ 0.00" currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}">
+                placeholder="R$ 0.00" currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}" required>
             </div>
         </div>  
     </div>
@@ -34,4 +37,5 @@
         <span>Criar</span>
         </button>
     </div>
+    <small><b>* Campos Obrigatórios</b></small>
 </form>
