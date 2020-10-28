@@ -5,6 +5,7 @@
             <div style="width: 30%">
                 <div>
                     <label for="salas" style="font-size: 130%">Descrição da Sala</label>
+                    <span style="color: red">*</span>
                 </div>
                 <p-dropdown required [options]="salas" formControlName="idSala"
                      placeholder="Selecione um Sala" [(ngModel)]=salaSelecionada></p-dropdown>
@@ -15,6 +16,7 @@
             <div style="width: 30%">
                 <div>
                     <label for="clientes" style="font-size: 130%">CPF do Cliente</label>
+                    <span style="color: red">*</span>
                 </div>
                 <p-dropdown required [options]="clientes" [(ngModel)]=clienteSelecionado formControlName="idCliente"
                     placeholder="Selecione um Cpf de Cliente"></p-dropdown>
@@ -24,6 +26,7 @@
         <div class="ui-g ui-fluid">
             <div class="ui-g-12 ui-md-4">
                 <label for="dataInicio" style="font-size: 130%;">Data Inicial</label>
+                <span style="color: red">*</span>
                 <div class="ui-inputgroup">
                     <input required type="datetime-local" pInputText formControlName="dataInicio" 
                     id="dataInicio">
@@ -34,6 +37,7 @@
         <div class="ui-g ui-fluid">
             <div class="ui-g-12 ui-md-4">
                 <label for="dataFim" style="font-size: 130%;">Data Final</label>
+                <span style="color: red">*</span>
                 <div class="ui-inputgroup">
                     <input required type="datetime-local" pInputText formControlName="dataFim" id="dataFim"
                     (mouseleave)='valorTotal()'>
@@ -55,9 +59,11 @@
         <div style="display: flex;">
             <div style="margin-right: 75px;">
                 <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
+                <span style="color: red">*</span>
             </div>
             <div>
                 <label for="quantidade" style="font-size: 130%;">Quantidade</label>
+                <span style="color: red">*</span>
             </div>
         </div>
 
@@ -128,6 +134,6 @@
         style="background-color: green; margin-top: 10px; font-weight: bold; line-height: 30px;"
         (click) = onSubmit() [disabled]="!formulario.valid">
         <i class="fa fa-check" aria-hidden="true"></i>
-        <span>Realizar Reserva</span>
+        <span>Reservar</span>
     </button>
 </form>
