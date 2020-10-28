@@ -5,6 +5,8 @@ import com.basis.srs.dominio.Sala;
 import com.basis.srs.repositorio.EquipamentoRepositorio;
 import com.basis.srs.repositorio.SalaRepositorio;
 import com.basis.srs.servico.dto.EquipamentoDTO;
+import com.basis.srs.servico.dto.ReservaDTO;
+import com.basis.srs.servico.dto.SalaDTO;
 import com.basis.srs.servico.exception.RegraNegocioException;
 import com.basis.srs.servico.exception.RegraNegocioExceptionNotFound;
 import com.basis.srs.servico.mapper.EquipamentoMapper;
@@ -24,6 +26,12 @@ public class EquipamentoServico {
 
     public EquipamentoDTO criar(EquipamentoDTO novoEquipamento) {
         if(novoEquipamento.getId()!=null){
+            for (Equipamento equipamento: equipamentoRepositorio.findAll()) {
+                if (equipamento.getNome().equals(novoEquipamento.getNome())
+                        && equipamento.getTipoEquipamento().getId().equals(novoEquipamento.getIdTipoEquipamento())) {
+                    throw new RegraNegocioException("Incompatibilidade com outro equipamento, por favor verifique o equipamento de id" + " " + equipamento.getId());
+                }
+            }
             Equipamento equip = equipamentoRepositorio.save(equipamentoMapper.toEntity(novoEquipamento));
             EquipamentoDTO equipDTO = equipamentoMapper.toDto(equip);
             return equipDTO;
@@ -54,16 +62,11 @@ public class EquipamentoServico {
     }
 
     public void deletar(Integer id) {
-        EquipamentoDTO equipamento = buscar(id);
-        List<Sala> salas = salaRepositorio.findAll();
-        if(salas.contains(equipamento)) {
-            throw new RegraNegocioException("Equipamento está sendo utilizado.");
-        }
-        else {
-            equipamentoRepositorio.deleteById(id);
-        }
+
+        equipamentoRepositorio.deleteById(id);
     }
 }
+
 
 
 

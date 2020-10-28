@@ -61,8 +61,11 @@
 
 <p-confirmDialog icon="fa fa-exclamation-triangle"></p-confirmDialog>
 
-<p-dialog header = "Novo Equipamento" [modal]="true" [(visible)]="displayCreation" [style]="{'width':'22wv', 'height':'40wv'}">
+<p-dialog id="formDialog" header = "Novo Equipamento" [modal]="true" [(visible)]="displayCreation" [style]="{'width':'22wv', 'height':'40wv'}">
     <app-equipamentos-form #appChild></app-equipamentos-form>    
 </p-dialog>
+
+<p-confirmDialog modal="true" [style]="{'width':'22wv', 'height':'40wv'}" key="equipamentoDel">
+</p-confirmDialog>
 
 <p-toast position="top-center"></p-toast>

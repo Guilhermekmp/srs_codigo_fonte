@@ -1,11 +1,8 @@
-import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EquipamentosService } from './equipamentos.service';
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Equipamento } from './models/equipamento';
 import { ConfirmationService, MessageService, Message } from 'primeng';
-import { EventEmitter } from '@angular/core';
-import { EquipamentosFormComponent } from './equipamentos-form/equipamentos-form.component';
 
 @Component({
   selector: 'app-equipamentos',
@@ -49,10 +46,10 @@ export class EquipamentosComponent implements OnInit {
   listar(){
     this.equipamentosService.listarEquipamentos().subscribe((data)=>{
       this.equipamentos = data;
-      console.log(data);
     }, err =>{
-      console.log(err);
-      
+      if(err.status === 500 ){
+        this.throwMessageError("Algo inesperado aconteceu, tente novamente mais tarde...")
+      }
     })
   }
 
@@ -60,16 +57,27 @@ export class EquipamentosComponent implements OnInit {
     this.confirmationService.confirm({
       message:'Deseja mesmo deletar esse equipamento?',
       header:'Atenção',
+      icon:'pi pi-exclamation-triangle',
       accept: () => {
         this.equipamentosService.deletar(id).subscribe(
-          r => {
+          result=>{
+            this.throwMessageSuccess('Deletado com sucesso!');
             this.listar()
+          },
+          error=>{
+            if(error.status===500){
+              this.throwMessageError('O equipamento é obrigatório em alguma sala, remova a sala antes...')
+              this.listar();
+            }
           }
         )
-        this.messageService.add({severity:'success', summary:'Sucesso!', detail:'Requisição efetuada com sucesso'})
-      }
-    })
-  }
+      },
+      reject:() =>{
+        this.throwMessageInfo('Você recusou a axclusão do equipamento');
+      },
+      key: 'equipamentoDel'
+    },
+    )}
 
   abrirPopUp(){
     this.displayCreation = true;
@@ -92,5 +100,9 @@ export class EquipamentosComponent implements OnInit {
 
   throwMessageError(detail:string){
     this.messageService.add({severity:'error', summary:'Erro', detail:detail})
+  }
+
+  throwMessageInfo(detail:string){
+    this.messageService.add({severity:'info', summary:'Aviso', detail:detail})
   }
 }

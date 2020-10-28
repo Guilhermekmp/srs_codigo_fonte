@@ -9,12 +9,12 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { LoginSuccessComponent } from '@nuvem/angular-base';
 
 const routes: Routes = [
-    { path: 'diario-erros', component: DiarioErrosComponent, data: { breadcrumb: 'Diário de Erros'} },
-    { path: 'login-success', component: LoginSuccessComponent },
-    { path: 'clientes', component: ClientesComponent },
-    { path: 'equipamentos', component: EquipamentosComponent },
-    { path: 'reservas', component: ReservasComponent },
-    { path: 'salas', component: SalasComponent }
+    { path: 'diario-erros', component: DiarioErrosComponent, data: { breadcrumb: 'Diário de Erros'}},
+    { path: 'login-success', component: LoginSuccessComponent }, 
+    { path: 'clientes', component: ClientesComponent, data: { breadcrumb: 'Clientes'} },
+    { path: 'equipamentos', component: EquipamentosComponent, data: { breadcrumb: 'Equipamentos'} },
+    { path: 'reservas', component: ReservasComponent, data: { breadcrumb: 'Reservas'} },
+    { path: 'salas', component: SalasComponent, data: { breadcrumb: 'Salas'}  }
     
 ];
 
