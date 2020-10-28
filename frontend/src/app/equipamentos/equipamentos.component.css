@@ -1,0 +1,39 @@
+.botao{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+th{
+    white-space:wrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 12px;
+}
+
+td {
+    white-space:nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+    font-size: 14px;
+ }
+
+ :host .ui-button /deep/ .ui-button-text{
+     display: none;
+ }
+
+ .custom-toast .ui-toast{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;   
+ }
+
+ .custom-toast .ui-toast-message-content{
+    font-family: 'Courier New', Courier, monospace;
+    background: #FFD07B;
+ }
+ body .ui-button .ui-button-text, body .ui-datepicker-buttonpane > button .ui-button-text {
+    padding: 0;
+}

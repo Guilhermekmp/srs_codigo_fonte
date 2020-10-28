@@ -1,0 +1,81 @@
+<div class="card" style = "height:65px; display: block;">
+    <div style= "height: 2.7rem; text-align: left; line-height: 60%; display: flex;
+    justify-content: space-between;">
+        <h1 style = "font-size: 30px;">Reservas</h1>
+        <button 
+            pButton 
+            type="button" 
+            class="app-button-success p-d-flex p-jc-center p-ic-center"
+            (click) = popUpOpen()>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span> Nova Reserva</span>
+        </button>
+    </div>
+</div>
+    
+<p-dialog header="Nova Reserva" [(visible)]="openPopUp" [style]="{'width':'60vw', 'height':'fit-content'}">
+    <div style="height: auto;">
+        <app-reservas-form [reservaId]="reservaSelecionadaId"></app-reservas-form>
+    </div>
+</p-dialog>
+
+
+<p-table [value]="reservas">
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="cliente">Cliente <p-sortIcon field="cliente"></p-sortIcon></th>
+            <th pSortableColumn="sala">Sala <p-sortIcon field="sala"></p-sortIcon></th>
+            <th pSortableColumn="dtIni">Data Inicial <p-sortIcon field="dtIni"></p-sortIcon></th>
+            <th pSortableColumn="dtFim">Data Final <p-sortIcon field="dtFim"></p-sortIcon></th>
+            <th pSortableColumn="equipamentos">Opcionais <p-sortIcon field="equipamentos"></p-sortIcon></th>
+            <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+            <th style="width: 13rem;"> 
+                <div style="display: flex;">
+                    <div style="padding-top: 5px; padding-right: 2px;">
+                        <i class="pi pi-search"></i>
+                    </div>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." style="width: 85%;"/>
+                </div>       
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-reserva>
+        <tr>
+            <td>{{reserva?.idCliente}}</td>
+            <td>{{reserva?.idSala}}</td>
+            <td>{{reserva?.dataInicio | date:"dd/MM/yyyy HH:mm:ss"}}</td>
+            <td>{{reserva?.dataFim | date:"dd/MM/yyyy HH:mm:ss"}}</td>
+            <td>
+                <div *ngFor="let equipamento of reserva.equipamentos">
+                    <div>
+                        {{getNomeEquipamento(equipamento.idEquipamento)}}: {{equipamento.quantidade}} 
+                    </div>
+                </div>
+            </td>
+            <td>{{reserva?.total | currency: 'R$ '}}</td>
+            <td>
+                <span style="float: center">
+                    <button 
+                    (click)="editar(sala.id)"
+                    pButton 
+                    type="button" 
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <span>Editar</span>
+                    </button>       
+                    <button 
+                    pButton 
+                    type="button" 
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: red;"
+                    (click)="deletar(sala.id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <span>Deletar</span>
+                    </button>
+                </span>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-confirmDialog header="Atenção" icon="pi pi-exclamation-triangle"></p-confirmDialog>

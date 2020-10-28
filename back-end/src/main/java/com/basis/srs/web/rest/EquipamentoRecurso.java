@@ -13,41 +13,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/equipamentos")
 @RequiredArgsConstructor
 public class EquipamentoRecurso {
+
     private final EquipamentoServico equipamentoServico;
 
     @GetMapping
     public ResponseEntity<List<EquipamentoDTO>> listar(){
-        return ResponseEntity.ok(new ArrayList<>());
+        return ResponseEntity.ok(equipamentoServico.listar());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EquipamentoDTO> obterPorId(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(new EquipamentoDTO());
+    public ResponseEntity<EquipamentoDTO> buscar(@PathVariable Integer id){
+        return ResponseEntity.ok(equipamentoServico.buscar(id));
     }
 
     @PostMapping
-    public ResponseEntity<EquipamentoDTO> salvar(@RequestBody EquipamentoDTO EquipamentoDTO) throws URISyntaxException {
-        EquipamentoDTO dto = new EquipamentoDTO();
-        return ResponseEntity.created(new URI("/a/i/Equipamentos/")).body(dto);
+    public ResponseEntity<EquipamentoDTO> salvar(@Valid @RequestBody EquipamentoDTO equipamentoDTO) throws URISyntaxException {
+        EquipamentoDTO dto = equipamentoServico.criar(equipamentoDTO);
+        return ResponseEntity.created(new URI("/api/equipamentos/")).body(dto);
     }
 
     @PutMapping
-    public ResponseEntity<EquipamentoDTO> atualizar(@RequestBody EquipamentoDTO EquipamentoDTO){
-        EquipamentoDTO dto = new EquipamentoDTO();
+    public ResponseEntity<EquipamentoDTO> atualizar(@Valid @RequestBody EquipamentoDTO equipamentoDTO){
+        equipamentoServico.buscar(equipamentoDTO.getId());
+        EquipamentoDTO dto = equipamentoServico.criar(equipamentoDTO);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable("id") Integer id){
+    public ResponseEntity<Void> remover(@PathVariable Integer id){
+        equipamentoServico.deletar(id);
         return ResponseEntity.ok().build();
     }
+
 }

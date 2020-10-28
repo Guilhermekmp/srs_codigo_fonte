@@ -1,0 +1,84 @@
+<div class="card" style = "height:65px; display: block;">
+    <div style= "height: 2.7rem; text-align: left; line-height: 60%; display: flex;
+    justify-content: space-between;">
+        <h1 style = "font-size: 30px;">Salas</h1>
+            <button 
+            pButton 
+            type="button" 
+            class="app-button-success p-d-flex p-jc-center p-ic-center" 
+            style="background-color: green; margin-top: 5px;"
+            (click) = criarNovaSala()>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span>Nova sala</span>
+            </button>
+    </div>
+</div>
+
+<p-dialog header = "Nova Sala" [(visible)]="displayCreation" [style]="{'width':'40vw', 'height':'fit-content'}">
+    <div style="height: auto;">
+    <app-salas-form [salaId]="salaSelecionadaId"></app-salas-form>        
+    </div>
+</p-dialog>
+<!-- <app-item-output (criarSalaEvento)="listar()"></app-item-output> -->
+
+
+<p-table #dt [value]="salas" [globalFilterFields]="['descricao']">
+    
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="id" style="width: 9rem;" >Id <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="descricao">Descrição <p-sortIcon field="descricao"></p-sortIcon></th>
+            <th pSortableColumn="idTipoSala" style="width: 10rem;">Tipo <p-sortIcon field="idTipoSala"></p-sortIcon></th>
+            <th pSortableColumn="precoDiario" style="width: 8rem;">Preço Diário <p-sortIcon field="precoDiario"></p-sortIcon></th>
+            <th pSortableColumn="capacidade"  style="width: 9rem;">Capacidade <p-sortIcon field="capacidade"></p-sortIcon></th>
+            <th pSortableColumn="equipamentos" style="width: 12rem;">Equipamentos <p-sortIcon field="equipamentos"></p-sortIcon></th>
+            <th style="width: 13rem;"> 
+                <div style="display: flex;">
+                    <div style="padding-top: 5px; padding-right: 2px;">
+                        <i class="pi pi-search"></i>
+                    </div>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." style="width: 85%;"/>
+                </div>       
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-sala>
+        <tr>
+            
+            <td id="1" style="text-align: center;">{{sala?.id}}</td>
+            <td>{{sala?.descricao}}</td>
+            <td style="text-align: center;">{{getTipoSala(sala)}}</td>
+            <td style="text-align: center;">{{sala?.precoDiario | currency: 'R$ '}}</td>
+            <td style="text-align: center;">{{sala?.capacidade}}</td>
+            <td>
+                <div *ngFor="let equipamento of sala.equipamentos">
+                    <div>
+                        {{getNomeEquipamento(equipamento.idEquipamento)}}: {{equipamento.quantidade}} 
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span style="float: center">
+                    <button 
+                    (click)="editar(sala.id)"
+                    pButton 
+                    type="button" 
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <span>Editar</span>
+                    </button>       
+                    <button 
+                    pButton 
+                    type="button" 
+                    class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: red;"
+                    (click)="deletar(sala.id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <span>Deletar</span>
+                    </button>
+                </span>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-confirmDialog header="ATENÇÃO!" icon="pi pi-exclamation-triangle"></p-confirmDialog>

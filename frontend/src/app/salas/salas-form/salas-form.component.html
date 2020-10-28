@@ -1,0 +1,136 @@
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <div>
+        <div>
+            <label for="descricao" style="font-size: 130%;">Descrição</label>
+        </div>
+        <div style="text-align: center; margin-top: 3px;">
+            <textarea required [rows]="5" [cols]="89" pInputTextarea autoResize="autoResize" style="box-sizing: border-box; width: 100%;"
+            formControlName="descricao" [(ngModel)]="sala.descricao" id="descricao" placeholder="Endereço, área, etc."></textarea>
+        </div>
+        <div style="justify-content: space-between; display: inline-flex;">
+            <div>
+                <div>
+                    <label for="precoDiario" style="font-size: 130%;">Preço Diário Base</label>
+                </div>
+                <div class="ui-inputgroup">
+                    <input type="text" pInputText placeholder="R$" formControlName="precoDiario" id="precoDiario"
+                    currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}" [(ngModel)]="sala.precoDiario">
+                </div>
+            </div>
+            <div style="margin-left: 10px;">
+                <div>
+                    <label for="idTipoSala" style="font-size: 130%">Tipo</label>
+                </div>
+                <p-dropdown [options]="tiposSala" formControlName="idTipoSala" [(ngModel)]="sala.idTipoSala" placeholder="Selecione..."></p-dropdown>
+            </div>
+            <div style="margin-left: 10px; display: flexbox;">
+                <div>
+                    <label for="capacidade" style="font-size: 130%;">Capacidade</label>
+                </div>
+                <div class="ui-inputgroup">
+                    <input pInputText type="number" min="0" formControlName="capacidade" [(ngModel)]="sala.capacidade" 
+                    id="capacidade" style="width: 40%; border-right-width: 1px;" placeholder="0">
+                    <div style="margin-left: 5px; line-height: 30px; width: 30%; font-size: 17px;">
+                        pessoas
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-d-lg-inline">
+        <div style="display: flex;">
+            <h2>Equipamentos obrigatórios</h2>
+            <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
+        </div>
+        <div style="display: flex;">
+            <div style="margin-right: 75px;">
+                <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
+            </div>
+            <div>
+                <label for="quantidade" style="font-size: 130%;">Quantidade</label>
+            </div>
+        </div>
+        <div *ngIf="mostrarLista">
+            <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosNew; let i=index">
+                <div class="ui-g ui-fluid" style="display: flex; margin-bottom: 10px;">
+                    <div>
+                        <div style="width: fit-content; margin-right: 10px" >
+                            <input pInputText type="text" id="idEquipamento" style="width: 175px; background-color: darkgray;"
+                            readonly value="{{getNomeEquipamento(listaEquipamentosNew[i].idEquipamento)}}"> 
+                        </div>
+                    </div>
+                    <div class="ui-g ui-fluid">
+                        <div style="width: 5.4vw;" >
+                            <input pInputText type="number" min="1" [value]="listaEquipamentosNew[i].quantidade" id="quantidade"
+                            #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form action="" [formGroup]="formulario2"></form>
+        <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosNew; let i=index">
+            <div class="equipamento" style="display: flex; margin-bottom: 10px;">
+                <div style="width: fit-content;">
+
+                    <p-dropdown [options]="listaEquipamentos" #idEquipamento
+                         id="listaEquipamentos" placeholder="Selecione..."
+                        (onChange) = "alterarIdEquipamento(idEquipamento.value, i)"></p-dropdown>
+                </div>
+                <div class="ui-g ui-fluid">
+                    <div style="width: 5.4vw; margin-left: 10px" >
+
+                        <input pInputText type="number" min="1" [value]="listaEquipamentosNew[i].quantidade" id="quantidade"
+                        #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
+                    </div>
+                </div>
+
+                <div style="margin-left: 10px;">
+                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
+                </div>
+                <div style="margin-left: 10px;">
+                    <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
+                </div>
+                
+                
+            </div>
+        </div>
+        <!-- <div style="display: flexbox;" formArrayName="equipamentos"  *ngFor="let equipamento of formulario.get('equipamentos').controls; let i = index;">
+            <div [formGroupName]="i" style="display: flex;">
+                <div style="width: fit-content;">
+                    <div>
+                        <label for="listaEquipamentos" style="font-size: 130%">Nome</label>
+                    </div>
+                    <p-dropdown [options]="listaEquipamentos" formControlName="idEquipamento"
+                    [(ngModel)]="equipamento.idEquipamento" id="listaEquipamentos" placeholder="Selecione..."></p-dropdown>
+                </div>
+                <div class="ui-g ui-fluid">
+                    <div style="width: 5.4vw; margin-left: 10px" >
+                        <div>
+                            <label for="capacidade" style="font-size: 130%;">Quantidade</label>
+                        </div>
+                        <div class="ui-inputgroup">
+                            <input pInputText type="number" min="1" formControlName="quantidade" [(ngModel)]="equipamento.quantidade" id="quantidade"> 
+                        </div>
+                    </div>
+                </div>
+                <div style="line-height: 65px; margin-left: 10px;">
+                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" style="background-color: green;" (click) = addEquipamento()></button>
+                </div>
+                <div style="line-height: 65px; margin-left: 10px;">
+                    <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
+                </div>
+            </div>
+
+        </div> -->
+    </div>
+    <button 
+    pButton 
+    type="button" 
+    class="app-button-success p-d-flex p-jc-center p-ic-center" 
+    style="background-color: green; margin-top: 10px; font-weight: bold; line-height: 30px;"
+    (click) = onSubmit()>
+    <span>Criar</span>
+    </button>
+</form>

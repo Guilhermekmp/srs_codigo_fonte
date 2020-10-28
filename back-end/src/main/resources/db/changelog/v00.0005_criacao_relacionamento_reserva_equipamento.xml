@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet  author="guilherme.maciel"  id="relationReservaEquipamento">
+
+        <createTable tableName="reserva_equipamento">
+
+            <column name="id_reserva" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="id_equipamento" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="quantidade" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addPrimaryKey tableName="reserva_equipamento" columnNames="id_reserva, id_equipamento" constraintName="pk_reserva_equipamento"/>
+
+        <addForeignKeyConstraint baseTableName="reserva_equipamento" baseColumnNames="id_equipamento"
+                                 constraintName="fk_reserva_equipamento_equipamento" referencedTableName="equipamento"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="reserva_equipamento" baseColumnNames="id_reserva" constraintName="fk_reserva_equipamento_reserva"
+                                 referencedTableName="reserva" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

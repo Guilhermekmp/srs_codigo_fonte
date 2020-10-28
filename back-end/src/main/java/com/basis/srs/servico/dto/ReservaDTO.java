@@ -1,26 +1,39 @@
 package com.basis.srs.servico.dto;
 
-import com.basis.srs.dominio.Cliente;
-import com.basis.srs.dominio.Sala;
-import lombok.AllArgsConstructor;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 @Getter
 @Setter
-public class ReservaDTO {
+public class ReservaDTO implements Serializable {
 
-    private int id;
-    private ClienteDTO cliente;
-    private SalaDTO sala;
+    private static final long serialVersionUID = 1L;
+
+    private Integer id;
+
+    @NotNull
+    private Integer idCliente;
+
+    @NotNull
+    private Integer idSala;
+
+    @NotNull
     private Double total;
+
+    @NotNull
+    @FutureOrPresent
     private LocalDateTime dataInicio;
+    
+    @NotNull
+    @Future
     private LocalDateTime dataFim;
+
+    @NotNull
+    private List<ReservaEquipamentoDTO> equipamentos;
 }
