@@ -200,7 +200,7 @@ export class ReservasFormComponent implements OnInit {
       ...this.formulario.value,
     }
     this.reserva.id = idReserva;
-    var lista = this.equipamentosOpcionaisNew;
+    var lista = this.juntarListas();
     this.reserva.equipamentos = []
     lista.forEach(element => {
       if(element.idEquipamento != null){
