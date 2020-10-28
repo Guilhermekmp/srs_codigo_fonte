@@ -21,7 +21,7 @@
                 <label for="precoDiario" style="font-size: 130%;">Preço Diário</label>
                 <small> *</small>
                 <br>
-                <input id="preco" pInputText min="0" formControlName="precoDiario" [(ngModel)]="precoDiario" 
+                <input id="preco" pInputText min="1" formControlName="precoDiario" [(ngModel)]="precoDiario" 
                 placeholder="R$ 0.00" currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ','}" required>
             </div>
         </div>  
