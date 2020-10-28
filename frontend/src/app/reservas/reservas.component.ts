@@ -3,7 +3,7 @@ import { SalasService } from './../salas/salas.service';
 import { Sala } from './../salas/sala';
 import { ReservasService } from './reservas.service';
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, SortEvent } from 'primeng';
+import { ConfirmationService, MessageService, SortEvent } from 'primeng';
 import { Reserva } from './reserva';
 
 @Component({
@@ -25,7 +25,8 @@ export class ReservasComponent implements OnInit {
 
   constructor(
     private reservasService: ReservasService, private confirmationService:ConfirmationService,
-    private salasService:SalasService, private equipamentosService: EquipamentosService){}
+    private salasService:SalasService, private equipamentosService: EquipamentosService,
+    private messageService: MessageService){}
 
   ngOnInit(){
     this.listar();
@@ -81,5 +82,9 @@ export class ReservasComponent implements OnInit {
    editar(id: number){
     this.reservaSelecionadaId = id;
     this.popUpOpen();
+  }
+
+  throwMessageSuccess(mensagem: string){
+    this.messageService.add({severity: 'success', summary: 'Sucesso', detail: mensagem});
   }
 }

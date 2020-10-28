@@ -31,6 +31,8 @@ export class ReservasFormComponent implements OnInit {
 
   equipamentos: FormArray;
   equipamentoOpcionais = [];
+
+  equipamentosOpcionaisAdicionados: EquipamentoOpcional[] = [];
   equipamentosOpcionaisNew: EquipamentoOpcional[] = []; 
 
   salas = [];
@@ -52,12 +54,8 @@ export class ReservasFormComponent implements OnInit {
 
   constructor(private reservasService: ReservasService, private formBuilder: FormBuilder
     , private salasService: SalasService, private equipamentosService: EquipamentosService
-    , private clientesService: ClientesService) { 
-<<<<<<< HEAD
-      this.initForm();
-=======
+    , private clientesService: ClientesService, private reservasComponent:ReservasComponent) { 
     this.initForm();
->>>>>>> e268a26... conflitos em reserva
       if(!this.reservaId){
         this.mostrarLista = false;
       }
@@ -71,7 +69,6 @@ export class ReservasFormComponent implements OnInit {
     
     this.formulario2 = this.formBuilder.group({});
 
-    this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
   }
 
   private listarClientes() {
@@ -131,12 +128,12 @@ export class ReservasFormComponent implements OnInit {
 
   }
 
-  addEquipamento(){
-    this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
-  }
-
   removerEquipamento(index: number){
     this.equipamentosOpcionaisNew.splice(index, 1);
+  }
+
+  removerTodosEquipamentos(){
+    this.equipamentosOpcionaisNew = [];
   }
 
   clear(){
@@ -158,7 +155,9 @@ export class ReservasFormComponent implements OnInit {
 
         this.reservasService.atualizarReserva(this.construirObjetoReserva()).subscribe(
           success => {
-            console.log('PUT' + this.reserva)},
+            console.log('PUT' + this.reserva)
+            this.reservasComponent.throwMessageSuccess('Atualizada com sucesso!');
+            },
           error => console.error(error),
           () => {console.log('request completo')
          debounce(this.criarReservaEvento.emit(), 2)
@@ -170,7 +169,9 @@ export class ReservasFormComponent implements OnInit {
        
         this.reservasService.salvar(this.construirObjetoReserva()).subscribe(
           success => {
-            console.log('POST')},
+            console.log('POST')
+            this.reservasComponent.throwMessageSuccess('Criada com sucesso!');
+          },
           error => console.error(error),
           () => {console.log('request completo')
          debounce(this.criarReservaEvento.emit(), 2)
@@ -232,13 +233,15 @@ export class ReservasFormComponent implements OnInit {
     reserva.dataFim = this.formulario.get('dataFim').value;
     reserva.total = this.formulario.get('total').value;
 
-    reserva.equipamentos = this.equipamentosOpcionaisNew.map(item=>{
-      console.log('item lista', item);
+    reserva.equipamentos = this.juntarListas()
+    .map(item=>{
+      //console.log('item lista', item);
       
       if(item.idEquipamento && item.quantidade){
         return item;
       }
       });
+    //console.log("EQUIPAMENTOS SALA EDITADA", sala.equipamentos);
     return reserva;
   }
   
@@ -255,6 +258,51 @@ export class ReservasFormComponent implements OnInit {
   getNomeEquipamento(idEquipamento: number): string {
     let item = this.equipamentoOpcionais.find(i => i.value === idEquipamento);
     return item ? item.label : '';
+  }
+
+  addEquipamento(){
+    this.equipamentosOpcionaisAdicionados.push(new EquipamentoOpcional());
+  }
+
+  alterarIdEquipamentoAdicionado(idEquipamento: number, index: number){
+    this.equipamentosOpcionaisAdicionados[index].idReserva = null;
+    this.equipamentosOpcionaisAdicionados[index].idEquipamento = idEquipamento;
+  }
+
+  removerEquipamentoAdicionado(index: number){
+    this.equipamentosOpcionaisAdicionados.splice(index, 1);
+  }
+
+  alterarQuantidadeAdicionado(quantidade: number, index: number){
+    //console.log(quantidade, index);
+    this.equipamentosOpcionaisAdicionados[index].quantidade = Number(quantidade);
+  }
+
+  juntarListas(): EquipamentoOpcional[]{
+    var listaCompleta :EquipamentoOpcional[];
+    listaCompleta = this.equipamentosOpcionaisAdicionados;
+    for (let index = 0; index < this.equipamentosOpcionaisNew.length; index++) {
+       var salaEquipamento: EquipamentoOpcional = new EquipamentoOpcional(); 
+       
+       salaEquipamento.idReserva = null;
+       salaEquipamento.idEquipamento = this.equipamentosOpcionaisNew[index].idEquipamento;
+       salaEquipamento.quantidade = this.equipamentosOpcionaisNew[index].quantidade;
+       
+      listaCompleta.push(salaEquipamento);
+    }
+    //console.log("LISTA COMPLETA", listaCompleta);
+    return listaCompleta;
+  }
+
+  resetarReserva(){
+    this.reserva.id = null;
+    this.reserva.idSala = null;
+    this.reserva.idCliente = null;
+    this.reserva.dataInicio = null;
+    this.reserva.dataFim = null;
+    this.reserva.total = null;
+
+    this.removerTodosEquipamentos();
   }
 
 }
