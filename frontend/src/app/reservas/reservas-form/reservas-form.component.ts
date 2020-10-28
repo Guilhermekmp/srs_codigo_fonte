@@ -210,8 +210,7 @@ export class ReservasFormComponent implements OnInit {
         this.reserva.equipamentos = []
       }
     });
-    console.log(this.reserva,'reserva valor');
-    
+    console.log(this.reserva,'reserva valor');    
     this.reserva.total = 0;
     this.getTotal(this.reserva);
   }
