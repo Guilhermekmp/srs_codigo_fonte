@@ -145,6 +145,8 @@ validaForm(){
 
       this.equipamentoComponent.throwMessageError('Digite um preço para o equipamento');
 
+    }else if(this.formulario.get('precoDiario').value == 0){
+      this.equipamentoComponent.throwMessageError('Digite um preço válido')
     }
 }
 }
