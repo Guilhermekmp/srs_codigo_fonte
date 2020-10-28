@@ -195,9 +195,11 @@ export class ReservasFormComponent implements OnInit {
   }
 
   valorTotal() {
+    const idReserva = this.reserva.id;
     this.reserva = {
       ...this.formulario.value,
     }
+    this.reserva.id = idReserva;
     var lista = this.equipamentosOpcionaisNew;
     this.reserva.equipamentos = []
     lista.forEach(element => {
