@@ -44,8 +44,8 @@
     <ng-template pTemplate="body" let-sala>
         <tr>
             
-            <td id="1" style="text-align: center;">{{sala?.id}}</td>
-            <td>{{sala?.descricao}}</td>
+            <td style="text-align: center;">{{sala?.id}}</td>
+            <td style="text-overflow: ellipsis;">{{sala?.descricao}}</td>
             <td style="text-align: center;">{{getTipoSala(sala)}}</td>
             <td style="text-align: center;">{{sala?.precoDiario | currency: 'R$ '}}</td>
             <td style="text-align: center;">{{sala?.capacidade}}</td>

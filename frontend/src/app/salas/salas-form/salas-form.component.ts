@@ -208,7 +208,7 @@ export class SalasFormComponent implements OnInit {
         this.salasService.atualizarSala(this.construirObjetoSala()).subscribe(
           success => {
             this.salasComponent.throwMessageSuccess('Atualizada com sucesso!');
-            //window.location.reload();
+            window.location.reload();
             //console.log('PUT', this.sala)
           },
           error => console.error(error)
@@ -221,7 +221,7 @@ export class SalasFormComponent implements OnInit {
         this.salasService.criar(this.construirObjetoSala()).subscribe(
           success => {
             this.salasComponent.throwMessageSuccess('Criada com sucesso!');
-            //window.location.reload();
+            window.location.reload();
             //console.log('POST')
           },
           error => console.error(error)
