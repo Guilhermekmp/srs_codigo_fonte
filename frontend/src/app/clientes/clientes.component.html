@@ -79,13 +79,13 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th>Nome</th>
-            <th style="width: 10.8rem;">Email</th>
-            <th>Endereco</th>
-            <th>CPF</th>
-            <th style="width: 5rem;">RG</th>
-            <th>Telefone</th>
-            <th>Data Nascimento</th>
+            <th pSortableColumn="nome">Nome<p-sortIcon field="nome"></p-sortIcon></th>
+            <th style="width: 10.8rem;" pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
+            <th pSortableColumn="endereco">Endereço<p-sortIcon field="endereco"></p-sortIcon></th>
+            <th pSortableColumn="cpf">CPF<p-sortIcon field="cpf"></p-sortIcon></th>
+            <th style="width: 5rem;" pSortableColumn="rg">RG<p-sortIcon field="rg"></p-sortIcon></th>
+            <th pSortableColumn="telefone">Telefone<p-sortIcon field="telefone"></p-sortIcon></th>
+            <th pSortableColumn="dataNascimento">Data Nascimento<p-sortIcon field="dataNascimento"></p-sortIcon></th>
             <th style="width: 13rem;"> 
                 <div style="display: flex;">
                     <div style="padding-top: 5px; padding-right: 2px;">
@@ -98,13 +98,13 @@
     </ng-template>
     <ng-template pTemplate="body" let-client>
         <tr>
-            <td>{{client.nome}}</td>
-            <td>{{client.email}}</td>
-            <td>{{client.endereco}}</td>
-            <td>{{client.cpf | CPF}}</td>
-            <td>{{client.rg}}</td>
-            <td>{{client.telefone | TELEFONE}}</td>
-            <td>{{client.dataNascimento | date:"dd/MM/yyyy"}}</td>
+            <td style="text-align: center;">{{client.nome}}</td>
+            <td style="text-overflow: center; overflow: hidden;">{{client.email}}</td>
+            <td style="text-align: center;">{{client.endereco}}</td>
+            <td style="text-align: center;">{{client.cpf | CPF}}</td>
+            <td style="text-align: center;">{{client.rg}}</td>
+            <td style="text-align: center;">{{client.telefone | TELEFONE}}</td>
+            <td style="text-align: center;">{{client.dataNascimento | date:"dd/MM/yyyy"}}</td>
             <td>
                 <button pButton class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;" 
                 (click)="atualizarCliente(client.id)"
