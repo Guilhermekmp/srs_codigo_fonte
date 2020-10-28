@@ -79,7 +79,7 @@
                     <div class="ui-g ui-fluid">
                         <div style="width: 5.4vw;" >
                             <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
-                            #qtd (change) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
+                            #qtd (mouseleave) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
                         </div>
                         <div style="margin-left: 10px;">
                             <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
@@ -103,7 +103,7 @@
                     <div style="width: 5.4vw; margin-left: 10px" >
 
                         <input pInputText required type="number" min="1" [value]="equipamentosOpcionaisAdicionados[i].quantidade" id="quantidade"
-                        #qtd (change) = "alterarQuantidadeAdicionado(qtd.value, i);valorTotal()"> 
+                        #qtd (mouseleave) = "alterarQuantidadeAdicionado(qtd.value, i);valorTotal()"> 
                     </div>
                 </div>
 
