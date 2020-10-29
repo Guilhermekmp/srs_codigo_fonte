@@ -8,7 +8,8 @@
                     <span style="color: red">*</span>
                 </div>
                 <p-dropdown required [options]="salas" formControlName="idSala"
-                     placeholder="Selecione um Sala" [(ngModel)]=salaSelecionada></p-dropdown>
+                     placeholder="Selecione um Sala" [(ngModel)]=salaSelecionada
+                     ></p-dropdown>
             </div>
         </div>
 
@@ -73,16 +74,17 @@
                     <div>
                         <div style="width: fit-content; margin-right: 10px" >
                             <input pInputText type="text" id="idEquipamento" style="width: 175px; background-color: darkgray;"
-                            readonly value="{{getNomeEquipamento(equipamentosOpcionaisNew[i].idEquipamento)}}"> 
+                            readonly value="{{getNomeEquipamento(equipamentosOpcionaisNew[i].idEquipamento)}}"
+                            (mouseenter)="listarOpcionais()"> 
                         </div>
                     </div>
                     <div class="ui-g ui-fluid">
                         <div style="width: 5.4vw;" >
                             <input pInputText type="number" min="1" [value]="equipamentosOpcionaisNew[i].quantidade" id="quantidade"
-                            #qtd (mouseleave) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
+                            #qtd (change) = "alterarQuantidade(qtd.value, i);valorTotal()"> 
                         </div>
                         <div style="margin-left: 10px;">
-                            <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i)></button>
+                            <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded" style="background-color: red;" (click) = removerEquipamento(i);valorTotal()></button>
                         </div>
                     </div>
                 </div>
@@ -96,14 +98,14 @@
 
                     <p-dropdown [options]="equipamentoOpcionais" #idEquipamento
                          id="listaEquipamentos" placeholder="Selecione..."
-                         (onClick) = 'listarOpcionais()'
+                         (onFocus)="listarOpcionais()"
                         (onChange) = "alterarIdEquipamentoAdicionado(idEquipamento.value, i)"></p-dropdown>
                 </div>
                 <div class="ui-g ui-fluid">
                     <div style="width: 5.4vw; margin-left: 10px" >
 
                         <input pInputText required type="number" min="1" [value]="equipamentosOpcionaisAdicionados[i].quantidade" id="quantidade"
-                        #qtd (mouseleave) = "alterarQuantidadeAdicionado(qtd.value, i);valorTotal()"> 
+                        #qtd (change) = "alterarQuantidadeAdicionado(qtd.value, i);valorTotal()"> 
                     </div>
                 </div>
 

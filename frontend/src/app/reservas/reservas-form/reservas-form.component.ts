@@ -49,6 +49,8 @@ export class ReservasFormComponent implements OnInit {
       console.log("ID " + id);
       this.mostrarLista = true;
       console.log(this.mostrarLista);
+    }else{
+      this.resetarReserva();
     }
   }
 
@@ -58,6 +60,7 @@ export class ReservasFormComponent implements OnInit {
     this.initForm();
       if(!this.reservaId){
         this.mostrarLista = false;
+        this.formulario.reset();
       }
     }
   ngOnInit(): void {
@@ -66,6 +69,8 @@ export class ReservasFormComponent implements OnInit {
 
     this.listarSalas();
     this.listarClientes();
+
+    this.listarOpcionais();
     
     this.formulario2 = this.formBuilder.group({});
 
@@ -134,6 +139,7 @@ export class ReservasFormComponent implements OnInit {
 
   removerTodosEquipamentos(){
     this.equipamentosOpcionaisNew = [];
+    this.equipamentosOpcionaisAdicionados = [];
   }
 
   clear(){
@@ -260,6 +266,7 @@ export class ReservasFormComponent implements OnInit {
     let item = this.equipamentoOpcionais.find(i => i.value === idEquipamento);
     return item ? item.label : '';
   }
+  
 
   addEquipamento(){
     this.equipamentosOpcionaisAdicionados.push(new EquipamentoOpcional());
@@ -280,20 +287,22 @@ export class ReservasFormComponent implements OnInit {
   }
 
   juntarListas(): EquipamentoOpcional[]{
-    var listaCompleta :EquipamentoOpcional[];
-    listaCompleta = this.equipamentosOpcionaisAdicionados;
+    var listaCompleta :EquipamentoOpcional[] = [];
+    listaCompleta = listaCompleta.concat(this.equipamentosOpcionaisAdicionados);
     for (let index = 0; index < this.equipamentosOpcionaisNew.length; index++) {
        var salaEquipamento: EquipamentoOpcional = new EquipamentoOpcional(); 
        
        salaEquipamento.idReserva = null;
        salaEquipamento.idEquipamento = this.equipamentosOpcionaisNew[index].idEquipamento;
        salaEquipamento.quantidade = this.equipamentosOpcionaisNew[index].quantidade;
+      
        
       listaCompleta.push(salaEquipamento);
     }
-    //console.log("LISTA COMPLETA", listaCompleta);
     return listaCompleta;
   }
+
+  adicionarReservaEquipamento(){}
 
   resetarReserva(){
     this.reserva.id = null;
@@ -302,6 +311,8 @@ export class ReservasFormComponent implements OnInit {
     this.reserva.dataInicio = null;
     this.reserva.dataFim = null;
     this.reserva.total = null;
+
+    this.initForm();
 
     this.removerTodosEquipamentos();
   }
