@@ -287,20 +287,22 @@ export class ReservasFormComponent implements OnInit {
   }
 
   juntarListas(): EquipamentoOpcional[]{
-    var listaCompleta :EquipamentoOpcional[];
-    listaCompleta = this.equipamentosOpcionaisAdicionados;
+    var listaCompleta :EquipamentoOpcional[] = [];
+    listaCompleta = listaCompleta.concat(this.equipamentosOpcionaisAdicionados);
     for (let index = 0; index < this.equipamentosOpcionaisNew.length; index++) {
        var salaEquipamento: EquipamentoOpcional = new EquipamentoOpcional(); 
        
        salaEquipamento.idReserva = null;
        salaEquipamento.idEquipamento = this.equipamentosOpcionaisNew[index].idEquipamento;
        salaEquipamento.quantidade = this.equipamentosOpcionaisNew[index].quantidade;
+      
        
       listaCompleta.push(salaEquipamento);
     }
-    //console.log("LISTA COMPLETA", listaCompleta);
     return listaCompleta;
   }
+
+  adicionarReservaEquipamento(){}
 
   resetarReserva(){
     this.reserva.id = null;
