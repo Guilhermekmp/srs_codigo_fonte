@@ -63,16 +63,16 @@
         </div>
         <!-- LISTA DE EQUIPAMENTOS PREVIAMENTE ADICIONADOS -->
         <div *ngIf="mostrarLista">
-            <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosNew; let i=index">
+            <div class="nova-lista-equipamentos" *ngFor="let item of listaEquipamentosOld; let i=index">
                 <div class="ui-g ui-fluid" style="display: flex; margin-bottom: 10px;">
                     <div>
                         <div style="width: fit-content; margin-right: 10px" >
                             <input pInputText required type="text" id="idEquipamento" style="width: 175px; background-color: darkgray;"
-                            readonly value="{{getNomeEquipamento(listaEquipamentosNew[i].idEquipamento)}}"> 
+                            readonly value="{{getNomeEquipamento(listaEquipamentosOld[i].idEquipamento)}}"> 
                         </div>
                     </div>
                     <div class="ui-g ui-fluid" style="width: 5.4vw;" >
-                        <input pInputText type="number" min="1" [value]="listaEquipamentosNew[i].quantidade" id="quantidade"
+                        <input pInputText type="number" min="1" [value]="listaEquipamentosOld[i].quantidade" id="quantidade"
                         #qtd (blur) = "alterarQuantidade(qtd.value, i)"> 
                     </div>
                     <div style="margin-left: 10px;">

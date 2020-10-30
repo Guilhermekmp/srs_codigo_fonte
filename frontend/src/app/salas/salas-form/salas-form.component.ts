@@ -23,7 +23,7 @@ export class SalasFormComponent implements OnInit {
 
   equipamentos: FormArray;
   
-  listaEquipamentosNew: SalaEquipamento[] = [];
+  listaEquipamentosOld: SalaEquipamento[] = [];
   
   @Input() set salaId(id: number){
     if(id)  {
@@ -82,8 +82,8 @@ export class SalasFormComponent implements OnInit {
       this.sala = data;
       this.atualizarForm();
       //console.log(data);
-      this.listaEquipamentosNew = this.sala.equipamentos;
-      //console.log("EQUIPAMENTOS DA SALA", this.listaEquipamentosNew);
+      this.listaEquipamentosOld = this.sala.equipamentos;
+      //console.log("EQUIPAMENTOS DA SALA", this.listaEquipamentosOld);
     }, err =>{
       //console.log(err);
     });
@@ -91,7 +91,7 @@ export class SalasFormComponent implements OnInit {
   }
 
   atualizarForm() {
-    var equipamentos = this.listaEquipamentosNew.map(e => {return { idSala: null, idEquipamento: e.idEquipamento, quantidade: e.quantidade }});
+    var equipamentos = this.listaEquipamentosOld.map(e => {return { idSala: null, idEquipamento: e.idEquipamento, quantidade: e.quantidade }});
 
     this.formulario.get('descricao').setValue(this.sala.descricao);
     this.formulario.get('precoDiario').setValue(this.sala.precoDiario);
@@ -136,7 +136,7 @@ export class SalasFormComponent implements OnInit {
     return item ? item.label : '';
   }
 
-  /* ListaEquipamentosNew é a lista dos equipamentos que já estavam adicionados 
+  /* listaEquipamentosOld é a lista dos equipamentos que já estavam adicionados 
   * na sala. Unicamente utilizada no formulário de editar.
   * 
   * ListaEquipamentosAdicionados é a lista dos novos equipamentos a serem 
@@ -146,23 +146,23 @@ export class SalasFormComponent implements OnInit {
   * for submetido.
   */
 
-  //Funções que usam listaEquipamentosNew
+  //Funções que usam listaEquipamentosOld
   alterarIdEquipamento(idEquipamento: number, index: number){
-    this.listaEquipamentosNew[index].idSala = null;
-    this.listaEquipamentosNew[index].idEquipamento = idEquipamento;
+    this.listaEquipamentosOld[index].idSala = null;
+    this.listaEquipamentosOld[index].idEquipamento = idEquipamento;
   }
 
   removerEquipamento(index: number){
-    this.listaEquipamentosNew.splice(index, 1);
+    this.listaEquipamentosOld.splice(index, 1);
   }
 
   alterarQuantidade(quantidade: number, index: number){
     //console.log(quantidade, index);
-    this.listaEquipamentosNew[index].quantidade = Number(quantidade);
+    this.listaEquipamentosOld[index].quantidade = Number(quantidade);
   }
 
   removerTodosEquipamentos(){
-    this.listaEquipamentosNew = [];
+    this.listaEquipamentosOld = [];
   }
 
   //Funções que usam listaEquipamentosAdicionados
@@ -187,12 +187,12 @@ export class SalasFormComponent implements OnInit {
   juntarListas(): SalaEquipamento[]{
     var listaCompleta :SalaEquipamento[];
     listaCompleta = this.listaEquipamentosAdicionados;
-    for (let index = 0; index < this.listaEquipamentosNew.length; index++) {
+    for (let index = 0; index < this.listaEquipamentosOld.length; index++) {
        var salaEquipamento: SalaEquipamento = new SalaEquipamento(); 
        
        salaEquipamento.idSala = null;
-       salaEquipamento.idEquipamento = this.listaEquipamentosNew[index].idEquipamento;
-       salaEquipamento.quantidade = this.listaEquipamentosNew[index].quantidade;
+       salaEquipamento.idEquipamento = this.listaEquipamentosOld[index].idEquipamento;
+       salaEquipamento.quantidade = this.listaEquipamentosOld[index].quantidade;
        
       listaCompleta.push(salaEquipamento);
     }
