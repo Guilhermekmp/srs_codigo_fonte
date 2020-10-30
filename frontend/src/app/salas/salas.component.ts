@@ -1,4 +1,4 @@
-import { ConfirmationService } from 'primeng';
+import { ConfirmationService, MessageService } from 'primeng';
 import { EquipamentosService } from './../equipamentos/equipamentos.service';
 import { Equipamento } from './../equipamentos/models/equipamento';
 import { SalasService } from './salas.service';
@@ -23,7 +23,10 @@ export class SalasComponent implements OnInit {
 
   displayCreation: boolean = false;
 
-  constructor(private  salasService: SalasService, private equipamentosService: EquipamentosService, private confirmationService: ConfirmationService) { }
+  constructor(private  salasService: SalasService,
+    private equipamentosService: EquipamentosService, 
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.listar();
@@ -109,6 +112,10 @@ export class SalasComponent implements OnInit {
 
   abrirPopUp(){
     this.displayCreation = true;
+  }
+
+  throwMessageSuccess(mensagem: string){
+    this.messageService.add({severity: 'success', summary: 'Sucesso', detail: mensagem});
   }
 
 }

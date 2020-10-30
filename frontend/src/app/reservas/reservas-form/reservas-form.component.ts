@@ -5,7 +5,7 @@ import { SalasService } from './../../salas/salas.service';
 import { ReservasComponent } from './../reservas.component';
 import { ReservasService } from './../reservas.service';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Reserva } from '../reserva';
 import { Sala } from 'src/app/salas/sala';
 import { Cliente } from 'src/app/clientes/models/cliente.interface';
@@ -27,10 +27,12 @@ export class ReservasFormComponent implements OnInit {
 
   controlDrop = new FormControl();
 
-  reserva: Reserva;
+  reserva = new Reserva();
 
   equipamentos: FormArray;
   equipamentoOpcionais = [];
+
+  equipamentosOpcionaisAdicionados: EquipamentoOpcional[] = [];
   equipamentosOpcionaisNew: EquipamentoOpcional[] = []; 
 
   salas = [];
@@ -47,13 +49,20 @@ export class ReservasFormComponent implements OnInit {
       console.log("ID " + id);
       this.mostrarLista = true;
       console.log(this.mostrarLista);
+    }else{
+      this.resetarReserva();
     }
   }
 
   constructor(private reservasService: ReservasService, private formBuilder: FormBuilder
     , private salasService: SalasService, private equipamentosService: EquipamentosService
-    , private clientesService: ClientesService) { }
-
+    , private clientesService: ClientesService, private reservasComponent:ReservasComponent) { 
+    this.initForm();
+      if(!this.reservaId){
+        this.mostrarLista = false;
+        this.formulario.reset();
+      }
+    }
   ngOnInit(): void {
 
     this.initForm();
@@ -61,7 +70,10 @@ export class ReservasFormComponent implements OnInit {
     this.listarSalas();
     this.listarClientes();
 
-    this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
+    this.listarOpcionais();
+    
+    this.formulario2 = this.formBuilder.group({});
+
   }
 
   private listarClientes() {
@@ -99,10 +111,10 @@ export class ReservasFormComponent implements OnInit {
 
   private initForm() {
     this.formulario = this.formBuilder.group({
-      idSala: new FormControl(),
-      idCliente: new FormControl(),
-      dataInicio: new FormControl(),
-      dataFim: new FormControl(),
+      idSala: new FormControl(null,Validators.required),
+      idCliente: new FormControl(null,Validators.required),
+      dataInicio: new FormControl(null,Validators.required),
+      dataFim: new FormControl(null,Validators.required),
       total: new FormControl()
     })
   }
@@ -111,7 +123,8 @@ export class ReservasFormComponent implements OnInit {
     this.reservasService.getByid(id).subscribe((data)=>{
       this.reserva = data;
       this.atualizarForm();
-      console.log(data);
+      console.log("DATA", data);
+      console.log("RESERVA", this.reserva);
       this.equipamentosOpcionaisNew = this.reserva.equipamentos;
       console.log(this.equipamentosOpcionaisNew);
     }, err =>{
@@ -120,12 +133,13 @@ export class ReservasFormComponent implements OnInit {
 
   }
 
-  addEquipamento(){
-    this.equipamentosOpcionaisNew.push(new EquipamentoOpcional());
-  }
-
   removerEquipamento(index: number){
     this.equipamentosOpcionaisNew.splice(index, 1);
+  }
+
+  removerTodosEquipamentos(){
+    this.equipamentosOpcionaisNew = [];
+    this.equipamentosOpcionaisAdicionados = [];
   }
 
   clear(){
@@ -147,7 +161,9 @@ export class ReservasFormComponent implements OnInit {
 
         this.reservasService.atualizarReserva(this.construirObjetoReserva()).subscribe(
           success => {
-            console.log('PUT' + this.reserva)},
+            console.log('PUT' + this.reserva)
+            this.reservasComponent.throwMessageSuccess('Atualizada com sucesso!');
+            },
           error => console.error(error),
           () => {console.log('request completo')
          debounce(this.criarReservaEvento.emit(), 2)
@@ -159,7 +175,9 @@ export class ReservasFormComponent implements OnInit {
        
         this.reservasService.salvar(this.construirObjetoReserva()).subscribe(
           success => {
-            console.log('POST')},
+            console.log('POST')
+            this.reservasComponent.throwMessageSuccess('Criada com sucesso!');
+          },
           error => console.error(error),
           () => {console.log('request completo')
          debounce(this.criarReservaEvento.emit(), 2)
@@ -183,24 +201,32 @@ export class ReservasFormComponent implements OnInit {
   }
 
   valorTotal() {
+    const idReserva = this.reserva.id;
     this.reserva = {
       ...this.formulario.value,
     }
-    var lista = this.formulario.value.equipamentos;
-    if(lista != null){
-      this.reserva.equipamentos = []
-      lista.forEach(element => {
-        this.reserva.equipamentos.push(element.value);
-      });
-    }
-    console.log(this.formulario.value);
-    
+    this.reserva.id = idReserva;
+    var lista = this.juntarListas();
+    this.reserva.equipamentos = []
+    lista.forEach(element => {
+      if(element.idEquipamento != null){
+        this.reserva.equipamentos.push(element);
+      }
+      else{
+        this.reserva.equipamentos = []
+      }
+    });
+    console.log(this.reserva,'reserva valor');    
+    this.reserva.total = 0;
     this.getTotal(this.reserva);
   }
   getTotal(reserva: Reserva) {
-    console.log(reserva);
+    console.log(reserva,'chegou aqui');
     this.reservasService.getTotal(reserva).subscribe((dado) => {
       this.formulario.patchValue({ total: dado.total });
+      this.reserva.total = dado.total;
+      console.log(this.reserva,'total');
+      
     });
   }
 
@@ -208,19 +234,21 @@ export class ReservasFormComponent implements OnInit {
   construirObjetoReserva(): Reserva {
     const reserva = new Reserva();
     reserva.id = this.reserva.id? this.reserva.id : null;
-    reserva.idSala = this.formulario.get('capacidade').value;
-    reserva.idCliente = this.formulario.get('descricao').value;
-    reserva.dataInicio = this.formulario.get('idTiporeserva').value;
-    reserva.dataFim = this.formulario.get('precoDiario').value;
-    reserva.total = this.formulario.get('precoDiario').value;
+    reserva.idSala = this.formulario.get('idSala').value;
+    reserva.idCliente = this.formulario.get('idCliente').value;
+    reserva.dataInicio = this.formulario.get('dataInicio').value;
+    reserva.dataFim = this.formulario.get('dataFim').value;
+    reserva.total = this.formulario.get('total').value;
 
-    reserva.equipamentos = this.equipamentosOpcionaisNew.map(item=>{
-      console.log('item lista', item);
+    reserva.equipamentos = this.juntarListas()
+    .map(item=>{
+      //console.log('item lista', item);
       
       if(item.idEquipamento && item.quantidade){
         return item;
       }
       });
+    //console.log("EQUIPAMENTOS SALA EDITADA", sala.equipamentos);
     return reserva;
   }
   
@@ -237,6 +265,56 @@ export class ReservasFormComponent implements OnInit {
   getNomeEquipamento(idEquipamento: number): string {
     let item = this.equipamentoOpcionais.find(i => i.value === idEquipamento);
     return item ? item.label : '';
+  }
+  
+
+  addEquipamento(){
+    this.equipamentosOpcionaisAdicionados.push(new EquipamentoOpcional());
+  }
+
+  alterarIdEquipamentoAdicionado(idEquipamento: number, index: number){
+    this.equipamentosOpcionaisAdicionados[index].idReserva = null;
+    this.equipamentosOpcionaisAdicionados[index].idEquipamento = idEquipamento;
+  }
+
+  removerEquipamentoAdicionado(index: number){
+    this.equipamentosOpcionaisAdicionados.splice(index, 1);
+  }
+
+  alterarQuantidadeAdicionado(quantidade: number, index: number){
+    //console.log(quantidade, index);
+    this.equipamentosOpcionaisAdicionados[index].quantidade = Number(quantidade);
+  }
+
+  juntarListas(): EquipamentoOpcional[]{
+    var listaCompleta :EquipamentoOpcional[] = [];
+    listaCompleta = listaCompleta.concat(this.equipamentosOpcionaisAdicionados);
+    for (let index = 0; index < this.equipamentosOpcionaisNew.length; index++) {
+       var salaEquipamento: EquipamentoOpcional = new EquipamentoOpcional(); 
+       
+       salaEquipamento.idReserva = null;
+       salaEquipamento.idEquipamento = this.equipamentosOpcionaisNew[index].idEquipamento;
+       salaEquipamento.quantidade = this.equipamentosOpcionaisNew[index].quantidade;
+      
+       
+      listaCompleta.push(salaEquipamento);
+    }
+    return listaCompleta;
+  }
+
+  adicionarReservaEquipamento(){}
+
+  resetarReserva(){
+    this.reserva.id = null;
+    this.reserva.idSala = null;
+    this.reserva.idCliente = null;
+    this.reserva.dataInicio = null;
+    this.reserva.dataFim = null;
+    this.reserva.total = null;
+
+    this.initForm();
+
+    this.removerTodosEquipamentos();
   }
 
 }

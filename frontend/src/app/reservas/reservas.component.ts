@@ -3,8 +3,7 @@ import { SalasService } from './../salas/salas.service';
 import { Sala } from './../salas/sala';
 import { ReservasService } from './reservas.service';
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, SortEvent } from 'primeng';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConfirmationService, MessageService, SortEvent } from 'primeng';
 import { Reserva } from './reserva';
 
 @Component({
@@ -17,9 +16,6 @@ export class ReservasComponent implements OnInit {
 
   openPopUp: boolean = false;
 
-  //Reservas2: any;
-  //clonedReservas: { [s: string]: Reserva; } = {};
-
   reservas: Reserva[];
   reservaSelecionadaId: number;
   opcionais: any[];
@@ -29,34 +25,18 @@ export class ReservasComponent implements OnInit {
 
   constructor(
     private reservasService: ReservasService, private confirmationService:ConfirmationService,
-    private salasService:SalasService, private equipamentosService: EquipamentosService){
-    // private formBuilder: FormBuilder,
-    // private confirmationService: ConfirmationService) {
-    // this.formulario = this.formBuilder.group({
-    //   sala: ['', [Validators.required]],
-    //   cliente: ['', [Validators.required]], 
-    //   dtIni: ['', [Validators.required]],
-    //   dtFim: ['', [Validators.required]],
-    //   total: ['', [Validators.required]],
-    // });
-
-  }
+    private salasService:SalasService, private equipamentosService: EquipamentosService,
+    private messageService: MessageService){}
 
   ngOnInit(){
     this.listar();
+    this.listarEquipamentos();
   }
 
 
   popUpOpen(){
     this.openPopUp=true;
   }
-
-  //adicionarReserva() {
-    //this.Reservas2 = this.ReservasService.adicionarReserva(this.formulario.getRawValue());
-    //console.log(this.Reservas)
-    //this.formulario.reset()
-  //}
-
 
   listarEquipamentos(){
     this.equipamentosService.listarEquipamentos().subscribe((data)=>{
@@ -102,5 +82,9 @@ export class ReservasComponent implements OnInit {
    editar(id: number){
     this.reservaSelecionadaId = id;
     this.popUpOpen();
+  }
+
+  throwMessageSuccess(mensagem: string){
+    this.messageService.add({severity: 'success', summary: 'Sucesso', detail: mensagem});
   }
 }

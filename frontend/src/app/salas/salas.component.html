@@ -19,7 +19,6 @@
     <app-salas-form [salaId]="salaSelecionadaId"></app-salas-form>        
     </div>
 </p-dialog>
-<!-- <app-item-output (criarSalaEvento)="listar()"></app-item-output> -->
 
 
 <p-table #dt [value]="salas" [globalFilterFields]="['descricao']">
@@ -27,7 +26,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="id" style="width: 9rem;" >Id <p-sortIcon field="id"></p-sortIcon></th>
-            <th pSortableColumn="descricao">Descrição <p-sortIcon field="descricao"></p-sortIcon></th>
+            <th pSortableColumn="descricao" style="width: 10rem;">Descrição <p-sortIcon field="descricao"></p-sortIcon></th>
             <th pSortableColumn="idTipoSala" style="width: 10rem;">Tipo <p-sortIcon field="idTipoSala"></p-sortIcon></th>
             <th pSortableColumn="precoDiario" style="width: 8rem;">Preço Diário <p-sortIcon field="precoDiario"></p-sortIcon></th>
             <th pSortableColumn="capacidade"  style="width: 9rem;">Capacidade <p-sortIcon field="capacidade"></p-sortIcon></th>
@@ -45,8 +44,8 @@
     <ng-template pTemplate="body" let-sala>
         <tr>
             
-            <td id="1" style="text-align: center;">{{sala?.id}}</td>
-            <td>{{sala?.descricao}}</td>
+            <td style="text-align: center;">{{sala?.id}}</td>
+            <td style="text-overflow: ellipsis;">{{sala?.descricao}}</td>
             <td style="text-align: center;">{{getTipoSala(sala)}}</td>
             <td style="text-align: center;">{{sala?.precoDiario | currency: 'R$ '}}</td>
             <td style="text-align: center;">{{sala?.capacidade}}</td>
@@ -82,3 +81,5 @@
 </p-table>
 
 <p-confirmDialog header="ATENÇÃO!" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<p-toast position="top-center"></p-toast>

@@ -1,9 +1,20 @@
-<div>
-    <button style="background-color: green; border: green;" pButton (click)="abrirPopUp()" id="novo">
-        <label for="novo" style="line-height: 30px;">Novo Cliente</label>
-    </button>
+<div class="card" style = "height:65px; display: block;">
+    <div style= "height: 2.7rem; text-align: left; line-height: 60%; display: flex;
+    justify-content: space-between;">
+        <h1 style = "font-size: 30px;">Clientes</h1>
+        <button 
+            pButton
+            style="background-color: green; border: green;" 
+            type="button" 
+            class="app-button-success p-d-flex p-jc-center p-ic-center"
+            (click) = abrirPopUp()>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span style="line-height: 30px;"> Novo Cliente</span>
+        </button>
+    </div>
 </div>
-<p-dialog header="Novo Cliente" [(visible)]="displayCreation" [style]="{width: '50vw'}">
+
+<p-dialog header="Novo Cliente" [(visible)]="displayCreation" [style]="{width: '50vw'}" (onHide)="apagarId()">
     <form [formGroup]="formulario">
         <div class="p-grid p-fluid">
             <div class="p-col-12 p-md-4">
@@ -28,12 +39,15 @@
         <div class="p-col-12 p-md-4">
             <div class="p-inputgroup">
                 <p-inputMask mask="999.999.999-99" unmask="true" formControlName="cpf" placeholder="CPF"></p-inputMask>
-            </div><br>
+            </div>
+            <div *ngIf="formulario.get('cpf').getError('cpfNotValid')"> 
+                O cpf não é válido.
+              </div><br>
         </div>
 
         <div class="p-col-12 p-md-4">
             <div class="p-inputgroup">
-                <input type="text" formControlName="rg" pInputText placeholder="RG">
+                <input type="text" formControlName="rg" pInputText placeholder="RG" minlength="7" maxlength="7">
             </div> <br>
         </div>
 
@@ -61,37 +75,47 @@
 
 </p-dialog>
 
-<h3 class="first">CLIENTES</h3>
-<p-table [value]="client">
+<p-table #dt [value]="client" [globalFilterFields]="['nome']">
+
     <ng-template pTemplate="header">
         <tr>
-            <th>Nome</th>
-            <th style="width: 10.8rem;">Email</th>
-            <th>Endereco</th>
-            <th>CPF</th>
-            <th style="width: 5rem;">RG</th>
-            <th>Telefone</th>
-            <th>Data Nascimento</th>
-            <th style="width: 10.8rem;">Ações</th>
+            <th pSortableColumn="nome">Nome<p-sortIcon field="nome"></p-sortIcon></th>
+            <th style="width: 10.8rem;" pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
+            <th pSortableColumn="endereco">Endereço<p-sortIcon field="endereco"></p-sortIcon></th>
+            <th pSortableColumn="cpf">CPF<p-sortIcon field="cpf"></p-sortIcon></th>
+            <th style="width: 5rem;" pSortableColumn="rg">RG<p-sortIcon field="rg"></p-sortIcon></th>
+            <th pSortableColumn="telefone">Telefone<p-sortIcon field="telefone"></p-sortIcon></th>
+            <th pSortableColumn="dataNascimento">Data Nascimento<p-sortIcon field="dataNascimento"></p-sortIcon></th>
+            <th style="width: 13rem;"> 
+                <div style="display: flex;">
+                    <div style="padding-top: 5px; padding-right: 2px;">
+                        <i class="pi pi-search"></i>
+                    </div>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." style="width: 85%;"/>
+                </div>       
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-client>
         <tr>
-            <td>{{client.nome}}</td>
-            <td>{{client.email}}</td>
-            <td>{{client.endereco}}</td>
-            <td>{{client.cpf | CPF}}</td>
-            <td>{{client.rg}}</td>
-            <td>{{client.telefone | TELEFONE}}</td>
-            <td>{{client.dataNascimento | date:"dd/MM/yyyy"}}</td>
+            <td style="text-align: center;">{{client.nome}}</td>
+            <td style="text-overflow: center; overflow: hidden;">{{client.email}}</td>
+            <td style="text-align: center;">{{client.endereco}}</td>
+            <td style="text-align: center;">{{client.cpf | CPF}}</td>
+            <td style="text-align: center;">{{client.rg}}</td>
+            <td style="text-align: center;">{{client.telefone | TELEFONE}}</td>
+            <td style="text-align: center;">{{client.dataNascimento | date:"dd/MM/yyyy"}}</td>
             <td>
-                <button pButton class="ui-button-primary" (click)="atualizarCliente(client.id)"
+                <button pButton class="app-button-success p-d-flex p-jc-center p-ic-center" style="background-color: blue;" 
+                (click)="atualizarCliente(client.id)"
                     style="text-align:center">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
                     <span style="line-height: 30px;">
                         Editar
                     </span>
                 </button>
                 <button pButton class="ui-button-danger" (click)="deletar(client.id)" style="margin-left: 5px;">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
                     <span style="line-height: 30px;">
                         Deletar
                     </span>

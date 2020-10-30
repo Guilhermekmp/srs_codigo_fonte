@@ -5,5 +5,5 @@ export class Sala{
     idTipoSala: number;
     precoDiario:number;
     capacidade: number;
-    equipamentos: SalaEquipamento[] = [];
+    equipamentos: SalaEquipamento[];
 }
